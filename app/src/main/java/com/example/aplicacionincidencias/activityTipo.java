@@ -7,26 +7,28 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import gestionincidencias.entidades.Sala;
+import gestionincidencias.entidades.Tipo;
 
-public class activitySalas extends AppCompatActivity {
+public class activityTipo extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_salas);
+        setContentView(R.layout.activity_tipo);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        Sala[] salas = new Sala[50];
-        for (int j = 0; j < salas.length;j++) {
-            salas[j] = new Sala(j+1,"Sala"+(j+1));
+        Tipo[] tipos = new Tipo[50];
+        for (int i=0;i<tipos.length;i++){
+            tipos[i]=new Tipo(i+1,"Tipo" +(i+1));
         }
-        ListView listaSalas = (ListView) findViewById(R.id.ListaSalas);
-        AdaptadorSalas adaptadorSalas = new AdaptadorSalas(this, salas);
-        listaSalas.setAdapter(adaptadorSalas);
+        ListView listaTipo= (ListView) findViewById(R.id.ListaTipo);
+        AdaptadorTipo adaptadorTipo = new AdaptadorTipo(this,tipos);
+        listaTipo.setAdapter(adaptadorTipo);
+
+
     }
 }
