@@ -1,4 +1,4 @@
-package com.example.aplicacionincidencias;
+package com.example.aplicacionincidencias.Sala;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -6,12 +6,14 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.example.aplicacionincidencias.R;
+
 import gestionincidencias.entidades.Sala;
 
 public class AdaptadorSalas extends ArrayAdapter<Sala> {
     private Sala[] datos;
     public AdaptadorSalas(Context c, Sala[] salas){
-        super(c,R.layout.elemento_sala,salas);
+        super(c, R.layout.elemento_sala,salas);
         this.datos=salas;
     }
     @Override

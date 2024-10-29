@@ -13,7 +13,7 @@
         android:theme="@style/Theme.AplicacionIncidencias"
         tools:targetApi="31">
         <activity
-            android:name=".activityIncidencia"
+            android:name=".Incidencia.activityIncidencia"
             android:exported="true">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
@@ -22,11 +22,11 @@
         </intent-filter>
         </activity>
         <activity
-            android:name=".activityTipo"
+            android:name=".Tipo.activityTipo"
             android:exported="false">
         </activity>
         <activity
-            android:name=".activitySalas"
+            android:name=".Sala.activitySalas"
             android:exported="false"></activity>
     </application>
 
