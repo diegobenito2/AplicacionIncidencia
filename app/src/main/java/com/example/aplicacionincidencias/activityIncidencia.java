@@ -26,7 +26,7 @@ public class activityIncidencia extends AppCompatActivity {
         });
         Incidencia[] incidencias = new Incidencia[50];
         for (int i = 0; i < incidencias.length; i++) {
-            incidencias[i] = new Incidencia(i+1,"Hola",456,1200,1201);
+            incidencias[i] = new Incidencia(i+1,"Hola",(i+2),(i+3),(i+4));
         }
         ListView listaIncidencia = (ListView) findViewById(R.id.ListaIncidencia);
         AdaptadorIncidencia adaptadorIncidencia = new AdaptadorIncidencia(this, incidencias);
