@@ -32,7 +32,7 @@ public class AdaptadorIncidencia extends ArrayAdapter<Incidencia> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         Date fechaActual = new Date();
-        SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        SimpleDateFormat formato = new SimpleDateFormat("HH:mm:ss dd-MM-yyyy ");
         String fechaFormateada = formato.format(fechaActual);
         LayoutInflater mostrado = LayoutInflater.from(getContext());
         View VIncidencia = mostrado.inflate(R.layout.elemento_incidencia, parent, false);

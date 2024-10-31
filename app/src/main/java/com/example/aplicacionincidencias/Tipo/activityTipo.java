@@ -24,7 +24,7 @@ public class activityTipo extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        Tipo[] tipos = new Tipo[50];
+        Tipo[] tipos = new Tipo[5];
         for (int i=0;i<tipos.length;i++){
             tipos[i]=new Tipo(i+1,"Tipo" +(i+1));
         }
