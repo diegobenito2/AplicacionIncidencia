@@ -9,13 +9,13 @@ import android.widget.TextView;
 
 import com.example.aplicacionincidencias.R;
 
-import gestionincidencias.entidades.Tipo;
+import gestionincidencias.entidades.EntTipo;
 
 
-public class AdaptadorTipo extends ArrayAdapter<Tipo> {
-    private Tipo[] datos;
+public class AdaptadorTipo extends ArrayAdapter<EntTipo> {
+    private EntTipo[] datos;
 
-    public AdaptadorTipo(Context c, Tipo[] tipo) {
+    public AdaptadorTipo(Context c, EntTipo[] tipo) {
         super(c, R.layout.elemento_tipo, tipo);
         this.datos = tipo;
     }

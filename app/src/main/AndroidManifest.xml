@@ -13,18 +13,16 @@
         android:theme="@style/Theme.AplicacionIncidencias"
         tools:targetApi="31">
         <activity
-            android:name=".Incidencia.activityIncidencia"
-            android:exported="true">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+            android:name=".Ubicacion.activityUbicacion"
+            android:exported="false">
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
         </activity>
         <activity
+            android:name=".Incidencia.activityIncidencia"
+            android:exported="false"></activity>
+        <activity
             android:name=".Tipo.activityTipo"
-            android:exported="false">
-        </activity>
+            android:exported="false"></activity>
         <activity
             android:name=".Sala.activitySalas"
             android:exported="false"></activity>

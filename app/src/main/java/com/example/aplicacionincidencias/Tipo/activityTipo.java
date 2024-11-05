@@ -7,10 +7,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-
 import com.example.aplicacionincidencias.R;
 
-import gestionincidencias.entidades.Tipo;
+import gestionincidencias.GestionIncidencias;
+import gestionincidencias.entidades.EntTipo;
 
 public class activityTipo extends AppCompatActivity {
 
@@ -24,12 +24,9 @@ public class activityTipo extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        Tipo[] tipos = new Tipo[5];
-        for (int i=0;i<tipos.length;i++){
-            tipos[i]=new Tipo(i+1,"Tipo" +(i+1));
-        }
+
         ListView listaTipo= (ListView) findViewById(R.id.ListaTipo);
-        AdaptadorTipo adaptadorTipo = new AdaptadorTipo(this,tipos);
+        AdaptadorTipo adaptadorTipo = new AdaptadorTipo(this, GestionIncidencias.getArTipos().toArray(new EntTipo[0]));
         listaTipo.setAdapter(adaptadorTipo);
 
 
