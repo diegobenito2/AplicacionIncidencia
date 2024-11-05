@@ -29,8 +29,9 @@ public class AdaptadorUbicacion extends ArrayAdapter<EntUbicacion> {
 
 
         TextView txCodigoUbicacion = Vubicacion.findViewById(R.id.codigoUbicacion);
-        TextView txCodigoElementoUbicacion = Vubicacion.findViewById(R.id.codigoElementoUbicacion);
         TextView txCodigoSalaUbicacion = Vubicacion.findViewById(R.id.codigoSalaUbicacion);
+        TextView txCodigoElementoUbicacion = Vubicacion.findViewById(R.id.codigoElementoUbicacion);
+        TextView txDescripcionUbicacion= Vubicacion.findViewById(R.id.DescripcionUbicacion);
         TextView txCodigoUbicacionFechaInicio = Vubicacion.findViewById(R.id.codigoUbicacionFechaInicio);
         TextView txCodigoUbicacionFechaFin = Vubicacion.findViewById(R.id.codigoUbicacionFechaFin);
 
@@ -39,6 +40,7 @@ public class AdaptadorUbicacion extends ArrayAdapter<EntUbicacion> {
         txCodigoSalaUbicacion.setText(datos[position].getIdSala());
         txCodigoUbicacionFechaInicio.setText(String.valueOf(datos[position].getFechaInicio()));
         txCodigoUbicacionFechaFin.setText(String.valueOf(datos[position].getFechaFin()));
+        txDescripcionUbicacion.setText(datos[position].getDescripcion());
         return Vubicacion;
     }
 }

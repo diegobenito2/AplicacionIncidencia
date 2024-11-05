@@ -16,6 +16,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"></TextView>
     <TextView
+        android:id="@+id/DescripcionUbicacion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></TextView>
+    <TextView
         android:id="@+id/codigoUbicacionFechaInicio"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"></TextView>
@@ -23,6 +27,7 @@
         android:id="@+id/codigoUbicacionFechaFin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"></TextView>
+
 
 
 </LinearLayout>

@@ -5,13 +5,12 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Elemento.activityElemento">
+    tools:context=".Prestamo.ActivityPrestamo">
 
     <ListView
-        android:id="@+id/ListaElemento"
+        android:id="@+id/ListaPrestamo"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></ListView>
-
+        tools:layout_editor_absoluteX="-36dp"
+        tools:layout_editor_absoluteY="-309dp"></ListView>
 </androidx.constraintlayout.widget.ConstraintLayout>

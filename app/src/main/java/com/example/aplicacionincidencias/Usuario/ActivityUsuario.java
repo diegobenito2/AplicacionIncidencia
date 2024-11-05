@@ -1,4 +1,4 @@
-package com.example.aplicacionincidencias.Elemento;
+package com.example.aplicacionincidencias.Usuario;
 
 import android.os.Bundle;
 import android.widget.ListView;
@@ -12,21 +12,21 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.aplicacionincidencias.R;
 
 import gestionincidencias.GestionIncidencias;
-import gestionincidencias.entidades.EntElemento;
+import gestionincidencias.entidades.EntUsuario;
 
-public class activityElemento extends AppCompatActivity {
+public class ActivityUsuario extends AppCompatActivity {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_elemento);
+        setContentView(R.layout.activity_usuario);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        ListView listaElemento = (ListView) findViewById(R.id.ListaElemento);
-        AdaptadorElemento adaptadorElemento = new AdaptadorElemento(this, GestionIncidencias.getArElementos().toArray(new EntElemento[0]));
-        listaElemento.setAdapter(adaptadorElemento);
+        ListView ListaUsuario = (ListView) findViewById(R.id.ListaUsuario);
+        AdaptadorUsuario adaptadorUsuario = new AdaptadorUsuario(this, GestionIncidencias.getArUsuarios().toArray(new EntUsuario[0]));
     }
 }
