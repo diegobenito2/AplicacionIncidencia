@@ -1,6 +1,5 @@
 package com.example.aplicacionincidencias.Incidencia;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Build;
 import android.view.LayoutInflater;
@@ -8,22 +7,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-
 import androidx.annotation.RequiresApi;
-
 import com.example.aplicacionincidencias.R;
-
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.util.Date;
+import gestionincidencias.entidades.EntIncidencia;
 
-import gestionincidencias.entidades.Incidencia;
-
-public class AdaptadorIncidencia extends ArrayAdapter<Incidencia> {
-    private Incidencia[] datos;
+public class AdaptadorIncidencia extends ArrayAdapter<EntIncidencia> {
+    private EntIncidencia[] datos;
 
 
-    public AdaptadorIncidencia(Context c, Incidencia[] incidencias) {
+    public AdaptadorIncidencia(Context c, EntIncidencia[] incidencias) {
         super(c, R.layout.elemento_incidencia, incidencias);
         this.datos = incidencias;
     }
@@ -48,7 +42,7 @@ public class AdaptadorIncidencia extends ArrayAdapter<Incidencia> {
         txDescripcion.setText("Descripción: " + datos[position].getDescripcion());
         txIdElemento.setText("Id Elemento: " + String.valueOf(datos[position].getIdElemento()));
         txIdUsuarioCreacion.setText("Id Usuario Creación: " + String.valueOf(datos[position].getIdUsuarioCreacion()));
-        txIdResponsable.setText("Id Responsable: " + String.valueOf(datos[position].getIdResponsable()));
+        txIdResponsable.setText("Id Responsable: " + String.valueOf(datos[position]));
         txFechaCreacion.setText("Fecha Creación: " + String.valueOf(fechaFormateada));
         return VIncidencia;
     }

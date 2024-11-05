@@ -10,7 +10,8 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.aplicacionincidencias.R;
 
-import gestionincidencias.entidades.Sala;
+import gestionincidencias.GestionIncidencias;
+import gestionincidencias.entidades.EntSala;
 
 public class activitySalas extends AppCompatActivity {
 
@@ -24,12 +25,9 @@ public class activitySalas extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        Sala[] salas = new Sala[50];
-        for (int j = 0; j < salas.length;j++) {
-            salas[j] = new Sala(j+1,"Sala"+(j+1));
-        }
+
         ListView listaSalas = (ListView) findViewById(R.id.ListaSalas);
-        AdaptadorSalas adaptadorSalas = new AdaptadorSalas(this, salas);
+        AdaptadorSalas adaptadorSalas = new AdaptadorSalas(this, GestionIncidencias.getArSalas().toArray(new EntSala[0]));
         listaSalas.setAdapter(adaptadorSalas);
     }
 }
