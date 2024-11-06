@@ -17,7 +17,7 @@ public class AdaptadorUbicacion extends ArrayAdapter<EntUbicacion> {
     private EntUbicacion[] datos;
 
     public AdaptadorUbicacion(Context c, EntUbicacion[] ubicacion) {
-        super(c, R.layout.elemento_ubicacion);
+        super(c, R.layout.elemento_ubicacion, ubicacion);
         this.datos = ubicacion;
     }
 
@@ -31,16 +31,17 @@ public class AdaptadorUbicacion extends ArrayAdapter<EntUbicacion> {
         TextView txCodigoUbicacion = Vubicacion.findViewById(R.id.codigoUbicacion);
         TextView txCodigoSalaUbicacion = Vubicacion.findViewById(R.id.codigoSalaUbicacion);
         TextView txCodigoElementoUbicacion = Vubicacion.findViewById(R.id.codigoElementoUbicacion);
-        TextView txDescripcionUbicacion= Vubicacion.findViewById(R.id.DescripcionUbicacion);
+        TextView txDescripcionUbicacion = Vubicacion.findViewById(R.id.DescripcionUbicacion);
         TextView txCodigoUbicacionFechaInicio = Vubicacion.findViewById(R.id.codigoUbicacionFechaInicio);
         TextView txCodigoUbicacionFechaFin = Vubicacion.findViewById(R.id.codigoUbicacionFechaFin);
 
-        txCodigoUbicacion.setText(String.valueOf(datos[position].getCodigoUbicacion()));
-        txCodigoElementoUbicacion.setText(datos[position].getIdElemento());
-        txCodigoSalaUbicacion.setText(datos[position].getIdSala());
-        txCodigoUbicacionFechaInicio.setText(String.valueOf(datos[position].getFechaInicio()));
-        txCodigoUbicacionFechaFin.setText(String.valueOf(datos[position].getFechaFin()));
-        txDescripcionUbicacion.setText(datos[position].getDescripcion());
+        txCodigoUbicacion.setText("Codigo Ubicación:" + String.valueOf(datos[position].getCodigoUbicacion()));
+        txCodigoSalaUbicacion.setText("Sala: " + String.valueOf(datos[position].getIdSala()));
+        txCodigoElementoUbicacion.setText("Codigo Elemento:" + String.valueOf(datos[position].getIdElemento()));
+        txDescripcionUbicacion.setText("Descripción: " + datos[position].getDescripcion());
+        txCodigoUbicacionFechaInicio.setText("Fecha Inicio: " + String.valueOf(datos[position].getFechaInicio()));
+        txCodigoUbicacionFechaFin.setText("Fecha Fin: " + String.valueOf(datos[position].getFechaFin()));
+
         return Vubicacion;
     }
 }

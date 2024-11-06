@@ -13,7 +13,7 @@
         android:theme="@style/Theme.AplicacionIncidencias"
         tools:targetApi="31">
         <activity
-            android:name=".Prestamo.ActivityPrestamo"
+            android:name=".MenuPrincipal.ActivityMenu"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,13 +22,14 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".Prestamo.ActivityPrestamo"
+            android:exported="false"></activity>
+        <activity
             android:name=".Usuario.ActivityUsuario"
-            android:exported="false">
-
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".Elemento.activityElemento"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".Ubicacion.activityUbicacion"
             android:exported="false"></activity>

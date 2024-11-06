@@ -28,5 +28,6 @@ public class ActivityUsuario extends AppCompatActivity {
         });
         ListView ListaUsuario = (ListView) findViewById(R.id.ListaUsuario);
         AdaptadorUsuario adaptadorUsuario = new AdaptadorUsuario(this, GestionIncidencias.getArUsuarios().toArray(new EntUsuario[0]));
+        ListaUsuario.setAdapter(adaptadorUsuario);
     }
 }
