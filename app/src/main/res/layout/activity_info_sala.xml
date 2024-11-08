@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    tools:context=".Elemento.Activity_Info_Sala">
+    tools:context=".Sala.Activity_Info_Sala">
 
 
         <TextView
@@ -28,6 +28,7 @@
             android:layout_marginTop="39dp"
             android:layout_marginEnd="253dp"
             android:textSize="20sp"
+            android:text="0"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tvCodigoSala"
             app:layout_constraintTop_toTopOf="parent"></TextView>

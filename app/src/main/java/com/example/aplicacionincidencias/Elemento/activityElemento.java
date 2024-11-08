@@ -1,6 +1,9 @@
 package com.example.aplicacionincidencias.Elemento;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import androidx.activity.EdgeToEdge;
@@ -13,6 +16,7 @@ import com.example.aplicacionincidencias.R;
 
 import gestionincidencias.GestionIncidencias;
 import gestionincidencias.entidades.EntElemento;
+import gestionincidencias.entidades.EntSala;
 
 public class activityElemento extends AppCompatActivity {
     @Override
@@ -28,5 +32,44 @@ public class activityElemento extends AppCompatActivity {
         ListView listaElemento = (ListView) findViewById(R.id.ListaElemento);
         AdaptadorElemento adaptadorElemento = new AdaptadorElemento(this, GestionIncidencias.getArElementos().toArray(new EntElemento[0]));
         listaElemento.setAdapter(adaptadorElemento);
+
+
     }
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
