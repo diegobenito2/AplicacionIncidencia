@@ -19,35 +19,42 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:text="Salas"
+        android:text="Tipos"
         ></Button>
     <Button
         android:id="@+id/ButtonMenuPrestamo"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:text="Salas"
+        android:text="Prestamo"
         ></Button>
     <Button
         android:id="@+id/ButtonMenuUbicacion"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:text="Salas"
+        android:text="Ubicación"
         ></Button>
     <Button
         android:id="@+id/ButtonMenuUsuario"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:text="Salas"
+        android:text="Usuario"
         ></Button>
     <Button
         android:id="@+id/ButtonMenuElemento"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:text="Salas"
+        android:text="Elemento"
+        ></Button>
+    <Button
+        android:id="@+id/ButtonMenuIncidencia"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="Incidencias"
         ></Button>
 
 </LinearLayout>
