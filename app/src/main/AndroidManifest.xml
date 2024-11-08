@@ -13,6 +13,9 @@
         android:theme="@style/Theme.AplicacionIncidencias"
         tools:targetApi="31">
         <activity
+            android:name=".Elemento.Activity_Info_Sala"
+            android:exported="false" />
+        <activity
             android:name=".MenuPrincipal.ActivityMenu"
             android:exported="true">
             <intent-filter>
@@ -23,25 +26,25 @@
         </activity>
         <activity
             android:name=".Prestamo.ActivityPrestamo"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".Usuario.ActivityUsuario"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".Elemento.activityElemento"
             android:exported="false" />
         <activity
             android:name=".Ubicacion.activityUbicacion"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".Incidencia.activityIncidencia"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".Tipo.activityTipo"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".Sala.activitySalas"
-            android:exported="false"></activity>
+            android:exported="false" />
     </application>
 
 </manifest>
