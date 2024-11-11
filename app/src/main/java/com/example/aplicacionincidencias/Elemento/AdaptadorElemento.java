@@ -14,7 +14,7 @@ import gestionincidencias.entidades.EntSala;
 public class AdaptadorElemento extends ArrayAdapter<EntElemento> {
     private EntElemento[] datos;
     public AdaptadorElemento(Context c, EntElemento[] elemento){
-        super(c, R.layout.elemento_elemento);
+        super(c, R.layout.elemento_elemento,elemento);
         this.datos=elemento;
     }
     @Override

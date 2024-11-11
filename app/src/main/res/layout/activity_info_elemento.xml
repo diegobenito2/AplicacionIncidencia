@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Elemento.Activity_Info_Elemento">
+
+    <TextView
+        android:id="@+id/tvCodigoElemento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:text="Código: "
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvinfoCodigoElemento"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <TextView
+        android:id="@+id/tvinfoCodigoElemento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginBottom="42dp"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/editNombreElemento"
+        app:layout_constraintStart_toEndOf="@+id/tvCodigoElemento" />
+
+    <TextView
+        android:id="@+id/tvNombreElemento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="31dp"
+        android:layout_marginTop="231dp"
+        android:layout_marginEnd="24dp"
+        android:text="Nombre: "
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/editNombreElemento"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editNombreElemento"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="204dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="93dp"
+        android:inputType="text"
+        android:text="Nombre"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/editDescripcionElemento"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvNombreElemento"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/tvDescripcionElemento"
+        android:layout_width="117dp"
+        android:layout_height="31dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="96dp"
+        android:text="Descripción: "
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/editcodigoTipoElemento"
+        app:layout_constraintEnd_toStartOf="@+id/editDescripcionElemento"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/editDescripcionElemento"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="305dp"
+        android:inputType="textMultiLine"
+        android:text="Descripcion"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvDescripcionElemento"
+        app:layout_constraintTop_toBottomOf="@+id/editNombreElemento" />
+
+    <TextView
+        android:id="@+id/tvcodigoTipoElemento"
+        android:layout_width="120dp"
+        android:layout_height="29dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="12dp"
+        android:text="Código Tipo: "
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/editcodigoTipoElemento"
+        app:layout_constraintEnd_toStartOf="@+id/editcodigoTipoElemento"
+        app:layout_constraintStart_toStartOf="parent"></TextView>
+
+    <EditText
+        android:id="@+id/editcodigoTipoElemento"
+        android:layout_width="0dp"
+        android:layout_height="55dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginBottom="176dp"
+        android:inputType="textMultiLine"
+        android:text="Codigo Tipo: "
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvcodigoTipoElemento"></EditText>
+
+    <Button
+        android:id="@+id/btnGuardar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="Guardar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnVolver" />
+
+    <Button
+        android:id="@+id/btnVolver"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="17dp"
+        android:layout_marginEnd="138dp"
+        android:layout_marginBottom="16dp"
+        android:text="Volver"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnGuardar"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

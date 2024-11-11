@@ -13,6 +13,24 @@
         android:theme="@style/Theme.AplicacionIncidencias"
         tools:targetApi="31">
         <activity
+            android:name=".Usuario.Activity_Info_Usuario"
+            android:exported="false" />
+        <activity
+            android:name=".Ubicacion.Activity_Info_Ubicacion"
+            android:exported="false" />
+        <activity
+            android:name=".Tipo.Activity_Info_Tipo"
+            android:exported="false" />
+        <activity
+            android:name=".Prestamo.Activity_Info_Prestamo"
+            android:exported="false" />
+        <activity
+            android:name=".Incidencia.Activity_Info_Incidencia"
+            android:exported="false" />
+        <activity
+            android:name=".Elemento.Activity_Info_Elemento"
+            android:exported="false" />
+        <activity
             android:name=".Sala.Activity_Info_Sala"
             android:exported="false" />
         <activity

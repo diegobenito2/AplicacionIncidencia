@@ -13,6 +13,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.aplicacionincidencias.R;
+import com.example.aplicacionincidencias.Sala.Activity_Info_Sala;
 
 import gestionincidencias.GestionIncidencias;
 import gestionincidencias.entidades.EntElemento;
@@ -32,6 +33,31 @@ public class activityElemento extends AppCompatActivity {
         ListView listaElemento = (ListView) findViewById(R.id.ListaElemento);
         AdaptadorElemento adaptadorElemento = new AdaptadorElemento(this, GestionIncidencias.getArElementos().toArray(new EntElemento[0]));
         listaElemento.setAdapter(adaptadorElemento);
+
+        // Establecer un listener para detectar cuando un usuario hace clic en un ítem de la lista
+        listaElemento.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+
+                // Obtener la sala seleccionada en la posición clickeada
+                EntElemento elementoSeleccionado = (EntElemento) adapterView.getItemAtPosition(position);
+
+
+                // Crear una nueva Intent para abrir la actividad de información de la sala
+                Intent intentInfoElemento = new Intent(view.getContext(), Activity_Info_Elemento.class);
+
+                // Pasar datos a la nueva actividad mediante el uso de 'putExtra'. Estos datos corresponden a la sala seleccionada.
+
+                intentInfoElemento.putExtra("codigo", elementoSeleccionado.getCodigoElemento());
+                intentInfoElemento.putExtra("nombre", elementoSeleccionado.getNombre());
+                intentInfoElemento.putExtra("descripcion", elementoSeleccionado.getDescripcion());
+                intentInfoElemento.putExtra("tipo", elementoSeleccionado.getIdTipo());
+
+
+                // Iniciar la actividad de información de la sala
+                startActivity(intentInfoElemento);
+            }
+        });
 
 
     }

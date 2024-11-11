@@ -5,56 +5,75 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     tools:context=".MenuPrincipal.ActivityMenu"
     android:orientation="vertical">
+
     <Button
         android:id="@+id/ButtonMenuSala"
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:text="Salas"
+        android:textColor="@color/white"
+        android:layout_gravity="center"
+        android:backgroundTint="@color/black"
+
         ></Button>
+
     <Button
         android:id="@+id/ButtonMenuTipo"
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:text="Tipos"
+        android:layout_gravity="center"
+        android:backgroundTint="#4CAF50"
         ></Button>
     <Button
         android:id="@+id/ButtonMenuPrestamo"
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:text="Prestamo"
+        android:layout_gravity="center"
+        android:backgroundTint="#00BCD4"
         ></Button>
     <Button
         android:id="@+id/ButtonMenuUbicacion"
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:text="Ubicación"
+        android:layout_gravity="center"
+
         ></Button>
     <Button
         android:id="@+id/ButtonMenuUsuario"
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:text="Usuario"
+        android:layout_gravity="center"
+        android:backgroundTint="#E91E63"
         ></Button>
     <Button
         android:id="@+id/ButtonMenuElemento"
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:text="Elemento"
+        android:layout_gravity="center"
+        android:backgroundTint="@color/teal_200"
         ></Button>
     <Button
         android:id="@+id/ButtonMenuIncidencia"
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:text="Incidencias"
+        android:layout_gravity="center"
+        android:backgroundTint="@color/purple_200"
         ></Button>
 
 </LinearLayout>

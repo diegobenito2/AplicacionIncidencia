@@ -8,83 +8,102 @@
     android:orientation="horizontal"
     tools:context=".Sala.Activity_Info_Sala">
 
+    <TextView
+        android:id="@+id/tvCodigoSala"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="93dp"
+        android:text="Código: "
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvinfoCodigoSala"
+        app:layout_constraintStart_toStartOf="parent" />
 
-        <TextView
-            android:id="@+id/tvCodigoSala"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="64dp"
-            android:layout_marginTop="39dp"
-            android:text="Código: "
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"></TextView>
-
-        <TextView
-            android:id="@+id/tvinfoCodigoSala"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="39dp"
-            android:layout_marginEnd="253dp"
-            android:textSize="20sp"
-            android:text="0"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/tvCodigoSala"
-            app:layout_constraintTop_toTopOf="parent"></TextView>
+    <TextView
+        android:id="@+id/tvinfoCodigoSala"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="114dp"
+        android:layout_marginBottom="57dp"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/editNombreSala"
+        app:layout_constraintStart_toStartOf="@+id/editNombreSala" />
 
 
-        <TextView
-            android:id="@+id/tvNombreSala"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="64dp"
-            android:layout_marginTop="22dp"
-            android:layout_marginEnd="7dp"
-            android:text="Nombre: "
-            android:textSize="20dp"
-            app:layout_constraintEnd_toStartOf="@+id/editNombreSala"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvCodigoSala"></TextView>
+    <TextView
+        android:id="@+id/tvNombreSala"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="31dp"
+        android:layout_marginTop="194dp"
+        android:layout_marginEnd="24dp"
+        android:text="Nombre: "
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/editNombreSala"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
-            android:id="@+id/editNombreSala"
-            android:layout_width="258dp"
-            android:layout_height="54dp"
-            android:layout_marginStart="7dp"
-            android:layout_marginTop="71dp"
-            android:ems="10"
-            android:hint="Escribe el nombre"
-            android:inputType="text"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/tvNombreSala"
-            app:layout_constraintTop_toTopOf="parent" />
+    <EditText
+        android:id="@+id/editNombreSala"
+        android:layout_width="0dp"
+        android:layout_height="54dp"
+        android:layout_marginEnd="16dp"
+        android:inputType="text"
+        android:text="Nombre"
+        android:textSize="20sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvNombreSala"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvNombreSala" />
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="126dp"
-            android:layout_height="45dp"
-            android:layout_marginStart="64dp"
-            android:layout_marginTop="28dp"
-            android:layout_marginEnd="221dp"
-            android:text="Descripción: "
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editNombreSala"></TextView>
+    <TextView
+        android:id="@+id/tvDescripcionSala"
+        android:layout_width="115dp"
+        android:layout_height="29dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="7dp"
+        android:text="Descripción: "
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/editDescripcionSala"
+        app:layout_constraintEnd_toStartOf="@+id/editDescripcionSala"
+        app:layout_constraintStart_toStartOf="parent" />
 
-        <EditText
-            android:layout_width="246dp"
-            android:layout_height="103dp"
-            android:layout_marginStart="87dp"
-            android:layout_marginTop="21dp"
-            android:layout_marginEnd="106dp"
-            android:hint="Escribe Aquí la Descripción"
-            android:inputType="textMultiLine"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+    <EditText
+        android:id="@+id/editDescripcionSala"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="78dp"
+        android:layout_marginEnd="28dp"
+        android:inputType="textMultiLine"
+        android:text="Descripcion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvDescripcionSala"
+        app:layout_constraintTop_toBottomOf="@+id/editNombreSala" />
+
+    <Button
+        android:id="@+id/btnGuardar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+
+        android:layout_marginBottom="16dp"
+        android:text="Guardar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnVolver" />
+
+    <Button
+        android:id="@+id/btnVolver"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="17dp"
+        android:layout_marginEnd="138dp"
+        android:layout_marginBottom="16dp"
+        android:text="Volver"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnGuardar"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

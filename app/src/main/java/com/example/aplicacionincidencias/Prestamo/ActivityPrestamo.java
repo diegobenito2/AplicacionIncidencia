@@ -1,6 +1,9 @@
 package com.example.aplicacionincidencias.Prestamo;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import androidx.activity.EdgeToEdge;
@@ -26,8 +29,26 @@ public class ActivityPrestamo extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        ListView ListaPrestamo =(ListView) findViewById(R.id.ListaPrestamo);
-        AdaptadorPrestamo adaptadorPrestamo= new AdaptadorPrestamo(this, GestionIncidencias.getArPrestamos().toArray(new EntPrestamo[0]));
+        ListView ListaPrestamo = (ListView) findViewById(R.id.ListaPrestamo);
+        AdaptadorPrestamo adaptadorPrestamo = new AdaptadorPrestamo(this, GestionIncidencias.getArPrestamos().toArray(new EntPrestamo[0]));
         ListaPrestamo.setAdapter(adaptadorPrestamo);
+
+        ListaPrestamo.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                EntPrestamo PrestamoSeleccionado = (EntPrestamo) adapterView.getItemAtPosition(i);
+
+                Intent intentPrestamo = new Intent(view.getContext(), Activity_Info_Prestamo.class);
+
+                intentPrestamo.putExtra("codigoPrestamo", PrestamoSeleccionado.getCodigoPrestamo());
+                intentPrestamo.putExtra("codigoUsuario", PrestamoSeleccionado.getIdUsuario());
+                intentPrestamo.putExtra("codigoElemento", PrestamoSeleccionado.getIdElemento());
+                intentPrestamo.putExtra("fechaInicio", String.valueOf(PrestamoSeleccionado.getFechaInicio()));
+                intentPrestamo.putExtra("fechaFin", String.valueOf(PrestamoSeleccionado.getFechaFin()));
+
+                startActivity(intentPrestamo);
+
+            }
+        });
     }
 }
