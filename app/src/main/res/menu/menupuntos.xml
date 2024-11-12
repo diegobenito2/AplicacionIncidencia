@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/itemMenuSalas"
+        android:title="Salas">
+
+    </item>
+    <item
+        android:id="@+id/itemMenuElemento"
+        android:title="Elemento">
+
+    </item>
+    <item
+        android:id="@+id/itemMenuIncidencia"
+        android:title="Incidencia">
+
+    </item>
+    <item
+        android:id="@+id/itemMenuPrestamo"
+        android:title="Prestamo">
+
+    </item>
+    <item
+        android:id="@+id/itemMenuUsuario"
+        android:title="Usuario">
+
+    </item>
+    <item
+        android:id="@+id/itemMenuTipo"
+        android:title="Tipo">
+
+    </item>
+    <item
+        android:id="@+id/itemMenuUbicacion"
+        android:title="Ubicacion">
+
+    </item>
+</menu>

@@ -7,17 +7,17 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.aplicacionincidencias.MenuPrincipal.menutrespuntos;
 import com.example.aplicacionincidencias.R;
 
 import gestionincidencias.GestionIncidencias;
 import gestionincidencias.entidades.EntIncidencia;
 
-public class activityIncidencia extends AppCompatActivity {
+public class activityIncidencia extends menutrespuntos {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

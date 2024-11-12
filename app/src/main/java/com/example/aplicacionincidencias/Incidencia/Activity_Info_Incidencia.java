@@ -13,10 +13,11 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.aplicacionincidencias.MenuPrincipal.menutrespuntos;
 import com.example.aplicacionincidencias.R;
 import com.example.aplicacionincidencias.Sala.activitySalas;
 
-public class Activity_Info_Incidencia extends AppCompatActivity implements View.OnClickListener{
+public class Activity_Info_Incidencia extends menutrespuntos implements View.OnClickListener{
     private Button btnVolver, btnGuardar;
 
     @Override
@@ -49,7 +50,7 @@ public class Activity_Info_Incidencia extends AppCompatActivity implements View.
         edDescripcionIncidencia.setText(descripcionIncidencia);
         tvCodigoElemento.setText(String.valueOf(codigoElemento));
         tvCodigoUsuarioCreacion.setText(String.valueOf(codigoUsuarioCreacion));
-        tvFechaCreacion.setText(fechaCreacion);
+        tvFechaCreacion.setText(String.valueOf(fechaCreacion));
         initComponentsVolverGuardar();
         initListenersVolverGuardar();
 
@@ -69,7 +70,7 @@ public class Activity_Info_Incidencia extends AppCompatActivity implements View.
     @Override
     public void onClick(View view) {
         btnVolver.setOnClickListener(v -> {
-            Intent intent = new Intent(this, activitySalas.class);
+            Intent intent = new Intent(this, activityIncidencia.class);
             startActivity(intent);
         });
         btnGuardar.setOnClickListener(v -> {

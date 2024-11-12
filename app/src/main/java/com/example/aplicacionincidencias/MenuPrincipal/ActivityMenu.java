@@ -20,7 +20,7 @@ import com.example.aplicacionincidencias.Tipo.activityTipo;
 import com.example.aplicacionincidencias.Ubicacion.activityUbicacion;
 import com.example.aplicacionincidencias.Usuario.ActivityUsuario;
 
-public class ActivityMenu extends AppCompatActivity implements View.OnClickListener {
+public class ActivityMenu extends menutrespuntos implements View.OnClickListener {
     private Button ButtonMenuSala;
     private Button ButtonMenuTipo;
     private Button ButtonMenuPrestamo;
