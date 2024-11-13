@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,8 +17,8 @@ import com.example.aplicacionincidencias.R;
 import gestionincidencias.GestionIncidencias;
 import gestionincidencias.entidades.EntSala;
 
-public class activitySalas extends menutrespuntos {
-
+public class activitySalas extends menutrespuntos implements View.OnClickListener {
+    private Button btnVolver;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,15 +54,22 @@ public class activitySalas extends menutrespuntos {
                 // Pasar datos a la nueva actividad mediante el uso de 'putExtra'. Estos datos corresponden a la sala seleccionada.
 
                 intentInfoSala.putExtra("codigo", salaSeleccionado.getCodigoSala());
-                intentInfoSala.putExtra("nombre", salaSeleccionado.getNombre());
-                intentInfoSala.putExtra("descripcion", salaSeleccionado.getDescripcion());
 
 
                 // Iniciar la actividad de información de la sala
                 startActivity(intentInfoSala);
             }
         });
+        btnVolver = findViewById(R.id.btnVolver);
+        btnVolver.setOnClickListener((View.OnClickListener) this);
     }
+
+    @Override
+    public void onClick(View view) {
+        btnVolver.setOnClickListener(v -> {
+            Intent intent = new Intent(this, activitySalas.class);
+            startActivity(intent);
+        });
 }
 
 

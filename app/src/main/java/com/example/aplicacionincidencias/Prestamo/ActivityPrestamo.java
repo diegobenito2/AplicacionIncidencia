@@ -42,10 +42,6 @@ public class ActivityPrestamo extends menutrespuntos {
                 Intent intentPrestamo = new Intent(view.getContext(), Activity_Info_Prestamo.class);
 
                 intentPrestamo.putExtra("codigoPrestamo", PrestamoSeleccionado.getCodigoPrestamo());
-                intentPrestamo.putExtra("codigoUsuario", PrestamoSeleccionado.getIdUsuario());
-                intentPrestamo.putExtra("codigoElemento", PrestamoSeleccionado.getIdElemento());
-                intentPrestamo.putExtra("fechaInicio", String.valueOf(PrestamoSeleccionado.getFechaInicio()));
-                intentPrestamo.putExtra("fechaFin", String.valueOf(PrestamoSeleccionado.getFechaFin()));
 
                 startActivity(intentPrestamo);
 
