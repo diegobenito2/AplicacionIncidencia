@@ -17,8 +17,8 @@ import com.example.aplicacionincidencias.R;
 import gestionincidencias.GestionIncidencias;
 import gestionincidencias.entidades.EntSala;
 
-public class activitySalas extends menutrespuntos implements View.OnClickListener {
-    private Button btnVolver;
+public class activitySalas extends menutrespuntos{
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,16 +60,7 @@ public class activitySalas extends menutrespuntos implements View.OnClickListene
                 startActivity(intentInfoSala);
             }
         });
-        btnVolver = findViewById(R.id.btnVolver);
-        btnVolver.setOnClickListener((View.OnClickListener) this);
     }
-
-    @Override
-    public void onClick(View view) {
-        btnVolver.setOnClickListener(v -> {
-            Intent intent = new Intent(this, activitySalas.class);
-            startActivity(intent);
-        });
 }
 
 

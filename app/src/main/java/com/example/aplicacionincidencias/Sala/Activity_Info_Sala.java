@@ -81,7 +81,7 @@ public class Activity_Info_Sala extends AppCompatActivity implements View.OnClic
                 TextView tvCodigoSala = findViewById(R.id.tvinfoCodigoSala);
                 EditText edNombreSala = findViewById(R.id.editNombreSala);
                 EditText edDescripcion = findViewById(R.id.editDescripcionSala);
-                sala.setCodigoSala(tvCodigoSala.getId());
+                sala.setCodigoSala(Integer.parseInt(tvCodigoSala.getText().toString()));
                 sala.setNombre(String.valueOf(edNombreSala.getText()));
                 sala.setDescripcion(String.valueOf(edDescripcion.getText()));
                 if (sala.getCodigoSala() == 0) {

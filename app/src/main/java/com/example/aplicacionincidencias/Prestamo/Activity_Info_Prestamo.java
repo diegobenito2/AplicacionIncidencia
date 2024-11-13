@@ -89,10 +89,10 @@ public class Activity_Info_Prestamo extends AppCompatActivity implements View.On
                 EditText edCodigoElemento = findViewById(R.id.infotvCodigoElemento);
                 EditText edfechaInicio = findViewById(R.id.infotvfechaInicio);
                 EditText edfechaFin = findViewById(R.id.infotvfechaFin);
-                prestamo.setIdUsuario(edCodigoUsuario.getId());
-                prestamo.setIdElemento(edCodigoElemento.getId());
-                prestamo.setFechaInicio(Date.valueOf(String.valueOf(edfechaInicio.getText())));
-                prestamo.setFechaFin(Date.valueOf(String.valueOf(edfechaFin.getText())));
+                prestamo.setIdUsuario(Integer.parseInt(edCodigoUsuario.getText().toString()));
+                prestamo.setIdElemento(Integer.parseInt(edCodigoElemento.getText().toString()));
+                prestamo.setFechaInicio(Date.valueOf(edfechaInicio.getText().toString()));
+                prestamo.setFechaFin(Date.valueOf(edfechaFin.getText().toString()));
                 if (prestamo.getCodigoPrestamo() == 0){
                     prestamo.setCodigoPrestamo(GestionIncidencias.getArPrestamos().size() +1);
                     GestionIncidencias.getArPrestamos().add(0,prestamo);

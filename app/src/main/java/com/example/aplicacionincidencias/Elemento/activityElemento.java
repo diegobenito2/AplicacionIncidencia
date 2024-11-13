@@ -12,6 +12,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.aplicacionincidencias.MenuPrincipal.menutrespuntos;
 import com.example.aplicacionincidencias.R;
 import com.example.aplicacionincidencias.Sala.Activity_Info_Sala;
 
@@ -19,7 +20,7 @@ import gestionincidencias.GestionIncidencias;
 import gestionincidencias.entidades.EntElemento;
 import gestionincidencias.entidades.EntSala;
 
-public class activityElemento extends AppCompatActivity {
+public class activityElemento extends menutrespuntos {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
