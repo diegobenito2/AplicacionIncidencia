@@ -4,9 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextClock;
-import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,15 +12,10 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.aplicacionincidencias.R;
-
-import java.sql.Date;
-
-import gestionincidencias.GestionIncidencias;
-import gestionincidencias.entidades.EntPrestamo;
+import com.example.aplicacionincidencias.Sala.activitySalas;
 
 public class Activity_Info_Prestamo extends AppCompatActivity implements View.OnClickListener {
     private Button btnVolver, btnGuardar;
-    private EntPrestamo prestamo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,34 +28,20 @@ public class Activity_Info_Prestamo extends AppCompatActivity implements View.On
             return insets;
         });
 
+        Intent intentPrestamo = this.getIntent();
 
-        int idPrestamo = getIntent().getExtras().getInt("codigoPrestamo");
-        if (idPrestamo > 0) {
-            for (EntPrestamo e : GestionIncidencias.getArPrestamos()) {
-                if (e.getCodigoPrestamo() == idPrestamo) {
-                    prestamo = e;
-                }
-            }
+        Bundle bnd = intentPrestamo.getExtras();
 
-        } else {
-            prestamo = new EntPrestamo(0, 0, 0, null, null);
-        }
-        if (prestamo != null) {
-            TextView txCodigoPrestamo = findViewById(R.id.infotvCodigoPrestamo);
-            EditText edCodigoUsuario = findViewById(R.id.infotvCodigoUsuario);
-            EditText edCodigoElemento = findViewById(R.id.infotvCodigoElemento);
-            EditText edfechaInicio = findViewById(R.id.infotvfechaInicio);
-            EditText edfechaFin = findViewById(R.id.infotvfechaFin);
+        int codigoPrestamo = bnd.getInt("codigoPrestamo");
+        int codigoUsuario = bnd.getInt("codigoUsuario");
+        int codigoElemento = bnd.getInt("codigoElemento");
+        String fechaInicio=bnd.getString("fechaInicio");
+        String fechaFin=bnd.getString("fechaInicio");
 
-            txCodigoPrestamo.setText(String.valueOf(prestamo.getCodigoPrestamo()));
-            edCodigoUsuario.setText(String.valueOf(prestamo.getIdUsuario()));
-            edCodigoElemento.setText(String.valueOf(prestamo.getIdElemento()));
-            edfechaInicio.setText(String.valueOf(prestamo.getFechaInicio()));
-            edfechaFin.setText(String.valueOf(prestamo.getFechaFin()));
-        }
 
         initComponentsVolverGuardar();
         initListenersVolverGuardar();
+
 
     }
 
@@ -84,22 +62,7 @@ public class Activity_Info_Prestamo extends AppCompatActivity implements View.On
             startActivity(intent);
         });
         btnGuardar.setOnClickListener(v -> {
-            if (prestamo != null) {
-                EditText edCodigoUsuario = findViewById(R.id.infotvCodigoUsuario);
-                EditText edCodigoElemento = findViewById(R.id.infotvCodigoElemento);
-                EditText edfechaInicio = findViewById(R.id.infotvfechaInicio);
-                EditText edfechaFin = findViewById(R.id.infotvfechaFin);
-                prestamo.setIdUsuario(edCodigoUsuario.getId());
-                prestamo.setIdElemento(edCodigoElemento.getId());
-                prestamo.setFechaInicio(Date.valueOf(String.valueOf(edfechaInicio.getText())));
-                prestamo.setFechaFin(Date.valueOf(String.valueOf(edfechaFin.getText())));
-                if (prestamo.getCodigoPrestamo() == 0){
-                    prestamo.setCodigoPrestamo(GestionIncidencias.getArPrestamos().size() +1);
-                    GestionIncidencias.getArPrestamos().add(0,prestamo);
-                }
-                Intent intentVolverPrestamos= new Intent(view.getContext(), ActivityPrestamo.class);
-                startActivity(intentVolverPrestamos);
-            }
+
         });
     }
 }
