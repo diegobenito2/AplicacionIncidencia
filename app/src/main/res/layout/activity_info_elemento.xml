@@ -97,7 +97,7 @@
         android:textSize="20sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/editcodigoTipoElemento"
         app:layout_constraintEnd_toStartOf="@+id/editcodigoTipoElemento"
-        app:layout_constraintStart_toStartOf="parent"></TextView>
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/editcodigoTipoElemento"
@@ -109,13 +109,12 @@
         android:text="Codigo Tipo: "
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tvcodigoTipoElemento"></EditText>
+        app:layout_constraintStart_toEndOf="@+id/tvcodigoTipoElemento" />
 
     <Button
         android:id="@+id/btnGuardar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:text="Guardar"
