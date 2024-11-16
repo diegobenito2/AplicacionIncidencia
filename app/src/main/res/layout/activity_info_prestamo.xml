@@ -19,12 +19,12 @@
         android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/textView2"
-        app:layout_constraintEnd_toStartOf="@+id/infotvCodigoPrestamo"
+        app:layout_constraintEnd_toStartOf="@+id/infoedCodigoPrestamo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/infotvCodigoPrestamo"
+    <EditText
+        android:id="@+id/infoedCodigoPrestamo"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginEnd="135dp"

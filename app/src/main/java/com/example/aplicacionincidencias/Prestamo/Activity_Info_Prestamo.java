@@ -49,13 +49,13 @@ public class Activity_Info_Prestamo extends AppCompatActivity implements View.On
             prestamo = new EntPrestamo(0, 0, 0, null, null);
         }
         if (prestamo != null) {
-            TextView txCodigoPrestamo = findViewById(R.id.infotvCodigoPrestamo);
+            EditText edCodigoPrestamo = findViewById(R.id.infoedCodigoPrestamo);
             EditText edCodigoUsuario = findViewById(R.id.infotvCodigoUsuario);
             EditText edCodigoElemento = findViewById(R.id.infotvCodigoElemento);
             EditText edfechaInicio = findViewById(R.id.infotvfechaInicio);
             EditText edfechaFin = findViewById(R.id.infotvfechaFin);
 
-            txCodigoPrestamo.setText(String.valueOf(prestamo.getCodigoPrestamo()));
+            edCodigoPrestamo.setText(String.valueOf(prestamo.getCodigoPrestamo()));
             edCodigoUsuario.setText(String.valueOf(prestamo.getIdUsuario()));
             edCodigoElemento.setText(String.valueOf(prestamo.getIdElemento()));
             edfechaInicio.setText(String.valueOf(prestamo.getFechaInicio()));

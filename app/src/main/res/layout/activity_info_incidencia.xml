@@ -15,46 +15,47 @@
         android:text="Código Incidencia: "
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/tvinfoCodigoIncidencia"
-        app:layout_constraintStart_toStartOf="parent"></TextView>
+        app:layout_constraintBaseline_toBaselineOf="@+id/edinfoCodigoIncidencia"
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/tvinfoCodigoIncidencia"
+    <EditText
+        android:id="@+id/edinfoCodigoIncidencia"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="13dp"
         android:layout_marginTop="66dp"
-        android:layout_marginEnd="34dp"
-        android:textSize="20sp"
+        android:text="0"
         android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="@+id/tvDescripcionIncidencia"
-        app:layout_constraintTop_toTopOf="parent"></TextView>
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/tvCodigoIncidencia"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvDescripcionIncidencia"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="15dp"
         android:text="Descripción: "
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/edDescripcionIncidencia"
         app:layout_constraintEnd_toEndOf="@+id/edDescripcionIncidencia"
-        app:layout_constraintStart_toStartOf="@+id/edDescripcionIncidencia"></TextView>
+        app:layout_constraintStart_toStartOf="@+id/edDescripcionIncidencia"
+        app:layout_constraintTop_toBottomOf="@+id/edinfoCodigoIncidencia" />
 
     <EditText
         android:id="@+id/edDescripcionIncidencia"
         android:layout_width="269dp"
         android:layout_height="113dp"
         android:layout_marginStart="37dp"
-        android:layout_marginTop="96dp"
-        android:layout_marginBottom="98dp"
+        android:layout_marginTop="172dp"
+        android:layout_marginBottom="171dp"
         android:inputType="textMultiLine"
         android:text="Descripcion"
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/tvCodigoUsuarioCreacion"
+        app:layout_constraintBottom_toTopOf="@+id/edInfoFechaCreacion"
         app:layout_constraintStart_toStartOf="@+id/tvCodigoElemento"
-        app:layout_constraintTop_toTopOf="@+id/tvCodigoIncidencia"></EditText>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvCodigoElemento"
@@ -64,83 +65,88 @@
         android:text="Código Elemento: "
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/tvInfoCodigoElemento"
-        app:layout_constraintStart_toStartOf="parent"></TextView>
+        app:layout_constraintBaseline_toBaselineOf="@+id/edInfoCodigoElemento"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/tvCodigoUsuarioCreacion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
+        android:layout_marginBottom="310dp"
         android:text="Código Usuario Creación: "
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/tvInfoCodigoUsuarioCreacion"
-        app:layout_constraintStart_toStartOf="parent"></TextView>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/tvFechaCreacion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="254dp"
+        android:layout_marginStart="24dp"
         android:text="Fecha Creación: "
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"></TextView>
+        app:layout_constraintBaseline_toBaselineOf="@+id/edInfoFechaCreacion"
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/tvInfoFechaCreacion"
+    <EditText
+        android:id="@+id/edInfoFechaCreacion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="75dp"
-        android:layout_marginTop="38dp"
-        android:textSize="20sp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="35dp"
+        android:text="0"
         android:textColor="@color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvFechaCreacion"></TextView>
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/tvFechaCreacion"
+        app:layout_constraintTop_toBottomOf="@+id/tvCodigoUsuarioCreacion" />
 
-    <TextView
-        android:id="@+id/tvInfoCodigoUsuarioCreacion"
+    <EditText
+        android:id="@+id/edInfoCodigoUsuarioCreacion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="13dp"
-        android:layout_marginBottom="50dp"
-        android:textSize="20sp"
+        android:layout_marginStart="19dp"
+        android:text="0"
         android:textColor="@color/black"
-        app:layout_constraintBottom_toTopOf="@+id/tvFechaCreacion"
-        app:layout_constraintStart_toEndOf="@+id/tvCodigoUsuarioCreacion"></TextView>
+        android:textSize="20sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvCodigoUsuarioCreacion"
+        app:layout_constraintStart_toEndOf="@+id/tvCodigoUsuarioCreacion" />
 
-    <TextView
-        android:id="@+id/tvInfoCodigoElemento"
+    <EditText
+        android:id="@+id/edInfoCodigoElemento"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="18dp"
         android:layout_marginTop="27dp"
-        android:textSize="20sp"
+        android:text="0"
         android:textColor="@color/black"
+        android:textSize="20sp"
         app:layout_constraintStart_toEndOf="@+id/tvCodigoElemento"
-        app:layout_constraintTop_toBottomOf="@+id/edDescripcionIncidencia"></TextView>
+        app:layout_constraintTop_toBottomOf="@+id/edDescripcionIncidencia" />
 
     <Button
         android:id="@+id/btnGuardar"
-        android:layout_width="120dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:text="Guardar"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnVolver" />
 
     <Button
         android:id="@+id/btnVolver"
-        android:layout_width="120dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="17dp"
+        android:layout_marginEnd="138dp"
         android:layout_marginBottom="16dp"
         android:text="Volver"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnGuardar"
         app:layout_constraintStart_toStartOf="parent" />
 
 

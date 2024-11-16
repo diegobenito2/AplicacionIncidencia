@@ -34,21 +34,29 @@ public class Activity_Info_Sala extends AppCompatActivity implements View.OnClic
         });
 
         int codigoSala = getIntent().getExtras().getInt("codigo");
+        String nombreSala = getIntent().getExtras().getString("nombre");
+
         if (codigoSala > 0) {
             for (EntSala s : GestionIncidencias.getArSalas()) {
                 if (s.getCodigoSala() == codigoSala) {
                     sala = s;
                 }
             }
-        } else {
+        } else if (codigoSala == 0 && nombreSala.isEmpty()) {
             sala = new EntSala(0, "", "");
+        } else if (codigoSala == 0) {
+            for (EntSala s : GestionIncidencias.getArSalas()) {
+                if (s.getCodigoSala() == codigoSala) {
+                    sala = s;
+                }
+            }
         }
         if (sala != null) {
-            TextView tvCodigoSala = findViewById(R.id.tvinfoCodigoSala);
+            EditText edCodigoSala = findViewById(R.id.edinfoCodigoSala);
             EditText edNombreSala = findViewById(R.id.editNombreSala);
             EditText edDescripcion = findViewById(R.id.editDescripcionSala);
 
-            tvCodigoSala.setText(String.valueOf(sala.getCodigoSala()));
+            edCodigoSala.setText(String.valueOf(sala.getCodigoSala()));
             edNombreSala.setText(sala.getNombre());
             edDescripcion.setText(sala.getDescripcion());
         }
@@ -78,15 +86,22 @@ public class Activity_Info_Sala extends AppCompatActivity implements View.OnClic
         });
         btnGuardar.setOnClickListener(v -> {
             if (sala != null) {
-                TextView tvCodigoSala = findViewById(R.id.tvinfoCodigoSala);
+                EditText edCodigoSala = findViewById(R.id.edinfoCodigoSala);
                 EditText edNombreSala = findViewById(R.id.editNombreSala);
                 EditText edDescripcion = findViewById(R.id.editDescripcionSala);
-                sala.setCodigoSala(Integer.parseInt(tvCodigoSala.getText().toString()));
-                sala.setNombre(String.valueOf(edNombreSala.getText()));
-                sala.setDescripcion(String.valueOf(edDescripcion.getText()));
-                if (sala.getCodigoSala() == 0) {
-                    sala.setCodigoSala(GestionIncidencias.getArSalas().size() + 1);
-                    GestionIncidencias.getArSalas().add(0, sala);
+                if (sala.getCodigoSala() != 0) {
+                    sala.setCodigoSala(Integer.parseInt(edCodigoSala.getText().toString()));
+                    sala.setNombre(String.valueOf(edNombreSala.getText()));
+                    sala.setDescripcion(String.valueOf(edDescripcion.getText()));
+                } else if (sala.getCodigoSala() == 0 && sala.getNombre().isEmpty()) {
+                    sala.setCodigoSala(Integer.parseInt(edCodigoSala.getText().toString()));
+                    sala.setNombre(String.valueOf(edNombreSala.getText()));
+                    sala.setDescripcion(String.valueOf(edDescripcion.getText()));
+                    GestionIncidencias.getArSalas().add(GestionIncidencias.getArSalas().size(), sala);
+                } else if (sala.getCodigoSala() == 0) {
+                    sala.setCodigoSala(Integer.parseInt(edCodigoSala.getText().toString()));
+                    sala.setNombre(String.valueOf(edNombreSala.getText()));
+                    sala.setDescripcion(String.valueOf(edDescripcion.getText()));
                 }
                 Intent intentVolverSalas = new Intent(view.getContext(), activitySalas.class);
                 startActivity(intentVolverSalas);

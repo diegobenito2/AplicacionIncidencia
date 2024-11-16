@@ -40,17 +40,17 @@ public class Activity_Info_Incidencia extends menutrespuntos implements View.OnC
         int codigoUsuarioCreacion = bnd.getInt("codigoUsuarioCreacion");
         String fechaCreacion = bnd.getString("fechaCreacion");
 
-        TextView tvCodigoIncidencia = findViewById(R.id.tvinfoCodigoIncidencia);
+        EditText edCodigoIncidencia = findViewById(R.id.edinfoCodigoIncidencia);
         EditText edDescripcionIncidencia = findViewById(R.id.edDescripcionIncidencia);
-        TextView tvCodigoElemento = findViewById(R.id.tvInfoCodigoElemento);
-        TextView tvCodigoUsuarioCreacion = findViewById(R.id.tvInfoCodigoUsuarioCreacion);
-        TextView tvFechaCreacion = findViewById(R.id.tvInfoFechaCreacion);
+        EditText edCodigoElemento = findViewById(R.id.edInfoCodigoElemento);
+        EditText edCodigoUsuarioCreacion = findViewById(R.id.edInfoCodigoUsuarioCreacion);
+        EditText edFechaCreacion = findViewById(R.id.edInfoFechaCreacion);
 
-        tvCodigoIncidencia.setText(String.valueOf(codigoIncidencia));
+        edCodigoIncidencia.setText(String.valueOf(codigoIncidencia));
         edDescripcionIncidencia.setText(descripcionIncidencia);
-        tvCodigoElemento.setText(String.valueOf(codigoElemento));
-        tvCodigoUsuarioCreacion.setText(String.valueOf(codigoUsuarioCreacion));
-        tvFechaCreacion.setText(String.valueOf(fechaCreacion));
+        edCodigoElemento.setText(String.valueOf(codigoElemento));
+        edCodigoUsuarioCreacion.setText(String.valueOf(codigoUsuarioCreacion));
+        edFechaCreacion.setText(String.valueOf(fechaCreacion));
         initComponentsVolverGuardar();
         initListenersVolverGuardar();
 

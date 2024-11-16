@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,8 +16,13 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.aplicacionincidencias.R;
 import com.example.aplicacionincidencias.Sala.activitySalas;
 
+import gestionincidencias.GestionIncidencias;
+import gestionincidencias.entidades.EntTipo;
+
 public class Activity_Info_Tipo extends AppCompatActivity implements View.OnClickListener {
     private Button btnVolver, btnGuardar;
+    private EntTipo tipo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,10 +34,25 @@ public class Activity_Info_Tipo extends AppCompatActivity implements View.OnClic
             return insets;
         });
 
-        Intent intentTipo = this.getIntent();
+        int codigoTipo = getIntent().getExtras().getInt("codigo");
+        if (codigoTipo > 0) {
+            for (EntTipo t : GestionIncidencias.getArTipos()) {
+                if (t.getCodigoTipo() == codigoTipo) {
+                    tipo = t;
+                }
+            }
+        } else{
+            tipo= new EntTipo(0,"","");
+        }
+        if (tipo != null) {
+            EditText edCodigoTipo = findViewById(R.id.edinfoCodigoTipo);
+            EditText edNombreTipo = findViewById(R.id.editNombreTipo);
+            EditText edDescripcion = findViewById(R.id.editDescripcionTipo);
 
-        Bundle bnd = intentTipo.getExtras();
-
+            edCodigoTipo.setText(String.valueOf(tipo.getCodigoTipo()));
+            edNombreTipo.setText(tipo.getNombre());
+            edDescripcion.setText(tipo.getDescripcion());
+        }
 
 
         initComponentsVolverGuardar();
@@ -56,7 +78,20 @@ public class Activity_Info_Tipo extends AppCompatActivity implements View.OnClic
             startActivity(intent);
         });
         btnGuardar.setOnClickListener(v -> {
-
+            if (tipo != null) {
+                EditText edCodigoTipo = findViewById(R.id.edinfoCodigoTipo);
+                EditText edNombreTipo = findViewById(R.id.editNombreTipo);
+                EditText edDescripcion = findViewById(R.id.editDescripcionTipo);
+                tipo.setCodigoTipo(Integer.parseInt(edCodigoTipo.getText().toString()));
+                tipo.setNombre(String.valueOf(edNombreTipo.getText()));
+                tipo.setDescripcion(String.valueOf(edDescripcion.getText()));
+                if (tipo.getCodigoTipo() == 0) {
+                    tipo.setCodigoTipo(GestionIncidencias.getArSalas().size() + 1);
+                    GestionIncidencias.getArTipos().add(0, tipo);
+                }
+                Intent intentVolverTipo = new Intent(view.getContext(), activityTipo.class);
+                startActivity(intentVolverTipo);
+            }
         });
     }
 }

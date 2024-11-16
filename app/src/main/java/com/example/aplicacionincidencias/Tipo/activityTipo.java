@@ -1,6 +1,9 @@
 package com.example.aplicacionincidencias.Tipo;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +15,7 @@ import com.example.aplicacionincidencias.MenuPrincipal.menutrespuntos;
 import com.example.aplicacionincidencias.R;
 
 import gestionincidencias.GestionIncidencias;
+import gestionincidencias.entidades.EntPrestamo;
 import gestionincidencias.entidades.EntTipo;
 
 public class activityTipo extends menutrespuntos {
@@ -30,6 +34,16 @@ public class activityTipo extends menutrespuntos {
         ListView listaTipo= (ListView) findViewById(R.id.ListaTipo);
         AdaptadorTipo adaptadorTipo = new AdaptadorTipo(this, GestionIncidencias.getArTipos().toArray(new EntTipo[0]));
         listaTipo.setAdapter(adaptadorTipo);
+        listaTipo.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                EntTipo tipoSelecccionado = (EntTipo) adapterView.getItemAtPosition(i);
+
+                Intent intentInfoTipo = new Intent(view.getContext(), Activity_Info_Tipo.class);
+                intentInfoTipo.putExtra("codigo",tipoSelecccionado.getCodigoTipo());
+                startActivity(intentInfoTipo);
+            }
+        });
 
 
     }

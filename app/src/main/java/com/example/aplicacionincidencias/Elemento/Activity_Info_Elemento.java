@@ -42,7 +42,7 @@ public class Activity_Info_Elemento extends AppCompatActivity implements View.On
         int codigoTipo = bnd.getInt("tipo");
 
         // Se busca el TextView en el layout de la actividad donde se mostrarán los elementos pasados en el intent.
-        TextView tvCodigoElemento = findViewById(R.id.tvinfoCodigoElemento);
+        EditText tvCodigoElemento = findViewById(R.id.edinfoCodigoElemento);
         EditText edNombreElemento = findViewById(R.id.editNombreElemento);
         EditText edDescripcionElemento = findViewById(R.id.editDescripcionElemento);
         EditText edCodigoTipoElemento = findViewById(R.id.editcodigoTipoElemento);

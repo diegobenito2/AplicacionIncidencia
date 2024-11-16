@@ -16,16 +16,18 @@
         android:text="Código: "
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/tvinfoCodigoSala"
+        app:layout_constraintBaseline_toBaselineOf="@+id/edinfoCodigoSala"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/tvinfoCodigoSala"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <EditText
+        android:id="@+id/edinfoCodigoSala"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginStart="114dp"
         android:layout_marginBottom="57dp"
         android:textSize="20sp"
+        android:gravity="center"
+        android:text="0"
         app:layout_constraintBottom_toTopOf="@+id/editNombreSala"
         app:layout_constraintStart_toStartOf="@+id/editNombreSala" />
 

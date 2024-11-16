@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">AplicacionIncidencias</string>
+    <string name="submit">Añadiendo nuevo  </string>
 </resources>

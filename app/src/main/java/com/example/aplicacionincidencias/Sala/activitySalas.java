@@ -14,6 +14,8 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.aplicacionincidencias.MenuPrincipal.menutrespuntos;
 import com.example.aplicacionincidencias.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import gestionincidencias.GestionIncidencias;
 import gestionincidencias.entidades.EntSala;
 
@@ -54,9 +56,25 @@ public class activitySalas extends menutrespuntos{
                 // Pasar datos a la nueva actividad mediante el uso de 'putExtra'. Estos datos corresponden a la sala seleccionada.
 
                 intentInfoSala.putExtra("codigo", salaSeleccionado.getCodigoSala());
+                intentInfoSala.putExtra("nombre", salaSeleccionado.getNombre());
 
 
                 // Iniciar la actividad de información de la sala
+                startActivity(intentInfoSala);
+            }
+        });
+
+        FloatingActionButton AñadirSala = findViewById(R.id.fabAñadirSala);
+        AñadirSala.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Crear una nueva Intent para abrir la actividad de información de la sala
+                Intent intentInfoSala = new Intent(view.getContext(), Activity_Info_Sala.class);
+
+                // Pasar datos a la nueva actividad mediante el uso de 'putExtra'. Estos datos corresponden a la sala seleccionada.
+
+                intentInfoSala.putExtra("codigo", 0);
+                intentInfoSala.putExtra("nombre","");
                 startActivity(intentInfoSala);
             }
         });
