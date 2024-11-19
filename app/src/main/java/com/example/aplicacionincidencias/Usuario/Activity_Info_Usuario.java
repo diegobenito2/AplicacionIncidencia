@@ -14,8 +14,12 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.aplicacionincidencias.R;
 import com.example.aplicacionincidencias.Sala.activitySalas;
 
+import gestionincidencias.GestionIncidencias;
+import gestionincidencias.entidades.EntUsuario;
+
 public class Activity_Info_Usuario extends AppCompatActivity implements View.OnClickListener {
     private Button btnVolver, btnGuardar;
+    private EntUsuario usuario;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,10 +30,17 @@ public class Activity_Info_Usuario extends AppCompatActivity implements View.OnC
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        Intent intentUsuario= this.getIntent();
 
-        Bundle bnd = intentUsuario.getExtras();
+        int codigoUsuario = getIntent().getExtras().getInt("codigo");
+if (codigoUsuario >0 ){
+    for (EntUsuario u : GestionIncidencias.getArUsuarios()){
+        if (u.getCodigoUsuario()==codigoUsuario){
+            usuario=u;
+        }
+    }
+} else if (codigoUsuario == 0) {
 
+}
 
         initComponentsVolverGuardar();
         initListenersVolverGuardar();

@@ -1,33 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
     <TextView
         android:id="@+id/codigoUbicacion"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"></TextView>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Código: "
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        tools:layout_editor_absoluteX="84dp"
+        tools:layout_editor_absoluteY="103dp"></TextView>
+
+    <EditText
+        android:layout_width="50sp"
+        android:layout_height="50sp"
+        android:gravity="center"
+        android:text="0"
+        tools:layout_editor_absoluteX="213dp"
+        tools:layout_editor_absoluteY="90dp"></EditText>
+
     <TextView
-        android:id="@+id/codigoSalaUbicacion"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"></TextView>
+        android:id="@+id/codigoSala"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Código Sala: "
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        tools:layout_editor_absoluteX="84dp"
+        tools:layout_editor_absoluteY="211dp"></TextView>
+
+    <EditText
+        android:id="@+id/edCodigoSala"
+        android:layout_width="50sp"
+        android:layout_height="50sp"
+        android:gravity="center"
+        android:text="0"
+        tools:layout_editor_absoluteX="228dp"
+        tools:layout_editor_absoluteY="196dp"></EditText>
+
     <TextView
-        android:id="@+id/codigoElementoUbicacion"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"></TextView>
-    <TextView
-        android:id="@+id/DescripcionUbicacion"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"></TextView>
-    <TextView
-        android:id="@+id/codigoUbicacionFechaInicio"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"></TextView>
-    <TextView
-        android:id="@+id/codigoUbicacionFechaFin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"></TextView>
+        android:id="@+id/codigoElemento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Código Elemento: "
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        tools:layout_editor_absoluteX="84dp"
+        tools:layout_editor_absoluteY="317dp"></TextView>
+
+    <EditText
+        android:id="@+id/edCodigoElemento"
+        android:layout_width="50sp"
+        android:layout_height="50sp"
+        android:gravity="center"
+        android:text="0"
+        android:textColor="@color/black"
+        tools:layout_editor_absoluteX="278dp"
+        tools:layout_editor_absoluteY="307dp"></EditText>
+
+    <!--    <TextView-->
+    <!--        android:id="@+id/codigoElementoUbicacion"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"></TextView>-->
+    <!--    <TextView-->
+    <!--        android:id="@+id/DescripcionUbicacion"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"></TextView>-->
+    <!--    <TextView-->
+    <!--        android:id="@+id/codigoUbicacionFechaInicio"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"></TextView>-->
+    <!--    <TextView-->
+    <!--        android:id="@+id/codigoUbicacionFechaFin"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"></TextView>-->
 
 
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
