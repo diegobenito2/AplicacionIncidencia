@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,6 +22,7 @@ import gestionincidencias.entidades.EntUsuario;
 public class Activity_Info_Usuario extends AppCompatActivity implements View.OnClickListener {
     private Button btnVolver, btnGuardar;
     private EntUsuario usuario;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,15 +35,38 @@ public class Activity_Info_Usuario extends AppCompatActivity implements View.OnC
         });
 
         int codigoUsuario = getIntent().getExtras().getInt("codigo");
-if (codigoUsuario >0 ){
-    for (EntUsuario u : GestionIncidencias.getArUsuarios()){
-        if (u.getCodigoUsuario()==codigoUsuario){
-            usuario=u;
-        }
-    }
-} else if (codigoUsuario == 0) {
+        String nombreUsuario = getIntent().getExtras().getString("nombre");
 
-}
+        if (codigoUsuario > 0) {
+            for (EntUsuario u : GestionIncidencias.getArUsuarios()) {
+                if (u.getCodigoUsuario() == codigoUsuario) {
+                    usuario = u;
+                }
+            }
+        } else if (codigoUsuario == 0 && nombreUsuario.isEmpty()) {
+            usuario = new EntUsuario(0, "", "", "", "", "");
+        } else if (codigoUsuario == 0) {
+            for (EntUsuario u : GestionIncidencias.getArUsuarios()) {
+                if (u.getCodigoUsuario() == codigoUsuario) {
+                    usuario = u;
+                }
+            }
+        }
+        if (usuario != null) {
+            EditText edCodigoUsuario = findViewById(R.id.edIdCodigoUsuario);
+            EditText edNombreUsuario = findViewById(R.id.edNombreUsuario);
+            EditText edCorreoUsuario = findViewById(R.id.edcorreoUsuario);
+            EditText edTelefonoUsuario = findViewById(R.id.edtelefonoUsuario);
+            EditText edContraseñaUsuario = findViewById(R.id.edpasswordUsuario);
+            EditText edRolUsuario = findViewById(R.id.edrolUsuario);
+
+            edCodigoUsuario.setText(String.valueOf(usuario.getCodigoUsuario()));
+            edNombreUsuario.setText(usuario.getNombre());
+            edCorreoUsuario.setText(usuario.getCorreo());
+            edTelefonoUsuario.setText(usuario.getTelefono());
+            edContraseñaUsuario.setText(usuario.getPassword());
+            edRolUsuario.setText(usuario.getRol());
+        }
 
         initComponentsVolverGuardar();
         initListenersVolverGuardar();
@@ -65,7 +91,63 @@ if (codigoUsuario >0 ){
             startActivity(intent);
         });
         btnGuardar.setOnClickListener(v -> {
-
+            if (usuario != null) {
+                EditText edCodigoUsuario = findViewById(R.id.edIdCodigoUsuario);
+                EditText edNombreUsuario = findViewById(R.id.edNombreUsuario);
+                EditText edCorreoUsuario = findViewById(R.id.edcorreoUsuario);
+                EditText edTelefonoUsuario = findViewById(R.id.edtelefonoUsuario);
+                EditText edContraseñaUsuario = findViewById(R.id.edpasswordUsuario);
+                EditText edRolUsuario = findViewById(R.id.edrolUsuario);
+                if (usuario.getCodigoUsuario() != 0) {
+                    usuario.setCodigoUsuario(Integer.parseInt(edCodigoUsuario.getText().toString()));
+                    usuario.setNombre(edNombreUsuario.getText().toString());
+                    usuario.setCorreo(edCorreoUsuario.getText().toString());
+                    usuario.setTelefono(edTelefonoUsuario.getText().toString());
+                    usuario.setPassword(edContraseñaUsuario.getText().toString());
+                    usuario.setRol(edRolUsuario.getText().toString());
+                } else if (usuario.getCodigoUsuario()==0 && usuario.getNombre().isEmpty()) {
+                    usuario.setCodigoUsuario(Integer.parseInt(edCodigoUsuario.getText().toString()));
+                    usuario.setNombre(edNombreUsuario.getText().toString());
+                    usuario.setCorreo(edCorreoUsuario.getText().toString());
+                    usuario.setTelefono(edTelefonoUsuario.getText().toString());
+                    usuario.setPassword(edContraseñaUsuario.getText().toString());
+                    usuario.setRol(edRolUsuario.getText().toString());
+                    GestionIncidencias.getArUsuarios().add(GestionIncidencias.getArUsuarios().size(),usuario);
+                } else if (usuario.getCodigoUsuario()==0) {
+                    usuario.setCodigoUsuario(Integer.parseInt(edCodigoUsuario.getText().toString()));
+                    usuario.setNombre(edNombreUsuario.getText().toString());
+                    usuario.setCorreo(edCorreoUsuario.getText().toString());
+                    usuario.setTelefono(edTelefonoUsuario.getText().toString());
+                    usuario.setPassword(edContraseñaUsuario.getText().toString());
+                    usuario.setRol(edRolUsuario.getText().toString());
+                }
+                Intent intentVolverUsuario = new Intent(view.getContext(),ActivityUsuario.class);
+                startActivity(intentVolverUsuario);
+            }
         });
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -8,121 +8,176 @@
     tools:context=".Ubicacion.Activity_Info_Ubicacion">
 
     <TextView
-        android:id="@+id/codigoUbicacion"
+        android:id="@+id/tvcodigoUbicacion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Código: "
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="49dp"
+        android:layout_marginEnd="111dp"
+        android:layout_marginBottom="85dp"
+        android:text="Código "
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="@+id/codigoSala"
-        tools:layout_editor_absoluteY="63dp" />
+        app:layout_constraintBottom_toTopOf="@+id/tvcodigoSala"
+        app:layout_constraintEnd_toStartOf="@+id/edCodigoUbicacion"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/edCodigoElemento"
-        android:layout_width="50dp"
+        android:id="@+id/edCodigoUbicacion"
+        android:layout_width="0dp"
         android:layout_height="58dp"
-        android:layout_marginEnd="120dp"
+        android:layout_marginTop="43dp"
+        android:layout_marginEnd="134dp"
+        android:layout_marginBottom="48dp"
         android:gravity="center"
         android:text="0"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="@+id/infocodigoUbicacionFechaInicio"
-        tools:layout_editor_absoluteY="271dp" />
+        app:layout_constraintBottom_toTopOf="@+id/edCodigoSala"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvcodigoUbicacion"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <TextView
-        android:id="@+id/codigoSala"
+        android:id="@+id/tvcodigoSala"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Código Sala: "
+        android:layout_marginStart="41dp"
+        android:layout_marginEnd="70dp"
+        android:layout_marginBottom="82dp"
+        android:text="Código Sala "
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="@+id/codigoElemento"
-        tools:layout_editor_absoluteY="178dp" />
-
-    <TextView
-        android:id="@+id/codigoElemento"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Código Elemento: "
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="@+id/DescripcionUbicacion"
-        tools:layout_editor_absoluteY="288dp" />
+        app:layout_constraintBottom_toTopOf="@+id/tvcodigoElemento"
+        app:layout_constraintEnd_toStartOf="@+id/edCodigoSala"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvcodigoUbicacion" />
 
     <EditText
         android:id="@+id/edCodigoSala"
-        android:layout_width="51dp"
+        android:layout_width="0dp"
         android:layout_height="50sp"
+        android:layout_marginTop="149dp"
+        android:layout_marginEnd="136dp"
+        android:layout_marginBottom="149dp"
         android:gravity="center"
         android:text="0"
-        app:layout_constraintEnd_toEndOf="@+id/edCodigoElemento"
-        tools:layout_editor_absoluteY="163dp" />
+        app:layout_constraintBottom_toBottomOf="@+id/tvcodigoUbicacionFechaInicio"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvcodigoSala"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/DescripcionUbicacion"
+        android:id="@+id/tvcodigoElemento"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Descripción:  "
+        android:layout_marginStart="37dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="24dp"
+        android:text="Código Elemento: "
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="@+id/edDescripcionUbicacion"
-        tools:layout_editor_absoluteY="371dp" />
+        app:layout_constraintBottom_toTopOf="@+id/tvcodigoUbicacionFechaInicio"
+        app:layout_constraintEnd_toStartOf="@+id/edCodigoElemento"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvcodigoSala" />
 
     <EditText
-        android:id="@+id/editText"
-        android:layout_width="50dp"
+        android:id="@+id/edCodigoElemento"
+        android:layout_width="0dp"
         android:layout_height="58dp"
+        android:layout_marginTop="51dp"
+        android:layout_marginEnd="136dp"
+        android:layout_marginBottom="51dp"
         android:gravity="center"
         android:text="0"
-        app:layout_constraintEnd_toEndOf="@+id/edCodigoSala"
-        tools:layout_editor_absoluteY="50dp" />
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/tvcodigoUbicacionFechaInicio"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvcodigoElemento"
+        app:layout_constraintTop_toBottomOf="@+id/tvcodigoSala" />
 
+
+    <TextView
+        android:id="@+id/tvcodigoUbicacionFechaInicio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="17dp"
+        android:layout_marginBottom="28dp"
+        android:text="Fecha Inicio"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/tvinfocodigoUbicacionFechaInicio"
+        app:layout_constraintEnd_toEndOf="@+id/edCodigoElemento"
+        app:layout_constraintTop_toBottomOf="@+id/tvcodigoElemento" />
+
+    <TextView
+        android:id="@+id/tvinfocodigoUbicacionFechaInicio"
+        android:layout_width="392dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="9dp"
+        android:layout_marginEnd="9dp"
+        android:layout_marginBottom="33dp"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/tvcodigoUbicacionFechaFin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvcodigoUbicacionFechaInicio" />
+
+    <TextView
+        android:id="@+id/tvcodigoUbicacionFechaFin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="7dp"
+        android:layout_marginBottom="15dp"
+        android:text="Fecha Fin:  "
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/tvinfocodigoUbicacionFechaFin"
+        app:layout_constraintStart_toStartOf="@+id/tvDescripcionUbicacion"
+        app:layout_constraintTop_toBottomOf="@+id/tvinfocodigoUbicacionFechaInicio" />
+
+    <TextView
+        android:id="@+id/tvinfocodigoUbicacionFechaFin"
+        android:layout_width="410dp"
+        android:layout_height="31dp"
+        android:layout_marginStart="3dp"
+        android:layout_marginEnd="3dp"
+        android:layout_marginBottom="12dp"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/tvDescripcionUbicacion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvcodigoUbicacionFechaFin" />
+
+    <TextView
+        android:id="@+id/tvDescripcionUbicacion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="13dp"
+        android:text="Descripción  "
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/edDescripcionUbicacion"
+        app:layout_constraintEnd_toEndOf="@+id/tvinfocodigoUbicacionFechaFin"
+        app:layout_constraintStart_toStartOf="@+id/tvinfocodigoUbicacionFechaFin"
+        app:layout_constraintTop_toBottomOf="@+id/tvinfocodigoUbicacionFechaFin" />
 
     <EditText
         android:id="@+id/edDescripcionUbicacion"
-        android:layout_width="364dp"
-        android:layout_height="77dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="17dp"
+        android:layout_marginEnd="17dp"
         android:gravity="center"
         android:inputType="textMultiLine"
         android:text="Contenido Descripción"
         android:textColor="@color/black"
-        app:layout_constraintStart_toStartOf="@+id/codigoUbicacionFechaInicio"
-        tools:layout_editor_absoluteY="436dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDescripcionUbicacion" />
 
-    <TextView
-        android:id="@+id/infocodigoUbicacionFechaInicio"
-        android:layout_width="224dp"
-        android:layout_height="58dp"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/infocodigoUbicacionFechaFin"
-        tools:layout_editor_absoluteY="551dp" />
-
-    <TextView
-        android:id="@+id/codigoUbicacionFechaInicio"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Fecha Inicio:  "
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="@+id/codigoUbicacionFechaFin"
-        tools:layout_editor_absoluteY="551dp" />
-
-    <TextView
-        android:id="@+id/codigoUbicacionFechaFin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Fecha Fin:  "
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        tools:layout_editor_absoluteX="32dp"
-        tools:layout_editor_absoluteY="645dp" />
-
-    <TextView
-        android:id="@+id/infocodigoUbicacionFechaFin"
-        android:layout_width="237dp"
-        android:layout_height="29dp"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        tools:layout_editor_absoluteX="158dp"
-        tools:layout_editor_absoluteY="645dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -13,6 +13,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.aplicacionincidencias.MenuPrincipal.menutrespuntos;
 import com.example.aplicacionincidencias.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import gestionincidencias.GestionIncidencias;
 import gestionincidencias.entidades.EntIncidencia;
@@ -38,14 +39,28 @@ public class activityIncidencia extends menutrespuntos {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 EntIncidencia IncidenciaSeleccionada = (EntIncidencia) adapterView.getItemAtPosition(i);
 
-                Intent intentInfoIncidencia = new Intent(view.getContext(),Activity_Info_Incidencia.class);
+                Intent intentInfoIncidencia = new Intent(view.getContext(), Activity_Info_Incidencia.class);
 
-                intentInfoIncidencia.putExtra("codigoIncidencia",IncidenciaSeleccionada.getCodigoIncidencia());
-                intentInfoIncidencia.putExtra("descripcionIncidencia",IncidenciaSeleccionada.getDescripcion());
-                intentInfoIncidencia.putExtra("codigoElemento",IncidenciaSeleccionada.getIdElemento());
+                intentInfoIncidencia.putExtra("codigoIncidencia", IncidenciaSeleccionada.getCodigoIncidencia());
+                intentInfoIncidencia.putExtra("descripcionIncidencia", IncidenciaSeleccionada.getDescripcion());
+                intentInfoIncidencia.putExtra("codigoElemento", IncidenciaSeleccionada.getIdElemento());
                 intentInfoIncidencia.putExtra("codigoUsuarioCreacion", IncidenciaSeleccionada.getIdUsuarioCreacion());
-                intentInfoIncidencia.putExtra("fechaCreacion" , String.valueOf(IncidenciaSeleccionada.getFechaCreacion()));
+                intentInfoIncidencia.putExtra("fechaCreacion", String.valueOf(IncidenciaSeleccionada.getFechaCreacion()));
 
+                startActivity(intentInfoIncidencia);
+            }
+        });
+        FloatingActionButton AñadirIncidencia = findViewById(R.id.fabAñadirIncidencia);
+        AñadirIncidencia.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Crear una nueva Intent para abrir la actividad de información de la sala
+                Intent intentInfoIncidencia = new Intent(view.getContext(), Activity_Info_Incidencia.class);
+
+                // Pasar datos a la nueva actividad mediante el uso de 'putExtra'. Estos datos corresponden a la sala seleccionada.
+
+                intentInfoIncidencia.putExtra("codigoIncidencia", 0);
+                intentInfoIncidencia.putExtra("descripcionIncidencia", "");
                 startActivity(intentInfoIncidencia);
             }
         });

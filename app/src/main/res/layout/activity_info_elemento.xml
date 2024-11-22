@@ -27,7 +27,7 @@
         android:layout_marginBottom="42dp"
         android:textSize="20sp"
         android:text="0"
-        app:layout_constraintBottom_toTopOf="@+id/editNombreElemento"
+        app:layout_constraintBottom_toTopOf="@+id/edNombreElemento"
         app:layout_constraintStart_toEndOf="@+id/tvCodigoElemento" />
 
     <TextView
@@ -40,12 +40,12 @@
         android:text="Nombre: "
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintEnd_toStartOf="@+id/editNombreElemento"
+        app:layout_constraintEnd_toStartOf="@+id/edNombreElemento"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editNombreElemento"
+        android:id="@+id/edNombreElemento"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="204dp"
@@ -54,7 +54,7 @@
         android:inputType="text"
         android:text="Nombre"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/editDescripcionElemento"
+        app:layout_constraintBottom_toTopOf="@+id/edDescripcionElemento"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tvNombreElemento"
         app:layout_constraintTop_toTopOf="parent" />
@@ -71,11 +71,11 @@
         android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/editcodigoTipoElemento"
-        app:layout_constraintEnd_toStartOf="@+id/editDescripcionElemento"
+        app:layout_constraintEnd_toStartOf="@+id/edDescripcionElemento"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/editDescripcionElemento"
+        android:id="@+id/edDescripcionElemento"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginEnd="16dp"
@@ -85,7 +85,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tvDescripcionElemento"
-        app:layout_constraintTop_toBottomOf="@+id/editNombreElemento" />
+        app:layout_constraintTop_toBottomOf="@+id/edNombreElemento" />
 
     <TextView
         android:id="@+id/tvcodigoTipoElemento"

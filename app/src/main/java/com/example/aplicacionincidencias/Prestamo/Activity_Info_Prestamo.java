@@ -52,14 +52,14 @@ public class Activity_Info_Prestamo extends AppCompatActivity implements View.On
             EditText edCodigoPrestamo = findViewById(R.id.infoedCodigoPrestamo);
             EditText edCodigoUsuario = findViewById(R.id.infotvCodigoUsuario);
             EditText edCodigoElemento = findViewById(R.id.infotvCodigoElemento);
-            EditText edfechaInicio = findViewById(R.id.infotvfechaInicio);
-            EditText edfechaFin = findViewById(R.id.infotvfechaFin);
+            TextView tvfechaInicio = findViewById(R.id.infotvfechaInicio);
+            TextView tvfechaFin = findViewById(R.id.infotvfechaFin);
 
             edCodigoPrestamo.setText(String.valueOf(prestamo.getCodigoPrestamo()));
             edCodigoUsuario.setText(String.valueOf(prestamo.getIdUsuario()));
             edCodigoElemento.setText(String.valueOf(prestamo.getIdElemento()));
-            edfechaInicio.setText(String.valueOf(prestamo.getFechaInicio()));
-            edfechaFin.setText(String.valueOf(prestamo.getFechaFin()));
+            tvfechaInicio.setText(String.valueOf(prestamo.getFechaInicio()));
+            tvfechaFin.setText(String.valueOf(prestamo.getFechaFin()));
         }
 
         initComponentsVolverGuardar();
@@ -87,12 +87,12 @@ public class Activity_Info_Prestamo extends AppCompatActivity implements View.On
             if (prestamo != null) {
                 EditText edCodigoUsuario = findViewById(R.id.infotvCodigoUsuario);
                 EditText edCodigoElemento = findViewById(R.id.infotvCodigoElemento);
-                EditText edfechaInicio = findViewById(R.id.infotvfechaInicio);
-                EditText edfechaFin = findViewById(R.id.infotvfechaFin);
+                TextView tvfechaInicio = findViewById(R.id.infotvfechaInicio);
+                TextView tvfechaFin = findViewById(R.id.infotvfechaFin);
                 prestamo.setIdUsuario(Integer.parseInt(edCodigoUsuario.getText().toString()));
                 prestamo.setIdElemento(Integer.parseInt(edCodigoElemento.getText().toString()));
-                prestamo.setFechaInicio(Date.valueOf(edfechaInicio.getText().toString()));
-                prestamo.setFechaFin(Date.valueOf(edfechaFin.getText().toString()));
+                prestamo.setFechaInicio(Date.valueOf(tvfechaInicio.getText().toString()));
+                prestamo.setFechaFin(Date.valueOf(tvfechaFin.getText().toString()));
                 if (prestamo.getCodigoPrestamo() == 0){
                     prestamo.setCodigoPrestamo(GestionIncidencias.getArPrestamos().size() +1);
                     GestionIncidencias.getArPrestamos().add(0,prestamo);

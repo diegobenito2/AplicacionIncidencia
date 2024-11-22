@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,7 +17,6 @@ import com.example.aplicacionincidencias.Sala.activitySalas;
 
 import gestionincidencias.GestionIncidencias;
 import gestionincidencias.entidades.EntElemento;
-import gestionincidencias.entidades.EntSala;
 
 public class Activity_Info_Elemento extends AppCompatActivity implements View.OnClickListener {
     private Button btnVolver, btnGuardar;
@@ -53,7 +51,7 @@ public class Activity_Info_Elemento extends AppCompatActivity implements View.On
             }
         }
         if (elemento != null) {
-            TextView tvCodigoElemento = findViewById(R.id.tvinfoCodigoElemento);
+            EditText tvCodigoElemento = findViewById(R.id.edinfoCodigoElemento);
             EditText edNombreElemento = findViewById(R.id.edNombreElemento);
             EditText edDescripcion = findViewById(R.id.edDescripcionElemento);
             EditText edTipo = findViewById(R.id.editcodigoTipoElemento);
@@ -89,28 +87,28 @@ public class Activity_Info_Elemento extends AppCompatActivity implements View.On
         });
         btnGuardar.setOnClickListener(v -> {
             if (elemento != null) {
-                TextView tvCodigoElemento = findViewById(R.id.tvinfoCodigoElemento);
+                EditText edCodigoElemento = findViewById(R.id.edinfoCodigoElemento);
                 EditText edNombreElemento = findViewById(R.id.edNombreElemento);
                 EditText edDescripcion = findViewById(R.id.edDescripcionElemento);
                 EditText edTipo = findViewById(R.id.editcodigoTipoElemento);
                 if (elemento.getCodigoElemento()!= 0) {
-                    tvCodigoElemento.setText(String.valueOf(elemento.getCodigoElemento()));
-                    edNombreElemento.setText(elemento.getNombre());
-                    edDescripcion.setText(elemento.getDescripcion());
-                    edTipo.setText(String.valueOf(elemento.getIdTipo()));
+                    elemento.setCodigoElemento(Integer.parseInt(edCodigoElemento.getText().toString()));
+                    elemento.setNombre(String.valueOf(edNombreElemento.getText()));
+                    elemento.setDescripcion(String.valueOf(edDescripcion.getText()));
+                    elemento.setIdTipo(Integer.parseInt(edTipo.getText().toString()));
                 } else if (elemento.getCodigoElemento() == 0 && elemento.getNombre().isEmpty()) {
-                    tvCodigoElemento.setText(String.valueOf(elemento.getCodigoElemento()));
-                    edNombreElemento.setText(elemento.getNombre());
-                    edDescripcion.setText(elemento.getDescripcion());
-                    edTipo.setText(String.valueOf(elemento.getIdTipo()));
+                    elemento.setCodigoElemento(Integer.parseInt(edCodigoElemento.getText().toString()));
+                    elemento.setNombre(String.valueOf(edNombreElemento.getText()));
+                    elemento.setDescripcion(String.valueOf(edDescripcion.getText()));
+                    elemento.setIdTipo(Integer.parseInt(edTipo.getText().toString()));
                     GestionIncidencias.getArElementos().add(GestionIncidencias.getArElementos().size(), elemento);
                 } else if (elemento.getCodigoElemento() == 0) {
-                    tvCodigoElemento.setText(String.valueOf(elemento.getCodigoElemento()));
-                    edNombreElemento.setText(elemento.getNombre());
-                    edDescripcion.setText(elemento.getDescripcion());
-                    edTipo.setText(String.valueOf(elemento.getIdTipo()));
+                    elemento.setCodigoElemento(Integer.parseInt(edCodigoElemento.getText().toString()));
+                    elemento.setNombre(String.valueOf(edNombreElemento.getText()));
+                    elemento.setDescripcion(String.valueOf(edDescripcion.getText()));
+                    elemento.setIdTipo(Integer.parseInt(edTipo.getText().toString()));
                 }
-                Intent intentVolverSalas = new Intent(view.getContext(), activitySalas.class);
+                Intent intentVolverSalas = new Intent(view.getContext(), activityElemento.class);
                 startActivity(intentVolverSalas);
             }
         });

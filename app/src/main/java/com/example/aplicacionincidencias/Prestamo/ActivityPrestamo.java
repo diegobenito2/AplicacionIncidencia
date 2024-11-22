@@ -7,13 +7,14 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.aplicacionincidencias.MenuPrincipal.menutrespuntos;
 import com.example.aplicacionincidencias.R;
+import com.example.aplicacionincidencias.Sala.Activity_Info_Sala;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import gestionincidencias.GestionIncidencias;
 import gestionincidencias.entidades.EntPrestamo;
@@ -45,6 +46,20 @@ public class ActivityPrestamo extends menutrespuntos {
 
                 startActivity(intentPrestamo);
 
+            }
+        });
+        FloatingActionButton AñadirPrestamo = findViewById(R.id.fabAñadirPrestamo);
+        AñadirPrestamo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Crear una nueva Intent para abrir la actividad de información de la sala
+                Intent intentInfoPrestamo = new Intent(view.getContext(), Activity_Info_Prestamo.class);
+
+                // Pasar datos a la nueva actividad mediante el uso de 'putExtra'. Estos datos corresponden a la sala seleccionada.
+
+                intentInfoPrestamo.putExtra("codigo", 0);
+                intentInfoPrestamo.putExtra("descripcion","");
+                startActivity(intentInfoPrestamo);
             }
         });
     }
