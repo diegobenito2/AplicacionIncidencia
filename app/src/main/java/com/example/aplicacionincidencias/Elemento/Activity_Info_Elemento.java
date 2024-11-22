@@ -16,8 +16,13 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.aplicacionincidencias.R;
 import com.example.aplicacionincidencias.Sala.activitySalas;
 
-public class Activity_Info_Elemento extends AppCompatActivity implements View.OnClickListener{
+import gestionincidencias.GestionIncidencias;
+import gestionincidencias.entidades.EntElemento;
+import gestionincidencias.entidades.EntSala;
+
+public class Activity_Info_Elemento extends AppCompatActivity implements View.OnClickListener {
     private Button btnVolver, btnGuardar;
+    private EntElemento elemento;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,29 +34,35 @@ public class Activity_Info_Elemento extends AppCompatActivity implements View.On
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        // Se obtiene el Intent que lanzó la actividad actual.
-        Intent infoElemento = this.getIntent();
+        int codigoElemento = getIntent().getExtras().getInt("codigo");
+        String nombreElemento = getIntent().getExtras().getString("nombre");
 
-        // Se recuperan los datos extras enviados en el Intent.
-        Bundle bnd = infoElemento.getExtras();
+        if (codigoElemento > 0) {
+            for (EntElemento e : GestionIncidencias.getArElementos()) {
+                if (e.getCodigoElemento() == codigoElemento) {
+                    elemento = e;
+                }
+            }
+        } else if (codigoElemento == 0 && nombreElemento.isEmpty()) {
+            elemento = new EntElemento(0, "", "", 0);
+        } else if (codigoElemento == 0) {
+            for (EntElemento e : GestionIncidencias.getArElementos()) {
+                if (e.getCodigoElemento() == codigoElemento) {
+                    elemento = e;
+                }
+            }
+        }
+        if (elemento != null) {
+            TextView tvCodigoElemento = findViewById(R.id.tvinfoCodigoElemento);
+            EditText edNombreElemento = findViewById(R.id.edNombreElemento);
+            EditText edDescripcion = findViewById(R.id.edDescripcionElemento);
+            EditText edTipo = findViewById(R.id.editcodigoTipoElemento);
 
-        // Se extrae el valor asociado a la clave desde el Bundle y se guarda en una variable
-        int codigoElemento = bnd.getInt("codigo");
-        String nombreElemento = bnd.getString("nombre");
-        String descripcionElemento = bnd.getString("descripcion");
-        int codigoTipo = bnd.getInt("tipo");
-
-        // Se busca el TextView en el layout de la actividad donde se mostrarán los elementos pasados en el intent.
-        EditText tvCodigoElemento = findViewById(R.id.edinfoCodigoElemento);
-        EditText edNombreElemento = findViewById(R.id.editNombreElemento);
-        EditText edDescripcionElemento = findViewById(R.id.editDescripcionElemento);
-        EditText edCodigoTipoElemento = findViewById(R.id.editcodigoTipoElemento);
-
-        // Se establece el texto al elemento con el valor obtenido en el Intent.
-        tvCodigoElemento.setText(String.valueOf(codigoElemento));
-        edNombreElemento.setText(nombreElemento);
-        edDescripcionElemento.setText(descripcionElemento);
-        edCodigoTipoElemento.setText(String.valueOf(codigoTipo));
+            tvCodigoElemento.setText(String.valueOf(elemento.getCodigoElemento()));
+            edNombreElemento.setText(elemento.getNombre());
+            edDescripcion.setText(elemento.getDescripcion());
+            edTipo.setText(String.valueOf(elemento.getIdTipo()));
+        }
 
 
         initComponentsVolverGuardar();
@@ -77,7 +88,31 @@ public class Activity_Info_Elemento extends AppCompatActivity implements View.On
             startActivity(intent);
         });
         btnGuardar.setOnClickListener(v -> {
-
+            if (elemento != null) {
+                TextView tvCodigoElemento = findViewById(R.id.tvinfoCodigoElemento);
+                EditText edNombreElemento = findViewById(R.id.edNombreElemento);
+                EditText edDescripcion = findViewById(R.id.edDescripcionElemento);
+                EditText edTipo = findViewById(R.id.editcodigoTipoElemento);
+                if (elemento.getCodigoElemento()!= 0) {
+                    tvCodigoElemento.setText(String.valueOf(elemento.getCodigoElemento()));
+                    edNombreElemento.setText(elemento.getNombre());
+                    edDescripcion.setText(elemento.getDescripcion());
+                    edTipo.setText(String.valueOf(elemento.getIdTipo()));
+                } else if (elemento.getCodigoElemento() == 0 && elemento.getNombre().isEmpty()) {
+                    tvCodigoElemento.setText(String.valueOf(elemento.getCodigoElemento()));
+                    edNombreElemento.setText(elemento.getNombre());
+                    edDescripcion.setText(elemento.getDescripcion());
+                    edTipo.setText(String.valueOf(elemento.getIdTipo()));
+                    GestionIncidencias.getArElementos().add(GestionIncidencias.getArElementos().size(), elemento);
+                } else if (elemento.getCodigoElemento() == 0) {
+                    tvCodigoElemento.setText(String.valueOf(elemento.getCodigoElemento()));
+                    edNombreElemento.setText(elemento.getNombre());
+                    edDescripcion.setText(elemento.getDescripcion());
+                    edTipo.setText(String.valueOf(elemento.getIdTipo()));
+                }
+                Intent intentVolverSalas = new Intent(view.getContext(), activitySalas.class);
+                startActivity(intentVolverSalas);
+            }
         });
     }
 }

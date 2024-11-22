@@ -14,8 +14,11 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.aplicacionincidencias.R;
 import com.example.aplicacionincidencias.Sala.activitySalas;
 
+import gestionincidencias.entidades.EntUbicacion;
+
 public class Activity_Info_Ubicacion extends AppCompatActivity  implements View.OnClickListener{
     private Button btnVolver, btnGuardar;
+    private EntUbicacion ubicacion;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +32,7 @@ public class Activity_Info_Ubicacion extends AppCompatActivity  implements View.
 
         Intent intentUbicacion= this.getIntent();
 
-        Bundle bnd = intentUbicacion.getExtras();
+
 
 
         initComponentsVolverGuardar();

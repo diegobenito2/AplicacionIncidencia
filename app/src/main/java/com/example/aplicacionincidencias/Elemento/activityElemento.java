@@ -51,8 +51,6 @@ public class activityElemento extends menutrespuntos {
 
                 intentInfoElemento.putExtra("codigo", elementoSeleccionado.getCodigoElemento());
                 intentInfoElemento.putExtra("nombre", elementoSeleccionado.getNombre());
-                intentInfoElemento.putExtra("descripcion", elementoSeleccionado.getDescripcion());
-                intentInfoElemento.putExtra("tipo", elementoSeleccionado.getIdTipo());
 
 
                 // Iniciar la actividad de información de la sala
