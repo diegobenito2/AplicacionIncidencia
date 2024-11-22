@@ -30,8 +30,8 @@ public class AdaptadorTipo extends ArrayAdapter<EntTipo> {
         TextView txCodigo = Vtipo.findViewById(R.id.codigoTipo);
         TextView txNombre = Vtipo.findViewById(R.id.nombreTipo);
 
-        txCodigo.setText(String.valueOf(datos[position].getCodigoTipo()));
-        txNombre.setText(datos[position].getNombre());
+        txCodigo.setText("Código: " + String.valueOf(datos[position].getCodigoTipo()));
+        txNombre.setText("Nombre: " +datos[position].getNombre());
         return Vtipo;
     }
 }

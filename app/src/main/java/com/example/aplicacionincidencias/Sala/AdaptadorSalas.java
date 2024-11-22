@@ -1,4 +1,5 @@
 package com.example.aplicacionincidencias.Sala;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,22 +13,24 @@ import gestionincidencias.entidades.EntSala;
 
 public class AdaptadorSalas extends ArrayAdapter<EntSala> {
     private EntSala[] datos;
-    public AdaptadorSalas(Context c, EntSala[] salas){
-        super(c, R.layout.elemento_sala,salas);
-        this.datos=salas;
-    }
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent){
 
-            LayoutInflater mostrado = LayoutInflater.from(getContext());
-            View VSala = mostrado.inflate(R.layout.elemento_sala,parent,false);
+    public AdaptadorSalas(Context c, EntSala[] salas) {
+        super(c, R.layout.elemento_sala, salas);
+        this.datos = salas;
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+
+        LayoutInflater mostrado = LayoutInflater.from(getContext());
+        View VSala = mostrado.inflate(R.layout.elemento_sala, parent, false);
 
 
         TextView txCodigo = VSala.findViewById(R.id.codigoSala);
         TextView txNombre = VSala.findViewById(R.id.nombreSala);
 
-        txCodigo.setText(String.valueOf(datos[position].getCodigoSala()));
-        txNombre.setText(datos[position].getNombre());
+        txCodigo.setText("Sala: " + String.valueOf(datos[position].getCodigoSala()));
+        txNombre.setText("Nombre: " +datos[position].getNombre());
         return VSala;
     }
 

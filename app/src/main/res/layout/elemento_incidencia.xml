@@ -11,22 +11,22 @@
         android:id="@+id/descripcionIncidencia"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"></TextView>
-    <TextView
-        android:id="@+id/idElemento"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"></TextView>
-    <TextView
-        android:id="@+id/IdResponsable"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"></TextView>
-    <TextView
-        android:id="@+id/IdUsuarioCreacion"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"></TextView>
-    <TextView
-        android:id="@+id/FechaCreacion"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        ></TextView>
+<!--    <TextView-->
+<!--        android:id="@+id/idElemento"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"></TextView>-->
+<!--    <TextView-->
+<!--        android:id="@+id/IdResponsable"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"></TextView>-->
+<!--    <TextView-->
+<!--        android:id="@+id/IdUsuarioCreacion"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"></TextView>-->
+<!--    <TextView-->
+<!--        android:id="@+id/FechaCreacion"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        ></TextView>-->
 
 </LinearLayout>

@@ -7,4 +7,122 @@
     android:layout_height="match_parent"
     tools:context=".Ubicacion.Activity_Info_Ubicacion">
 
+    <TextView
+        android:id="@+id/codigoUbicacion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Código: "
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/codigoSala"
+        tools:layout_editor_absoluteY="63dp" />
+
+    <EditText
+        android:id="@+id/edCodigoElemento"
+        android:layout_width="50dp"
+        android:layout_height="58dp"
+        android:layout_marginEnd="120dp"
+        android:gravity="center"
+        android:text="0"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="@+id/infocodigoUbicacionFechaInicio"
+        tools:layout_editor_absoluteY="271dp" />
+
+    <TextView
+        android:id="@+id/codigoSala"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Código Sala: "
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/codigoElemento"
+        tools:layout_editor_absoluteY="178dp" />
+
+    <TextView
+        android:id="@+id/codigoElemento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Código Elemento: "
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/DescripcionUbicacion"
+        tools:layout_editor_absoluteY="288dp" />
+
+    <EditText
+        android:id="@+id/edCodigoSala"
+        android:layout_width="51dp"
+        android:layout_height="50sp"
+        android:gravity="center"
+        android:text="0"
+        app:layout_constraintEnd_toEndOf="@+id/edCodigoElemento"
+        tools:layout_editor_absoluteY="163dp" />
+
+    <TextView
+        android:id="@+id/DescripcionUbicacion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Descripción:  "
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/edDescripcionUbicacion"
+        tools:layout_editor_absoluteY="371dp" />
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="50dp"
+        android:layout_height="58dp"
+        android:gravity="center"
+        android:text="0"
+        app:layout_constraintEnd_toEndOf="@+id/edCodigoSala"
+        tools:layout_editor_absoluteY="50dp" />
+
+
+    <EditText
+        android:id="@+id/edDescripcionUbicacion"
+        android:layout_width="364dp"
+        android:layout_height="77dp"
+        android:gravity="center"
+        android:inputType="textMultiLine"
+        android:text="Contenido Descripción"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@+id/codigoUbicacionFechaInicio"
+        tools:layout_editor_absoluteY="436dp" />
+
+    <TextView
+        android:id="@+id/infocodigoUbicacionFechaInicio"
+        android:layout_width="224dp"
+        android:layout_height="58dp"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/infocodigoUbicacionFechaFin"
+        tools:layout_editor_absoluteY="551dp" />
+
+    <TextView
+        android:id="@+id/codigoUbicacionFechaInicio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fecha Inicio:  "
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/codigoUbicacionFechaFin"
+        tools:layout_editor_absoluteY="551dp" />
+
+    <TextView
+        android:id="@+id/codigoUbicacionFechaFin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fecha Fin:  "
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        tools:layout_editor_absoluteX="32dp"
+        tools:layout_editor_absoluteY="645dp" />
+
+    <TextView
+        android:id="@+id/infocodigoUbicacionFechaFin"
+        android:layout_width="237dp"
+        android:layout_height="29dp"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        tools:layout_editor_absoluteX="158dp"
+        tools:layout_editor_absoluteY="645dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

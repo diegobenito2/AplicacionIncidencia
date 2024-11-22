@@ -28,13 +28,11 @@ public class AdaptadorPrestamo extends ArrayAdapter<EntPrestamo> {
         TextView txCodigo = VPrestamo.findViewById(R.id.CodigoPrestamo);
         TextView txIdUsuario = VPrestamo.findViewById(R.id.idUsuarioPrestamo);
         TextView txIdElemento = VPrestamo.findViewById(R.id.idElementoPrestamo);
-        TextView txFechaInicio = VPrestamo.findViewById(R.id.fechaInicioPrestamo);
-        TextView txFechaFin = VPrestamo.findViewById(R.id.fechaFinPrestamo);
+
         txCodigo.setText("Codigo: "+String.valueOf(datos[position].getCodigoPrestamo()));
         txIdUsuario.setText("Id Usuario: "+String.valueOf(datos[position].getIdUsuario()));
         txIdElemento.setText("Id Elemento: "+String.valueOf(datos[position].getIdElemento()));
-        txFechaInicio.setText("Fecha Inicio: " + String.valueOf(datos[position].getFechaInicio()));
-        txFechaFin.setText("Fecha Fin: " + String.valueOf(datos[position].getFechaFin()));
+
 
 
         return VPrestamo;

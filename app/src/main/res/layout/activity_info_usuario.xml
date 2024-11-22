@@ -6,5 +6,137 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Usuario.Activity_Info_Usuario">
+    <TextView
+        android:id="@+id/IdCodigoUsuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="83dp"
+        android:text="Código:"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/edIdCodigoUsuario"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/edIdCodigoUsuario" />
+
+    <TextView
+        android:id="@+id/edIdCodigoUsuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="72dp"
+        android:layout_marginBottom="51dp"
+        android:text="0"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/edNombreUsuario"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/NombreUsuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="59dp"
+        android:text="Nombre:"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/IdCodigoUsuario"
+        app:layout_constraintTop_toBottomOf="@+id/IdCodigoUsuario" />
+
+    <EditText
+        android:id="@+id/edNombreUsuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="180dp"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/edIdCodigoUsuario"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/correoUsuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="55dp"
+        android:text="Correo:"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/NombreUsuario"
+        app:layout_constraintTop_toBottomOf="@+id/NombreUsuario" />
+
+    <EditText
+        android:id="@+id/edcorreoUsuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="31dp"
+        android:text="Correo:"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/edNombreUsuario"
+        app:layout_constraintTop_toBottomOf="@+id/edNombreUsuario" />
+
+    <TextView
+        android:id="@+id/telefonoUsuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="55dp"
+        android:text="Teléfono:"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/correoUsuario"
+        app:layout_constraintTop_toBottomOf="@+id/correoUsuario" />
+
+    <EditText
+        android:id="@+id/edtelefonoUsuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="25dp"
+        android:text="Teléfono:"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/edpasswordUsuario"
+        app:layout_constraintEnd_toEndOf="@+id/edcorreoUsuario" />
+
+    <TextView
+        android:id="@+id/passwordUsuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="45dp"
+        android:text="Contraseña:"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/telefonoUsuario"
+        app:layout_constraintTop_toBottomOf="@+id/telefonoUsuario" />
+
+    <EditText
+        android:id="@+id/edpasswordUsuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Contraseña:"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/passwordUsuario"
+        app:layout_constraintEnd_toEndOf="@+id/edtelefonoUsuario" />
+
+    <TextView
+        android:id="@+id/rolUsuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="45dp"
+        android:text="Rol:"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/passwordUsuario"
+        app:layout_constraintTop_toBottomOf="@+id/passwordUsuario" />
+
+    <EditText
+        android:id="@+id/edrolUsuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Rol:"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/edpasswordUsuario"
+        app:layout_constraintTop_toBottomOf="@+id/edpasswordUsuario" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
