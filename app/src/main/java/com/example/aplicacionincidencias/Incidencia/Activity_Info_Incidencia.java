@@ -1,9 +1,11 @@
 package com.example.aplicacionincidencias.Incidencia;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -18,7 +20,10 @@ import com.example.aplicacionincidencias.R;
 import com.example.aplicacionincidencias.Sala.activitySalas;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.Locale;
 
 import gestionincidencias.GestionIncidencias;
 import gestionincidencias.entidades.EntIncidencia;
@@ -27,6 +32,7 @@ import gestionincidencias.entidades.EntSala;
 public class Activity_Info_Incidencia extends menutrespuntos implements View.OnClickListener {
     private Button btnVolver, btnGuardar;
     private EntIncidencia incidencia;
+    private TextView tvFechaCreacion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +69,7 @@ public class Activity_Info_Incidencia extends menutrespuntos implements View.OnC
             EditText edDescripcionIncidencia = findViewById(R.id.edDescripcionIncidencia);
             EditText edCodigoElemento = findViewById(R.id.edInfoCodigoElemento);
             EditText edCodigoUsuarioCreacion = findViewById(R.id.edInfoCodigoUsuarioCreacion);
-            TextView tvFechaCreacion = findViewById(R.id.tvInfoFechaCreacion);
+            tvFechaCreacion = findViewById(R.id.tvInfoFechaCreacion);
 
             edCodigoIncidencia.setText(String.valueOf(incidencia.getCodigoIncidencia()));
             edDescripcionIncidencia.setText(incidencia.getDescripcion());
@@ -80,9 +86,11 @@ public class Activity_Info_Incidencia extends menutrespuntos implements View.OnC
     private void initComponentsVolverGuardar() {
         btnVolver = findViewById(R.id.btnVolver);
         btnGuardar = findViewById(R.id.btnGuardar);
+
     }
 
     private void initListenersVolverGuardar() {
+        tvFechaCreacion.setOnClickListener((View.OnClickListener) this);
         btnVolver.setOnClickListener((View.OnClickListener) this);
         btnGuardar.setOnClickListener((View.OnClickListener) this);
     }
@@ -122,6 +130,23 @@ public class Activity_Info_Incidencia extends menutrespuntos implements View.OnC
                 }
                 Intent intentVolverIncidencias = new Intent(view.getContext(), activityIncidencia.class);
                 startActivity(intentVolverIncidencias);
+            }
+        });
+        tvFechaCreacion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Calendar c = Calendar.getInstance();
+                c.setTime(incidencia.getFechaCreacion());
+                DatePickerDialog dialogo = new DatePickerDialog(Activity_Info_Incidencia.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int y, int m, int d) {
+                        Date fechaCreacion = (Date) incidencia.getFechaCreacion();
+                        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+                        String[] fecha = format.format(fechaCreacion).split(" ");
+                        tvFechaCreacion.setText(y + "-" + (m + 1) + "-" + d + " " + fecha[1]);
+                    }
+                }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
+                dialogo.show();
             }
         });
     }

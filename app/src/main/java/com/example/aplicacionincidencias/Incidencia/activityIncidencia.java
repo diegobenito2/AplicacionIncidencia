@@ -43,9 +43,6 @@ public class activityIncidencia extends menutrespuntos {
 
                 intentInfoIncidencia.putExtra("codigoIncidencia", IncidenciaSeleccionada.getCodigoIncidencia());
                 intentInfoIncidencia.putExtra("descripcionIncidencia", IncidenciaSeleccionada.getDescripcion());
-                intentInfoIncidencia.putExtra("codigoElemento", IncidenciaSeleccionada.getIdElemento());
-                intentInfoIncidencia.putExtra("codigoUsuarioCreacion", IncidenciaSeleccionada.getIdUsuarioCreacion());
-                intentInfoIncidencia.putExtra("fechaCreacion", String.valueOf(IncidenciaSeleccionada.getFechaCreacion()));
 
                 startActivity(intentInfoIncidencia);
             }
