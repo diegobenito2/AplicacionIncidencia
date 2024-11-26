@@ -26,7 +26,7 @@
         android:layout_marginTop="66dp"
         android:text="0"
         android:textColor="@color/black"
-        android:textSize="20sp"
+        android:textSize="15sp"
         app:layout_constraintStart_toEndOf="@+id/tvCodigoIncidencia"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -38,8 +38,8 @@
         android:text="Descripción "
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/edDescripcionIncidencia"
-        app:layout_constraintStart_toStartOf="@+id/edDescripcionIncidencia"
+        app:layout_constraintEnd_toStartOf="@+id/edinfoCodigoIncidencia"
+        app:layout_constraintStart_toStartOf="@+id/edinfoCodigoIncidencia"
         app:layout_constraintTop_toBottomOf="@+id/edinfoCodigoIncidencia" />
 
     <EditText
@@ -52,7 +52,7 @@
         android:inputType="textMultiLine"
         android:text="Descripcion"
         android:textColor="@color/black"
-        android:textSize="20sp"
+        android:textSize="15sp"
         app:layout_constraintBottom_toTopOf="@+id/tvFechaCreacion"
         app:layout_constraintStart_toStartOf="@+id/tvCodigoElemento"
         app:layout_constraintTop_toTopOf="parent" />
@@ -83,36 +83,35 @@
         android:id="@+id/tvFechaCreacion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="21dp"
-        android:layout_marginBottom="44dp"
+        android:layout_marginStart="26dp"
         android:text="Fecha Creación "
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/tvInfoFechaCreacion"
-        app:layout_constraintEnd_toStartOf="@+id/edInfoCodigoUsuarioCreacion" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvInfoFechaCreacion"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/tvInfoFechaCreacion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="69dp"
-        android:layout_marginBottom="177dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="35dp"
         android:text="0"
         android:textColor="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:textSize="15sp"
+        app:layout_constraintStart_toEndOf="@+id/tvFechaCreacion"
+        app:layout_constraintTop_toBottomOf="@+id/tvCodigoUsuarioCreacion" />
 
     <EditText
         android:id="@+id/edInfoCodigoUsuarioCreacion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="19dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="299dp"
         android:text="0"
         android:textColor="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/tvFechaCreacion"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tvCodigoUsuarioCreacion" />
 
     <EditText
@@ -123,12 +122,12 @@
         android:layout_marginTop="27dp"
         android:text="0"
         android:textColor="@color/black"
-        android:textSize="20sp"
+        android:textSize="15sp"
         app:layout_constraintStart_toEndOf="@+id/tvCodigoElemento"
         app:layout_constraintTop_toBottomOf="@+id/edDescripcionIncidencia" />
 
     <Button
-        android:id="@+id/btnGuardar"
+        android:id="@+id/btnGuardarIncidencia"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -138,7 +137,7 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
-        android:id="@+id/btnVolver"
+        android:id="@+id/btnVolverIncidencia"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="1dp"

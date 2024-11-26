@@ -8,26 +8,20 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
-
 import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-
 import com.example.aplicacionincidencias.MenuPrincipal.menutrespuntos;
 import com.example.aplicacionincidencias.R;
-import com.example.aplicacionincidencias.Sala.activitySalas;
-
-import java.sql.Date;
+import java.text.ParseException;
+import java.util.Date;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Locale;
-
 import gestionincidencias.GestionIncidencias;
 import gestionincidencias.entidades.EntIncidencia;
-import gestionincidencias.entidades.EntSala;
+
 
 public class Activity_Info_Incidencia extends menutrespuntos implements View.OnClickListener {
     private Button btnVolver, btnGuardar;
@@ -75,24 +69,24 @@ public class Activity_Info_Incidencia extends menutrespuntos implements View.OnC
             edDescripcionIncidencia.setText(incidencia.getDescripcion());
             edCodigoElemento.setText(String.valueOf(incidencia.getIdElemento()));
             edCodigoUsuarioCreacion.setText(String.valueOf(incidencia.getIdUsuarioCreacion()));
-            tvFechaCreacion.setText(String.valueOf(incidencia.getFechaCreacion()));
+
+            Date fechaCreacion=incidencia.getFechaCreacion();
+
+            if (fechaCreacion!=null){
+                SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+                tvFechaCreacion.setText(format.format(fechaCreacion));
+            }else{
+                tvFechaCreacion.setText("Fecha no disponible.");
+            }
 
         }
-        initComponentsVolverGuardar();
-        initListenersVolverGuardar();
+        btnVolver = findViewById(R.id.btnVolverIncidencia);
+        btnGuardar = findViewById(R.id.btnGuardarIncidencia);
 
-    }
-
-    private void initComponentsVolverGuardar() {
-        btnVolver = findViewById(R.id.btnVolver);
-        btnGuardar = findViewById(R.id.btnGuardar);
-
-    }
-
-    private void initListenersVolverGuardar() {
         tvFechaCreacion.setOnClickListener((View.OnClickListener) this);
         btnVolver.setOnClickListener((View.OnClickListener) this);
         btnGuardar.setOnClickListener((View.OnClickListener) this);
+
     }
 
     @Override
@@ -107,26 +101,51 @@ public class Activity_Info_Incidencia extends menutrespuntos implements View.OnC
                 EditText edDescripcionIncidencia = findViewById(R.id.edDescripcionIncidencia);
                 EditText edCodigoElemento = findViewById(R.id.edInfoCodigoElemento);
                 EditText edCodigoUsuarioCreacion = findViewById(R.id.edInfoCodigoUsuarioCreacion);
-                TextView tvFechaCreacion = findViewById(R.id.tvInfoFechaCreacion);
+                tvFechaCreacion = findViewById(R.id.tvInfoFechaCreacion);
+
                 if (incidencia.getCodigoIncidencia() != 0) {
                     incidencia.setCodigoIncidencia(Integer.parseInt(edCodigoIncidencia.getText().toString()));
                     incidencia.setDescripcion(edDescripcionIncidencia.getText().toString());
                     incidencia.setIdElemento(Integer.parseInt(edCodigoElemento.getText().toString()));
                     incidencia.setIdUsuarioCreacion(Integer.parseInt(edCodigoUsuarioCreacion.getText().toString()));
-                    incidencia.setFechaCreacion(Date.valueOf(tvFechaCreacion.getText().toString()));
+                    tvFechaCreacion =findViewById(R.id.tvInfoFechaCreacion);
+                    String FechaCreacion= tvFechaCreacion.getText().toString();
+                    SimpleDateFormat formatCreacion = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+                    try{
+                        Date fechaCreacion = formatCreacion.parse(FechaCreacion);
+                        incidencia.setFechaCreacion(fechaCreacion);
+                    }catch (ParseException e){
+                        e.printStackTrace();
+                    }
                 } else if (incidencia.getCodigoIncidencia() == 0 && incidencia.getDescripcion().isEmpty()) {
                     incidencia.setCodigoIncidencia(Integer.parseInt(edCodigoIncidencia.getText().toString()));
                     incidencia.setDescripcion(edDescripcionIncidencia.getText().toString());
                     incidencia.setIdElemento(Integer.parseInt(edCodigoElemento.getText().toString()));
                     incidencia.setIdUsuarioCreacion(Integer.parseInt(edCodigoUsuarioCreacion.getText().toString()));
-                    incidencia.setFechaCreacion(Date.valueOf(tvFechaCreacion.getText().toString()));
+                    tvFechaCreacion =findViewById(R.id.tvInfoFechaCreacion);
+                    String FechaCreacion= tvFechaCreacion.getText().toString();
+                    SimpleDateFormat formatCreacion = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+                    try{
+                        Date fechaCreacion = formatCreacion.parse(FechaCreacion);
+                        incidencia.setFechaCreacion(fechaCreacion);
+                    }catch (ParseException e){
+                        e.printStackTrace();
+                    }
                     GestionIncidencias.getArIncidencias().add(GestionIncidencias.getArIncidencias().size(), incidencia);
                 } else if (incidencia.getCodigoIncidencia() == 0) {
                     incidencia.setCodigoIncidencia(Integer.parseInt(edCodigoIncidencia.getText().toString()));
                     incidencia.setDescripcion(edDescripcionIncidencia.getText().toString());
                     incidencia.setIdElemento(Integer.parseInt(edCodigoElemento.getText().toString()));
                     incidencia.setIdUsuarioCreacion(Integer.parseInt(edCodigoUsuarioCreacion.getText().toString()));
-                    incidencia.setFechaCreacion(Date.valueOf(tvFechaCreacion.getText().toString()));
+                    tvFechaCreacion =findViewById(R.id.tvInfoFechaCreacion);
+                    String FechaCreacion= tvFechaCreacion.getText().toString();
+                    SimpleDateFormat formatCreacion = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+                    try{
+                        Date fechaCreacion = formatCreacion.parse(FechaCreacion);
+                        incidencia.setFechaCreacion(fechaCreacion);
+                    }catch (ParseException e){
+                        e.printStackTrace();
+                    }
                 }
                 Intent intentVolverIncidencias = new Intent(view.getContext(), activityIncidencia.class);
                 startActivity(intentVolverIncidencias);
@@ -140,7 +159,7 @@ public class Activity_Info_Incidencia extends menutrespuntos implements View.OnC
                 DatePickerDialog dialogo = new DatePickerDialog(Activity_Info_Incidencia.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int y, int m, int d) {
-                        Date fechaCreacion = (Date) incidencia.getFechaCreacion();
+                        Date fechaCreacion = incidencia.getFechaCreacion();
                         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
                         String[] fecha = format.format(fechaCreacion).split(" ");
                         tvFechaCreacion.setText(y + "-" + (m + 1) + "-" + d + " " + fecha[1]);

@@ -5,165 +5,128 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Prestamo.Activity_Info_Prestamo">
+    tools:context=".Prestamo.Activity_Info_Prestamo"
+    tools:layout_editor_absoluteX="0dp"
+    tools:layout_editor_absoluteY="6dp">
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="41dp"
-        android:layout_marginTop="103dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="52dp"
         android:text="Código Prestamo:"
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
-        app:layout_constraintEnd_toStartOf="@+id/infoedCodigoPrestamo"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:layout_editor_absoluteX="41dp"
+        tools:layout_editor_absoluteY="120dp" />
 
     <EditText
         android:id="@+id/infoedCodigoPrestamo"
-        android:layout_width="0dp"
+        android:layout_width="51dp"
         android:layout_height="50dp"
-        android:layout_marginEnd="135dp"
         android:gravity="center"
         android:text="0"
         android:textColor="@color/black"
-        app:layout_constraintBaseline_toBaselineOf="@+id/textView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView" />
+        android:textSize="15sp"
+        tools:layout_editor_absoluteX="226dp"
+        tools:layout_editor_absoluteY="104dp" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="41dp"
-        android:layout_marginEnd="43dp"
-        android:layout_marginBottom="59dp"
         android:text="Código Usuario:"
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView3"
-        app:layout_constraintEnd_toStartOf="@+id/infotvCodigoUsuario"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintStart_toStartOf="@+id/textView"
+        tools:layout_editor_absoluteY="210dp" />
 
     <EditText
         android:id="@+id/infotvCodigoUsuario"
-        android:layout_width="0dp"
+        android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginEnd="135dp"
         android:gravity="center"
         android:text="0"
         android:textColor="@color/black"
-        app:layout_constraintBaseline_toBaselineOf="@+id/textView2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView2" />
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="@+id/infoedCodigoPrestamo"
+        tools:layout_editor_absoluteY="194dp" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="41dp"
-        android:layout_marginEnd="27dp"
-        android:layout_marginBottom="45dp"
         android:text="Código Elemento:"
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/infotvfechaInicio"
-        app:layout_constraintEnd_toStartOf="@+id/infotvCodigoElemento"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintStart_toStartOf="@+id/textView2"
+        tools:layout_editor_absoluteY="307dp" />
 
     <EditText
         android:id="@+id/infotvCodigoElemento"
-        android:layout_width="0dp"
+        android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginEnd="135dp"
         android:gravity="center"
         android:text="0"
         android:textColor="@color/black"
-        app:layout_constraintBaseline_toBaselineOf="@+id/textView3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView3" />
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="@+id/infotvCodigoUsuario"
+        tools:layout_editor_absoluteY="291dp" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="41dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="6dp"
         android:text="Fecha Inicio:"
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintEnd_toStartOf="@+id/infotvfechaInicio"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/infotvfechaInicio" />
+        app:layout_constraintStart_toStartOf="@+id/textView3"
+        tools:layout_editor_absoluteY="400dp" />
 
     <TextView
         android:id="@+id/infotvfechaInicio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="7dp"
-        android:layout_marginBottom="37dp"
         android:gravity="center"
         android:textColor="@color/black"
-        app:layout_constraintBottom_toTopOf="@+id/infotvfechaFin"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView4"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="@+id/infotvCodigoElemento"
+        tools:layout_editor_absoluteY="400dp" />
 
     <TextView
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="41dp"
-        android:layout_marginEnd="28dp"
         android:text="Fecha Fin:"
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/infotvfechaFin"
-        app:layout_constraintEnd_toStartOf="@+id/infotvfechaFin"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/textView4"
+        tools:layout_editor_absoluteY="490dp" />
 
     <TextView
         android:id="@+id/infotvfechaFin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="7dp"
-        android:layout_marginBottom="250dp"
         android:gravity="center"
         android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView5"
-        app:layout_constraintTop_toBottomOf="@+id/infotvfechaInicio" />
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="@+id/infotvfechaInicio"
+        tools:layout_editor_absoluteY="498dp" />
 
     <Button
-        android:id="@+id/btnGuardar"
-        android:layout_width="0dp"
+        android:id="@+id/btnGuardarPrestamo"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
         android:text="Guardar"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btnVolver" />
+        tools:layout_editor_absoluteX="275dp"
+        tools:layout_editor_absoluteY="667dp" />
 
     <Button
-        android:id="@+id/btnVolver"
-        android:layout_width="0dp"
+        android:id="@+id/btnVolverPrestamo"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="17dp"
-        android:layout_marginEnd="138dp"
-        android:layout_marginBottom="16dp"
         android:text="Volver"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnGuardar"
-        app:layout_constraintStart_toStartOf="parent" />
+        tools:layout_editor_absoluteX="17dp"
+        tools:layout_editor_absoluteY="667dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

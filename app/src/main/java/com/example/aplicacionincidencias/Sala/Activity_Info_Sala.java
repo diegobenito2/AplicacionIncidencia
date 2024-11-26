@@ -61,22 +61,14 @@ public class Activity_Info_Sala extends AppCompatActivity implements View.OnClic
             edDescripcion.setText(sala.getDescripcion());
         }
 
+        btnVolver = findViewById(R.id.btnVolverSala);
+        btnGuardar = findViewById(R.id.btnGuardarSala);
 
-        initComponentsVolverGuardar();
-        initListenersVolverGuardar();
-
-
-    }
-
-    private void initComponentsVolverGuardar() {
-        btnVolver = findViewById(R.id.btnVolver);
-        btnGuardar = findViewById(R.id.btnGuardar);
-    }
-
-    private void initListenersVolverGuardar() {
         btnVolver.setOnClickListener((View.OnClickListener) this);
         btnGuardar.setOnClickListener((View.OnClickListener) this);
+
     }
+
 
     @Override
     public void onClick(View view) {

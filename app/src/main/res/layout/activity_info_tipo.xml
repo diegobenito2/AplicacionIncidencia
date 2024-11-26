@@ -81,7 +81,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editNombreTipo" />
 
     <Button
-        android:id="@+id/btnGuardar"
+        android:id="@+id/btnGuardarTipo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -93,7 +93,7 @@
         app:layout_constraintStart_toEndOf="@+id/btnVolver" />
 
     <Button
-        android:id="@+id/btnVolver"
+        android:id="@+id/btnVolverTipo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="17dp"

@@ -15,11 +15,12 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import com.example.aplicacionincidencias.R;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.Calendar;
 import java.util.Locale;
 
@@ -72,28 +73,33 @@ public class Activity_Info_Ubicacion extends AppCompatActivity implements View.O
             edCodigoUbicacion.setText(String.valueOf(ubicacion.getCodigoUbicacion()));
             edCodigoSala.setText(ubicacion.getDescripcion());
             edCodigoElemento.setText(ubicacion.getDescripcion());
-            tvFechaInicio.setText(String.valueOf(ubicacion.getFechaInicio()));
-            tvFechaFin.setText(String.valueOf(ubicacion.getFechaFin()));
+            Date fechaInicio = ubicacion.getFechaInicio();
+
+            if (fechaInicio != null) {
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+                tvFechaInicio.setText(format.format(fechaInicio));
+            } else {
+                tvFechaInicio.setText("Fecha no disponible.");
+            }
+
+            Date fechaFin = ubicacion.getFechaFin();
+
+            if (fechaFin != null) {
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+                tvFechaFin.setText(format.format(fechaFin));
+            } else {
+                tvFechaFin.setText("Fecha no disponible.");
+            }
         }
-
-
-        initComponentsVolverGuardar();
-        initListenersVolverGuardar();
-
-
-    }
-
-    private void initComponentsVolverGuardar() {
-        btnVolver = findViewById(R.id.btnVolver);
-        btnGuardar = findViewById(R.id.btnGuardar);
-    }
-
-    private void initListenersVolverGuardar() {
-        tvFechaInicio.setOnClickListener((View.OnClickListener) this);
-        tvFechaFin.setOnClickListener((View.OnClickListener) this);
+        btnVolver = findViewById(R.id.btnVolverUbicacion);
+        btnGuardar = findViewById(R.id.btnGuardarUbicacion);
         btnVolver.setOnClickListener((View.OnClickListener) this);
         btnGuardar.setOnClickListener((View.OnClickListener) this);
+        tvFechaInicio.setOnClickListener((View.OnClickListener) this);
+        tvFechaFin.setOnClickListener((View.OnClickListener) this);
+
     }
+
 
     @Override
     public void onClick(View view) {
@@ -106,32 +112,77 @@ public class Activity_Info_Ubicacion extends AppCompatActivity implements View.O
                 EditText edCodigoUbicacion = findViewById(R.id.edinfoCodigoElemento);
                 EditText edCodigoSala = findViewById(R.id.edNombreElemento);
                 EditText edCodigoElemento = findViewById(R.id.edDescripcionElemento);
-                TextView tvFechaInicio = findViewById(R.id.tvcodigoUbicacionFechaInicio);
-                TextView tvFechaFin = findViewById(R.id.tvcodigoUbicacionFechaFin);
+
+                // Obtiene y formatea las fechas.
+                tvFechaInicio = findViewById(R.id.infotvfechaInicio);
+                String FechaInicio = tvFechaInicio.getText().toString();
+                SimpleDateFormat formatInicio = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+
+                tvFechaFin = findViewById(R.id.infotvfechaFin);
+                String fechaFin = tvFechaFin.getText().toString();
+                SimpleDateFormat formatFin = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+
                 if (ubicacion.getCodigoUbicacion() != 0) {
+                    // Actualiza los valores de la ubicación.
                     ubicacion.setCodigoUbicacion(Integer.parseInt(edCodigoUbicacion.getText().toString()));
                     ubicacion.setIdSala(Integer.parseInt(edCodigoSala.getText().toString()));
                     ubicacion.setIdElemento(Integer.parseInt(edCodigoElemento.getText().toString()));
-                    ubicacion.setFechaInicio(Date.valueOf(tvFechaInicio.getText().toString()));
-                    ubicacion.setFechaFin(Date.valueOf(tvFechaFin.getText().toString()));
+                    try {
+                        Date fechaInicio = formatInicio.parse(FechaInicio);
+                        ubicacion.setFechaInicio(fechaInicio);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+
+                    try {
+                        Date fechaFinal = formatFin.parse(fechaFin);
+                        ubicacion.setFechaFin(fechaFinal);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
                 } else if (ubicacion.getCodigoUbicacion() == 0 && ubicacion.getDescripcion().isEmpty()) {
+                    // Actualiza los valores de la ubicación al agregar una nueva.
                     ubicacion.setCodigoUbicacion(Integer.parseInt(edCodigoUbicacion.getText().toString()));
                     ubicacion.setIdSala(Integer.parseInt(edCodigoSala.getText().toString()));
                     ubicacion.setIdElemento(Integer.parseInt(edCodigoElemento.getText().toString()));
-                    ubicacion.setFechaInicio(Date.valueOf(tvFechaInicio.getText().toString()));
-                    ubicacion.setFechaFin(Date.valueOf(tvFechaFin.getText().toString()));
+                    try {
+                        Date fechaInicio = formatInicio.parse(FechaInicio);
+                        ubicacion.setFechaInicio(fechaInicio);
+                    } catch (ParseException e) {
+                        e.printStackTrace();    // Manejo de error si el formato falla.
+                    }
+
+                    try {
+                        Date fechaFinal = formatFin.parse(fechaFin);
+                        ubicacion.setFechaFin(fechaFinal);
+                    } catch (ParseException e) {
+                        e.printStackTrace();    // Manejo de error si el formato falla.
+                    }
                     GestionIncidencias.getArUbicaciones().add(GestionIncidencias.getArUbicaciones().size(), ubicacion);
                 } else if (ubicacion.getCodigoUbicacion() == 0) {
+                    // Actualiza los valores de la ubicación.
                     ubicacion.setCodigoUbicacion(Integer.parseInt(edCodigoUbicacion.getText().toString()));
                     ubicacion.setIdSala(Integer.parseInt(edCodigoSala.getText().toString()));
                     ubicacion.setIdElemento(Integer.parseInt(edCodigoElemento.getText().toString()));
-                    ubicacion.setFechaInicio(Date.valueOf(tvFechaInicio.getText().toString()));
-                    ubicacion.setFechaFin(Date.valueOf(tvFechaFin.getText().toString()));
+                    try {
+                        Date fechaInicio = formatInicio.parse(FechaInicio);
+                        ubicacion.setFechaInicio(fechaInicio);
+                    } catch (ParseException e) {
+                        e.printStackTrace();// Manejo de error si el formato falla.
+                    }
+
+                    try {
+                        Date fechaFinal = formatFin.parse(fechaFin);
+                        ubicacion.setFechaFin(fechaFinal);
+                    } catch (ParseException e) {
+                        e.printStackTrace();// Manejo de error si el formato falla.
+                    }
                 }
                 Intent intentVolverUbicacion = new Intent(view.getContext(), activityUbicacion.class);
                 startActivity(intentVolverUbicacion);
             }
         });
+        // Listener para seleccionar fecha de inicio.
         tvFechaInicio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -140,7 +191,7 @@ public class Activity_Info_Ubicacion extends AppCompatActivity implements View.O
                 DatePickerDialog dialogo = new DatePickerDialog(Activity_Info_Ubicacion.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int y, int m, int d) {
-                        Date fechaInicio = (Date) ubicacion.getFechaInicio();
+                        Date fechaInicio = ubicacion.getFechaInicio();
                         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
                         String[] fecha = format.format(fechaInicio).split(" ");
                         tvFechaInicio.setText(y + "-" + (m + 1) + "-" + d + " " + fecha[1]);
@@ -149,6 +200,7 @@ public class Activity_Info_Ubicacion extends AppCompatActivity implements View.O
                 dialogo.show();
             }
         });
+        // Listener para seleccionar fecha de fin.
         tvFechaFin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -157,8 +209,8 @@ public class Activity_Info_Ubicacion extends AppCompatActivity implements View.O
                 DatePickerDialog dialogo = new DatePickerDialog(Activity_Info_Ubicacion.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int y, int m, int d) {
-                        Date fechaFin = (Date) ubicacion.getFechaFin();
-                        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+                        Date fechaFin = ubicacion.getFechaFin();
+                        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()); // Establece nueva fecha.
                         String[] fecha = format.format(fechaFin).split(" ");
                         tvFechaFin.setText(y + "-" + (m + 1) + "-" + d + " " + fecha[1]);
                     }

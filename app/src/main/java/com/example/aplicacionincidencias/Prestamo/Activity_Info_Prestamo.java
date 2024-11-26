@@ -84,12 +84,12 @@ public class Activity_Info_Prestamo extends AppCompatActivity implements View.On
                 tvfechaFin.setText("Fecha no disponible.");
             }
         }
-        tvfechaInicio.setOnClickListener((View.OnClickListener) this);
-        tvfechaFin.setOnClickListener((View.OnClickListener) this);
-        btnVolver = findViewById(R.id.btnVolver);
-        btnGuardar = findViewById(R.id.btnGuardar);
+        btnVolver = findViewById(R.id.btnVolverPrestamo);
+        btnGuardar = findViewById(R.id.btnGuardarPrestamo);
         btnVolver.setOnClickListener((View.OnClickListener) this);
         btnGuardar.setOnClickListener((View.OnClickListener) this);
+        tvfechaInicio.setOnClickListener((View.OnClickListener) this);
+        tvfechaFin.setOnClickListener((View.OnClickListener) this);
 
     }
 
@@ -115,15 +115,15 @@ public class Activity_Info_Prestamo extends AppCompatActivity implements View.On
 
                 prestamo.setIdUsuario(Integer.parseInt(edCodigoUsuario.getText().toString()));
                 prestamo.setIdElemento(Integer.parseInt(edCodigoElemento.getText().toString()));
-                try{
-                    Date fechaInicio = (Date) formatInicio.parse(FechaInicio);
+                try {
+                    Date fechaInicio = formatInicio.parse(FechaInicio);
                     prestamo.setFechaInicio(fechaInicio);
-                }catch (ParseException e){
+                } catch (ParseException e) {
                     e.printStackTrace();
                 }
 
                try{
-                   Date fechaFinal= (Date) formatFin.parse(fechaFin);
+                   Date fechaFinal= formatFin.parse(fechaFin);
                    prestamo.setFechaFin(fechaFinal);
                }catch (ParseException e){
                    e.printStackTrace();
@@ -162,9 +162,6 @@ public class Activity_Info_Prestamo extends AppCompatActivity implements View.On
 
                         // Actualizar el TextView con la nueva fecha y la hora original
                         guardaFechaInicio.setText(y + "-" + (m + 1) + "-" + d + " " + fecha[1]);
-
-                        // Aquí guardamos la fecha seleccionada en la variable de fechaInicio, si es necesario:
-                        // Prestamo.setFechaInicio(new Date(...)) o algo similar si necesitas actualizar el objeto.
 
                     }
                 }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));

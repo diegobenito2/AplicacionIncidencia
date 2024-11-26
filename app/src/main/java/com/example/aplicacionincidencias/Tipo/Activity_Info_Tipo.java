@@ -54,22 +54,17 @@ public class Activity_Info_Tipo extends AppCompatActivity implements View.OnClic
             edDescripcion.setText(tipo.getDescripcion());
         }
 
+        btnVolver = findViewById(R.id.btnVolverTipo);
+        btnGuardar = findViewById(R.id.btnGuardarTipo);
 
-        initComponentsVolverGuardar();
-        initListenersVolverGuardar();
-
-
-    }
-
-    private void initComponentsVolverGuardar() {
-        btnVolver = findViewById(R.id.btnVolver);
-        btnGuardar = findViewById(R.id.btnGuardar);
-    }
-
-    private void initListenersVolverGuardar() {
         btnVolver.setOnClickListener((View.OnClickListener) this);
         btnGuardar.setOnClickListener((View.OnClickListener) this);
+
     }
+
+
+
+
 
     @Override
     public void onClick(View view) {

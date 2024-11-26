@@ -5,16 +5,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-
 import com.example.aplicacionincidencias.R;
-import com.example.aplicacionincidencias.Sala.activitySalas;
-
 import gestionincidencias.GestionIncidencias;
 import gestionincidencias.entidades.EntElemento;
 
@@ -63,21 +59,18 @@ public class Activity_Info_Elemento extends AppCompatActivity implements View.On
         }
 
 
-        initComponentsVolverGuardar();
-        initListenersVolverGuardar();
+        btnVolver = findViewById(R.id.btnVolverElemento);
+        btnGuardar = findViewById(R.id.btnGuardarElemento);
 
-
-    }
-
-    private void initComponentsVolverGuardar() {
-        btnVolver = findViewById(R.id.btnVolver);
-        btnGuardar = findViewById(R.id.btnGuardar);
-    }
-
-    private void initListenersVolverGuardar() {
         btnVolver.setOnClickListener((View.OnClickListener) this);
         btnGuardar.setOnClickListener((View.OnClickListener) this);
+
+
     }
+
+
+
+
 
     @Override
     public void onClick(View view) {

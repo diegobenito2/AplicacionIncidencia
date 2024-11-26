@@ -68,20 +68,12 @@ public class Activity_Info_Usuario extends AppCompatActivity implements View.OnC
             edRolUsuario.setText(usuario.getRol());
         }
 
-        initComponentsVolverGuardar();
-        initListenersVolverGuardar();
+        btnVolver = findViewById(R.id.btnVolverUsuario);
+        btnGuardar = findViewById(R.id.btnGuardarUsuario);
 
-
-    }
-
-    private void initComponentsVolverGuardar() {
-        btnVolver = findViewById(R.id.btnVolver);
-        btnGuardar = findViewById(R.id.btnGuardar);
-    }
-
-    private void initListenersVolverGuardar() {
         btnVolver.setOnClickListener((View.OnClickListener) this);
         btnGuardar.setOnClickListener((View.OnClickListener) this);
+
     }
 
     @Override
@@ -105,15 +97,15 @@ public class Activity_Info_Usuario extends AppCompatActivity implements View.OnC
                     usuario.setTelefono(edTelefonoUsuario.getText().toString());
                     usuario.setPassword(edContraseñaUsuario.getText().toString());
                     usuario.setRol(edRolUsuario.getText().toString());
-                } else if (usuario.getCodigoUsuario()==0 && usuario.getNombre().isEmpty()) {
+                } else if (usuario.getCodigoUsuario() == 0 && usuario.getNombre().isEmpty()) {
                     usuario.setCodigoUsuario(Integer.parseInt(edCodigoUsuario.getText().toString()));
                     usuario.setNombre(edNombreUsuario.getText().toString());
                     usuario.setCorreo(edCorreoUsuario.getText().toString());
                     usuario.setTelefono(edTelefonoUsuario.getText().toString());
                     usuario.setPassword(edContraseñaUsuario.getText().toString());
                     usuario.setRol(edRolUsuario.getText().toString());
-                    GestionIncidencias.getArUsuarios().add(GestionIncidencias.getArUsuarios().size(),usuario);
-                } else if (usuario.getCodigoUsuario()==0) {
+                    GestionIncidencias.getArUsuarios().add(GestionIncidencias.getArUsuarios().size(), usuario);
+                } else if (usuario.getCodigoUsuario() == 0) {
                     usuario.setCodigoUsuario(Integer.parseInt(edCodigoUsuario.getText().toString()));
                     usuario.setNombre(edNombreUsuario.getText().toString());
                     usuario.setCorreo(edCorreoUsuario.getText().toString());
@@ -121,7 +113,7 @@ public class Activity_Info_Usuario extends AppCompatActivity implements View.OnC
                     usuario.setPassword(edContraseñaUsuario.getText().toString());
                     usuario.setRol(edRolUsuario.getText().toString());
                 }
-                Intent intentVolverUsuario = new Intent(view.getContext(),ActivityUsuario.class);
+                Intent intentVolverUsuario = new Intent(view.getContext(), ActivityUsuario.class);
                 startActivity(intentVolverUsuario);
             }
         });
