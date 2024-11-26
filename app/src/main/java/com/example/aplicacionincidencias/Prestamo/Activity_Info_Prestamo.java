@@ -4,9 +4,11 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -17,6 +19,8 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.aplicacionincidencias.R;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -24,13 +28,17 @@ import java.util.Calendar;
 import java.util.Locale;
 
 import gestionincidencias.GestionIncidencias;
+import gestionincidencias.entidades.EntElemento;
 import gestionincidencias.entidades.EntPrestamo;
+import gestionincidencias.entidades.EntUsuario;
 
 public class Activity_Info_Prestamo extends AppCompatActivity implements View.OnClickListener {
     private Button btnVolver, btnGuardar;
     private EntPrestamo prestamo;
     private TextView tvfechaInicio;
     private TextView tvfechaFin;
+    private int ElementoSelected;
+    private int UsuarioSelected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,37 +61,91 @@ public class Activity_Info_Prestamo extends AppCompatActivity implements View.On
             }
 
         } else {
-            prestamo = new EntPrestamo(0, 0, 0, null, null);
+            Date nuevafechainicio = null;
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                String fecha = "2024-01-01 10:30:00";
+                SimpleDateFormat formatInicio = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+                try {
+                    nuevafechainicio = formatInicio.parse(fecha);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+            prestamo = new EntPrestamo(0, 0, 0, nuevafechainicio, nuevafechainicio);
         }
         if (prestamo != null) {
+
             EditText edCodigoPrestamo = findViewById(R.id.infoedCodigoPrestamo);
-            EditText edCodigoUsuario = findViewById(R.id.infotvCodigoUsuario);
-            EditText edCodigoElemento = findViewById(R.id.infotvCodigoElemento);
-            tvfechaInicio = findViewById(R.id.infotvfechaInicio);
-            tvfechaFin = findViewById(R.id.infotvfechaFin);
-
             edCodigoPrestamo.setText(String.valueOf(prestamo.getCodigoPrestamo()));
-            edCodigoUsuario.setText(String.valueOf(prestamo.getIdUsuario()));
-            edCodigoElemento.setText(String.valueOf(prestamo.getIdElemento()));
+////////////////////////////////////////////////////////Inicio Spinner Usuarios//////////////////////////////////////////////////////////////////////////////////
 
-            Date fechaInicio=prestamo.getFechaInicio();
+            // Configurar los Spinners
+            Spinner spinnerUsuarios = findViewById(R.id.spinnerUsuario);
+            Spinner spinnerElementos = findViewById(R.id.spinnerElemento);
 
-            if (fechaInicio!=null){
-                SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+            // Configuración del Spinner de Usuarios
+            ArrayList<String> listaUsuarios = new ArrayList<>();
+            ArrayList<Integer> listaUsuariosIds = new ArrayList<>();
+            for (EntUsuario user : GestionIncidencias.getArUsuarios()) {
+                listaUsuarios.add(user.getNombre());
+                listaUsuariosIds.add(user.getCodigoUsuario());
+            }
+
+            ArrayAdapter<String> adapterUsuarios = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, listaUsuarios);
+            spinnerUsuarios.setAdapter(adapterUsuarios);
+
+            // Seleccionar el usuario actual del préstamo
+            if (prestamo.getIdUsuario() > 0) {
+                UsuarioSelected = listaUsuariosIds.indexOf(prestamo.getIdUsuario());
+                if (UsuarioSelected != -1) {
+                    spinnerUsuarios.setSelection(UsuarioSelected);
+                }
+            }
+////////////////////////////////////////////////////////Fin Spinner Usuarios//////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////Inicio Spinner Elementos//////////////////////////////////////////////////////////////////////////////////
+            // Configuración del Spinner de Elementos
+            ArrayList<String> listaElementos = new ArrayList<>();
+            ArrayList<Integer> listaElementosIds = new ArrayList<>();
+            for (EntElemento elemento : GestionIncidencias.getArElementos()) {
+                listaElementos.add(elemento.getNombre());
+                listaElementosIds.add(elemento.getCodigoElemento());
+            }
+
+            ArrayAdapter<String> adapterElementos = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, listaElementos);
+            spinnerElementos.setAdapter(adapterElementos);
+
+            // Seleccionar el elemento actual del préstamo
+            if (prestamo.getIdElemento() > 0) {
+                ElementoSelected = listaElementosIds.indexOf(prestamo.getIdElemento());
+                if (ElementoSelected != -1) {
+                    spinnerElementos.setSelection(ElementoSelected);
+                }
+            }
+////////////////////////////////////////////////////////Fin Spinner Elementos//////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////Inicio DatePickers Fechas//////////////////////////////////////////////////////////////////////////////////
+
+            tvfechaInicio = findViewById(R.id.infotvfechaInicio);
+            Date fechaInicio = prestamo.getFechaInicio();
+
+            if (fechaInicio != null) {
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
                 tvfechaInicio.setText(format.format(fechaInicio));
-            }else{
+            } else {
                 tvfechaInicio.setText("Fecha no disponible.");
             }
 
-            Date fechaFin= prestamo.getFechaFin();
+            tvfechaFin = findViewById(R.id.infotvfechaFin);
+            Date fechaFin = prestamo.getFechaFin();
 
-            if (fechaFin!=null){
-                SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+            if (fechaFin != null) {
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
                 tvfechaFin.setText(format.format(fechaFin));
-            }else{
+            } else {
                 tvfechaFin.setText("Fecha no disponible.");
             }
         }
+////////////////////////////////////////////////////////Fin DatePickers Fechas//////////////////////////////////////////////////////////////////////////////////
         btnVolver = findViewById(R.id.btnVolverPrestamo);
         btnGuardar = findViewById(R.id.btnGuardarPrestamo);
         btnVolver.setOnClickListener((View.OnClickListener) this);
@@ -102,32 +164,33 @@ public class Activity_Info_Prestamo extends AppCompatActivity implements View.On
         });
         btnGuardar.setOnClickListener(v -> {
             if (prestamo != null) {
-                EditText edCodigoUsuario = findViewById(R.id.infotvCodigoUsuario);
-                EditText edCodigoElemento = findViewById(R.id.infotvCodigoElemento);
 
-                TextView tvFechaInicio=findViewById(R.id.infotvfechaInicio);
-                String FechaInicio= tvFechaInicio.getText().toString();
+                prestamo.setIdUsuario(UsuarioSelected); //Guarda el id del usuario puesto en el spinner.
+                prestamo.setIdElemento(ElementoSelected); // Guarda el id del elemento puesto en el spinner.
+
+
+////////////////////////////////////////////////////////DatePicker Fecha Inicio//////////////////////////////////////////////////////////////////////////////////
+                TextView tvFechaInicio = findViewById(R.id.infotvfechaInicio);
+                String FechaInicio = tvFechaInicio.getText().toString();
                 SimpleDateFormat formatInicio = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
 
-                TextView tvFechaFin=findViewById(R.id.infotvfechaFin);
-                String fechaFin= tvFechaFin.getText().toString();
+                TextView tvFechaFin = findViewById(R.id.infotvfechaFin);
+                String fechaFin = tvFechaFin.getText().toString();
                 SimpleDateFormat formatFin = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
 
-                prestamo.setIdUsuario(Integer.parseInt(edCodigoUsuario.getText().toString()));
-                prestamo.setIdElemento(Integer.parseInt(edCodigoElemento.getText().toString()));
                 try {
                     Date fechaInicio = formatInicio.parse(FechaInicio);
                     prestamo.setFechaInicio(fechaInicio);
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-
-               try{
-                   Date fechaFinal= formatFin.parse(fechaFin);
-                   prestamo.setFechaFin(fechaFinal);
-               }catch (ParseException e){
-                   e.printStackTrace();
-               }
+////////////////////////////////////////////////////////DatePicker Fecha Fin//////////////////////////////////////////////////////////////////////////////////
+                try {
+                    Date fechaFinal = formatFin.parse(fechaFin);
+                    prestamo.setFechaFin(fechaFinal);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
                 if (prestamo.getCodigoPrestamo() == 0) {
                     prestamo.setCodigoPrestamo(GestionIncidencias.getArPrestamos().size() + 1);
                     GestionIncidencias.getArPrestamos().add(0, prestamo);
@@ -136,7 +199,7 @@ public class Activity_Info_Prestamo extends AppCompatActivity implements View.On
                 startActivity(intentVolverPrestamos);
             }
         });
-
+////////////////////////////////////////////////////////DatePicker Fecha Inicio//////////////////////////////////////////////////////////////////////////////////
         tvfechaInicio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -171,7 +234,7 @@ public class Activity_Info_Prestamo extends AppCompatActivity implements View.On
             }
         });
 
-
+////////////////////////////////////////////////////////DatePicker Fecha Fin//////////////////////////////////////////////////////////////////////////////////
         TextView fechaFin = findViewById(R.id.infotvfechaFin);
         fechaFin.setOnClickListener(new View.OnClickListener() {
             @Override
