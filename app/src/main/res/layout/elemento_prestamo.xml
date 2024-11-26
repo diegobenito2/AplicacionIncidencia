@@ -9,19 +9,22 @@
         android:id="@+id/CodigoPrestamo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:ignore="MissingConstraints"></TextView>
+        android:layout_marginStart="20sp"
+        tools:ignore="MissingConstraints"/>
 
     <TextView
         android:id="@+id/idUsuarioPrestamo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:ignore="MissingConstraints"></TextView>
+        android:layout_marginStart="50sp"
+        tools:ignore="MissingConstraints"/>
 
     <TextView
         android:id="@+id/idElementoPrestamo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:ignore="MissingConstraints"></TextView>
+        android:layout_marginStart="50sp"
+        tools:ignore="MissingConstraints"/>
 
 <!--    <TextView-->
 <!--        android:id="@+id/fechaInicioPrestamo"-->

@@ -29,8 +29,8 @@ public class AdaptadorSalas extends ArrayAdapter<EntSala> {
         TextView txCodigo = VSala.findViewById(R.id.codigoSala);
         TextView txNombre = VSala.findViewById(R.id.nombreSala);
 
-        txCodigo.setText("Sala: " + String.valueOf(datos[position].getCodigoSala()));
-        txNombre.setText("Nombre: " +datos[position].getNombre());
+        txCodigo.setText("Nº Sala " + String.valueOf(datos[position].getCodigoSala()));
+        txNombre.setText("Nombre Sala "+datos[position].getNombre());
         return VSala;
     }
 
