@@ -66,7 +66,7 @@ public class Activity_Info_Prestamo extends AppCompatActivity implements View.On
             edCodigoUsuario.setText(String.valueOf(prestamo.getIdUsuario()));
             edCodigoElemento.setText(String.valueOf(prestamo.getIdElemento()));
 
-            Date fechaInicio= (Date) prestamo.getFechaInicio();
+            Date fechaInicio=prestamo.getFechaInicio();
 
             if (fechaInicio!=null){
                 SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
