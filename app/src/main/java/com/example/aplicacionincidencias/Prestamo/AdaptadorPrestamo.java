@@ -30,8 +30,8 @@ public class AdaptadorPrestamo extends ArrayAdapter<EntPrestamo> {
         TextView txIdElemento = VPrestamo.findViewById(R.id.idElementoPrestamo);
 
         txCodigo.setText("Codigo "+String.valueOf(datos[position].getCodigoPrestamo()));
-        txIdUsuario.setText("Nombre Usuario "+String.valueOf(datos[position].getUsuario().getNombre()));
-        txIdElemento.setText("Nombre Elemento "+String.valueOf(datos[position].getElemento().getNombre()));
+        txIdUsuario.setText("Nombre Usuario: "+String.valueOf(datos[position].getUsuario().getNombre()));
+        txIdElemento.setText("Nombre Elemento: "+String.valueOf(datos[position].getElemento().getNombre()));
 
 
         return VPrestamo;

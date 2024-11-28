@@ -30,7 +30,7 @@ public class AdaptadorIncidencia extends ArrayAdapter<EntIncidencia> {
         TextView txDescripcion = VIncidencia.findViewById(R.id.descripcionIncidencia);
 
 
-        txCodigo.setText("Código Incidencia: " + datos[position].getCodigoIncidencia());
+        txCodigo.setText("Código: " + datos[position].getCodigoIncidencia());
         txDescripcion.setText("Descripción: " + datos[position].getDescripcion());
 
         return VIncidencia;

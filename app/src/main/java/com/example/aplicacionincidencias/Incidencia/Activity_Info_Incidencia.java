@@ -4,29 +4,41 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
+
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
 import com.example.aplicacionincidencias.MenuPrincipal.menutrespuntos;
 import com.example.aplicacionincidencias.R;
+
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
+
 import gestionincidencias.GestionIncidencias;
+import gestionincidencias.entidades.EntElemento;
 import gestionincidencias.entidades.EntIncidencia;
+import gestionincidencias.entidades.EntUsuario;
 
 
-public class Activity_Info_Incidencia extends menutrespuntos implements View.OnClickListener {
+public class Activity_Info_Incidencia extends AppCompatActivity implements View.OnClickListener {
     private Button btnVolver, btnGuardar;
     private EntIncidencia incidencia;
     private TextView tvFechaCreacion;
+    private int ElementoSelected;
+    private int UsuarioSelected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,23 +73,64 @@ public class Activity_Info_Incidencia extends menutrespuntos implements View.OnC
 
             EditText edCodigoIncidencia = findViewById(R.id.edinfoCodigoIncidencia);
             EditText edDescripcionIncidencia = findViewById(R.id.edDescripcionIncidencia);
-            EditText edCodigoElemento = findViewById(R.id.edInfoCodigoElemento);
-            EditText edCodigoUsuarioCreacion = findViewById(R.id.edInfoCodigoUsuarioCreacion);
-            tvFechaCreacion = findViewById(R.id.tvInfoFechaCreacion);
 
             edCodigoIncidencia.setText(String.valueOf(incidencia.getCodigoIncidencia()));
             edDescripcionIncidencia.setText(incidencia.getDescripcion());
-            edCodigoElemento.setText(String.valueOf(incidencia.getIdElemento()));
-            edCodigoUsuarioCreacion.setText(String.valueOf(incidencia.getIdUsuarioCreacion()));
+////////////////////////////////////////////////////////Inicio Spinner Usuarios//////////////////////////////////////////////////////////////////////////////////
 
-            Date fechaCreacion=incidencia.getFechaCreacion();
+            // Configurar los Spinners
+            Spinner spinnerUsuarios = findViewById(R.id.spinnerUsuario);
+            Spinner spinnerElementos = findViewById(R.id.spinnerElemento);
 
-            if (fechaCreacion!=null){
-                SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+            // Configuración del Spinner de Usuarios
+            ArrayList<String> listaUsuarios = new ArrayList<>();
+            ArrayList<Integer> listaUsuariosIds = new ArrayList<>();
+            for (EntUsuario user : GestionIncidencias.getArUsuarios()) {
+                listaUsuarios.add(user.getNombre());
+                listaUsuariosIds.add(user.getCodigoUsuario());
+            }
+
+            ArrayAdapter<String> adapterUsuarios = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, listaUsuarios);
+            spinnerUsuarios.setAdapter(adapterUsuarios);
+
+            // Seleccionar el usuario actual de la incidencia
+            if (incidencia.getIdUsuarioCreacion() > 0) {
+                UsuarioSelected = listaUsuariosIds.indexOf(incidencia.getIdUsuarioCreacion());
+                if (UsuarioSelected != -1) {
+                    spinnerUsuarios.setSelection(UsuarioSelected);
+                }
+            }
+////////////////////////////////////////////////////////Fin Spinner Usuarios//////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////Inicio Spinner Elementos//////////////////////////////////////////////////////////////////////////////////
+            // Configuración del Spinner de Elementos
+            ArrayList<String> listaElementos = new ArrayList<>();
+            ArrayList<Integer> listaElementosIds = new ArrayList<>();
+            for (EntElemento elemento : GestionIncidencias.getArElementos()) {
+                listaElementos.add(elemento.getNombre());
+                listaElementosIds.add(elemento.getCodigoElemento());
+            }
+
+            ArrayAdapter<String> adapterElementos = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, listaElementos);
+            spinnerElementos.setAdapter(adapterElementos);
+
+            // Seleccionar el elemento actual de la incidencia
+            if (incidencia.getIdElemento() > 0) {
+                ElementoSelected = listaElementosIds.indexOf(incidencia.getIdElemento());
+                if (ElementoSelected != -1) {
+                    spinnerElementos.setSelection(ElementoSelected);
+                }
+            }
+////////////////////////////////////////////////////////Fin Spinner Elementos//////////////////////////////////////////////////////////////////////////////////
+            tvFechaCreacion = findViewById(R.id.tvInfoFechaCreacion);
+            Date fechaCreacion = incidencia.getFechaCreacion();
+
+            if (fechaCreacion != null) {
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
                 tvFechaCreacion.setText(format.format(fechaCreacion));
-            }else{
+            } else {
                 tvFechaCreacion.setText("Fecha no disponible.");
             }
+
 
         }
         btnVolver = findViewById(R.id.btnVolverIncidencia);
@@ -99,51 +152,51 @@ public class Activity_Info_Incidencia extends menutrespuntos implements View.OnC
             if (incidencia != null) {
                 EditText edCodigoIncidencia = findViewById(R.id.edinfoCodigoIncidencia);
                 EditText edDescripcionIncidencia = findViewById(R.id.edDescripcionIncidencia);
-                EditText edCodigoElemento = findViewById(R.id.edInfoCodigoElemento);
-                EditText edCodigoUsuarioCreacion = findViewById(R.id.edInfoCodigoUsuarioCreacion);
+                incidencia.setIdUsuarioCreacion(UsuarioSelected); //Guarda el id del usuario puesto en el spinner.
+                incidencia.setIdElemento(ElementoSelected); // Guarda el id del elemento puesto en el spinner.
                 tvFechaCreacion = findViewById(R.id.tvInfoFechaCreacion);
 
                 if (incidencia.getCodigoIncidencia() != 0) {
                     incidencia.setCodigoIncidencia(Integer.parseInt(edCodigoIncidencia.getText().toString()));
                     incidencia.setDescripcion(edDescripcionIncidencia.getText().toString());
-                    incidencia.setIdElemento(Integer.parseInt(edCodigoElemento.getText().toString()));
-                    incidencia.setIdUsuarioCreacion(Integer.parseInt(edCodigoUsuarioCreacion.getText().toString()));
-                    tvFechaCreacion =findViewById(R.id.tvInfoFechaCreacion);
-                    String FechaCreacion= tvFechaCreacion.getText().toString();
+                    incidencia.setIdUsuarioCreacion(UsuarioSelected); //Guarda el id del usuario puesto en el spinner.
+                    incidencia.setIdElemento(ElementoSelected); // Guarda el id del elemento puesto en el spinner.
+                    tvFechaCreacion = findViewById(R.id.tvInfoFechaCreacion);
+                    String FechaCreacion = tvFechaCreacion.getText().toString();
                     SimpleDateFormat formatCreacion = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
-                    try{
+                    try {
                         Date fechaCreacion = formatCreacion.parse(FechaCreacion);
                         incidencia.setFechaCreacion(fechaCreacion);
-                    }catch (ParseException e){
+                    } catch (ParseException e) {
                         e.printStackTrace();
                     }
                 } else if (incidencia.getCodigoIncidencia() == 0 && incidencia.getDescripcion().isEmpty()) {
                     incidencia.setCodigoIncidencia(Integer.parseInt(edCodigoIncidencia.getText().toString()));
                     incidencia.setDescripcion(edDescripcionIncidencia.getText().toString());
-                    incidencia.setIdElemento(Integer.parseInt(edCodigoElemento.getText().toString()));
-                    incidencia.setIdUsuarioCreacion(Integer.parseInt(edCodigoUsuarioCreacion.getText().toString()));
-                    tvFechaCreacion =findViewById(R.id.tvInfoFechaCreacion);
-                    String FechaCreacion= tvFechaCreacion.getText().toString();
+                    incidencia.setIdUsuarioCreacion(UsuarioSelected); //Guarda el id del usuario puesto en el spinner.
+                    incidencia.setIdElemento(ElementoSelected); // Guarda el id del elemento puesto en el spinner.
+                    tvFechaCreacion = findViewById(R.id.tvInfoFechaCreacion);
+                    String FechaCreacion = tvFechaCreacion.getText().toString();
                     SimpleDateFormat formatCreacion = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
-                    try{
+                    try {
                         Date fechaCreacion = formatCreacion.parse(FechaCreacion);
                         incidencia.setFechaCreacion(fechaCreacion);
-                    }catch (ParseException e){
+                    } catch (ParseException e) {
                         e.printStackTrace();
                     }
                     GestionIncidencias.getArIncidencias().add(GestionIncidencias.getArIncidencias().size(), incidencia);
                 } else if (incidencia.getCodigoIncidencia() == 0) {
                     incidencia.setCodigoIncidencia(Integer.parseInt(edCodigoIncidencia.getText().toString()));
                     incidencia.setDescripcion(edDescripcionIncidencia.getText().toString());
-                    incidencia.setIdElemento(Integer.parseInt(edCodigoElemento.getText().toString()));
-                    incidencia.setIdUsuarioCreacion(Integer.parseInt(edCodigoUsuarioCreacion.getText().toString()));
-                    tvFechaCreacion =findViewById(R.id.tvInfoFechaCreacion);
-                    String FechaCreacion= tvFechaCreacion.getText().toString();
+                    incidencia.setIdUsuarioCreacion(UsuarioSelected); //Guarda el id del usuario puesto en el spinner.
+                    incidencia.setIdElemento(ElementoSelected); // Guarda el id del elemento puesto en el spinner.
+                    tvFechaCreacion = findViewById(R.id.tvInfoFechaCreacion);
+                    String FechaCreacion = tvFechaCreacion.getText().toString();
                     SimpleDateFormat formatCreacion = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
-                    try{
+                    try {
                         Date fechaCreacion = formatCreacion.parse(FechaCreacion);
                         incidencia.setFechaCreacion(fechaCreacion);
-                    }catch (ParseException e){
+                    } catch (ParseException e) {
                         e.printStackTrace();
                     }
                 }

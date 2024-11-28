@@ -164,6 +164,10 @@ public class Activity_Info_Prestamo extends AppCompatActivity implements View.On
         });
         btnGuardar.setOnClickListener(v -> {
             if (prestamo != null) {
+                Spinner spinnerUsuarios = findViewById(R.id.spinnerUsuario);
+                Spinner spinnerElementos = findViewById(R.id.spinnerElemento);
+                UsuarioSelected=spinnerUsuarios.getSelectedItemPosition();
+                ElementoSelected=spinnerElementos.getSelectedItemPosition();
 
                 prestamo.setIdUsuario(UsuarioSelected); //Guarda el id del usuario puesto en el spinner.
                 prestamo.setIdElemento(ElementoSelected); // Guarda el id del elemento puesto en el spinner.
