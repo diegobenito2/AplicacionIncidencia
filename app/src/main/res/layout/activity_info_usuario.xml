@@ -6,158 +6,187 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Usuario.Activity_Info_Usuario">
+
     <TextView
         android:id="@+id/IdCodigoUsuario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="83dp"
         android:text="Código:"
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/edIdCodigoUsuario"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/edIdCodigoUsuario" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/edIdCodigoUsuario"
+        app:layout_constraintEnd_toStartOf="@+id/edrolUsuario"
+        app:layout_constraintStart_toStartOf="@+id/NombreUsuario" />
 
     <EditText
         android:id="@+id/edIdCodigoUsuario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="72dp"
-        android:layout_marginBottom="51dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="58dp"
         android:text="0"
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/edNombreUsuario"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/IdCodigoUsuario"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/NombreUsuario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="59dp"
         android:text="Nombre:"
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="@+id/IdCodigoUsuario"
-        app:layout_constraintTop_toBottomOf="@+id/IdCodigoUsuario" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/edNombreUsuario"
+        app:layout_constraintEnd_toStartOf="@+id/edcorreoUsuario"
+        app:layout_constraintStart_toStartOf="@+id/correoUsuario" />
 
     <EditText
         android:id="@+id/edNombreUsuario"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="180dp"
+        android:layout_width="210dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginBottom="70dp"
+        android:textAlignment="textStart"
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/edIdCodigoUsuario"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toBottomOf="@+id/edcorreoUsuario"
+        app:layout_constraintStart_toEndOf="@+id/NombreUsuario"
+        app:layout_constraintTop_toTopOf="@+id/edIdCodigoUsuario" />
 
     <TextView
         android:id="@+id/correoUsuario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="55dp"
+        android:layout_marginStart="42dp"
+        android:layout_marginEnd="11dp"
         android:text="Correo:"
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="@+id/NombreUsuario"
-        app:layout_constraintTop_toBottomOf="@+id/NombreUsuario" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/edcorreoUsuario"
+        app:layout_constraintEnd_toStartOf="@+id/edcorreoUsuario"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/edcorreoUsuario"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="31dp"
+        android:layout_width="0dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="94dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="91dp"
         android:text="Correo:"
+        android:textAlignment="textStart"
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/edNombreUsuario"
-        app:layout_constraintTop_toBottomOf="@+id/edNombreUsuario" />
+        app:layout_constraintBottom_toBottomOf="@+id/edtelefonoUsuario"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/correoUsuario"
+        app:layout_constraintTop_toBottomOf="@+id/edIdCodigoUsuario" />
 
     <TextView
         android:id="@+id/telefonoUsuario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="55dp"
+        android:layout_marginStart="42dp"
+        android:layout_marginEnd="42dp"
         android:text="Teléfono:"
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="@+id/correoUsuario"
-        app:layout_constraintTop_toBottomOf="@+id/correoUsuario" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/edtelefonoUsuario"
+        app:layout_constraintEnd_toStartOf="@+id/edpasswordUsuario"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/edtelefonoUsuario"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="25dp"
+        android:layout_width="224dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="192dp"
+        android:layout_marginBottom="191dp"
         android:text="Teléfono:"
+        android:textAlignment="textStart"
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/edpasswordUsuario"
-        app:layout_constraintEnd_toEndOf="@+id/edcorreoUsuario" />
+        app:layout_constraintBottom_toBottomOf="@+id/edrolUsuario"
+        app:layout_constraintStart_toEndOf="@+id/telefonoUsuario"
+        app:layout_constraintTop_toBottomOf="@+id/IdCodigoUsuario" />
 
     <TextView
         android:id="@+id/passwordUsuario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="45dp"
+        android:layout_marginStart="42dp"
+        android:layout_marginTop="297dp"
+        android:layout_marginEnd="17dp"
+        android:layout_marginBottom="296dp"
         android:text="Contraseña:"
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="@+id/telefonoUsuario"
-        app:layout_constraintTop_toBottomOf="@+id/telefonoUsuario" />
+        app:layout_constraintBottom_toBottomOf="@+id/btnVolverUsuario"
+        app:layout_constraintEnd_toStartOf="@+id/edpasswordUsuario"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/IdCodigoUsuario" />
 
     <EditText
         android:id="@+id/edpasswordUsuario"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="43dp"
+        android:layout_marginEnd="26dp"
         android:text="Contraseña:"
+        android:textAlignment="textStart"
         android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/passwordUsuario"
-        app:layout_constraintEnd_toEndOf="@+id/edtelefonoUsuario" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/passwordUsuario" />
 
     <TextView
         android:id="@+id/rolUsuario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="45dp"
+        android:layout_marginStart="42dp"
+        android:layout_marginEnd="43dp"
         android:text="Rol:"
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="@+id/passwordUsuario"
-        app:layout_constraintTop_toBottomOf="@+id/passwordUsuario" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/edrolUsuario"
+        app:layout_constraintEnd_toStartOf="@+id/edcorreoUsuario"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/edrolUsuario"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_width="139dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="111dp"
+        android:layout_marginTop="53dp"
+        android:layout_marginEnd="112dp"
         android:text="Rol:"
+        android:textAlignment="textStart"
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/edpasswordUsuario"
+        app:layout_constraintEnd_toEndOf="@+id/edtelefonoUsuario"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edpasswordUsuario" />
+
     <Button
         android:id="@+id/btnGuardarUsuario"
-        android:layout_width="0dp"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="17dp"
         android:layout_marginBottom="16dp"
         android:text="Guardar"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btnVolver" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
         android:id="@+id/btnVolverUsuario"
-        android:layout_width="0dp"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="17dp"
-        android:layout_marginEnd="138dp"
         android:layout_marginBottom="16dp"
         android:text="Volver"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnGuardar"
         app:layout_constraintStart_toStartOf="parent" />
 
 

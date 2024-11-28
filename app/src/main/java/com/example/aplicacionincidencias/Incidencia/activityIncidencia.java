@@ -30,7 +30,7 @@ public class activityIncidencia extends menutrespuntos {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        ListView listaIncidencia = (ListView) findViewById(R.id.ListaIncidencia);
+        ListView listaIncidencia = findViewById(R.id.ListaIncidencia);
         AdaptadorIncidencia adaptadorIncidencia = new AdaptadorIncidencia(this, GestionIncidencias.getArIncidencias().toArray(new EntIncidencia[0]));
         listaIncidencia.setAdapter(adaptadorIncidencia);
 

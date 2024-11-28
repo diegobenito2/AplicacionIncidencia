@@ -11,33 +11,69 @@
         android:id="@+id/tvCodigoIncidencia"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:text="Código Incidencia "
+        android:layout_marginStart="124dp"
+        android:layout_marginTop="65dp"
+        android:layout_marginEnd="12dp"
+        android:text="Código "
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/edinfoCodigoIncidencia"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toStartOf="@+id/edinfoCodigoIncidencia"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/edinfoCodigoIncidencia"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="13dp"
-        android:layout_marginTop="66dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="186dp"
+        android:layout_marginBottom="15dp"
         android:text="0"
         android:textColor="@color/black"
         android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/tvDescripcionIncidencia"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tvCodigoIncidencia"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/spinnerElemento"
+        android:layout_width="0dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="315dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="316dp"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnGuardarIncidencia"
+        app:layout_constraintEnd_toEndOf="@+id/edDescripcionIncidencia"
+        app:layout_constraintHorizontal_bias="0.67"
+        app:layout_constraintStart_toEndOf="@+id/tvCodigoElemento"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/spinnerUsuario"
+        android:layout_width="166dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="46dp"
+        android:layout_marginBottom="45dp"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvInfoFechaCreacion"
+        app:layout_constraintStart_toEndOf="@+id/tvCodigoUsuarioCreacion"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerElemento" />
 
     <TextView
         android:id="@+id/tvDescripcionIncidencia"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
+        android:layout_marginBottom="27dp"
         android:text="Descripción "
         android:textColor="@color/black"
         android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/edDescripcionIncidencia"
         app:layout_constraintEnd_toStartOf="@+id/edinfoCodigoIncidencia"
         app:layout_constraintStart_toStartOf="@+id/edinfoCodigoIncidencia"
         app:layout_constraintTop_toBottomOf="@+id/edinfoCodigoIncidencia" />
@@ -47,13 +83,15 @@
         android:layout_width="269dp"
         android:layout_height="113dp"
         android:layout_marginStart="37dp"
-        android:layout_marginTop="172dp"
-        android:layout_marginBottom="171dp"
+        android:layout_marginTop="170dp"
+        android:layout_marginEnd="81dp"
+        android:layout_marginBottom="170dp"
         android:inputType="textMultiLine"
         android:text="Descripcion"
         android:textColor="@color/black"
         android:textSize="15sp"
         app:layout_constraintBottom_toTopOf="@+id/tvFechaCreacion"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/tvCodigoElemento"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -62,90 +100,76 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:text="Código Elemento "
+        android:layout_marginTop="35dp"
+        android:text="Elemento "
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/edInfoCodigoElemento"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edDescripcionIncidencia" />
 
     <TextView
         android:id="@+id/tvCodigoUsuarioCreacion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:text="Código Usuario Creación "
+        android:layout_marginTop="49dp"
+        android:layout_marginEnd="8dp"
+        android:text="Usuario Creación  "
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/edInfoCodigoUsuarioCreacion"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toStartOf="@+id/spinnerUsuario"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerElemento" />
 
     <TextView
         android:id="@+id/tvFechaCreacion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="26dp"
+        android:layout_marginTop="26dp"
+        android:layout_marginEnd="241dp"
         android:text="Fecha Creación "
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/tvInfoFechaCreacion"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvCodigoUsuarioCreacion" />
 
     <TextView
         android:id="@+id/tvInfoFechaCreacion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
-        android:layout_marginTop="35dp"
-        android:text="0"
+        android:layout_marginTop="107dp"
+        android:text=""
         android:textColor="@color/black"
         android:textSize="15sp"
         app:layout_constraintStart_toEndOf="@+id/tvFechaCreacion"
-        app:layout_constraintTop_toBottomOf="@+id/tvCodigoUsuarioCreacion" />
-
-    <EditText
-        android:id="@+id/edInfoCodigoUsuarioCreacion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="19dp"
-        android:layout_marginBottom="299dp"
-        android:text="0"
-        android:textColor="@color/black"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tvCodigoUsuarioCreacion" />
-
-    <EditText
-        android:id="@+id/edInfoCodigoElemento"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="18dp"
-        android:layout_marginTop="27dp"
-        android:text="0"
-        android:textColor="@color/black"
-        android:textSize="15sp"
-        app:layout_constraintStart_toEndOf="@+id/tvCodigoElemento"
-        app:layout_constraintTop_toBottomOf="@+id/edDescripcionIncidencia" />
+        app:layout_constraintTop_toBottomOf="@+id/spinnerElemento" />
 
     <Button
         android:id="@+id/btnGuardarIncidencia"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="129dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:text="Guardar"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnVolverIncidencia" />
 
     <Button
         android:id="@+id/btnVolverIncidencia"
-        android:layout_width="0dp"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="1dp"
         android:layout_marginEnd="1dp"
         android:layout_marginBottom="16dp"
         android:text="Volver"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/tvDescripcionIncidencia"
+        app:layout_constraintEnd_toStartOf="@+id/spinnerElemento"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/tvCodigoIncidencia" />
 
 
