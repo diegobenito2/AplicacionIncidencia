@@ -17,6 +17,7 @@ import com.example.aplicacionincidencias.R;
 import com.example.aplicacionincidencias.Sala.activitySalas;
 
 import gestionincidencias.GestionIncidencias;
+import gestionincidencias.entidades.EntSala;
 import gestionincidencias.entidades.EntTipo;
 
 public class Activity_Info_Tipo extends AppCompatActivity implements View.OnClickListener {
@@ -35,14 +36,16 @@ public class Activity_Info_Tipo extends AppCompatActivity implements View.OnClic
         });
 
         int codigoTipo = getIntent().getExtras().getInt("codigo");
-        if (codigoTipo > 0) {
+        String nombreTipo = getIntent().getExtras().getString("nombre");
+
+        if (codigoTipo >= 0) {
             for (EntTipo t : GestionIncidencias.getArTipos()) {
                 if (t.getCodigoTipo() == codigoTipo) {
                     tipo = t;
                 }
             }
-        } else{
-            tipo= new EntTipo(0,"","");
+        } else if (codigoTipo == 0 && nombreTipo.isEmpty()) {
+            tipo = new EntTipo(0, "", "");
         }
         if (tipo != null) {
             EditText edCodigoTipo = findViewById(R.id.edinfoCodigoTipo);
@@ -52,18 +55,21 @@ public class Activity_Info_Tipo extends AppCompatActivity implements View.OnClic
             edCodigoTipo.setText(String.valueOf(tipo.getCodigoTipo()));
             edNombreTipo.setText(tipo.getNombre());
             edDescripcion.setText(tipo.getDescripcion());
+
+        // Al ser un nuevo tipo y el código ponerse automaticamente pues los campos se ocultan.
+            if (tipo.getCodigoTipo() == 0 && tipo.getNombre().isEmpty()) {
+                TextView tvCodigoTipo = findViewById(R.id.tvCodigoTipo);
+                tvCodigoTipo.setVisibility(View.INVISIBLE);
+                edCodigoTipo.setVisibility(View.INVISIBLE);
+            }
         }
 
         btnVolver = findViewById(R.id.btnVolverTipo);
         btnGuardar = findViewById(R.id.btnGuardarTipo);
-
         btnVolver.setOnClickListener((View.OnClickListener) this);
         btnGuardar.setOnClickListener((View.OnClickListener) this);
 
     }
-
-
-
 
 
     @Override
@@ -77,12 +83,20 @@ public class Activity_Info_Tipo extends AppCompatActivity implements View.OnClic
                 EditText edCodigoTipo = findViewById(R.id.edinfoCodigoTipo);
                 EditText edNombreTipo = findViewById(R.id.editNombreTipo);
                 EditText edDescripcion = findViewById(R.id.editDescripcionTipo);
-                tipo.setCodigoTipo(Integer.parseInt(edCodigoTipo.getText().toString()));
-                tipo.setNombre(String.valueOf(edNombreTipo.getText()));
-                tipo.setDescripcion(String.valueOf(edDescripcion.getText()));
-                if (tipo.getCodigoTipo() == 0) {
-                    tipo.setCodigoTipo(GestionIncidencias.getArSalas().size() + 1);
-                    GestionIncidencias.getArTipos().add(0, tipo);
+                if (tipo.getCodigoTipo() != 0) {
+                    tipo.setCodigoTipo(Integer.parseInt(edCodigoTipo.getText().toString()));
+                    tipo.setNombre(edNombreTipo.getText().toString());
+                    tipo.setDescripcion(edDescripcion.getText().toString());
+                } else if (tipo.getCodigoTipo() == 0 && tipo.getNombre().isEmpty()) {
+                    tipo.setCodigoTipo(GestionIncidencias.getArTipos().size() + 1);
+                    tipo.setNombre(edNombreTipo.getText().toString());
+                    tipo.setDescripcion(edDescripcion.getText().toString());
+                    GestionIncidencias.getArTipos().add(GestionIncidencias.getArTipos().size(), tipo);
+                } else if (tipo.getCodigoTipo() == 0) {
+                    tipo.setCodigoTipo(Integer.parseInt(edCodigoTipo.getText().toString()));
+                    tipo.setNombre(edNombreTipo.getText().toString());
+                    tipo.setDescripcion(edDescripcion.getText().toString());
+
                 }
                 Intent intentVolverTipo = new Intent(view.getContext(), activityTipo.class);
                 startActivity(intentVolverTipo);

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -13,6 +14,8 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.aplicacionincidencias.MenuPrincipal.menutrespuntos;
 import com.example.aplicacionincidencias.R;
+import com.example.aplicacionincidencias.Sala.Activity_Info_Sala;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import gestionincidencias.GestionIncidencias;
 import gestionincidencias.entidades.EntPrestamo;
@@ -31,7 +34,7 @@ public class activityTipo extends menutrespuntos {
             return insets;
         });
 
-        ListView listaTipo= (ListView) findViewById(R.id.ListaTipo);
+        ListView listaTipo = (ListView) findViewById(R.id.ListaTipo);
         AdaptadorTipo adaptadorTipo = new AdaptadorTipo(this, GestionIncidencias.getArTipos().toArray(new EntTipo[0]));
         listaTipo.setAdapter(adaptadorTipo);
         listaTipo.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -40,7 +43,22 @@ public class activityTipo extends menutrespuntos {
                 EntTipo tipoSelecccionado = (EntTipo) adapterView.getItemAtPosition(i);
 
                 Intent intentInfoTipo = new Intent(view.getContext(), Activity_Info_Tipo.class);
-                intentInfoTipo.putExtra("codigo",tipoSelecccionado.getCodigoTipo());
+                intentInfoTipo.putExtra("codigo", tipoSelecccionado.getCodigoTipo());
+                intentInfoTipo.putExtra("nombre", tipoSelecccionado.getNombre());
+                startActivity(intentInfoTipo);
+            }
+        });
+        FloatingActionButton AñadirTipo = findViewById(R.id.fabAñadirTipo);
+        AñadirTipo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Crear una nueva Intent para abrir la actividad de información de la sala
+                Intent intentInfoTipo = new Intent(view.getContext(), Activity_Info_Tipo.class);
+
+                // Pasar datos a la nueva actividad mediante el uso de 'putExtra'. Estos datos corresponden a la sala seleccionada.
+
+                intentInfoTipo.putExtra("codigo", 0);
+                intentInfoTipo.putExtra("nombre","");
                 startActivity(intentInfoTipo);
             }
         });

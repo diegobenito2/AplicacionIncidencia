@@ -57,8 +57,7 @@ public class ActivityPrestamo extends menutrespuntos {
 
                 // Pasar datos a la nueva actividad mediante el uso de 'putExtra'. Estos datos corresponden a la sala seleccionada.
 
-                intentInfoPrestamo.putExtra("codigo", 0);
-                intentInfoPrestamo.putExtra("descripcion","");
+                intentInfoPrestamo.putExtra("codigoPrestamo", 0);
                 startActivity(intentInfoPrestamo);
             }
         });

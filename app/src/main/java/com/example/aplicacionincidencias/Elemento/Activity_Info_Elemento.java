@@ -31,7 +31,7 @@ public class Activity_Info_Elemento extends AppCompatActivity implements View.On
         int codigoElemento = getIntent().getExtras().getInt("codigo");
         String nombreElemento = getIntent().getExtras().getString("nombre");
 
-        if (codigoElemento > 0) {
+        if (codigoElemento >= 0) {
             for (EntElemento e : GestionIncidencias.getArElementos()) {
                 if (e.getCodigoElemento() == codigoElemento) {
                     elemento = e;

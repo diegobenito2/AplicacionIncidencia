@@ -2,6 +2,7 @@ package com.example.aplicacionincidencias.Usuario;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -37,20 +38,14 @@ public class Activity_Info_Usuario extends AppCompatActivity implements View.OnC
         int codigoUsuario = getIntent().getExtras().getInt("codigo");
         String nombreUsuario = getIntent().getExtras().getString("nombre");
 
-        if (codigoUsuario > 0) {
+        if (codigoUsuario >= 0) {
             for (EntUsuario u : GestionIncidencias.getArUsuarios()) {
                 if (u.getCodigoUsuario() == codigoUsuario) {
                     usuario = u;
                 }
             }
-        } else if (codigoUsuario == 0 && nombreUsuario.isEmpty()) {
-            usuario = new EntUsuario(0, "", "", "", "", "");
-        } else if (codigoUsuario == 0) {
-            for (EntUsuario u : GestionIncidencias.getArUsuarios()) {
-                if (u.getCodigoUsuario() == codigoUsuario) {
-                    usuario = u;
-                }
-            }
+        } else if (codigoUsuario == 0 && nombreUsuario.isBlank()) {
+            usuario = new EntUsuario(codigoUsuario, nombreUsuario, "", "", "", "");
         }
         if (usuario != null) {
             EditText edCodigoUsuario = findViewById(R.id.edIdCodigoUsuario);
@@ -60,6 +55,11 @@ public class Activity_Info_Usuario extends AppCompatActivity implements View.OnC
             EditText edContraseñaUsuario = findViewById(R.id.edpasswordUsuario);
             EditText edRolUsuario = findViewById(R.id.edrolUsuario);
 
+            if (usuario.getCodigoUsuario() == 0 && usuario.getNombre().equals("")) {
+                TextView tvCodigoUsuario=findViewById(R.id.IdCodigoUsuario);
+                tvCodigoUsuario.setVisibility(View.INVISIBLE);
+                edCodigoUsuario.setVisibility(View.INVISIBLE);
+            }
             edCodigoUsuario.setText(String.valueOf(usuario.getCodigoUsuario()));
             edNombreUsuario.setText(usuario.getNombre());
             edCorreoUsuario.setText(usuario.getCorreo());
@@ -98,7 +98,7 @@ public class Activity_Info_Usuario extends AppCompatActivity implements View.OnC
                     usuario.setPassword(edContraseñaUsuario.getText().toString());
                     usuario.setRol(edRolUsuario.getText().toString());
                 } else if (usuario.getCodigoUsuario() == 0 && usuario.getNombre().isEmpty()) {
-                    usuario.setCodigoUsuario(Integer.parseInt(edCodigoUsuario.getText().toString()));
+                    usuario.setCodigoUsuario(GestionIncidencias.getArUsuarios().size() + 1);
                     usuario.setNombre(edNombreUsuario.getText().toString());
                     usuario.setCorreo(edCorreoUsuario.getText().toString());
                     usuario.setTelefono(edTelefonoUsuario.getText().toString());

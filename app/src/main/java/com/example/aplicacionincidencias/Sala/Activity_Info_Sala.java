@@ -36,7 +36,7 @@ public class Activity_Info_Sala extends AppCompatActivity implements View.OnClic
         int codigoSala = getIntent().getExtras().getInt("codigo");
         String nombreSala = getIntent().getExtras().getString("nombre");
 
-        if (codigoSala > 0) {
+        if (codigoSala >= 0) {
             for (EntSala s : GestionIncidencias.getArSalas()) {
                 if (s.getCodigoSala() == codigoSala) {
                     sala = s;
@@ -59,11 +59,16 @@ public class Activity_Info_Sala extends AppCompatActivity implements View.OnClic
             edCodigoSala.setText(String.valueOf(sala.getCodigoSala()));
             edNombreSala.setText(sala.getNombre());
             edDescripcion.setText(sala.getDescripcion());
+            // Al ser un nuevo tipo y el código ponerse automaticamente pues los campos se ocultan.
+            if (sala.getCodigoSala() == 0 && sala.getNombre().isEmpty()) {
+                TextView tvCodigoSala = findViewById(R.id.tvCodigoSala);
+                tvCodigoSala.setVisibility(View.INVISIBLE);
+                edCodigoSala.setVisibility(View.INVISIBLE);
+            }
         }
 
         btnVolver = findViewById(R.id.btnVolverSala);
         btnGuardar = findViewById(R.id.btnGuardarSala);
-
         btnVolver.setOnClickListener((View.OnClickListener) this);
         btnGuardar.setOnClickListener((View.OnClickListener) this);
 
@@ -78,22 +83,25 @@ public class Activity_Info_Sala extends AppCompatActivity implements View.OnClic
         });
         btnGuardar.setOnClickListener(v -> {
             if (sala != null) {
+                TextView tvCodigoSala=findViewById(R.id.tvCodigoSala);
                 EditText edCodigoSala = findViewById(R.id.edinfoCodigoSala);
                 EditText edNombreSala = findViewById(R.id.editNombreSala);
                 EditText edDescripcion = findViewById(R.id.editDescripcionSala);
                 if (sala.getCodigoSala() != 0) {
                     sala.setCodigoSala(Integer.parseInt(edCodigoSala.getText().toString()));
-                    sala.setNombre(String.valueOf(edNombreSala.getText()));
-                    sala.setDescripcion(String.valueOf(edDescripcion.getText()));
+                    sala.setNombre(edNombreSala.getText().toString());
+                    sala.setDescripcion(edDescripcion.getText().toString());
                 } else if (sala.getCodigoSala() == 0 && sala.getNombre().isEmpty()) {
-                    sala.setCodigoSala(Integer.parseInt(edCodigoSala.getText().toString()));
-                    sala.setNombre(String.valueOf(edNombreSala.getText()));
-                    sala.setDescripcion(String.valueOf(edDescripcion.getText()));
+                    tvCodigoSala.setVisibility(View.INVISIBLE);
+                    edCodigoSala.setVisibility(View.INVISIBLE);
+                    sala.setCodigoSala(GestionIncidencias.getArSalas().size()+1);
+                    sala.setNombre(edNombreSala.getText().toString());
+                    sala.setDescripcion(edDescripcion.getText().toString());
                     GestionIncidencias.getArSalas().add(GestionIncidencias.getArSalas().size(), sala);
                 } else if (sala.getCodigoSala() == 0) {
                     sala.setCodigoSala(Integer.parseInt(edCodigoSala.getText().toString()));
-                    sala.setNombre(String.valueOf(edNombreSala.getText()));
-                    sala.setDescripcion(String.valueOf(edDescripcion.getText()));
+                    sala.setNombre(edNombreSala.getText().toString());
+                    sala.setDescripcion(edDescripcion.getText().toString());
                 }
                 Intent intentVolverSalas = new Intent(view.getContext(), activitySalas.class);
                 startActivity(intentVolverSalas);

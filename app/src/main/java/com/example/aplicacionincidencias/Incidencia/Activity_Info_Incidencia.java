@@ -54,7 +54,7 @@ public class Activity_Info_Incidencia extends AppCompatActivity implements View.
 
         int codigoIncidencia = getIntent().getExtras().getInt("codigoIncidencia");
         String descripcionIncidencia = getIntent().getExtras().getString("descripcionIncidencia");
-        if (codigoIncidencia > 0) {
+        if (codigoIncidencia >= 0) {
             for (EntIncidencia i : GestionIncidencias.getArIncidencias()) {
                 if (i.getCodigoIncidencia() == codigoIncidencia) {
                     incidencia = i;
@@ -62,12 +62,6 @@ public class Activity_Info_Incidencia extends AppCompatActivity implements View.
             }
         } else if (codigoIncidencia == 0 && descripcionIncidencia.isEmpty()) {
             incidencia = new EntIncidencia(0, "", 0, null, 0);
-        } else if (codigoIncidencia == 0) {
-            for (EntIncidencia i : GestionIncidencias.getArIncidencias()) {
-                if (i.getCodigoIncidencia() == codigoIncidencia) {
-                    incidencia = i;
-                }
-            }
         }
         if (incidencia != null) {
 

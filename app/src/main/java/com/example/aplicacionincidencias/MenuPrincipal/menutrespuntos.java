@@ -45,6 +45,22 @@ public class menutrespuntos extends AppCompatActivity {
             Intent intentSalas = new Intent(this, activitySalas.class);
             startActivity(intentSalas);
             return true;
+        }else if (item.getItemId() == R.id.itemMenuTipo) {
+            Intent intentTipo = new Intent(this, activityTipo.class);
+            startActivity(intentTipo);
+            return true;
+        }else if (item.getItemId() == R.id.itemMenuPrestamo) {
+            Intent intentPrestamo = new Intent(this, ActivityPrestamo.class);
+            startActivity(intentPrestamo);
+            return true;
+        }else if (item.getItemId() == R.id.itemMenuUbicacion) {
+            Intent intentUbicacion = new Intent(this, activityUbicacion.class);
+            startActivity(intentUbicacion);
+            return true;
+        }    else if (item.getItemId() == R.id.itemMenuUsuario) {
+            Intent intentUsuario = new Intent(this, ActivityUsuario.class);
+            startActivity(intentUsuario);
+            return true;
         } else if (item.getItemId() == R.id.itemMenuElemento) {
             Intent intentElemento = new Intent(this, activityElemento.class);
             startActivity(intentElemento);
@@ -52,22 +68,6 @@ public class menutrespuntos extends AppCompatActivity {
         } else if (item.getItemId() == R.id.itemMenuIncidencia) {
             Intent intentIncidencia = new Intent(this, activityIncidencia.class);
             startActivity(intentIncidencia);
-            return true;
-        } else if (item.getItemId() == R.id.itemMenuPrestamo) {
-            Intent intentPrestamo = new Intent(this, ActivityPrestamo.class);
-            startActivity(intentPrestamo);
-            return true;
-        } else if (item.getItemId() == R.id.itemMenuTipo) {
-            Intent intentTipo = new Intent(this, activityTipo.class);
-            startActivity(intentTipo);
-            return true;
-        } else if (item.getItemId() == R.id.itemMenuUbicacion) {
-            Intent intentUbicacion = new Intent(this, activityUbicacion.class);
-            startActivity(intentUbicacion);
-            return true;
-        } else if (item.getItemId() == R.id.itemMenuUsuario) {
-            Intent intentUsuario = new Intent(this, ActivityUsuario.class);
-            startActivity(intentUsuario);
             return true;
         } else {
             return super.onOptionsItemSelected(item);
