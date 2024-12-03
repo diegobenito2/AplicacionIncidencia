@@ -173,15 +173,28 @@ public class Activity_Info_Prestamo extends AppCompatActivity implements View.On
         });
         btnGuardar.setOnClickListener(v -> {
             if (prestamo != null) {
-                //Aquí
+
                 ////////////////////////////////////////////////////////Spinner Usuarios//////////////////////////////////////////////////////////////////////////////////
                 Spinner spinnerUsuarios = findViewById(R.id.spinnerUsuario);
-                UsuarioSelected = spinnerUsuarios.getSelectedItemPosition();
-                prestamo.setIdUsuario(UsuarioSelected); //Guarda el id del usuario puesto en el spinner.
+                String UsuarioSelected = spinnerUsuarios.getSelectedItem().toString(); //Guardas el nombre del usuario seleccionado
+                for (EntUsuario usuario:GestionIncidencias.getArUsuarios()){ //Recorres la lista de usuarios.
+                    if (usuario.getNombre().equals(UsuarioSelected)){ //Cuando el nombre es igual al nombre de usuario seleccionado.
+                        prestamo.setIdUsuario(usuario.getCodigoUsuario()); //Cambia el código de usuario del prestamo al del usuario seleccionado.
+                        prestamo.setUsuario(usuario); //Cambia el objeto Usuario del prestamo por el nuevo usuario.
+                    }
+                }
                 ////////////////////////////////////////////////////////Spinner Elementos//////////////////////////////////////////////////////////////////////////////////
                 Spinner spinnerElementos = findViewById(R.id.spinnerElemento);
-                ElementoSelected = spinnerElementos.getSelectedItemPosition();
-                prestamo.setIdElemento(ElementoSelected); // Guarda el id del elemento puesto en el spinner.
+                String ElementoSelected = spinnerElementos.getSelectedItem().toString();
+                for (EntElemento elemento : GestionIncidencias.getArElementos()) {
+
+                    if (elemento.getNombre().equals(ElementoSelected)) {
+                        prestamo.setIdElemento(elemento.getCodigoElemento()); // Guarda el id del elemento puesto en el spinner.
+                        prestamo.setElemento(elemento);
+                        break;
+                    }
+                }
+
 
 
 ////////////////////////////////////////////////////////DatePicker Fecha Inicio//////////////////////////////////////////////////////////////////////////////////
