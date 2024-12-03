@@ -20,12 +20,12 @@
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintEnd_toStartOf="@+id/edinfoCodigoSala"
+        app:layout_constraintEnd_toStartOf="@+id/tvinfoCodigoSala"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/edinfoCodigoSala"
+    <TextView
+        android:id="@+id/tvinfoCodigoSala"
         android:layout_width="50dp"
         android:layout_height="45dp"
         android:layout_marginTop="72dp"
@@ -33,6 +33,7 @@
         android:layout_marginBottom="85dp"
         android:gravity="center"
         android:text="0"
+        android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/editNombreSala"
         app:layout_constraintEnd_toEndOf="parent"
@@ -59,10 +60,11 @@
         android:layout_marginEnd="29dp"
         android:inputType="text"
         android:text=""
+        android:hint="Escribe el nombre"
         android:textAlignment="textStart"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edinfoCodigoSala" />
+        app:layout_constraintTop_toBottomOf="@+id/tvinfoCodigoSala" />
 
     <TextView
         android:id="@+id/tvDescripcionSala"
@@ -86,6 +88,7 @@
         android:layout_marginEnd="16dp"
         android:inputType="textMultiLine"
         android:text=""
+        android:hint="Escribe una descripción"
         android:textAlignment="textStart"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tvDescripcionSala"

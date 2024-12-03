@@ -50,7 +50,6 @@ public class activityUbicacion extends menutrespuntos {
                 // Pasar datos a la nueva actividad mediante el uso de 'putExtra'. Estos datos corresponden a la sala seleccionada.
 
                 intentInfoUbicacion.putExtra("codigo", elementoSeleccionado.getCodigoUbicacion());
-                intentInfoUbicacion.putExtra("descripcion", elementoSeleccionado.getDescripcion());
 
 
                 // Iniciar la actividad de información de la sala

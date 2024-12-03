@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import com.example.aplicacionincidencias.R;
 
-import gestionincidencias.entidades.EntTipo;
 import gestionincidencias.entidades.EntUbicacion;
 
 
@@ -29,11 +28,11 @@ public class AdaptadorUbicacion extends ArrayAdapter<EntUbicacion> {
 
 
         TextView txCodigoUbicacion = Vubicacion.findViewById(R.id.codigoUbicacion);
-        TextView txDescripcionUbicacion = Vubicacion.findViewById(R.id.DescripcionUbicacion);
+        TextView txSalaUbicacion = Vubicacion.findViewById(R.id.SalaUbicacion);
 
 
         txCodigoUbicacion.setText("Codigo Ubicación:" + String.valueOf(datos[position].getCodigoUbicacion()));
-        txDescripcionUbicacion.setText("Sala: " + datos[position].getSala().getNombre());
+        txSalaUbicacion.setText("Sala: " + datos[position].getSala().getNombre());
 
         return Vubicacion;
     }

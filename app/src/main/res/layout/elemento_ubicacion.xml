@@ -9,15 +9,13 @@
         android:id="@+id/codigoUbicacion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
         tools:layout_editor_absoluteX="200dp"
         tools:layout_editor_absoluteY="103dp" />
 
     <TextView
-        android:id="@+id/DescripcionUbicacion"
+        android:id="@+id/SalaUbicacion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
         tools:layout_editor_absoluteX="109dp"
         tools:layout_editor_absoluteY="254dp" />
 

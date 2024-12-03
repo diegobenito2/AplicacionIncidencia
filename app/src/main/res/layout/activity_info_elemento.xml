@@ -12,107 +12,100 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
+        android:layout_marginTop="152dp"
         android:text="Código "
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/edinfoCodigoElemento"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
-    <EditText
-        android:id="@+id/edinfoCodigoElemento"
+    <TextView
+        android:id="@+id/tvinfoCodigoElemento"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="35dp"
-        android:layout_marginBottom="42dp"
-        android:textSize="15sp"
+        android:layout_marginTop="158dp"
         android:text="0"
-        app:layout_constraintBottom_toTopOf="@+id/edNombreElemento"
-        app:layout_constraintStart_toEndOf="@+id/tvCodigoElemento" />
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        app:layout_constraintStart_toEndOf="@+id/tvCodigoElemento"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvNombreElemento"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="31dp"
-        android:layout_marginTop="231dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="52dp"
         android:text="Nombre "
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintEnd_toStartOf="@+id/edNombreElemento"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/tvCodigoElemento" />
 
     <EditText
         android:id="@+id/edNombreElemento"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="204dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="93dp"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="42dp"
+        android:hint="Escribe el Nombre"
         android:inputType="text"
-        android:text="Nombre"
+        android:text=""
         android:textSize="15sp"
-        app:layout_constraintBottom_toTopOf="@+id/edDescripcionElemento"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tvNombreElemento"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/tvinfoCodigoElemento" />
 
 
     <TextView
         android:id="@+id/tvDescripcionElemento"
         android:layout_width="117dp"
         android:layout_height="31dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginBottom="96dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="122dp"
         android:text="Descripción "
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/editcodigoTipoElemento"
-        app:layout_constraintEnd_toStartOf="@+id/edDescripcionElemento"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvNombreElemento" />
 
     <EditText
         android:id="@+id/edDescripcionElemento"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="305dp"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="109dp"
+        android:hint="Escribe una descripción"
         android:inputType="textMultiLine"
-        android:text="Descripcion"
+        android:text=""
         android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tvDescripcionElemento"
         app:layout_constraintTop_toBottomOf="@+id/edNombreElemento" />
 
     <TextView
         android:id="@+id/tvcodigoTipoElemento"
-        android:layout_width="120dp"
-        android:layout_height="29dp"
+        android:layout_width="69dp"
+        android:layout_height="28dp"
         android:layout_marginStart="16dp"
-        android:layout_marginEnd="12dp"
-        android:text="Código Tipo "
+        android:layout_marginTop="102dp"
+        android:text="Tipo "
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/editcodigoTipoElemento"
-        app:layout_constraintEnd_toStartOf="@+id/editcodigoTipoElemento"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDescripcionElemento" />
 
-    <EditText
-        android:id="@+id/editcodigoTipoElemento"
-        android:layout_width="0dp"
+    <Spinner
+        android:id="@+id/spinnerTipoElemento"
+        android:layout_width="227dp"
         android:layout_height="55dp"
-        android:layout_marginEnd="36dp"
-        android:layout_marginBottom="176dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="72dp"
         android:inputType="textMultiLine"
         android:text="Codigo Tipo "
         android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tvcodigoTipoElemento" />
+        app:layout_constraintStart_toEndOf="@+id/tvcodigoTipoElemento"
+        app:layout_constraintTop_toBottomOf="@+id/edDescripcionElemento" />
 
     <Button
         android:id="@+id/btnGuardarElemento"
@@ -122,19 +115,16 @@
         android:layout_marginBottom="16dp"
         android:text="Guardar"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btnVolver" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
         android:id="@+id/btnVolverElemento"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="17dp"
-        android:layout_marginEnd="138dp"
         android:layout_marginBottom="16dp"
         android:text="Volver"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnGuardar"
         app:layout_constraintStart_toStartOf="parent" />
 
 

@@ -60,11 +60,11 @@ public class Activity_Info_Ubicacion extends AppCompatActivity implements View.O
                     break;
                 }
             }
-        } else if (codigoUbicacion == 0 && salaUbicacion.isEmpty()) {
+        } else if (codigoUbicacion == 0 && salaUbicacion.isBlank()) {
 
             String fecha = "2024-11-29 20:32:00";
             SimpleDateFormat formatInicio = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
-            Date nuevaFechaInicio=null;
+            Date nuevaFechaInicio = null;
             try {
                 nuevaFechaInicio = formatInicio.parse(fecha);
             } catch (ParseException e) {
@@ -74,10 +74,17 @@ public class Activity_Info_Ubicacion extends AppCompatActivity implements View.O
         }
 
         if (ubicacion != null) {
-            EditText edCodigoUbicacion = findViewById(R.id.edCodigoUbicacion);
-            edCodigoUbicacion.setText(String.valueOf(ubicacion.getCodigoUbicacion()));
+            TextView tvInfoCodigoUbicacion = findViewById(R.id.tvInfoCodigoUbicacion);
+            tvInfoCodigoUbicacion.setText(String.valueOf(ubicacion.getCodigoUbicacion()));
             EditText edDescripcionUbicacion = findViewById(R.id.edDescripcionUbicacion);
             edDescripcionUbicacion.setText(ubicacion.getDescripcion());
+
+            if (ubicacion.getCodigoUbicacion()==0&&salaUbicacion.isEmpty()){
+                TextView tvCodigoUbicacion=findViewById(R.id.tvcodigoUbicacion);
+                tvCodigoUbicacion.setVisibility(View.INVISIBLE);
+                tvInfoCodigoUbicacion.setVisibility(View.INVISIBLE);
+
+            }
 
 ////////////////////////////////////////////////////////Spinner Salas//////////////////////////////////////////////////////////////////////////////////
             Spinner spinnerSalas = findViewById(R.id.spinnerSala);
@@ -138,6 +145,7 @@ public class Activity_Info_Ubicacion extends AppCompatActivity implements View.O
             } else {
                 tvFechaFin.setText("Fecha no disponible.");
             }
+
         }
 
         btnVolver = findViewById(R.id.btnVolverUbicacion);
@@ -160,7 +168,7 @@ public class Activity_Info_Ubicacion extends AppCompatActivity implements View.O
 ////////////////////////////////////////////////////////Spinner Salas//////////////////////////////////////////////////////////////////////////////////
                 Spinner spinnerSalas = findViewById(R.id.spinnerSala);
                 String SalaSelected = spinnerSalas.getSelectedItem().toString();
-                for (EntSala sala:GestionIncidencias.getArSalas()){
+                for (EntSala sala : GestionIncidencias.getArSalas()) {
                     if (sala.getNombre().equals(SalaSelected)) {
                         ubicacion.setIdSala(sala.getCodigoSala()); // Guarda el id del elemento puesto en el spinner.
                         ubicacion.setSala(sala);

@@ -7,8 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+
 import androidx.annotation.RequiresApi;
+
 import com.example.aplicacionincidencias.R;
+
 import gestionincidencias.entidades.EntIncidencia;
 
 public class AdaptadorIncidencia extends ArrayAdapter<EntIncidencia> {
@@ -28,10 +31,12 @@ public class AdaptadorIncidencia extends ArrayAdapter<EntIncidencia> {
 
         TextView txCodigo = VIncidencia.findViewById(R.id.codigoIncidencia);
         TextView txDescripcion = VIncidencia.findViewById(R.id.descripcionIncidencia);
-
+        TextView tvUsuarioCreacion = VIncidencia.findViewById(R.id.UsuarioCreacionIncidencia);
 
         txCodigo.setText("Código: " + datos[position].getCodigoIncidencia());
         txDescripcion.setText("Descripción: " + datos[position].getDescripcion());
+        tvUsuarioCreacion.setText("Usuario Creación: " + datos[position].getUsuarioCreacion().getNombre());
+
 
         return VIncidencia;
     }

@@ -3,20 +3,30 @@ package com.example.aplicacionincidencias.Elemento;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
+
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
 import com.example.aplicacionincidencias.R;
+
+import java.util.ArrayList;
+
 import gestionincidencias.GestionIncidencias;
 import gestionincidencias.entidades.EntElemento;
+import gestionincidencias.entidades.EntTipo;
 
 public class Activity_Info_Elemento extends AppCompatActivity implements View.OnClickListener {
     private Button btnVolver, btnGuardar;
     private EntElemento elemento;
+    private int TipoSelected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,31 +41,55 @@ public class Activity_Info_Elemento extends AppCompatActivity implements View.On
         int codigoElemento = getIntent().getExtras().getInt("codigo");
         String nombreElemento = getIntent().getExtras().getString("nombre");
 
-        if (codigoElemento >= 0) {
+        if (codigoElemento > 0) {
             for (EntElemento e : GestionIncidencias.getArElementos()) {
                 if (e.getCodigoElemento() == codigoElemento) {
                     elemento = e;
                 }
             }
-        } else if (codigoElemento == 0 && nombreElemento.isEmpty()) {
+        } else if (codigoElemento == 0 && nombreElemento.isBlank()) {
             elemento = new EntElemento(0, "", "", 0);
-        } else if (codigoElemento == 0) {
-            for (EntElemento e : GestionIncidencias.getArElementos()) {
-                if (e.getCodigoElemento() == codigoElemento) {
-                    elemento = e;
-                }
-            }
         }
         if (elemento != null) {
-            EditText tvCodigoElemento = findViewById(R.id.edinfoCodigoElemento);
+            TextView tvInfoCodigoElemento = findViewById(R.id.tvinfoCodigoElemento);
             EditText edNombreElemento = findViewById(R.id.edNombreElemento);
             EditText edDescripcion = findViewById(R.id.edDescripcionElemento);
-            EditText edTipo = findViewById(R.id.editcodigoTipoElemento);
 
-            tvCodigoElemento.setText(String.valueOf(elemento.getCodigoElemento()));
+////////////////////////////////////////////////////////Inicio Spinner Usuarios//////////////////////////////////////////////////////////////////////////////////
+
+            // Configurar los Spinners
+            Spinner spinnerTipos = findViewById(R.id.spinnerTipoElemento);
+
+
+            // Configuración del Spinner de Usuarios
+            ArrayList<String> listaTipos = new ArrayList<>();
+            ArrayList<Integer> listaTiposIds = new ArrayList<>();
+            for (EntTipo type : GestionIncidencias.getArTipos()) {
+                listaTipos.add(type.getNombre());
+                listaTiposIds.add(type.getCodigoTipo());
+            }
+
+            ArrayAdapter<String> adapterTipos = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, listaTipos);
+            spinnerTipos.setAdapter(adapterTipos);
+
+            // Seleccionar el usuario actual del préstamo
+            if (elemento.getIdTipo() > 0) {
+                TipoSelected = listaTiposIds.indexOf(elemento.getIdTipo());
+                if (TipoSelected != -1) {
+                    spinnerTipos.setSelection(TipoSelected);
+                }
+            }
+////////////////////////////////////////////////////////Fin Spinner Usuarios//////////////////////////////////////////////////////////////////////////////////
+            if (codigoElemento == 0 && nombreElemento.isBlank()) {
+                TextView tvCodigoElemento = findViewById(R.id.tvCodigoElemento);
+                tvInfoCodigoElemento.setVisibility(View.INVISIBLE);
+                tvCodigoElemento.setVisibility(View.INVISIBLE);
+            }
+            tvInfoCodigoElemento.setText(String.valueOf(elemento.getCodigoElemento()));
             edNombreElemento.setText(elemento.getNombre());
             edDescripcion.setText(elemento.getDescripcion());
-            edTipo.setText(String.valueOf(elemento.getIdTipo()));
+
+
         }
 
 
@@ -69,9 +103,6 @@ public class Activity_Info_Elemento extends AppCompatActivity implements View.On
     }
 
 
-
-
-
     @Override
     public void onClick(View view) {
         btnVolver.setOnClickListener(v -> {
@@ -80,26 +111,26 @@ public class Activity_Info_Elemento extends AppCompatActivity implements View.On
         });
         btnGuardar.setOnClickListener(v -> {
             if (elemento != null) {
-                EditText edCodigoElemento = findViewById(R.id.edinfoCodigoElemento);
                 EditText edNombreElemento = findViewById(R.id.edNombreElemento);
                 EditText edDescripcion = findViewById(R.id.edDescripcionElemento);
-                EditText edTipo = findViewById(R.id.editcodigoTipoElemento);
-                if (elemento.getCodigoElemento()!= 0) {
-                    elemento.setCodigoElemento(Integer.parseInt(edCodigoElemento.getText().toString()));
+                Spinner spinnerTipos = findViewById(R.id.spinnerTipoElemento);
+                String TipoSelected = spinnerTipos.getSelectedItem().toString(); //Guardas el nombre del Tipo seleccionado
+                for (EntTipo type : GestionIncidencias.getArTipos()) { //Recorres la lista de Tipos.
+                    if (elemento.getNombre().equals(TipoSelected)) { //Cuando el nombre es igual al nombre de Tipo seleccionado.
+                        elemento.setIdTipo(elemento.getIdTipo()); //Cambia el código de Tipo del Elemento al del Tipo seleccionado.
+                        elemento.setTipoElemento(type); //Cambia el objeto Tipo del Elemento por el nuevo Tipo.
+                    }
+                }
+                if (elemento.getCodigoElemento() != 0) {
+                    elemento.setCodigoElemento(elemento.getCodigoElemento());
                     elemento.setNombre(String.valueOf(edNombreElemento.getText()));
                     elemento.setDescripcion(String.valueOf(edDescripcion.getText()));
-                    elemento.setIdTipo(Integer.parseInt(edTipo.getText().toString()));
+
                 } else if (elemento.getCodigoElemento() == 0 && elemento.getNombre().isEmpty()) {
-                    elemento.setCodigoElemento(Integer.parseInt(edCodigoElemento.getText().toString()));
+                    elemento.setCodigoElemento(GestionIncidencias.getArElementos().size() + 1);
                     elemento.setNombre(String.valueOf(edNombreElemento.getText()));
                     elemento.setDescripcion(String.valueOf(edDescripcion.getText()));
-                    elemento.setIdTipo(Integer.parseInt(edTipo.getText().toString()));
                     GestionIncidencias.getArElementos().add(GestionIncidencias.getArElementos().size(), elemento);
-                } else if (elemento.getCodigoElemento() == 0) {
-                    elemento.setCodigoElemento(Integer.parseInt(edCodigoElemento.getText().toString()));
-                    elemento.setNombre(String.valueOf(edNombreElemento.getText()));
-                    elemento.setDescripcion(String.valueOf(edDescripcion.getText()));
-                    elemento.setIdTipo(Integer.parseInt(edTipo.getText().toString()));
                 }
                 Intent intentVolverSalas = new Intent(view.getContext(), activityElemento.class);
                 startActivity(intentVolverSalas);

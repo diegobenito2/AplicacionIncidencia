@@ -38,7 +38,7 @@ public class Activity_Info_Tipo extends AppCompatActivity implements View.OnClic
         int codigoTipo = getIntent().getExtras().getInt("codigo");
         String nombreTipo = getIntent().getExtras().getString("nombre");
 
-        if (codigoTipo >= 0) {
+        if (codigoTipo > 0) {
             for (EntTipo t : GestionIncidencias.getArTipos()) {
                 if (t.getCodigoTipo() == codigoTipo) {
                     tipo = t;
@@ -48,7 +48,7 @@ public class Activity_Info_Tipo extends AppCompatActivity implements View.OnClic
             tipo = new EntTipo(0, "", "");
         }
         if (tipo != null) {
-            EditText edCodigoTipo = findViewById(R.id.edinfoCodigoTipo);
+            TextView edCodigoTipo = findViewById(R.id.tvinfoCodigoTipo);
             EditText edNombreTipo = findViewById(R.id.editNombreTipo);
             EditText edDescripcion = findViewById(R.id.editDescripcionTipo);
 
@@ -80,7 +80,7 @@ public class Activity_Info_Tipo extends AppCompatActivity implements View.OnClic
         });
         btnGuardar.setOnClickListener(v -> {
             if (tipo != null) {
-                EditText edCodigoTipo = findViewById(R.id.edinfoCodigoTipo);
+                TextView edCodigoTipo = findViewById(R.id.tvinfoCodigoTipo);
                 EditText edNombreTipo = findViewById(R.id.editNombreTipo);
                 EditText edDescripcion = findViewById(R.id.editDescripcionTipo);
                 if (tipo.getCodigoTipo() != 0) {

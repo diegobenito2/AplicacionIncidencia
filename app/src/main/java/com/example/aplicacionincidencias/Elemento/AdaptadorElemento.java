@@ -26,9 +26,10 @@ public class AdaptadorElemento extends ArrayAdapter<EntElemento> {
 
         TextView txCodigo = VElemento.findViewById(R.id.codigoElemento);
         TextView txNombre = VElemento.findViewById(R.id.nombreElemento);
+        TextView txTipo = VElemento.findViewById(R.id.tipoElemento);
 
 
-        txCodigo.setText("Código: "+String.valueOf(datos[position].getCodigoElemento()));
+        txCodigo.setText("Código: "+datos[position].getCodigoElemento());
         txNombre.setText("Nombre: "+datos[position].getNombre());
         return VElemento;
     }

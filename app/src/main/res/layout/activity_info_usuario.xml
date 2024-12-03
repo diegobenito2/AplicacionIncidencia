@@ -14,12 +14,12 @@
         android:text="Código:"
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/edIdCodigoUsuario"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvInfoIdCodigoUsuario"
         app:layout_constraintEnd_toStartOf="@+id/edrolUsuario"
         app:layout_constraintStart_toStartOf="@+id/NombreUsuario" />
 
-    <EditText
-        android:id="@+id/edIdCodigoUsuario"
+    <TextView
+        android:id="@+id/tvInfoIdCodigoUsuario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="14dp"
@@ -51,10 +51,10 @@
         android:textAlignment="textStart"
         android:hint="Escribe el Nombre"
         android:textColor="@color/black"
-        android:textSize="20sp"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="@+id/edcorreoUsuario"
         app:layout_constraintStart_toEndOf="@+id/NombreUsuario"
-        app:layout_constraintTop_toTopOf="@+id/edIdCodigoUsuario" />
+        app:layout_constraintTop_toTopOf="@+id/tvInfoIdCodigoUsuario" />
 
     <TextView
         android:id="@+id/correoUsuario"
@@ -72,7 +72,7 @@
     <EditText
         android:id="@+id/edcorreoUsuario"
         android:layout_width="0dp"
-        android:layout_height="42dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="94dp"
         android:layout_marginEnd="12dp"
         android:layout_marginBottom="91dp"
@@ -80,11 +80,11 @@
         android:hint="dbe548995@iesvirreymorcillo.es"
         android:textAlignment="textStart"
         android:textColor="@color/black"
-        android:textSize="20sp"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="@+id/edtelefonoUsuario"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/correoUsuario"
-        app:layout_constraintTop_toBottomOf="@+id/edIdCodigoUsuario" />
+        app:layout_constraintTop_toBottomOf="@+id/tvInfoIdCodigoUsuario" />
 
     <TextView
         android:id="@+id/telefonoUsuario"
@@ -110,7 +110,7 @@
         android:hint="697124356"
         android:textAlignment="textStart"
         android:textColor="@color/black"
-        android:textSize="20sp"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="@+id/edrolUsuario"
         app:layout_constraintStart_toEndOf="@+id/telefonoUsuario"
         app:layout_constraintTop_toBottomOf="@+id/IdCodigoUsuario" />
@@ -140,7 +140,7 @@
         android:hint="asdfasd"
         android:textAlignment="textStart"
         android:textColor="@color/black"
-        android:textSize="20sp"
+        android:textSize="15sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/passwordUsuario"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/passwordUsuario" />
@@ -169,7 +169,7 @@
         android:text=""
         android:textAlignment="textStart"
         android:textColor="@color/black"
-        android:textSize="20sp"
+        android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/rolUsuario"
         app:layout_constraintTop_toBottomOf="@+id/edpasswordUsuario" />

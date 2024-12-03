@@ -17,19 +17,20 @@
         android:text="Código "
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/edCodigoUbicacion"
-        app:layout_constraintEnd_toStartOf="@+id/edCodigoUbicacion"
+        app:layout_constraintBottom_toBottomOf="@+id/tvInfoCodigoUbicacion"
+        app:layout_constraintEnd_toStartOf="@+id/tvInfoCodigoUbicacion"
         app:layout_constraintStart_toStartOf="parent" />
 
 
-    <EditText
-        android:id="@+id/edCodigoUbicacion"
+    <TextView
+        android:id="@+id/tvInfoCodigoUbicacion"
         android:layout_width="0dp"
         android:layout_height="58dp"
         android:layout_marginTop="35dp"
         android:layout_marginEnd="150dp"
         android:gravity="center"
         android:text="0"
+        android:textColor="@color/black"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tvcodigoUbicacion"
@@ -135,31 +136,29 @@
         android:id="@+id/tvDescripcionUbicacion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="7dp"
-        android:layout_marginBottom="18dp"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="65dp"
         android:text="Descripción  "
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/edDescripcionUbicacion"
-        app:layout_constraintStart_toEndOf="@+id/tvcodigoUbicacionFechaFin" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvcodigoUbicacionFechaFin" />
 
     <EditText
         android:id="@+id/edDescripcionUbicacion"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="99dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="98dp"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="65dp"
+        android:layout_marginEnd="84dp"
         android:gravity="center"
         android:inputType="textMultiLine"
         android:text=""
         android:textColor="@color/black"
         android:textSize="15sp"
-        app:layout_constraintBottom_toTopOf="@+id/btnVolverUbicacion"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvcodigoUbicacionFechaFin" />
+        app:layout_constraintStart_toEndOf="@+id/tvDescripcionUbicacion"
+        app:layout_constraintTop_toBottomOf="@+id/tvinfocodigoUbicacionFechaFin" />
 
     <Button
         android:id="@+id/btnGuardarUbicacion"

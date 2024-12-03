@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -19,7 +18,6 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.aplicacionincidencias.R;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.text.ParseException;
@@ -75,16 +73,16 @@ public class Activity_Info_Prestamo extends AppCompatActivity implements View.On
         }
 
         if (prestamo != null) {
-            EditText edCodigoPrestamo = findViewById(R.id.infoedCodigoPrestamo);
-// Al ser un nuevo tipo y el código ponerse automaticamente pues los campos se ocultan.
+            TextView tvInfoCodigoPrestamo = findViewById(R.id.infotvCodigoPrestamo);
+        // Al ser un nuevo tipo y el código ponerse automaticamente pues los campos se ocultan.
             if (prestamo.getCodigoPrestamo() == 0) {
                 TextView tvCodigoPrestamo = findViewById(R.id.tvCodigoPrestamo);
-                edCodigoPrestamo.setText(String.valueOf(GestionIncidencias.getArPrestamos().size() + 1));
+                tvInfoCodigoPrestamo.setText(String.valueOf(GestionIncidencias.getArPrestamos().size() + 1));
                 tvCodigoPrestamo.setVisibility(View.INVISIBLE);
-                edCodigoPrestamo.setVisibility(View.INVISIBLE);
+                tvInfoCodigoPrestamo.setVisibility(View.INVISIBLE);
             }
 
-            edCodigoPrestamo.setText(String.valueOf(prestamo.getCodigoPrestamo()));
+            tvInfoCodigoPrestamo.setText(String.valueOf(prestamo.getCodigoPrestamo()));
 
 ////////////////////////////////////////////////////////Inicio Spinner Usuarios//////////////////////////////////////////////////////////////////////////////////
 
@@ -185,12 +183,12 @@ public class Activity_Info_Prestamo extends AppCompatActivity implements View.On
                 }
                 ////////////////////////////////////////////////////////Spinner Elementos//////////////////////////////////////////////////////////////////////////////////
                 Spinner spinnerElementos = findViewById(R.id.spinnerElemento);
-                String ElementoSelected = spinnerElementos.getSelectedItem().toString();
-                for (EntElemento elemento : GestionIncidencias.getArElementos()) {
+                String ElementoSelected = spinnerElementos.getSelectedItem().toString();//Guardas el nombre del elemento seleccionado
+                for (EntElemento elemento : GestionIncidencias.getArElementos()) {//Recorres la lista de elementos.
 
-                    if (elemento.getNombre().equals(ElementoSelected)) {
-                        prestamo.setIdElemento(elemento.getCodigoElemento()); // Guarda el id del elemento puesto en el spinner.
-                        prestamo.setElemento(elemento);
+                    if (elemento.getNombre().equals(ElementoSelected)) {//Cuando el nombre es igual al nombre del elemento seleccionado.
+                        prestamo.setIdElemento(elemento.getCodigoElemento());  //Cambia el código de elemento del prestamo al del elemento seleccionado.
+                        prestamo.setElemento(elemento);//Cambia el objeto Elemento del prestamo por el nuevo elemento.
                         break;
                     }
                 }
