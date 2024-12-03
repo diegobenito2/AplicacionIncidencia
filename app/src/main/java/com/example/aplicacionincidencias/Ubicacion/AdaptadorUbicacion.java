@@ -33,7 +33,7 @@ public class AdaptadorUbicacion extends ArrayAdapter<EntUbicacion> {
 
 
         txCodigoUbicacion.setText("Codigo Ubicación:" + String.valueOf(datos[position].getCodigoUbicacion()));
-        txDescripcionUbicacion.setText("Descripción: " + datos[position].getDescripcion());
+        txDescripcionUbicacion.setText("Sala: " + datos[position].getSala().getNombre());
 
         return Vubicacion;
     }

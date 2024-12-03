@@ -51,19 +51,20 @@ public class Activity_Info_Ubicacion extends AppCompatActivity implements View.O
         });
 
         int codigoUbicacion = getIntent().getExtras().getInt("codigo");
-        String descripcionUbicacion = getIntent().getExtras().getString("descripcion");
+        String salaUbicacion = getIntent().getExtras().getString("sala");
 
-        if (codigoUbicacion >= 0) {
+        if (codigoUbicacion > 0) {
             for (EntUbicacion u : GestionIncidencias.getArUbicaciones()) {
                 if (u.getCodigoUbicacion() == codigoUbicacion) {
                     ubicacion = u;
                     break;
                 }
             }
-        } else if (codigoUbicacion == 0 && descripcionUbicacion.isEmpty()) {
-            Date nuevaFechaInicio = null;
+        } else if (codigoUbicacion == 0 && salaUbicacion.isEmpty()) {
+
             String fecha = "2024-11-29 20:32:00";
             SimpleDateFormat formatInicio = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+            Date nuevaFechaInicio=null;
             try {
                 nuevaFechaInicio = formatInicio.parse(fecha);
             } catch (ParseException e) {
@@ -158,12 +159,26 @@ public class Activity_Info_Ubicacion extends AppCompatActivity implements View.O
 
 ////////////////////////////////////////////////////////Spinner Salas//////////////////////////////////////////////////////////////////////////////////
                 Spinner spinnerSalas = findViewById(R.id.spinnerSala);
-                SalaSelected = spinnerSalas.getSelectedItemPosition();
-                ubicacion.setIdSala(SalaSelected);
+                String SalaSelected = spinnerSalas.getSelectedItem().toString();
+                for (EntSala sala:GestionIncidencias.getArSalas()){
+                    if (sala.getNombre().equals(SalaSelected)) {
+                        ubicacion.setIdSala(sala.getCodigoSala()); // Guarda el id del elemento puesto en el spinner.
+                        ubicacion.setSala(sala);
+                        break;
+                    }
+                }
+
 ////////////////////////////////////////////////////////Spinner Elementos//////////////////////////////////////////////////////////////////////////////////
                 Spinner spinnerElementos = findViewById(R.id.spinnerElemento);
-                ElementoSelected = spinnerElementos.getSelectedItemPosition();
-                ubicacion.setIdElemento(ElementoSelected);
+                String ElementoSelected = spinnerElementos.getSelectedItem().toString();
+                for (EntElemento elemento : GestionIncidencias.getArElementos()) {
+
+                    if (elemento.getNombre().equals(ElementoSelected)) {
+                        ubicacion.setIdElemento(elemento.getCodigoElemento()); // Guarda el id del elemento puesto en el spinner.
+                        ubicacion.setElemento(elemento);
+                        break;
+                    }
+                }
 ////////////////////////////////////////////////////////DatePicker Fecha Inicio//////////////////////////////////////////////////////////////////////////////////
                 TextView tvFechaInicio = findViewById(R.id.tvinfocodigoUbicacionFechaInicio);
                 String fechaInicio = tvFechaInicio.getText().toString();
