@@ -118,6 +118,17 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
+        android:id="@+id/btnBorrarElemento"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="7dp"
+        android:layout_marginEnd="11dp"
+        android:layout_marginBottom="16dp"
+        android:text="Borrar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnGuardarElemento"
+        app:layout_constraintStart_toEndOf="@+id/btnVolverElemento" />
+    <Button
         android:id="@+id/btnVolverElemento"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

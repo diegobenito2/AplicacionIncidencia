@@ -19,7 +19,7 @@ import gestionincidencias.GestionIncidencias;
 import gestionincidencias.entidades.EntUsuario;
 
 public class Activity_Info_Usuario extends AppCompatActivity implements View.OnClickListener {
-    private Button btnVolver, btnGuardar;
+    private Button btnVolver, btnGuardar,btnBorrar;
     private EntUsuario usuario;
 
     @Override
@@ -68,7 +68,8 @@ public class Activity_Info_Usuario extends AppCompatActivity implements View.OnC
 
         btnVolver = findViewById(R.id.btnVolverUsuario);
         btnGuardar = findViewById(R.id.btnGuardarUsuario);
-
+        btnBorrar = findViewById(R.id.btnBorrarUsuario);
+        btnBorrar.setOnClickListener((View.OnClickListener)this);
         btnVolver.setOnClickListener((View.OnClickListener) this);
         btnGuardar.setOnClickListener((View.OnClickListener) this);
 
@@ -79,6 +80,11 @@ public class Activity_Info_Usuario extends AppCompatActivity implements View.OnC
         btnVolver.setOnClickListener(v -> {
             Intent intent = new Intent(this, ActivityUsuario.class);
             startActivity(intent);
+        });
+        btnBorrar.setOnClickListener(v -> {
+            GestionIncidencias.getArUsuarios().remove(usuario);
+            Intent intentVolverUsuario = new Intent(view.getContext(), ActivityUsuario.class);
+            startActivity(intentVolverUsuario);
         });
         btnGuardar.setOnClickListener(v -> {
             if (usuario != null) {

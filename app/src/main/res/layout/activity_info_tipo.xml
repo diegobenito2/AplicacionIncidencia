@@ -103,4 +103,16 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <Button
+        android:id="@+id/btnBorrarTipo"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="7dp"
+        android:layout_marginEnd="11dp"
+        android:layout_marginBottom="16dp"
+        android:text="Borrar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnGuardarTipo"
+        app:layout_constraintStart_toEndOf="@+id/btnVolverTipo" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

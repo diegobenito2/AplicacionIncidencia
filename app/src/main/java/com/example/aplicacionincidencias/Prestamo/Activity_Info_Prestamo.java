@@ -9,29 +9,25 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TextView;
-
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-
 import com.example.aplicacionincidencias.R;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
-
 import gestionincidencias.GestionIncidencias;
 import gestionincidencias.entidades.EntElemento;
 import gestionincidencias.entidades.EntPrestamo;
 import gestionincidencias.entidades.EntUsuario;
 
 public class Activity_Info_Prestamo extends AppCompatActivity implements View.OnClickListener {
-    private Button btnVolver, btnGuardar;
+    private Button btnVolver, btnGuardar, btnBorrar;
     private EntPrestamo prestamo;
     private TextView tvfechaInicio;
     private TextView tvfechaFin;
@@ -74,7 +70,7 @@ public class Activity_Info_Prestamo extends AppCompatActivity implements View.On
 
         if (prestamo != null) {
             TextView tvInfoCodigoPrestamo = findViewById(R.id.infotvCodigoPrestamo);
-        // Al ser un nuevo tipo y el código ponerse automaticamente pues los campos se ocultan.
+            // Al ser un nuevo tipo y el código ponerse automaticamente pues los campos se ocultan.
             if (prestamo.getCodigoPrestamo() == 0) {
                 TextView tvCodigoPrestamo = findViewById(R.id.tvCodigoPrestamo);
                 tvInfoCodigoPrestamo.setText(String.valueOf(GestionIncidencias.getArPrestamos().size() + 1));
@@ -155,9 +151,11 @@ public class Activity_Info_Prestamo extends AppCompatActivity implements View.On
         }
 ////////////////////////////////////////////////////////Fin DatePickers Fechas//////////////////////////////////////////////////////////////////////////////////
         btnVolver = findViewById(R.id.btnVolverPrestamo);
-        btnGuardar = findViewById(R.id.btnGuardarPrestamo);
         btnVolver.setOnClickListener((View.OnClickListener) this);
+        btnGuardar = findViewById(R.id.btnGuardarPrestamo);
         btnGuardar.setOnClickListener((View.OnClickListener) this);
+        btnBorrar = findViewById(R.id.btnBorrarPrestamo);
+        btnBorrar.setOnClickListener((View.OnClickListener)this);
         tvfechaInicio.setOnClickListener(this);
         tvfechaFin.setOnClickListener(this);
     }
@@ -169,14 +167,19 @@ public class Activity_Info_Prestamo extends AppCompatActivity implements View.On
             Intent intent = new Intent(this, ActivityPrestamo.class);
             startActivity(intent);
         });
+        btnBorrar.setOnClickListener(v -> {
+            GestionIncidencias.getArPrestamos().remove(prestamo);
+            Intent intentVolverPrestamos = new Intent(view.getContext(), ActivityPrestamo.class);
+            startActivity(intentVolverPrestamos);
+        });
         btnGuardar.setOnClickListener(v -> {
             if (prestamo != null) {
 
                 ////////////////////////////////////////////////////////Spinner Usuarios//////////////////////////////////////////////////////////////////////////////////
                 Spinner spinnerUsuarios = findViewById(R.id.spinnerUsuario);
                 String UsuarioSelected = spinnerUsuarios.getSelectedItem().toString(); //Guardas el nombre del usuario seleccionado
-                for (EntUsuario usuario:GestionIncidencias.getArUsuarios()){ //Recorres la lista de usuarios.
-                    if (usuario.getNombre().equals(UsuarioSelected)){ //Cuando el nombre es igual al nombre de usuario seleccionado.
+                for (EntUsuario usuario : GestionIncidencias.getArUsuarios()) { //Recorres la lista de usuarios.
+                    if (usuario.getNombre().equals(UsuarioSelected)) { //Cuando el nombre es igual al nombre de usuario seleccionado.
                         prestamo.setIdUsuario(usuario.getCodigoUsuario()); //Cambia el código de usuario del prestamo al del usuario seleccionado.
                         prestamo.setUsuario(usuario); //Cambia el objeto Usuario del prestamo por el nuevo usuario.
                     }
@@ -192,7 +195,6 @@ public class Activity_Info_Prestamo extends AppCompatActivity implements View.On
                         break;
                     }
                 }
-
 
 
 ////////////////////////////////////////////////////////DatePicker Fecha Inicio//////////////////////////////////////////////////////////////////////////////////

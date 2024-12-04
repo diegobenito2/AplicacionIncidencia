@@ -32,7 +32,7 @@ import gestionincidencias.entidades.EntSala;
 import gestionincidencias.entidades.EntUbicacion;
 
 public class Activity_Info_Ubicacion extends AppCompatActivity implements View.OnClickListener {
-    private Button btnVolver, btnGuardar;
+    private Button btnVolver, btnGuardar,btnBorrar;
     private EntUbicacion ubicacion;
     private TextView tvFechaInicio;
     private TextView tvFechaFin;
@@ -152,6 +152,8 @@ public class Activity_Info_Ubicacion extends AppCompatActivity implements View.O
         btnGuardar = findViewById(R.id.btnGuardarUbicacion);
         btnVolver.setOnClickListener(this);
         btnGuardar.setOnClickListener(this);
+        btnBorrar = findViewById(R.id.btnBorrarUbicacion);
+        btnBorrar.setOnClickListener((View.OnClickListener)this);
         tvFechaInicio.setOnClickListener(this);
         tvFechaFin.setOnClickListener(this);
     }
@@ -161,6 +163,11 @@ public class Activity_Info_Ubicacion extends AppCompatActivity implements View.O
         btnVolver.setOnClickListener(v -> {
             Intent intent = new Intent(this, activityUbicacion.class);
             startActivity(intent);
+        });
+        btnBorrar.setOnClickListener(v -> {
+            GestionIncidencias.getArUbicaciones().remove(ubicacion);
+            Intent intentVolverUbicacion = new Intent(view.getContext(), activityUbicacion.class);
+            startActivity(intentVolverUbicacion);
         });
         btnGuardar.setOnClickListener(v -> {
             if (ubicacion != null) {

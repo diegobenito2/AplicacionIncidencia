@@ -33,7 +33,7 @@ import gestionincidencias.entidades.EntUsuario;
 
 
 public class Activity_Info_Incidencia extends AppCompatActivity implements View.OnClickListener {
-    private Button btnVolver, btnGuardar;
+    private Button btnVolver, btnGuardar, btnBorrar;
     private EntIncidencia incidencia;
     private TextView tvFechaCreacion;
     private int ElementoSelected;
@@ -141,7 +141,8 @@ public class Activity_Info_Incidencia extends AppCompatActivity implements View.
         }
         btnVolver = findViewById(R.id.btnVolverIncidencia);
         btnGuardar = findViewById(R.id.btnGuardarIncidencia);
-
+        btnBorrar = findViewById(R.id.btnBorrarIncidencia);
+        btnBorrar.setOnClickListener((View.OnClickListener) this);
         tvFechaCreacion.setOnClickListener((View.OnClickListener) this);
         btnVolver.setOnClickListener((View.OnClickListener) this);
         btnGuardar.setOnClickListener((View.OnClickListener) this);
@@ -153,6 +154,11 @@ public class Activity_Info_Incidencia extends AppCompatActivity implements View.
         btnVolver.setOnClickListener(v -> {
             Intent intent = new Intent(this, activityIncidencia.class);
             startActivity(intent);
+        });
+        btnBorrar.setOnClickListener(v -> {
+            GestionIncidencias.getArIncidencias().remove(incidencia);
+            Intent intentVolverIncidencias = new Intent(view.getContext(), activityIncidencia.class);
+            startActivity(intentVolverIncidencias);
         });
         btnGuardar.setOnClickListener(v -> {
             if (incidencia != null) {

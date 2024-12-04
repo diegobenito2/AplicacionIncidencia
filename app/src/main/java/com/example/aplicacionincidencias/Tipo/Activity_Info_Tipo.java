@@ -21,7 +21,7 @@ import gestionincidencias.entidades.EntSala;
 import gestionincidencias.entidades.EntTipo;
 
 public class Activity_Info_Tipo extends AppCompatActivity implements View.OnClickListener {
-    private Button btnVolver, btnGuardar;
+    private Button btnVolver, btnGuardar,btnBorrar;
     private EntTipo tipo;
 
     @Override
@@ -66,6 +66,8 @@ public class Activity_Info_Tipo extends AppCompatActivity implements View.OnClic
 
         btnVolver = findViewById(R.id.btnVolverTipo);
         btnGuardar = findViewById(R.id.btnGuardarTipo);
+        btnBorrar = findViewById(R.id.btnBorrarTipo);
+        btnBorrar.setOnClickListener((View.OnClickListener)this);
         btnVolver.setOnClickListener((View.OnClickListener) this);
         btnGuardar.setOnClickListener((View.OnClickListener) this);
 
@@ -77,6 +79,11 @@ public class Activity_Info_Tipo extends AppCompatActivity implements View.OnClic
         btnVolver.setOnClickListener(v -> {
             Intent intent = new Intent(this, activityTipo.class);
             startActivity(intent);
+        });
+        btnBorrar.setOnClickListener(v -> {
+            GestionIncidencias.getArTipos().remove(tipo);
+            Intent intentVolverTipo = new Intent(view.getContext(), activityTipo.class);
+            startActivity(intentVolverTipo);
         });
         btnGuardar.setOnClickListener(v -> {
             if (tipo != null) {

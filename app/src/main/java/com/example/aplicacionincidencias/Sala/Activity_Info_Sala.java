@@ -19,7 +19,7 @@ import gestionincidencias.GestionIncidencias;
 import gestionincidencias.entidades.EntSala;
 
 public class Activity_Info_Sala extends AppCompatActivity implements View.OnClickListener {
-    private Button btnVolver, btnGuardar;
+    private Button btnVolver, btnGuardar,btnBorrar;
     private EntSala sala;
 
     @Override
@@ -50,18 +50,21 @@ public class Activity_Info_Sala extends AppCompatActivity implements View.OnClic
             EditText edNombreSala = findViewById(R.id.editNombreSala);
             EditText edDescripcion = findViewById(R.id.editDescripcionSala);
 
-            edNombreSala.setText(sala.getNombre());
-            edDescripcion.setText(sala.getDescripcion());
             // Al ser una nueva sala y el código ponerse automaticamente pues los campos se ocultan.
             if (sala.getCodigoSala() == 0 && sala.getNombre().isBlank()) {
                 TextView tvCodigoSala = findViewById(R.id.tvCodigoSala);
                 tvCodigoSala.setVisibility(View.INVISIBLE);
                 tvInfoCodigoSala.setVisibility(View.INVISIBLE);
             }
+            tvInfoCodigoSala.setText(String.valueOf(sala.getCodigoSala()));
+            edNombreSala.setText(sala.getNombre());
+            edDescripcion.setText(sala.getDescripcion());
         }
 
         btnVolver = findViewById(R.id.btnVolverSala);
         btnGuardar = findViewById(R.id.btnGuardarSala);
+        btnBorrar = findViewById(R.id.btnBorrarSala);
+        btnBorrar.setOnClickListener((View.OnClickListener)this);
         btnVolver.setOnClickListener((View.OnClickListener) this);
         btnGuardar.setOnClickListener((View.OnClickListener) this);
 
@@ -73,6 +76,11 @@ public class Activity_Info_Sala extends AppCompatActivity implements View.OnClic
         btnVolver.setOnClickListener(v -> {
             Intent intent = new Intent(this, activitySalas.class);
             startActivity(intent);
+        });
+        btnBorrar.setOnClickListener(v -> {
+            GestionIncidencias.getArSalas().remove(sala);
+            Intent intentVolverSalas = new Intent(view.getContext(), activitySalas.class);
+            startActivity(intentVolverSalas);
         });
         btnGuardar.setOnClickListener(v -> {
             if (sala != null) {

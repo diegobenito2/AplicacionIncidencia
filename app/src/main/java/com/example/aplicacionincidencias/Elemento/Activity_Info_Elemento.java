@@ -24,7 +24,7 @@ import gestionincidencias.entidades.EntElemento;
 import gestionincidencias.entidades.EntTipo;
 
 public class Activity_Info_Elemento extends AppCompatActivity implements View.OnClickListener {
-    private Button btnVolver, btnGuardar;
+    private Button btnVolver, btnGuardar,btnBorrar;
     private EntElemento elemento;
     private int TipoSelected;
 
@@ -89,13 +89,13 @@ public class Activity_Info_Elemento extends AppCompatActivity implements View.On
             edNombreElemento.setText(elemento.getNombre());
             edDescripcion.setText(elemento.getDescripcion());
 
-
         }
 
 
         btnVolver = findViewById(R.id.btnVolverElemento);
         btnGuardar = findViewById(R.id.btnGuardarElemento);
-
+        btnBorrar = findViewById(R.id.btnBorrarElemento);
+        btnBorrar.setOnClickListener((View.OnClickListener) this);
         btnVolver.setOnClickListener((View.OnClickListener) this);
         btnGuardar.setOnClickListener((View.OnClickListener) this);
 
@@ -108,6 +108,11 @@ public class Activity_Info_Elemento extends AppCompatActivity implements View.On
         btnVolver.setOnClickListener(v -> {
             Intent intent = new Intent(this, activityElemento.class);
             startActivity(intent);
+        });
+        btnBorrar.setOnClickListener(v -> {
+            GestionIncidencias.getArElementos().remove(elemento);
+            Intent intentVolverElemento = new Intent(view.getContext(), activityElemento.class);
+            startActivity(intentVolverElemento);
         });
         btnGuardar.setOnClickListener(v -> {
             if (elemento != null) {
