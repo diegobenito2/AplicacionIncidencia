@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -169,6 +171,7 @@ public class Activity_Info_Prestamo extends AppCompatActivity implements View.On
         });
         btnBorrar.setOnClickListener(v -> {
             GestionIncidencias.getArPrestamos().remove(prestamo);
+            Toast.makeText(getApplicationContext(), "Prestamo Borrado Correctamente", Toast.LENGTH_SHORT).show();
             Intent intentVolverPrestamos = new Intent(view.getContext(), ActivityPrestamo.class);
             startActivity(intentVolverPrestamos);
         });
@@ -221,6 +224,9 @@ public class Activity_Info_Prestamo extends AppCompatActivity implements View.On
                 if (prestamo.getCodigoPrestamo() == 0) {
                     prestamo.setCodigoPrestamo(GestionIncidencias.getArPrestamos().size() + 1);
                     GestionIncidencias.getArPrestamos().add(GestionIncidencias.getArPrestamos().size(), prestamo);
+                    Toast.makeText(getApplicationContext(), "Prestamo Añadido Correctamente", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(getApplicationContext(), "Prestamo Guardado Correctamente", Toast.LENGTH_SHORT).show();
                 }
                 Intent intentVolverPrestamos = new Intent(view.getContext(), ActivityPrestamo.class);
                 startActivity(intentVolverPrestamos);

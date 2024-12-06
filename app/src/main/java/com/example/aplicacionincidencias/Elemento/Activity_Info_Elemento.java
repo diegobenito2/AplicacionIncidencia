@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -111,6 +112,7 @@ public class Activity_Info_Elemento extends AppCompatActivity implements View.On
         });
         btnBorrar.setOnClickListener(v -> {
             GestionIncidencias.getArElementos().remove(elemento);
+            Toast.makeText(getApplicationContext(), "Elemento Borrado Correctamente", Toast.LENGTH_SHORT).show();
             Intent intentVolverElemento = new Intent(view.getContext(), activityElemento.class);
             startActivity(intentVolverElemento);
         });
@@ -126,16 +128,17 @@ public class Activity_Info_Elemento extends AppCompatActivity implements View.On
                         elemento.setTipoElemento(type); //Cambia el objeto Tipo del Elemento por el nuevo Tipo.
                     }
                 }
-                if (elemento.getCodigoElemento() != 0) {
-                    elemento.setCodigoElemento(elemento.getCodigoElemento());
+
+
                     elemento.setNombre(String.valueOf(edNombreElemento.getText()));
                     elemento.setDescripcion(String.valueOf(edDescripcion.getText()));
 
-                } else if (elemento.getCodigoElemento() == 0 && elemento.getNombre().isEmpty()) {
+                if (elemento.getCodigoElemento() == 0 && elemento.getNombre().isEmpty()) {
                     elemento.setCodigoElemento(GestionIncidencias.getArElementos().size() + 1);
-                    elemento.setNombre(String.valueOf(edNombreElemento.getText()));
-                    elemento.setDescripcion(String.valueOf(edDescripcion.getText()));
                     GestionIncidencias.getArElementos().add(GestionIncidencias.getArElementos().size(), elemento);
+                    Toast.makeText(getApplicationContext(), "Elemento Añadido Correctamente", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(getApplicationContext(), "Elemento Guardado Correctamente", Toast.LENGTH_SHORT).show();
                 }
                 Intent intentVolverSalas = new Intent(view.getContext(), activityElemento.class);
                 startActivity(intentVolverSalas);

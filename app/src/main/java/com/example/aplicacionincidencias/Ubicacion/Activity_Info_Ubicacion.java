@@ -10,6 +10,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -79,11 +80,10 @@ public class Activity_Info_Ubicacion extends AppCompatActivity implements View.O
             EditText edDescripcionUbicacion = findViewById(R.id.edDescripcionUbicacion);
             edDescripcionUbicacion.setText(ubicacion.getDescripcion());
 
-            if (ubicacion.getCodigoUbicacion()==0&&salaUbicacion.isEmpty()){
-                TextView tvCodigoUbicacion=findViewById(R.id.tvcodigoUbicacion);
+            if (ubicacion.getCodigoUbicacion()==0&&salaUbicacion.isEmpty()) {
+                TextView tvCodigoUbicacion = findViewById(R.id.tvcodigoUbicacion);
                 tvCodigoUbicacion.setVisibility(View.INVISIBLE);
                 tvInfoCodigoUbicacion.setVisibility(View.INVISIBLE);
-
             }
 
 ////////////////////////////////////////////////////////Spinner Salas//////////////////////////////////////////////////////////////////////////////////
@@ -166,6 +166,7 @@ public class Activity_Info_Ubicacion extends AppCompatActivity implements View.O
         });
         btnBorrar.setOnClickListener(v -> {
             GestionIncidencias.getArUbicaciones().remove(ubicacion);
+            Toast.makeText(getApplicationContext(), "Ubicación Borrada Correctamente", Toast.LENGTH_SHORT).show();
             Intent intentVolverUbicacion = new Intent(view.getContext(), activityUbicacion.class);
             startActivity(intentVolverUbicacion);
         });
@@ -220,6 +221,9 @@ public class Activity_Info_Ubicacion extends AppCompatActivity implements View.O
                     EditText edDescripcionUbicacion = findViewById(R.id.edDescripcionUbicacion);
                     ubicacion.setDescripcion(edDescripcionUbicacion.getText().toString());
                     GestionIncidencias.getArUbicaciones().add(GestionIncidencias.getArUbicaciones().size(), ubicacion);
+                    Toast.makeText(getApplicationContext(), "Ubicación Añadida Correctamente", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(getApplicationContext(), "Ubicación Guardada Correctamente", Toast.LENGTH_SHORT).show();
                 }
 
                 Intent intentVolverUbicacion = new Intent(view.getContext(), activityUbicacion.class);

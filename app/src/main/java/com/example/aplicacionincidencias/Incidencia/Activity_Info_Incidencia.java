@@ -10,6 +10,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -157,6 +158,7 @@ public class Activity_Info_Incidencia extends AppCompatActivity implements View.
         });
         btnBorrar.setOnClickListener(v -> {
             GestionIncidencias.getArIncidencias().remove(incidencia);
+            Toast.makeText(getApplicationContext(), "Incidencia Borrada Correctamente", Toast.LENGTH_SHORT).show();
             Intent intentVolverIncidencias = new Intent(view.getContext(), activityIncidencia.class);
             startActivity(intentVolverIncidencias);
         });
@@ -214,6 +216,9 @@ public class Activity_Info_Incidencia extends AppCompatActivity implements View.
                         e.printStackTrace();
                     }
                     GestionIncidencias.getArIncidencias().add(GestionIncidencias.getArIncidencias().size(), incidencia);
+                    Toast.makeText(getApplicationContext(), "Incidencia Añadida Correctamente", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(getApplicationContext(), "Incidencia Guardada Correctamente", Toast.LENGTH_SHORT).show();
                 }
                 Intent intentVolverIncidencias = new Intent(view.getContext(), activityIncidencia.class);
                 startActivity(intentVolverIncidencias);

@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,7 +22,7 @@ import gestionincidencias.entidades.EntSala;
 import gestionincidencias.entidades.EntTipo;
 
 public class Activity_Info_Tipo extends AppCompatActivity implements View.OnClickListener {
-    private Button btnVolver, btnGuardar,btnBorrar;
+    private Button btnVolver, btnGuardar, btnBorrar;
     private EntTipo tipo;
 
     @Override
@@ -56,7 +57,7 @@ public class Activity_Info_Tipo extends AppCompatActivity implements View.OnClic
             edNombreTipo.setText(tipo.getNombre());
             edDescripcion.setText(tipo.getDescripcion());
 
-        // Al ser un nuevo tipo y el código ponerse automaticamente pues los campos se ocultan.
+            // Al ser un nuevo tipo y el código ponerse automaticamente pues los campos se ocultan.
             if (tipo.getCodigoTipo() == 0 && tipo.getNombre().isEmpty()) {
                 TextView tvCodigoTipo = findViewById(R.id.tvCodigoTipo);
                 tvCodigoTipo.setVisibility(View.INVISIBLE);
@@ -67,7 +68,7 @@ public class Activity_Info_Tipo extends AppCompatActivity implements View.OnClic
         btnVolver = findViewById(R.id.btnVolverTipo);
         btnGuardar = findViewById(R.id.btnGuardarTipo);
         btnBorrar = findViewById(R.id.btnBorrarTipo);
-        btnBorrar.setOnClickListener((View.OnClickListener)this);
+        btnBorrar.setOnClickListener((View.OnClickListener) this);
         btnVolver.setOnClickListener((View.OnClickListener) this);
         btnGuardar.setOnClickListener((View.OnClickListener) this);
 
@@ -82,6 +83,7 @@ public class Activity_Info_Tipo extends AppCompatActivity implements View.OnClic
         });
         btnBorrar.setOnClickListener(v -> {
             GestionIncidencias.getArTipos().remove(tipo);
+            Toast.makeText(getApplicationContext(), "Tipo Borrado Correctamente", Toast.LENGTH_SHORT).show();
             Intent intentVolverTipo = new Intent(view.getContext(), activityTipo.class);
             startActivity(intentVolverTipo);
         });
@@ -90,20 +92,19 @@ public class Activity_Info_Tipo extends AppCompatActivity implements View.OnClic
                 TextView edCodigoTipo = findViewById(R.id.tvinfoCodigoTipo);
                 EditText edNombreTipo = findViewById(R.id.editNombreTipo);
                 EditText edDescripcion = findViewById(R.id.editDescripcionTipo);
-                if (tipo.getCodigoTipo() != 0) {
-                    tipo.setCodigoTipo(Integer.parseInt(edCodigoTipo.getText().toString()));
-                    tipo.setNombre(edNombreTipo.getText().toString());
-                    tipo.setDescripcion(edDescripcion.getText().toString());
-                } else if (tipo.getCodigoTipo() == 0 && tipo.getNombre().isEmpty()) {
+
+                tipo.setNombre(edNombreTipo.getText().toString());
+                tipo.setDescripcion(edDescripcion.getText().toString());
+
+
+                if (tipo.getCodigoTipo() == 0 && tipo.getNombre().isEmpty()) {
                     tipo.setCodigoTipo(GestionIncidencias.getArTipos().size() + 1);
                     tipo.setNombre(edNombreTipo.getText().toString());
                     tipo.setDescripcion(edDescripcion.getText().toString());
                     GestionIncidencias.getArTipos().add(GestionIncidencias.getArTipos().size(), tipo);
-                } else if (tipo.getCodigoTipo() == 0) {
-                    tipo.setCodigoTipo(Integer.parseInt(edCodigoTipo.getText().toString()));
-                    tipo.setNombre(edNombreTipo.getText().toString());
-                    tipo.setDescripcion(edDescripcion.getText().toString());
-
+                    Toast.makeText(getApplicationContext(), "Tipo Añadido Correctamente", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(getApplicationContext(), "Tipo Guardado Correctamente", Toast.LENGTH_SHORT).show();
                 }
                 Intent intentVolverTipo = new Intent(view.getContext(), activityTipo.class);
                 startActivity(intentVolverTipo);

@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,7 +20,7 @@ import gestionincidencias.GestionIncidencias;
 import gestionincidencias.entidades.EntSala;
 
 public class Activity_Info_Sala extends AppCompatActivity implements View.OnClickListener {
-    private Button btnVolver, btnGuardar,btnBorrar;
+    private Button btnVolver, btnGuardar, btnBorrar;
     private EntSala sala;
 
     @Override
@@ -64,7 +65,7 @@ public class Activity_Info_Sala extends AppCompatActivity implements View.OnClic
         btnVolver = findViewById(R.id.btnVolverSala);
         btnGuardar = findViewById(R.id.btnGuardarSala);
         btnBorrar = findViewById(R.id.btnBorrarSala);
-        btnBorrar.setOnClickListener((View.OnClickListener)this);
+        btnBorrar.setOnClickListener((View.OnClickListener) this);
         btnVolver.setOnClickListener((View.OnClickListener) this);
         btnGuardar.setOnClickListener((View.OnClickListener) this);
 
@@ -79,6 +80,7 @@ public class Activity_Info_Sala extends AppCompatActivity implements View.OnClic
         });
         btnBorrar.setOnClickListener(v -> {
             GestionIncidencias.getArSalas().remove(sala);
+            Toast.makeText(getApplicationContext(), "Sala Borrada Correctamente", Toast.LENGTH_SHORT).show();
             Intent intentVolverSalas = new Intent(view.getContext(), activitySalas.class);
             startActivity(intentVolverSalas);
         });
@@ -86,14 +88,18 @@ public class Activity_Info_Sala extends AppCompatActivity implements View.OnClic
             if (sala != null) {
                 EditText edNombreSala = findViewById(R.id.editNombreSala);
                 EditText edDescripcion = findViewById(R.id.editDescripcionSala);
-                if (sala.getCodigoSala() != 0) {
-                    sala.setNombre(edNombreSala.getText().toString());
-                    sala.setDescripcion(edDescripcion.getText().toString());
-                } else if (sala.getCodigoSala() == 0 && sala.getNombre().isEmpty()) {
-                    sala.setCodigoSala(GestionIncidencias.getArSalas().size()+1);
+
+                sala.setNombre(edNombreSala.getText().toString());
+                sala.setDescripcion(edDescripcion.getText().toString());
+
+                if (sala.getCodigoSala() == 0 && sala.getNombre().isEmpty()) {
+                    sala.setCodigoSala(GestionIncidencias.getArSalas().size() + 1);
                     sala.setNombre(edNombreSala.getText().toString());
                     sala.setDescripcion(edDescripcion.getText().toString());
                     GestionIncidencias.getArSalas().add(GestionIncidencias.getArSalas().size(), sala);
+                    Toast.makeText(getApplicationContext(), "Sala Añadida Correctamente", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(getApplicationContext(), "Sala Guardada Correctamente", Toast.LENGTH_SHORT).show();
                 }
                 Intent intentVolverSalas = new Intent(view.getContext(), activitySalas.class);
                 startActivity(intentVolverSalas);

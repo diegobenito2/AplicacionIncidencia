@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -83,6 +84,7 @@ public class Activity_Info_Usuario extends AppCompatActivity implements View.OnC
         });
         btnBorrar.setOnClickListener(v -> {
             GestionIncidencias.getArUsuarios().remove(usuario);
+            Toast.makeText(getApplicationContext(), "Usuario Borrado Correctamente", Toast.LENGTH_SHORT).show();
             Intent intentVolverUsuario = new Intent(view.getContext(), ActivityUsuario.class);
             startActivity(intentVolverUsuario);
         });
@@ -107,6 +109,9 @@ public class Activity_Info_Usuario extends AppCompatActivity implements View.OnC
                     usuario.setPassword(edContraseñaUsuario.getText().toString());
                     usuario.setRol(edRolUsuario.getText().toString());
                     GestionIncidencias.getArUsuarios().add(GestionIncidencias.getArUsuarios().size(), usuario);
+                    Toast.makeText(getApplicationContext(), "Usuario Añadido Correctamente", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(getApplicationContext(), "Usuario Guardado Correctamente", Toast.LENGTH_SHORT).show();
                 }
                 Intent intentVolverUsuario = new Intent(view.getContext(), ActivityUsuario.class);
                 startActivity(intentVolverUsuario);
