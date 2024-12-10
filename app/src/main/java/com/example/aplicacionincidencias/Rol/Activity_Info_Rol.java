@@ -85,16 +85,17 @@ public class Activity_Info_Rol extends AppCompatActivity implements View.OnClick
             if (rol != null) {
                 EditText edNombreRol = findViewById(R.id.edNombreRol);
                 EditText edDescripcion = findViewById(R.id.edDescripcionRol);
-                EditText edNivelAcceso=findViewById(R.id.edNivelAccesoRol);
+                EditText edNivelAcceso = findViewById(R.id.edNivelAccesoRol);
+
                 rol.setNombre(edNombreRol.getText().toString());
                 rol.setDescripcion(edDescripcion.getText().toString());
                 rol.setNivel_acceso(Integer.parseInt(edNivelAcceso.getText().toString()));
 
-                if (rol.getCodigo()== 0 && rol.getNombre().isEmpty()) {
+                if (rol.getCodigo() == 0) {
                     rol.setCodigo(GestionIncidencias.getArRoles().size() + 1);
-                    GestionIncidencias.getArRoles().add(GestionIncidencias.getArRoles().size()-1, rol);
+                    GestionIncidencias.getArRoles().add(GestionIncidencias.getArRoles().size(), rol);
                     Toast.makeText(getApplicationContext(), "Rol Añadido Correctamente", Toast.LENGTH_SHORT).show();
-                }else{
+                } else {
                     Toast.makeText(getApplicationContext(), "Rol Guardado Correctamente", Toast.LENGTH_SHORT).show();
                 }
                 Intent intentVolverRol = new Intent(view.getContext(), Activity_Rol.class);
