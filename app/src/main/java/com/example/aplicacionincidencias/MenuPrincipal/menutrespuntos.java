@@ -4,9 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,16 +12,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.aplicacionincidencias.Elemento.activityElemento;
 import com.example.aplicacionincidencias.Incidencia.activityIncidencia;
 import com.example.aplicacionincidencias.Prestamo.ActivityPrestamo;
-import com.example.aplicacionincidencias.Prestamo.Activity_Info_Prestamo;
-import com.example.aplicacionincidencias.Prestamo.AdaptadorPrestamo;
 import com.example.aplicacionincidencias.R;
+import com.example.aplicacionincidencias.Rol.Activity_Rol;
 import com.example.aplicacionincidencias.Sala.activitySalas;
 import com.example.aplicacionincidencias.Tipo.activityTipo;
 import com.example.aplicacionincidencias.Ubicacion.activityUbicacion;
 import com.example.aplicacionincidencias.Usuario.ActivityUsuario;
-
-import gestionincidencias.GestionIncidencias;
-import gestionincidencias.entidades.EntPrestamo;
 
 public class menutrespuntos extends AppCompatActivity {
     @Override
@@ -68,6 +61,10 @@ public class menutrespuntos extends AppCompatActivity {
         } else if (item.getItemId() == R.id.itemMenuIncidencia) {
             Intent intentIncidencia = new Intent(this, activityIncidencia.class);
             startActivity(intentIncidencia);
+            return true;
+        }else if (item.getItemId() == R.id.itemMenuRol) {
+            Intent intentRol = new Intent(this, Activity_Rol.class);
+            startActivity(intentRol);
             return true;
         } else {
             return super.onOptionsItemSelected(item);

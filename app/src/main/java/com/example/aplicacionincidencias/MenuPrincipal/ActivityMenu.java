@@ -15,6 +15,7 @@ import com.example.aplicacionincidencias.Elemento.activityElemento;
 import com.example.aplicacionincidencias.Incidencia.activityIncidencia;
 import com.example.aplicacionincidencias.Prestamo.ActivityPrestamo;
 import com.example.aplicacionincidencias.R;
+import com.example.aplicacionincidencias.Rol.Activity_Rol;
 import com.example.aplicacionincidencias.Sala.activitySalas;
 import com.example.aplicacionincidencias.Tipo.activityTipo;
 import com.example.aplicacionincidencias.Ubicacion.activityUbicacion;
@@ -28,6 +29,7 @@ public class ActivityMenu extends menutrespuntos implements View.OnClickListener
     private Button ButtonMenuUsuario;
     private Button ButtonMenuElemento;
     private Button ButtonMenuIncidencia;
+    private Button ButtonMenuRol;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +53,7 @@ public class ActivityMenu extends menutrespuntos implements View.OnClickListener
         ButtonMenuUsuario = findViewById(R.id.ButtonMenuUsuario);
         ButtonMenuElemento = findViewById(R.id.ButtonMenuElemento);
         ButtonMenuIncidencia = findViewById(R.id.ButtonMenuIncidencia);
+        ButtonMenuRol = findViewById(R.id.ButtonMenuRol);
 
     }
 
@@ -62,6 +65,7 @@ public class ActivityMenu extends menutrespuntos implements View.OnClickListener
         ButtonMenuUsuario.setOnClickListener((View.OnClickListener) this);
         ButtonMenuElemento.setOnClickListener((View.OnClickListener) this);
         ButtonMenuIncidencia.setOnClickListener((View.OnClickListener) this);
+        ButtonMenuRol.setOnClickListener((View.OnClickListener) this);
     }
 
     @Override
@@ -92,6 +96,10 @@ public class ActivityMenu extends menutrespuntos implements View.OnClickListener
         });
         ButtonMenuIncidencia.setOnClickListener(v -> {
             Intent intent = new Intent(this, activityIncidencia.class);
+            startActivity(intent);
+        });
+        ButtonMenuRol.setOnClickListener(v -> {
+            Intent intent = new Intent(this, Activity_Rol.class);
             startActivity(intent);
         });
 

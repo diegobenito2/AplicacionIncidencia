@@ -1,4 +1,4 @@
-package com.example.aplicacionincidencias.Prestamo;
+package com.example.aplicacionincidencias.Rol;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,62 +7,59 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.aplicacionincidencias.MenuPrincipal.menutrespuntos;
 import com.example.aplicacionincidencias.R;
-
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 import gestionincidencias.GestionIncidencias;
-import gestionincidencias.entidades.EntPrestamo;
+import gestionincidencias.entidades.EntRol;
 
-public class ActivityPrestamo extends menutrespuntos {
+public class Activity_Rol extends menutrespuntos {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_prestamo);
+        setContentView(R.layout.activity_rol);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        ListView ListaPrestamo = (ListView) findViewById(R.id.ListaPrestamo);
-        AdaptadorPrestamo adaptadorPrestamo = new AdaptadorPrestamo(this, GestionIncidencias.getArPrestamos().toArray(new EntPrestamo[0]));
-        ListaPrestamo.setAdapter(adaptadorPrestamo);
+        ListView ListaRol = (ListView) findViewById(R.id.ListaRol);
+        AdaptadorRol adaptadorRol = new AdaptadorRol(this, GestionIncidencias.getArRoles().toArray(new EntRol[0]));
+        ListaRol.setAdapter(adaptadorRol);
 
-        ListaPrestamo.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        ListaRol.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                EntPrestamo PrestamoSeleccionado = (EntPrestamo) adapterView.getItemAtPosition(i);
+                EntRol RolSeleccionado = (EntRol) adapterView.getItemAtPosition(i);
 
-                Intent intentPrestamo = new Intent(view.getContext(), Activity_Info_Prestamo.class);
+                Intent intentRol = new Intent(view.getContext(), Activity_Info_Rol.class);
 
-                intentPrestamo.putExtra("codigoPrestamo", PrestamoSeleccionado.getCodigoPrestamo());
+                intentRol.putExtra("codigo", RolSeleccionado.getCodigo());
 
-                startActivity(intentPrestamo);
+                startActivity(intentRol);
 
             }
         });
-        FloatingActionButton AñadirPrestamo = findViewById(R.id.fabAñadirPrestamo);
+        FloatingActionButton AñadirPrestamo = findViewById(R.id.fabAñadirRol);
         AñadirPrestamo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Crear una nueva Intent para abrir la actividad de información de la sala
-                Intent intentInfoPrestamo = new Intent(view.getContext(), Activity_Info_Prestamo.class);
+                Intent intentInfoRol = new Intent(view.getContext(), Activity_Info_Rol.class);
 
                 // Pasar datos a la nueva actividad mediante el uso de 'putExtra'. Estos datos corresponden a la sala seleccionada.
 
-                intentInfoPrestamo.putExtra("codigoPrestamo", 0);
-                startActivity(intentInfoPrestamo);
+                intentInfoRol.putExtra("codigo", 0);
+                intentInfoRol.putExtra("nombre","");
+                startActivity(intentInfoRol);
             }
         });
     }
-
-
-
 }

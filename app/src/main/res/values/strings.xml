@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">AplicacionIncidencias</string>
     <string name="submit">Añadiendo nuevo  </string>
+    <string name="title_activity_rol">activity_rol</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 </resources>

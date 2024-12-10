@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Rol.Activity_Info_Rol">
+    <TextView
+        android:id="@+id/tvCodigoRol"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="152dp"
+        android:text="Código "
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/tvinfoCodigoRol"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="158dp"
+        android:text="0"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        app:layout_constraintStart_toEndOf="@+id/tvCodigoRol"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvNombreRol"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="52dp"
+        android:text="Nombre "
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvCodigoRol" />
+
+    <EditText
+        android:id="@+id/edNombreRol"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="42dp"
+        android:hint="Escribe el Nombre"
+        android:inputType="text"
+        android:text=""
+        android:textSize="15sp"
+        app:layout_constraintStart_toEndOf="@+id/tvNombreRol"
+        app:layout_constraintTop_toBottomOf="@+id/tvinfoCodigoRol" />
+
+
+    <TextView
+        android:id="@+id/tvDescripcionRol"
+        android:layout_width="117dp"
+        android:layout_height="31dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="122dp"
+        android:text="Descripción "
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvNombreRol" />
+
+    <EditText
+        android:id="@+id/edDescripcionRol"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="109dp"
+        android:hint="Escribe una descripción"
+        android:inputType="textMultiLine"
+        android:text=""
+        android:textSize="15sp"
+        app:layout_constraintStart_toEndOf="@+id/tvDescripcionRol"
+        app:layout_constraintTop_toBottomOf="@+id/edNombreRol" />
+
+    <TextView
+        android:id="@+id/tvNivelAccesoRol"
+        android:layout_width="117dp"
+        android:layout_height="31dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="87dp"
+        android:text="Nivel Acceso "
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDescripcionRol" />
+
+    <EditText
+        android:id="@+id/edNivelAccesoRol"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="87dp"
+        app:layout_constraintStart_toEndOf="@+id/tvNivelAccesoRol"
+        app:layout_constraintTop_toBottomOf="@+id/edDescripcionRol" />
+    <Button
+        android:id="@+id/btnGuardarRol"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="16dp"
+        android:text="Guardar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/btnBorrarRol"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="7dp"
+        android:layout_marginEnd="11dp"
+        android:layout_marginBottom="16dp"
+        android:text="Borrar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnGuardarRol"
+        app:layout_constraintStart_toEndOf="@+id/btnVolverRol" />
+    <Button
+        android:id="@+id/btnVolverRol"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="18dp"
+        android:layout_marginBottom="16dp"
+        android:text="Volver"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

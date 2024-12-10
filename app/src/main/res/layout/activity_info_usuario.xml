@@ -15,7 +15,7 @@
         android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/tvInfoIdCodigoUsuario"
-        app:layout_constraintEnd_toStartOf="@+id/edrolUsuario"
+        app:layout_constraintEnd_toStartOf="@+id/spinnerrolUsuario"
         app:layout_constraintStart_toStartOf="@+id/NombreUsuario" />
 
     <TextView
@@ -111,7 +111,7 @@
         android:textAlignment="textStart"
         android:textColor="@color/black"
         android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="@+id/edrolUsuario"
+        app:layout_constraintBottom_toBottomOf="@+id/spinnerrolUsuario"
         app:layout_constraintStart_toEndOf="@+id/telefonoUsuario"
         app:layout_constraintTop_toBottomOf="@+id/IdCodigoUsuario" />
 
@@ -154,18 +154,17 @@
         android:text="Rol:"
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/edrolUsuario"
+        app:layout_constraintBaseline_toBaselineOf="@+id/spinnerrolUsuario"
         app:layout_constraintEnd_toStartOf="@+id/edcorreoUsuario"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <EditText
-        android:id="@+id/edrolUsuario"
+    <Spinner
+        android:id="@+id/spinnerrolUsuario"
         android:layout_width="274dp"
         android:layout_height="45dp"
         android:layout_marginStart="35dp"
         android:layout_marginTop="53dp"
         android:layout_marginEnd="26dp"
-        android:hint="Escribe el rol del Usuario."
         android:text=""
         android:textAlignment="textStart"
         android:textColor="@color/black"

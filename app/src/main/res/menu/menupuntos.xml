@@ -35,4 +35,9 @@
         android:title="Ubicacion">
 
     </item>
+    <item
+        android:id="@+id/itemMenuRol"
+        android:title="Rol">
+
+    </item>
 </menu>
