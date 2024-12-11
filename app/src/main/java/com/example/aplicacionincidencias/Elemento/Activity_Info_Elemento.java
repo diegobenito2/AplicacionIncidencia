@@ -123,7 +123,7 @@ public class Activity_Info_Elemento extends AppCompatActivity implements View.On
                 Spinner spinnerTipos = findViewById(R.id.spinnerTipoElemento);
                 String TipoSelected = spinnerTipos.getSelectedItem().toString(); //Guardas el nombre del Tipo seleccionado
                 for (EntTipo type : GestionIncidencias.getArTipos()) { //Recorres la lista de Tipos.
-                    if (elemento.getNombre().equals(TipoSelected)) { //Cuando el nombre es igual al nombre de Tipo seleccionado.
+                    if (type.getNombre().equals(TipoSelected)) { //Cuando el nombre es igual al nombre de Tipo seleccionado.
                         elemento.setIdTipo(elemento.getIdTipo()); //Cambia el código de Tipo del Elemento al del Tipo seleccionado.
                         elemento.setTipoElemento(type); //Cambia el objeto Tipo del Elemento por el nuevo Tipo.
                     }

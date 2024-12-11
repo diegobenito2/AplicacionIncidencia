@@ -126,7 +126,7 @@ public class Activity_Info_Usuario extends AppCompatActivity implements View.OnC
                 Spinner spinnerRol = findViewById(R.id.spinnerrolUsuario);
                 String RolSelected = spinnerRol.getSelectedItem().toString(); //Guardas el nombre del Tipo seleccionado
                 for (EntRol rol : GestionIncidencias.getArRoles()) { //Recorres la lista de Tipos.
-                    if (usuario.getEntRol().getNombre().equals(RolSelected)) { //Cuando el nombre es igual al nombre de Tipo seleccionado.
+                    if (rol.getNombre().equals(RolSelected)) { //Cuando el nombre es igual al nombre de Tipo seleccionado.
                         usuario.setRol(rol.getCodigo()); //Cambia el código de Tipo del Elemento al del Tipo seleccionado.
                         usuario.setEntRol(rol); //Cambia el objeto Tipo del Elemento por el nuevo Tipo.
                         break;
