@@ -41,8 +41,10 @@ public class ActivityMenu extends menutrespuntos implements View.OnClickListener
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
         initComponents();
         initListeners();
+        guardaActividad(this.getLocalClassName());
     }
 
     private void initComponents() {

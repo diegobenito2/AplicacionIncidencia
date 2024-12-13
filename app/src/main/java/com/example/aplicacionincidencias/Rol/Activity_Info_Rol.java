@@ -33,6 +33,7 @@ public class Activity_Info_Rol extends AppCompatActivity implements View.OnClick
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
         int codigoRol = getIntent().getExtras().getInt("codigo");
         String nombreRol = getIntent().getExtras().getString("nombre");
 

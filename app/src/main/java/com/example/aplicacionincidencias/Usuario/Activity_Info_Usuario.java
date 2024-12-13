@@ -41,6 +41,7 @@ public class Activity_Info_Usuario extends AppCompatActivity implements View.OnC
             return insets;
         });
 
+
         int codigoUsuario = getIntent().getExtras().getInt("codigo");
         String nombreUsuario = getIntent().getExtras().getString("nombre");
 

@@ -1,6 +1,7 @@
 package com.example.aplicacionincidencias.MenuPrincipal;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -71,4 +72,18 @@ public class menutrespuntos extends AppCompatActivity {
         }
 
     }
+    public void guardaActividad(String valor){
+        // Obtener las preferencias compartidas en modo privado
+        SharedPreferences prefs = getPreferences(MODE_PRIVATE);
+
+        // Crear un editor para modificar las preferencias
+        SharedPreferences.Editor editor = prefs.edit();
+
+        // Guardar el valor 'valor' bajo la clave "ultimaActividad"
+        editor.putString("ultimaActividad", valor);
+
+        // Aplicar los cambios (escribirlos en almacenamiento)
+        editor.commit();
+    }
+
 }
