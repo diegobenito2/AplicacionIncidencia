@@ -39,19 +39,19 @@ public class menutrespuntos extends AppCompatActivity {
             Intent intentSalas = new Intent(this, activitySalas.class);
             startActivity(intentSalas);
             return true;
-        }else if (item.getItemId() == R.id.itemMenuTipo) {
+        } else if (item.getItemId() == R.id.itemMenuTipo) {
             Intent intentTipo = new Intent(this, activityTipo.class);
             startActivity(intentTipo);
             return true;
-        }else if (item.getItemId() == R.id.itemMenuPrestamo) {
+        } else if (item.getItemId() == R.id.itemMenuPrestamo) {
             Intent intentPrestamo = new Intent(this, ActivityPrestamo.class);
             startActivity(intentPrestamo);
             return true;
-        }else if (item.getItemId() == R.id.itemMenuUbicacion) {
+        } else if (item.getItemId() == R.id.itemMenuUbicacion) {
             Intent intentUbicacion = new Intent(this, activityUbicacion.class);
             startActivity(intentUbicacion);
             return true;
-        }    else if (item.getItemId() == R.id.itemMenuUsuario) {
+        } else if (item.getItemId() == R.id.itemMenuUsuario) {
             Intent intentUsuario = new Intent(this, ActivityUsuario.class);
             startActivity(intentUsuario);
             return true;
@@ -63,18 +63,18 @@ public class menutrespuntos extends AppCompatActivity {
             Intent intentIncidencia = new Intent(this, activityIncidencia.class);
             startActivity(intentIncidencia);
             return true;
-        }else if (item.getItemId() == R.id.itemMenuRol) {
+        } else if (item.getItemId() == R.id.itemMenuRol) {
             Intent intentRol = new Intent(this, Activity_Rol.class);
             startActivity(intentRol);
             return true;
-        } else {
+        }else {
             return super.onOptionsItemSelected(item);
         }
 
     }
-    public void guardaActividad(String valor){
-        // Obtener las preferencias compartidas en modo privado
-        SharedPreferences prefs = getPreferences(MODE_PRIVATE);
+
+    public void guardaActividad(SharedPreferences prefs, String valor) {
+
 
         // Crear un editor para modificar las preferencias
         SharedPreferences.Editor editor = prefs.edit();
@@ -84,6 +84,10 @@ public class menutrespuntos extends AppCompatActivity {
 
         // Aplicar los cambios (escribirlos en almacenamiento)
         editor.commit();
+    }
+
+    public String getUltimaActividad(SharedPreferences prefs) {
+        return prefs.getString("ultimaActividad", "");
     }
 
 }

@@ -6,7 +6,6 @@ import android.view.View;
 import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -30,6 +29,7 @@ public class ActivityMenu extends menutrespuntos implements View.OnClickListener
     private Button ButtonMenuElemento;
     private Button ButtonMenuIncidencia;
     private Button ButtonMenuRol;
+    private boolean revisionInicial;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +44,16 @@ public class ActivityMenu extends menutrespuntos implements View.OnClickListener
 
         initComponents();
         initListeners();
-        guardaActividad(this.getLocalClassName());
+        String ultima = getUltimaActividad(getSharedPreferences("datos", MODE_PRIVATE));
+
+        if (!revisionInicial && ultima != null && !ultima.isEmpty()) {
+            if (ultima.equals(activitySalas.class.toString())) {
+                Intent intentSala = new Intent(this, activitySalas.class);
+                startActivity(intentSala);
+            }
+            revisionInicial = true;
+        }
+        guardaActividad(getSharedPreferences("datos", MODE_PRIVATE), "");
     }
 
     private void initComponents() {
@@ -104,6 +113,7 @@ public class ActivityMenu extends menutrespuntos implements View.OnClickListener
             Intent intent = new Intent(this, Activity_Rol.class);
             startActivity(intent);
         });
+
 
     }
 }
