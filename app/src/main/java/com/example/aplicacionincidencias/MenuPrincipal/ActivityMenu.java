@@ -50,7 +50,29 @@ public class ActivityMenu extends menutrespuntos implements View.OnClickListener
             if (ultima.equals(activitySalas.class.toString())) {
                 Intent intentSala = new Intent(this, activitySalas.class);
                 startActivity(intentSala);
+            } else if (ultima.equals(activityElemento.class.toString())) {
+                Intent intentElemento= new Intent(this,activityElemento.class);
+                startActivity(intentElemento);
+            } else if (ultima.equals(activityIncidencia.class.toString())) {
+                Intent intentIncidencias = new Intent(this,activityIncidencia.class);
+                startActivity(intentIncidencias);
+            } else if (ultima.equals(activityTipo.class.toString())) {
+                Intent intentTipo= new Intent(this,activityTipo.class);
+                startActivity(intentTipo);
+            } else if (ultima.equals(activityUbicacion.class.toString())) {
+                Intent intentUbicacion = new Intent(this,activityUbicacion.class);
+                startActivity(intentUbicacion);
+            } else if (ultima.equals(Activity_Rol.class.toString())) {
+                Intent intentRol = new Intent(this, Activity_Rol.class);
+                startActivity(intentRol);
+            } else if (ultima.equals(ActivityPrestamo.class.toString())) {
+                Intent intentPrestamo=new Intent(this,ActivityPrestamo.class);
+                startActivity(intentPrestamo);
+            } else if (ultima.equals(ActivityUsuario.class.toString())) {
+                Intent intentUsuario = new Intent(this,ActivityUsuario.class);
+                startActivity(intentUsuario);
             }
+
             revisionInicial = true;
         }
         guardaActividad(getSharedPreferences("datos", MODE_PRIVATE), "");
