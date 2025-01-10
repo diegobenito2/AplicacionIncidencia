@@ -1,6 +1,7 @@
 package com.example.aplicacionincidencias.MenuPrincipal;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,6 +11,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.aplicacionincidencias.Bbdd.BbddIncidencias;
 import com.example.aplicacionincidencias.Elemento.activityElemento;
 import com.example.aplicacionincidencias.Incidencia.activityIncidencia;
 import com.example.aplicacionincidencias.Prestamo.ActivityPrestamo;
@@ -44,6 +46,7 @@ public class ActivityMenu extends menutrespuntos implements View.OnClickListener
 
         initComponents();
         initListeners();
+        //******************************Parte para guardar la actividad en la que se ha cerrado la aplicación***************//
         String ultima = getUltimaActividad(getSharedPreferences("datos", MODE_PRIVATE));
 
         if (!revisionInicial && ultima != null && !ultima.isEmpty()) {
@@ -51,31 +54,34 @@ public class ActivityMenu extends menutrespuntos implements View.OnClickListener
                 Intent intentSala = new Intent(this, activitySalas.class);
                 startActivity(intentSala);
             } else if (ultima.equals(activityElemento.class.toString())) {
-                Intent intentElemento= new Intent(this,activityElemento.class);
+                Intent intentElemento = new Intent(this, activityElemento.class);
                 startActivity(intentElemento);
             } else if (ultima.equals(activityIncidencia.class.toString())) {
-                Intent intentIncidencias = new Intent(this,activityIncidencia.class);
+                Intent intentIncidencias = new Intent(this, activityIncidencia.class);
                 startActivity(intentIncidencias);
             } else if (ultima.equals(activityTipo.class.toString())) {
-                Intent intentTipo= new Intent(this,activityTipo.class);
+                Intent intentTipo = new Intent(this, activityTipo.class);
                 startActivity(intentTipo);
             } else if (ultima.equals(activityUbicacion.class.toString())) {
-                Intent intentUbicacion = new Intent(this,activityUbicacion.class);
+                Intent intentUbicacion = new Intent(this, activityUbicacion.class);
                 startActivity(intentUbicacion);
             } else if (ultima.equals(Activity_Rol.class.toString())) {
                 Intent intentRol = new Intent(this, Activity_Rol.class);
                 startActivity(intentRol);
             } else if (ultima.equals(ActivityPrestamo.class.toString())) {
-                Intent intentPrestamo=new Intent(this,ActivityPrestamo.class);
+                Intent intentPrestamo = new Intent(this, ActivityPrestamo.class);
                 startActivity(intentPrestamo);
             } else if (ultima.equals(ActivityUsuario.class.toString())) {
-                Intent intentUsuario = new Intent(this,ActivityUsuario.class);
+                Intent intentUsuario = new Intent(this, ActivityUsuario.class);
                 startActivity(intentUsuario);
             }
 
             revisionInicial = true;
         }
         guardaActividad(getSharedPreferences("datos", MODE_PRIVATE), "");
+        //Parte de la base de datos
+        BbddIncidencias bbdd = new BbddIncidencias(this, "bbddIncidencias", null, 1);
+        SQLiteDatabase db = bbdd.getWritableDatabase();
     }
 
     private void initComponents() {

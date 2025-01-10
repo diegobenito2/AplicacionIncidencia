@@ -19,10 +19,6 @@
             android:name=".Rol.Activity_Rol"
             android:exported="false" />
         <activity
-            android:name=".Rol.activity_rol"
-            android:exported="false"
-            android:label="@string/title_activity_rol" />
-        <activity
             android:name=".Usuario.Activity_Info_Usuario"
             android:exported="false" />
         <activity
