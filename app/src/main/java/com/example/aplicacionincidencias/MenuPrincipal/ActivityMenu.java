@@ -17,10 +17,16 @@ import com.example.aplicacionincidencias.Incidencia.activityIncidencia;
 import com.example.aplicacionincidencias.Prestamo.ActivityPrestamo;
 import com.example.aplicacionincidencias.R;
 import com.example.aplicacionincidencias.Rol.Activity_Rol;
+import com.example.aplicacionincidencias.Sala.SalaHelper;
 import com.example.aplicacionincidencias.Sala.activitySalas;
 import com.example.aplicacionincidencias.Tipo.activityTipo;
 import com.example.aplicacionincidencias.Ubicacion.activityUbicacion;
 import com.example.aplicacionincidencias.Usuario.ActivityUsuario;
+
+import java.util.ArrayList;
+
+import gestionincidencias.GestionIncidencias;
+import gestionincidencias.entidades.EntSala;
 
 public class ActivityMenu extends menutrespuntos implements View.OnClickListener {
     private Button ButtonMenuSala;
@@ -82,6 +88,9 @@ public class ActivityMenu extends menutrespuntos implements View.OnClickListener
         //Parte de la base de datos
         BbddIncidencias bbdd = new BbddIncidencias(this, "bbddIncidencias", null, 1);
         SQLiteDatabase db = bbdd.getWritableDatabase();
+//        bbdd.onUpgrade(db, 0, 0); // Para borrar las tablas
+        cargarDatosBBDD();
+
     }
 
     private void initComponents() {
@@ -143,5 +152,17 @@ public class ActivityMenu extends menutrespuntos implements View.OnClickListener
         });
 
 
+    }
+
+    public void cargarDatosBBDD() {
+        SalaHelper sh = new SalaHelper(this, "bbddIncidencias", null, 1);
+        ArrayList<EntSala> salas = sh.obtenerSalas();
+        if (salas == null || salas.isEmpty()) {
+            for (EntSala s : GestionIncidencias.getArSalas()) {
+                sh.crearSala(s);
+            }
+        }
+
+        //Hacer lo mismo con todos los demás tipos.
     }
 }
