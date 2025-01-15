@@ -1,36 +1,33 @@
-package com.example.aplicacionincidencias.Sala;
+package com.example.aplicacionincidencias.Tipo;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
-
 import androidx.annotation.Nullable;
-
 import com.example.aplicacionincidencias.Bbdd.BbddIncidencias;
-
+import com.example.aplicacionincidencias.Sala.SalaHelper;
 import java.util.ArrayList;
+import gestionincidencias.entidades.EntTipo;
 
-import gestionincidencias.entidades.EntSala;
-
-public class SalaHelper extends BbddIncidencias {
-    public SalaHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
+public class TipoHelper extends BbddIncidencias {
+    public TipoHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
     }
 
-    public long crearSala(EntSala sala) {
+    public long crearTipo(EntTipo tipo) {
         SQLiteDatabase db = getWritableDatabase();
-        long salaId = -1;
+        long tipoId = -1;
         db.beginTransaction(); //Inicia la transacción y garantiza que no se acceden a los datos mientras se realiza la transaccion(una transacción es un conjunto de consultas.)
         try {
             ContentValues values = new ContentValues();
-            if (sala.getCodigoSala() > 0) {
-                values.put(KEY_COL_CODIGO, sala.getCodigoSala());
+            if (tipo.getCodigoTipo() > 0) {
+                values.put(KEY_COL_CODIGO, tipo.getCodigoTipo());
             }
-            values.put(KEY_COL_NOMBRE, sala.getNombre());
-            values.put(KEY_COL_DESCRIPCION, sala.getDescripcion());
-            salaId = db.insertOrThrow(TABLA_SALA, null, values);
+            values.put(KEY_COL_NOMBRE, tipo.getNombre());
+            values.put(KEY_COL_DESCRIPCION, tipo.getDescripcion());
+            tipoId = db.insertOrThrow(TABLA_TIPO, null, values);
             db.setTransactionSuccessful();
         } catch (Exception e) {
             Log.d(SalaHelper.class.getName(), e.getMessage());
@@ -38,22 +35,22 @@ public class SalaHelper extends BbddIncidencias {
             db.endTransaction();
         }
 
-        return salaId;
+        return tipoId;
     }
 
-    public long actualizarSala(EntSala sala) {
+    public long actualizarTipo(EntTipo tipo) {
         SQLiteDatabase db = getWritableDatabase();
-        long salaId = -1;
-        if (sala.getCodigoSala() > 0) {
+        long tipoId = -1;
+        if (tipo.getCodigoTipo() > 0) {
             db.beginTransaction(); //Inicia la transacción y garantiza que no se acceden a los datos mientras se realiza la transaccion(una transacción es un conjunto de consultas.)
             try {
                 ContentValues values = new ContentValues();
-                values.put(KEY_COL_CODIGO, sala.getCodigoSala() > 0 ? sala.getCodigoSala() : null);
-                values.put(KEY_COL_NOMBRE, sala.getNombre());
-                values.put(KEY_COL_DESCRIPCION, sala.getDescripcion());
-                int rows = db.update(TABLA_SALA, values, KEY_COL_CODIGO + "= ?", new String[]{String.valueOf(sala.getCodigoSala())});
+                values.put(KEY_COL_CODIGO, tipo.getCodigoTipo() > 0 ? tipo.getCodigoTipo() : null);
+                values.put(KEY_COL_NOMBRE, tipo.getNombre());
+                values.put(KEY_COL_DESCRIPCION, tipo.getDescripcion());
+                int rows = db.update(TABLA_TIPO, values, KEY_COL_CODIGO + "= ?", new String[]{String.valueOf(tipo.getCodigoTipo())});
                 if (rows > 0) {
-                    salaId = sala.getCodigoSala();
+                    tipoId = tipo.getCodigoTipo();
                 }
             } catch (Exception e) {
                 Log.d(SalaHelper.class.getName(), e.getMessage());
@@ -62,23 +59,22 @@ public class SalaHelper extends BbddIncidencias {
             }
 
         }
-        return salaId;
+        return tipoId;
     }
 
-    public ArrayList<EntSala> obtenerSalas() {
-        ArrayList<EntSala> salas = new ArrayList<>();
+    public ArrayList<EntTipo> obtenerTipos() {
+        ArrayList<EntTipo> tipos = new ArrayList<>();
         SQLiteDatabase db = getWritableDatabase();
-        Cursor cursor = db.rawQuery("Select * from sala", null);
+        Cursor cursor = db.rawQuery("Select * from tipo", null);
         if (cursor.moveToFirst()) {
             do {
                 int codigo = cursor.getInt(0);
                 String nombre = cursor.getString(1);
                 String descripcion = cursor.getString(2);
-                EntSala sala = new EntSala(codigo, nombre, descripcion);
-                salas.add(sala);
+                EntTipo tipo = new EntTipo(codigo, nombre, descripcion);
+                tipos.add(tipo);
             } while (cursor.moveToNext());
         }
-        return salas;
+        return tipos;
     }
-
 }

@@ -19,6 +19,7 @@ import com.example.aplicacionincidencias.R;
 import com.example.aplicacionincidencias.Rol.Activity_Rol;
 import com.example.aplicacionincidencias.Sala.SalaHelper;
 import com.example.aplicacionincidencias.Sala.activitySalas;
+import com.example.aplicacionincidencias.Tipo.TipoHelper;
 import com.example.aplicacionincidencias.Tipo.activityTipo;
 import com.example.aplicacionincidencias.Ubicacion.activityUbicacion;
 import com.example.aplicacionincidencias.Usuario.ActivityUsuario;
@@ -27,6 +28,7 @@ import java.util.ArrayList;
 
 import gestionincidencias.GestionIncidencias;
 import gestionincidencias.entidades.EntSala;
+import gestionincidencias.entidades.EntTipo;
 
 public class ActivityMenu extends menutrespuntos implements View.OnClickListener {
     private Button ButtonMenuSala;
@@ -162,6 +164,15 @@ public class ActivityMenu extends menutrespuntos implements View.OnClickListener
                 sh.crearSala(s);
             }
         }
+
+        TipoHelper th = new TipoHelper(this, "bbddIncidencias", null, 1);
+        ArrayList<EntTipo> tipos = th.obtenerTipos();
+        if (tipos == null || tipos.isEmpty()) {
+            for (EntTipo t : GestionIncidencias.getArTipos()) {
+                th.crearTipo(t);
+            }
+        }
+
 
         //Hacer lo mismo con todos los demás tipos.
     }
