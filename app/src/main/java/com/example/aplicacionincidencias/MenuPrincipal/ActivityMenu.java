@@ -12,23 +12,30 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.aplicacionincidencias.Bbdd.BbddIncidencias;
+import com.example.aplicacionincidencias.Elemento.ElementoHelper;
 import com.example.aplicacionincidencias.Elemento.activityElemento;
+import com.example.aplicacionincidencias.Incidencia.IncidenciaHelper;
 import com.example.aplicacionincidencias.Incidencia.activityIncidencia;
 import com.example.aplicacionincidencias.Prestamo.ActivityPrestamo;
 import com.example.aplicacionincidencias.R;
 import com.example.aplicacionincidencias.Rol.Activity_Rol;
+import com.example.aplicacionincidencias.Rol.RolHelper;
 import com.example.aplicacionincidencias.Sala.SalaHelper;
 import com.example.aplicacionincidencias.Sala.activitySalas;
 import com.example.aplicacionincidencias.Tipo.TipoHelper;
 import com.example.aplicacionincidencias.Tipo.activityTipo;
 import com.example.aplicacionincidencias.Ubicacion.activityUbicacion;
 import com.example.aplicacionincidencias.Usuario.ActivityUsuario;
+import com.example.aplicacionincidencias.Usuario.UsuarioHelper;
 
 import java.util.ArrayList;
 
 import gestionincidencias.GestionIncidencias;
+import gestionincidencias.entidades.EntElemento;
+import gestionincidencias.entidades.EntRol;
 import gestionincidencias.entidades.EntSala;
 import gestionincidencias.entidades.EntTipo;
+import gestionincidencias.entidades.EntUsuario;
 
 public class ActivityMenu extends menutrespuntos implements View.OnClickListener {
     private Button ButtonMenuSala;
@@ -172,6 +179,32 @@ public class ActivityMenu extends menutrespuntos implements View.OnClickListener
                 th.crearTipo(t);
             }
         }
+
+        ElementoHelper eh = new ElementoHelper(this, "bbddIncidencias", null, 1);
+        ArrayList<EntElemento> elementos = eh.obtenerElementos();
+        if (elementos == null || elementos.isEmpty()) {
+            for (EntElemento e : GestionIncidencias.getArElementos()) {
+                eh.crearElemento(e);
+            }
+        }
+
+        RolHelper rh = new RolHelper(this, "bbddIncidencias", null, 1);
+        ArrayList<EntRol> roles = rh.obtenerRoles();
+        if (roles == null || roles.isEmpty()) {
+            for (EntRol r : GestionIncidencias.getArRoles()) {
+                rh.crearRol(r);
+            }
+        }
+
+        UsuarioHelper uh = new UsuarioHelper(this, "bbddIncidencias", null, 1);
+        ArrayList<EntUsuario> usuarios = uh.obtenerUsuarios();
+        if (usuarios == null || usuarios.isEmpty()) {
+            for (EntUsuario u : GestionIncidencias.getArUsuarios()) {
+                uh.crearUsuario(u);
+            }
+        }
+
+        IncidenciaHelper ih = new IncidenciaHelper(this, "bbddIncidencias", null, 1);
 
 
         //Hacer lo mismo con todos los demás tipos.

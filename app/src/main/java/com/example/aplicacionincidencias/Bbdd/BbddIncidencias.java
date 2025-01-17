@@ -7,8 +7,13 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 
 public class BbddIncidencias extends SQLiteOpenHelper {
+
     private static final String BORRAR_TABLA_tipo = "DROP TABLE if exists tipo";
     private static final String BORRAR_TABLA_sala = "DROP TABLE if exists sala";
     private static final String BORRAR_TABLA_rol = "DROP TABLE if exists rol";
@@ -72,4 +77,6 @@ public class BbddIncidencias extends SQLiteOpenHelper {
 
         onCreate(sqLiteDatabase);
     }
+
+
 }
