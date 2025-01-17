@@ -66,7 +66,7 @@ public class IncidenciaHelper extends BbddIncidencias {
             values.put(KEY_COL_DESCRIPCION, incidencia.getDescripcion());
             values.put("idElemento", incidencia.getIdElemento());
             values.put("idUsuarioCreacion", incidencia.getIdUsuarioCreacion());
-            values.put("fechaCreacion", String.valueOf(incidencia.getFechaCreacion()));
+            values.put("fechaCreacion", formatter.format(incidencia.getFechaCreacion()));
 
 
             int rows = db.update(TABLA_INCIDENCIA, values, "codigo = ?",

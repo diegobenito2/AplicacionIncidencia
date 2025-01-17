@@ -17,6 +17,7 @@ import com.example.aplicacionincidencias.Elemento.activityElemento;
 import com.example.aplicacionincidencias.Incidencia.IncidenciaHelper;
 import com.example.aplicacionincidencias.Incidencia.activityIncidencia;
 import com.example.aplicacionincidencias.Prestamo.ActivityPrestamo;
+import com.example.aplicacionincidencias.Prestamo.PrestamoHelper;
 import com.example.aplicacionincidencias.R;
 import com.example.aplicacionincidencias.Rol.Activity_Rol;
 import com.example.aplicacionincidencias.Rol.RolHelper;
@@ -24,6 +25,7 @@ import com.example.aplicacionincidencias.Sala.SalaHelper;
 import com.example.aplicacionincidencias.Sala.activitySalas;
 import com.example.aplicacionincidencias.Tipo.TipoHelper;
 import com.example.aplicacionincidencias.Tipo.activityTipo;
+import com.example.aplicacionincidencias.Ubicacion.UbicacionHelper;
 import com.example.aplicacionincidencias.Ubicacion.activityUbicacion;
 import com.example.aplicacionincidencias.Usuario.ActivityUsuario;
 import com.example.aplicacionincidencias.Usuario.UsuarioHelper;
@@ -32,9 +34,12 @@ import java.util.ArrayList;
 
 import gestionincidencias.GestionIncidencias;
 import gestionincidencias.entidades.EntElemento;
+import gestionincidencias.entidades.EntIncidencia;
+import gestionincidencias.entidades.EntPrestamo;
 import gestionincidencias.entidades.EntRol;
 import gestionincidencias.entidades.EntSala;
 import gestionincidencias.entidades.EntTipo;
+import gestionincidencias.entidades.EntUbicacion;
 import gestionincidencias.entidades.EntUsuario;
 
 public class ActivityMenu extends menutrespuntos implements View.OnClickListener {
@@ -205,8 +210,27 @@ public class ActivityMenu extends menutrespuntos implements View.OnClickListener
         }
 
         IncidenciaHelper ih = new IncidenciaHelper(this, "bbddIncidencias", null, 1);
+        ArrayList<EntIncidencia> incidencias = ih.obtenerIncidencias();
+        if (incidencias == null || incidencias.isEmpty()) {
+            for (EntIncidencia i : GestionIncidencias.getArIncidencias()) {
+                ih.crearIncidencia(i);
+            }
+        }
+        PrestamoHelper ph = new PrestamoHelper(this, "bbddIncidencias", null, 1);
+        ArrayList<EntPrestamo> prestamos = ph.obtenerPrestamos();
+        if (prestamos == null || prestamos.isEmpty()) {
+            for (EntPrestamo p : GestionIncidencias.getArPrestamos()) {
+                ph.crearPrestamo(p);
+            }
+        }
+        UbicacionHelper ubih = new UbicacionHelper(this, "bbddIncidencias", null, 1);
+        ArrayList<EntUbicacion> ubicaciones = ubih.obtenerUbicaciones();
+        if (ubicaciones == null || ubicaciones.isEmpty()) {
+            for (EntUbicacion u : GestionIncidencias.getArUbicaciones()) {
+                ubih.crearUbicacion(u);
+            }
+        }
 
 
-        //Hacer lo mismo con todos los demás tipos.
     }
 }
