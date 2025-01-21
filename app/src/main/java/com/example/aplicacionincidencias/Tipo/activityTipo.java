@@ -17,6 +17,8 @@ import com.example.aplicacionincidencias.R;
 import com.example.aplicacionincidencias.Sala.Activity_Info_Sala;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
+
 import gestionincidencias.GestionIncidencias;
 import gestionincidencias.entidades.EntPrestamo;
 import gestionincidencias.entidades.EntTipo;
@@ -35,7 +37,9 @@ public class activityTipo extends menutrespuntos {
         });
 
         ListView listaTipo = (ListView) findViewById(R.id.ListaTipo);
-        AdaptadorTipo adaptadorTipo = new AdaptadorTipo(this, GestionIncidencias.getArTipos().toArray(new EntTipo[0]));
+        TipoHelper th = new TipoHelper(this, "bbddIncidencias", null, 1);
+        ArrayList<EntTipo> tipos = th.obtenerTipos();
+        AdaptadorTipo adaptadorTipo = new AdaptadorTipo(this, tipos.toArray(new EntTipo[0]));
         listaTipo.setAdapter(adaptadorTipo);
         listaTipo.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

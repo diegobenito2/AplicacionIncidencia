@@ -17,6 +17,8 @@ import com.example.aplicacionincidencias.R;
 import com.example.aplicacionincidencias.Ubicacion.Activity_Info_Ubicacion;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
+
 import gestionincidencias.GestionIncidencias;
 import gestionincidencias.entidades.EntUbicacion;
 import gestionincidencias.entidades.EntUsuario;
@@ -34,7 +36,9 @@ public class ActivityUsuario extends menutrespuntos {
             return insets;
         });
         ListView ListaUsuario = (ListView) findViewById(R.id.ListaUsuario);
-        AdaptadorUsuario adaptadorUsuario = new AdaptadorUsuario(this, GestionIncidencias.getArUsuarios().toArray(new EntUsuario[0]));
+        UsuarioHelper uh = new UsuarioHelper(this, "bbddIncidencias", null, 1);
+        ArrayList<EntUsuario> usuarios = uh.obtenerUsuarios();
+        AdaptadorUsuario adaptadorUsuario = new AdaptadorUsuario(this, usuarios.toArray(new EntUsuario[0]));
         ListaUsuario.setAdapter(adaptadorUsuario);
         ListaUsuario.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

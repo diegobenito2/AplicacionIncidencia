@@ -16,6 +16,8 @@ import com.example.aplicacionincidencias.MenuPrincipal.menutrespuntos;
 import com.example.aplicacionincidencias.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
+
 import gestionincidencias.GestionIncidencias;
 import gestionincidencias.entidades.EntElemento;
 import gestionincidencias.entidades.EntUbicacion;
@@ -34,7 +36,9 @@ public class activityUbicacion extends menutrespuntos {
         });
 
         ListView listaUbicaciones= (ListView) findViewById(R.id.ListaUbicacion);
-        AdaptadorUbicacion adaptadorUbicacion = new AdaptadorUbicacion(this, GestionIncidencias.getArUbicaciones().toArray(new EntUbicacion[0]));
+        UbicacionHelper ubih = new UbicacionHelper(this, "bbddIncidencias", null, 1);
+        ArrayList<EntUbicacion> ubicaciones = ubih.obtenerUbicaciones();
+        AdaptadorUbicacion adaptadorUbicacion = new AdaptadorUbicacion(this, ubicaciones.toArray(new EntUbicacion[0]));
         listaUbicaciones.setAdapter(adaptadorUbicacion);
         listaUbicaciones.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

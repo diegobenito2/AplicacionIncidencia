@@ -15,6 +15,9 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.aplicacionincidencias.MenuPrincipal.menutrespuntos;
 import com.example.aplicacionincidencias.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.ArrayList;
+
 import gestionincidencias.GestionIncidencias;
 import gestionincidencias.entidades.EntRol;
 
@@ -31,7 +34,9 @@ public class Activity_Rol extends menutrespuntos {
             return insets;
         });
         ListView ListaRol = (ListView) findViewById(R.id.ListaRol);
-        AdaptadorRol adaptadorRol = new AdaptadorRol(this, GestionIncidencias.getArRoles().toArray(new EntRol[0]));
+        RolHelper rh = new RolHelper(this, "bbddIncidencias", null, 1);
+        ArrayList<EntRol> roles = rh.obtenerRoles();
+        AdaptadorRol adaptadorRol = new AdaptadorRol(this, roles.toArray(new EntRol[0]));
         ListaRol.setAdapter(adaptadorRol);
 
         ListaRol.setOnItemClickListener(new AdapterView.OnItemClickListener() {

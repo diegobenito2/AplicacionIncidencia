@@ -11,13 +11,17 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.aplicacionincidencias.Elemento.ElementoHelper;
 import com.example.aplicacionincidencias.MenuPrincipal.menutrespuntos;
 import com.example.aplicacionincidencias.R;
-
+import com.example.aplicacionincidencias.Usuario.UsuarioHelper;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import gestionincidencias.GestionIncidencias;
+import java.util.ArrayList;
+
+import gestionincidencias.entidades.EntElemento;
 import gestionincidencias.entidades.EntPrestamo;
+import gestionincidencias.entidades.EntUsuario;
 
 public class ActivityPrestamo extends menutrespuntos {
 
@@ -32,7 +36,26 @@ public class ActivityPrestamo extends menutrespuntos {
             return insets;
         });
         ListView ListaPrestamo = (ListView) findViewById(R.id.ListaPrestamo);
-        AdaptadorPrestamo adaptadorPrestamo = new AdaptadorPrestamo(this, GestionIncidencias.getArPrestamos().toArray(new EntPrestamo[0]));
+        PrestamoHelper ph = new PrestamoHelper(this, "bbddIncidencias", null, 1);
+        ArrayList<EntPrestamo> prestamos = ph.obtenerPrestamos();
+        AdaptadorPrestamo adaptadorPrestamo = new AdaptadorPrestamo(this, prestamos.toArray(new EntPrestamo[0]));
+        ElementoHelper eh = new ElementoHelper(this, "bbddIncidencias", null, 1);
+        ArrayList<EntElemento> elementos = eh.obtenerElementos();
+        UsuarioHelper uh = new UsuarioHelper(this, "bbddIncidencias", null, 1);
+        ArrayList<EntUsuario> usuarios = uh.obtenerUsuarios();
+        for (EntPrestamo p : prestamos) {
+            for (EntElemento e : elementos) {
+                if (p.getIdElemento() == e.getCodigoElemento()) {
+                    p.setElemento(e);
+                }
+            }
+            for (EntUsuario u : usuarios) {
+                if (p.getIdUsuario() == u.getCodigoUsuario()) {
+                    p.setUsuario(u);
+                }
+            }
+        }
+
         ListaPrestamo.setAdapter(adaptadorPrestamo);
 
         ListaPrestamo.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -62,7 +85,6 @@ public class ActivityPrestamo extends menutrespuntos {
             }
         });
     }
-
 
 
 }

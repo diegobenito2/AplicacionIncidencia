@@ -16,6 +16,8 @@ import com.example.aplicacionincidencias.MenuPrincipal.menutrespuntos;
 import com.example.aplicacionincidencias.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
+
 import gestionincidencias.GestionIncidencias;
 import gestionincidencias.entidades.EntSala;
 
@@ -35,9 +37,12 @@ public class activitySalas extends menutrespuntos{
 
         // Obtener la referencia al ListView con el ID 'ListaSalas' en el layout de la actividad
         ListView listaSalas = (ListView) findViewById(R.id.ListaSalas);
+        //Para que coja los datos de la base de datos.
+        SalaHelper sh = new SalaHelper(this, "bbddIncidencias", null, 1);
+        ArrayList<EntSala> salas = sh.obtenerSalas();
 
         // Crear un adaptador personalizado 'AdaptadorSalas' pasando el contexto actual y el array de salas (convertido a un arreglo de EntSala)
-        AdaptadorSalas adaptadorSalas = new AdaptadorSalas(this, GestionIncidencias.getArSalas().toArray(new EntSala[0]));
+        AdaptadorSalas adaptadorSalas = new AdaptadorSalas(this, salas.toArray(new EntSala[0]));
 
         // Establecer el adaptador al ListView para que cargue los datos de las salas en la interfaz
         listaSalas.setAdapter(adaptadorSalas);

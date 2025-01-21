@@ -13,10 +13,14 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.aplicacionincidencias.MenuPrincipal.menutrespuntos;
 import com.example.aplicacionincidencias.R;
+import com.example.aplicacionincidencias.Usuario.UsuarioHelper;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.ArrayList;
 
 import gestionincidencias.GestionIncidencias;
 import gestionincidencias.entidades.EntIncidencia;
+import gestionincidencias.entidades.EntUsuario;
 
 public class activityIncidencia extends menutrespuntos {
 
@@ -31,7 +35,19 @@ public class activityIncidencia extends menutrespuntos {
             return insets;
         });
         ListView listaIncidencia = findViewById(R.id.ListaIncidencia);
-        AdaptadorIncidencia adaptadorIncidencia = new AdaptadorIncidencia(this, GestionIncidencias.getArIncidencias().toArray(new EntIncidencia[0]));
+        IncidenciaHelper ih = new IncidenciaHelper(this, "bbddIncidencias", null, 1);
+        ArrayList<EntIncidencia> incidencias = ih.obtenerIncidencias();
+        AdaptadorIncidencia adaptadorIncidencia = new AdaptadorIncidencia(this, incidencias.toArray(new EntIncidencia[0]));
+        UsuarioHelper uh = new UsuarioHelper(this, "bbddIncidencias", null, 1);
+        ArrayList<EntUsuario> usuarios = uh.obtenerUsuarios();
+        for (EntIncidencia i : incidencias){
+            for (EntUsuario u: usuarios){
+                if (i.getIdUsuarioCreacion() == u.getCodigoUsuario()){
+                    i.setUsuarioCreacion(u);
+                    break;
+                }
+            }
+        }
         listaIncidencia.setAdapter(adaptadorIncidencia);
 
         listaIncidencia.setOnItemClickListener(new AdapterView.OnItemClickListener() {

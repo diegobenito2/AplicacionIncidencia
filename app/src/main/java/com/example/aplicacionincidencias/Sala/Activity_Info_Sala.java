@@ -16,12 +16,13 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.aplicacionincidencias.R;
 
-import gestionincidencias.GestionIncidencias;
+//import gestionincidencias.GestionIncidencias;
 import gestionincidencias.entidades.EntSala;
 
 public class Activity_Info_Sala extends AppCompatActivity implements View.OnClickListener {
     private Button btnVolver, btnGuardar, btnBorrar;
     private EntSala sala;
+    private SalaHelper sdh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,11 +39,7 @@ public class Activity_Info_Sala extends AppCompatActivity implements View.OnClic
         String nombreSala = getIntent().getExtras().getString("nombre");
 
         if (codigoSala > 0) {
-            for (EntSala s : GestionIncidencias.getArSalas()) {
-                if (s.getCodigoSala() == codigoSala) {
-                    sala = s;
-                }
-            }
+            sala = sdh.obtenerSala(codigoSala);
         } else if (codigoSala == 0 && nombreSala.isEmpty()) {
             sala = new EntSala(0, "", "");
         }
@@ -79,8 +76,11 @@ public class Activity_Info_Sala extends AppCompatActivity implements View.OnClic
             startActivity(intent);
         });
         btnBorrar.setOnClickListener(v -> {
-            GestionIncidencias.getArSalas().remove(sala);
-            Toast.makeText(getApplicationContext(), "Sala Borrada Correctamente", Toast.LENGTH_SHORT).show();
+
+            int borrado = sdh.borrarSala(sala.getCodigoSala());
+            if (borrado == 1) {
+                Toast.makeText(getApplicationContext(), "Sala Borrada Correctamente", Toast.LENGTH_SHORT).show();
+            }
             Intent intentVolverSalas = new Intent(view.getContext(), activitySalas.class);
             startActivity(intentVolverSalas);
         });
@@ -93,12 +93,12 @@ public class Activity_Info_Sala extends AppCompatActivity implements View.OnClic
                 sala.setDescripcion(edDescripcion.getText().toString());
 
                 if (sala.getCodigoSala() == 0 && sala.getNombre().isEmpty()) {
-                    sala.setCodigoSala(GestionIncidencias.getArSalas().size() + 1);
                     sala.setNombre(edNombreSala.getText().toString());
                     sala.setDescripcion(edDescripcion.getText().toString());
-                    GestionIncidencias.getArSalas().add(GestionIncidencias.getArSalas().size(), sala);
+                    sdh.crearSala(sala);
                     Toast.makeText(getApplicationContext(), "Sala Añadida Correctamente", Toast.LENGTH_SHORT).show();
-                }else{
+                } else {
+                    sdh.actualizarSala(sala);
                     Toast.makeText(getApplicationContext(), "Sala Guardada Correctamente", Toast.LENGTH_SHORT).show();
                 }
                 Intent intentVolverSalas = new Intent(view.getContext(), activitySalas.class);
