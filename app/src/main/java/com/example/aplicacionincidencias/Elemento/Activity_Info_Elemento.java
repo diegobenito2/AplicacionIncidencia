@@ -17,18 +17,19 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.aplicacionincidencias.R;
+import com.example.aplicacionincidencias.Tipo.TipoHelper;
 
 import java.util.ArrayList;
 
-import gestionincidencias.GestionIncidencias;
 import gestionincidencias.entidades.EntElemento;
 import gestionincidencias.entidades.EntTipo;
 
 public class Activity_Info_Elemento extends AppCompatActivity implements View.OnClickListener {
-    private Button btnVolver, btnGuardar,btnBorrar;
+    private Button btnVolver, btnGuardar, btnBorrar;
     private EntElemento elemento;
     private int TipoSelected;
     private ElementoHelper eh = new ElementoHelper(this, "bbddIncidencias", null, 1);
+    private TipoHelper th = new TipoHelper(this, "bbddIncidencias", null, 1);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,11 +45,7 @@ public class Activity_Info_Elemento extends AppCompatActivity implements View.On
         String nombreElemento = getIntent().getExtras().getString("nombre");
 
         if (codigoElemento > 0) {
-            for (EntElemento e : GestionIncidencias.getArElementos()) {
-                if (e.getCodigoElemento() == codigoElemento) {
-                    elemento = e;
-                }
-            }
+            eh.obtenerElemento(codigoElemento);
         } else if (codigoElemento == 0 && nombreElemento.isBlank()) {
             elemento = new EntElemento(0, "", "", 0);
         }
@@ -112,8 +109,10 @@ public class Activity_Info_Elemento extends AppCompatActivity implements View.On
             startActivity(intent);
         });
         btnBorrar.setOnClickListener(v -> {
-            GestionIncidencias.getArElementos().remove(elemento);
-            Toast.makeText(getApplicationContext(), "Elemento Borrado Correctamente", Toast.LENGTH_SHORT).show();
+            int borrado = eh.borrarElemento(elemento.getCodigoElemento());
+            if (borrado == 1) {
+                Toast.makeText(getApplicationContext(), "Elemento Borrado Correctamente", Toast.LENGTH_SHORT).show();
+            }
             Intent intentVolverElemento = new Intent(view.getContext(), activityElemento.class);
             startActivity(intentVolverElemento);
         });
@@ -123,22 +122,18 @@ public class Activity_Info_Elemento extends AppCompatActivity implements View.On
                 EditText edDescripcion = findViewById(R.id.edDescripcionElemento);
                 Spinner spinnerTipos = findViewById(R.id.spinnerTipoElemento);
                 String TipoSelected = spinnerTipos.getSelectedItem().toString(); //Guardas el nombre del Tipo seleccionado
-                for (EntTipo type : GestionIncidencias.getArTipos()) { //Recorres la lista de Tipos.
-                    if (type.getNombre().equals(TipoSelected)) { //Cuando el nombre es igual al nombre de Tipo seleccionado.
-                        elemento.setIdTipo(elemento.getIdTipo()); //Cambia el código de Tipo del Elemento al del Tipo seleccionado.
-                        elemento.setTipoElemento(type); //Cambia el objeto Tipo del Elemento por el nuevo Tipo.
-                    }
-                }
+                EntTipo tipo = th.obtenerNombreTipo(TipoSelected);
 
+                elemento.setNombre(String.valueOf(edNombreElemento.getText()));
+                elemento.setDescripcion(String.valueOf(edDescripcion.getText()));
+                elemento.setTipoElemento(tipo);
+                elemento.setIdTipo(tipo.getCodigoTipo());
 
-                    elemento.setNombre(String.valueOf(edNombreElemento.getText()));
-                    elemento.setDescripcion(String.valueOf(edDescripcion.getText()));
-
-                if (elemento.getCodigoElemento() == 0 && elemento.getNombre().isEmpty()) {
-                    elemento.setCodigoElemento(GestionIncidencias.getArElementos().size() + 1);
-                    GestionIncidencias.getArElementos().add(GestionIncidencias.getArElementos().size(), elemento);
+                if (elemento.getCodigoElemento() == 0) {
+                    eh.crearElemento(elemento);
                     Toast.makeText(getApplicationContext(), "Elemento Añadido Correctamente", Toast.LENGTH_SHORT).show();
-                }else{
+                } else {
+                    eh.actualizarElemento(elemento);
                     Toast.makeText(getApplicationContext(), "Elemento Guardado Correctamente", Toast.LENGTH_SHORT).show();
                 }
                 Intent intentVolverSalas = new Intent(view.getContext(), activityElemento.class);

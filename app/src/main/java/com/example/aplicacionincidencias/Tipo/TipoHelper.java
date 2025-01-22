@@ -101,5 +101,19 @@ public class TipoHelper extends BbddIncidencias {
         db.endTransaction();
         return tipo;
     }
+    public EntTipo obtenerNombreTipo(String nombreTipo){
+        EntTipo tipo = null;
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor cursor = db.rawQuery("Select * from "+ TABLA_TIPO+ " where " + KEY_COL_NOMBRE + "=" + nombreTipo, null);
+        if (cursor.moveToFirst()) {
+            do {
+                int codigo = cursor.getInt(0);
+                String nombre = cursor.getString(1);
+                String descripcion = cursor.getString(2);
+                tipo = new EntTipo(codigo, nombre, descripcion);
+            } while (cursor.moveToNext());
+        }
+        return tipo;
+    }
 
 }
