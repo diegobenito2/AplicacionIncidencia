@@ -96,7 +96,7 @@ public class TipoHelper extends BbddIncidencias {
 
     public Integer borrarTipo(int id) {
         SQLiteDatabase db = getWritableDatabase();
-        int tipo = db.delete(TABLA_SALA, KEY_COL_CODIGO + "=" + id, null);
+        int tipo = db.delete(TABLA_TIPO, KEY_COL_CODIGO + "=" + id, null);
         db.setTransactionSuccessful();
         db.endTransaction();
         return tipo;

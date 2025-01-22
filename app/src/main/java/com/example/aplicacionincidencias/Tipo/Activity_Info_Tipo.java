@@ -15,10 +15,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.aplicacionincidencias.R;
-import com.example.aplicacionincidencias.Sala.activitySalas;
 
-import gestionincidencias.GestionIncidencias;
-import gestionincidencias.entidades.EntSala;
 import gestionincidencias.entidades.EntTipo;
 
 public class Activity_Info_Tipo extends AppCompatActivity implements View.OnClickListener {
@@ -41,11 +38,7 @@ public class Activity_Info_Tipo extends AppCompatActivity implements View.OnClic
         String nombreTipo = getIntent().getExtras().getString("nombre");
 
         if (codigoTipo > 0) {
-            for (EntTipo t : GestionIncidencias.getArTipos()) {
-                if (t.getCodigoTipo() == codigoTipo) {
-                    tipo = t;
-                }
-            }
+            tipo = th.obtenerTipo(codigoTipo);
         } else if (codigoTipo == 0 && nombreTipo.isEmpty()) {
             tipo = new EntTipo(0, "", "");
         }
@@ -83,14 +76,15 @@ public class Activity_Info_Tipo extends AppCompatActivity implements View.OnClic
             startActivity(intent);
         });
         btnBorrar.setOnClickListener(v -> {
-            GestionIncidencias.getArTipos().remove(tipo);
-            Toast.makeText(getApplicationContext(), "Tipo Borrado Correctamente", Toast.LENGTH_SHORT).show();
+            int borrado = th.borrarTipo(tipo.getCodigoTipo());
+            if (borrado == 1) {
+                Toast.makeText(getApplicationContext(), "Tipo Borrado Correctamente", Toast.LENGTH_SHORT).show();
+            }
             Intent intentVolverTipo = new Intent(view.getContext(), activityTipo.class);
             startActivity(intentVolverTipo);
         });
         btnGuardar.setOnClickListener(v -> {
             if (tipo != null) {
-                TextView edCodigoTipo = findViewById(R.id.tvinfoCodigoTipo);
                 EditText edNombreTipo = findViewById(R.id.editNombreTipo);
                 EditText edDescripcion = findViewById(R.id.editDescripcionTipo);
 
@@ -98,13 +92,13 @@ public class Activity_Info_Tipo extends AppCompatActivity implements View.OnClic
                 tipo.setDescripcion(edDescripcion.getText().toString());
 
 
-                if (tipo.getCodigoTipo() == 0 && tipo.getNombre().isEmpty()) {
-                    tipo.setCodigoTipo(GestionIncidencias.getArTipos().size() + 1);
+                if (tipo.getCodigoTipo() == 0) {
                     tipo.setNombre(edNombreTipo.getText().toString());
                     tipo.setDescripcion(edDescripcion.getText().toString());
-                    GestionIncidencias.getArTipos().add(GestionIncidencias.getArTipos().size(), tipo);
+                    th.crearTipo(tipo);
                     Toast.makeText(getApplicationContext(), "Tipo Añadido Correctamente", Toast.LENGTH_SHORT).show();
                 } else {
+                    th.actualizarTipo(tipo);
                     Toast.makeText(getApplicationContext(), "Tipo Guardado Correctamente", Toast.LENGTH_SHORT).show();
                 }
                 Intent intentVolverTipo = new Intent(view.getContext(), activityTipo.class);
