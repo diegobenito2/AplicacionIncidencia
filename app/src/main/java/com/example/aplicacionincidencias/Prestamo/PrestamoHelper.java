@@ -109,6 +109,39 @@ public class PrestamoHelper extends BbddIncidencias {
         return prestamos;
     }
 
+    public EntPrestamo obtenerPrestamo(int idPrestamo) {
+
+        SQLiteDatabase db = getReadableDatabase();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+        EntPrestamo prestamo = null;
+
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLA_PRESTAMO + " where " + KEY_COL_CODIGO + "=" + idPrestamo, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                int codigo = cursor.getInt(0);
+                int idUsuario = cursor.getInt(1);
+                int idElemento = cursor.getInt(2);
+                String fechaInicioStr = cursor.getString(3);
+                String fechaFinStr = cursor.getString(4);
+                Date fechaInicio = null;
+                Date fechaFin = null;
+                try {
+                    fechaInicio = formatter.parse(fechaInicioStr);
+                    fechaFin = formatter.parse(fechaFinStr);
+                } catch (ParseException e) {
+                    Log.d(PrestamoHelper.class.getName(), e.getMessage());
+                }
+
+                prestamo = new EntPrestamo(codigo, idUsuario, idElemento, fechaInicio, fechaFin);
+
+
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return prestamo;
+    }
+
     public int borrarPrestamo(int codigoPrestamo) {
         SQLiteDatabase db = getWritableDatabase();
         int borrados = 0;

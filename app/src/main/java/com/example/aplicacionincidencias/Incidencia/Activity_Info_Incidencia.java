@@ -35,6 +35,7 @@ public class Activity_Info_Incidencia extends AppCompatActivity implements View.
     private TextView tvFechaCreacion;
     private int ElementoSelected;
     private int UsuarioSelected;
+    private IncidenciaHelper ih = new IncidenciaHelper(this, "bbddIncidencias", null, 1);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

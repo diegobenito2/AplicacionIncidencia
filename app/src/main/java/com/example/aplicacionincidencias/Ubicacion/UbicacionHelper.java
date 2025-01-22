@@ -139,6 +139,49 @@ public class UbicacionHelper extends BbddIncidencias {
         return ubicaciones;
     }
 
+    public EntUbicacion obtenerUbicacion(int idUbicacion) {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        EntUbicacion ubicacion = null;
+
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLA_UBICACION + " where " + KEY_COL_CODIGO + "=" + idUbicacion, null);
+
+
+        if (cursor.moveToFirst()) {
+            do {
+                int codigoUbicacion = cursor.getInt(0);
+                int idSala = cursor.getInt(1);
+                int idElemento = cursor.getInt(2);
+                String descripcion = cursor.getString(3);
+                String fechaInicioString = cursor.getString(4);
+                String fechaFinString = cursor.getString(5);
+                Date fechaInicioFormat = null;
+                Date fechaFinFormat = null;
+
+                if (fechaInicioString != null && !fechaInicioString.isEmpty()) {
+                    try {
+                        fechaInicioFormat = formatter.parse(fechaInicioString);
+                    } catch (ParseException e) {
+                        Log.e("UbicacionDatabaseHelper", "Error al formatear fecha Inicio ubicacion: " + e.getMessage());
+                    }
+                }
+                if (fechaFinString != null && !fechaFinString.isEmpty()) {
+                    try {
+                        fechaFinFormat = formatter.parse(fechaFinString);
+                    } catch (ParseException e) {
+                        Log.e("UbicacionDatabaseHelper", "Error al formatear fecha Fin ubicacion: " + e.getMessage());
+                    }
+                }
+
+                ubicacion = new EntUbicacion(codigoUbicacion, idSala, idElemento, descripcion, fechaInicioFormat, fechaFinFormat);
+
+
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return ubicacion;
+    }
+
     public int borrarUbicacion(int codigoUbicacion) {
         SQLiteDatabase db = this.getWritableDatabase();
         int borrados = 0;

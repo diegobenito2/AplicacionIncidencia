@@ -69,7 +69,7 @@ public class UsuarioHelper extends BbddIncidencias {
                 int rows = db.update(TABLA_USUARIO, values, "codigo = ?",
                         new String[]{String.valueOf(usuario.getCodigoUsuario())});
 
-                if (rows > 0){
+                if (rows > 0) {
                     db.setTransactionSuccessful();
                     usuarioID = usuario.getCodigoUsuario();
                 }
@@ -88,7 +88,7 @@ public class UsuarioHelper extends BbddIncidencias {
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM usuario", null);
 
-        if (cursor.moveToFirst()){
+        if (cursor.moveToFirst()) {
             do {
                 int codigo = cursor.getInt(0);
                 String nombre = cursor.getString(1);
@@ -99,9 +99,29 @@ public class UsuarioHelper extends BbddIncidencias {
 
                 EntUsuario usuario = new EntUsuario(codigo, nombre, correo, telefono, password, codigoRol);
                 usuarios.add(usuario);
-            }while (cursor.moveToNext());
+            } while (cursor.moveToNext());
         }
         return usuarios;
+    }
+
+    public EntUsuario obtenerUsuario(int idUsuario) {
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLA_USUARIO + " where " + KEY_COL_CODIGO + "=" + idUsuario, null);
+        EntUsuario usuario = null;
+        if (cursor.moveToFirst()) {
+            do {
+                int codigo = cursor.getInt(0);
+                String nombre = cursor.getString(1);
+                String correo = cursor.getString(2);
+                String telefono = cursor.getString(3);
+                String password = cursor.getString(4);
+                int codigoRol = cursor.getInt(5);
+
+                usuario = new EntUsuario(codigo, nombre, correo, telefono, password, codigoRol);
+
+            } while (cursor.moveToNext());
+        }
+        return usuario;
     }
 
     public int borrarUsuario(int codigo) {
@@ -113,7 +133,7 @@ public class UsuarioHelper extends BbddIncidencias {
         try {
             borrados = db.delete(TABLA_USUARIO, "codigo = ?", new String[]{String.valueOf(codigo)});
             db.setTransactionSuccessful();
-        }catch (Exception e) {
+        } catch (Exception e) {
             Log.d(UsuarioHelper.class.getName(), e.getMessage());
         } finally {
             db.endTransaction();

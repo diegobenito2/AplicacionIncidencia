@@ -22,6 +22,7 @@ import gestionincidencias.entidades.EntRol;
 public class Activity_Info_Rol extends AppCompatActivity implements View.OnClickListener {
     private EntRol rol;
     private Button btnVolver, btnGuardar, btnBorrar;
+    private RolHelper rh = new RolHelper(this, "bbddIncidencias", null, 1);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -5,9 +5,13 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+
 import androidx.annotation.Nullable;
+
 import com.example.aplicacionincidencias.Bbdd.BbddIncidencias;
+
 import java.util.ArrayList;
+
 import gestionincidencias.entidades.EntElemento;
 
 public class ElementoHelper extends BbddIncidencias {
@@ -90,6 +94,26 @@ public class ElementoHelper extends BbddIncidencias {
             } while (cursor.moveToNext());
         }
         return elementos;
+    }
+
+    public EntElemento obtenerElemento(int idElemento) {
+
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLA_ELEMENTO + " where " + KEY_COL_CODIGO + "=" + idElemento, null);
+        EntElemento elemento = null;
+        if (cursor.moveToFirst()) {
+            do {
+                int codigo = cursor.getInt(0);
+                String nombre = cursor.getString(1);
+                String descripcion = cursor.getString(2);
+                int idTipo = cursor.getInt(3);
+
+                elemento = new EntElemento(codigo, nombre, descripcion, idTipo);
+
+
+            } while (cursor.moveToNext());
+        }
+        return elemento;
     }
 
     public int borrarElemento(int codigo) {

@@ -35,6 +35,7 @@ public class Activity_Info_Prestamo extends AppCompatActivity implements View.On
     private TextView tvfechaFin;
     private int ElementoSelected;
     private int UsuarioSelected;
+    private PrestamoHelper ph = new PrestamoHelper(this, "bbddIncidencias", null, 1);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

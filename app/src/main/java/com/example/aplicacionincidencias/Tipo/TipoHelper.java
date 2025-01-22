@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 import com.example.aplicacionincidencias.Bbdd.BbddIncidencias;
 import com.example.aplicacionincidencias.Sala.SalaHelper;
 import java.util.ArrayList;
+
 import gestionincidencias.entidades.EntTipo;
 
 public class TipoHelper extends BbddIncidencias {
@@ -52,6 +53,7 @@ public class TipoHelper extends BbddIncidencias {
                 if (rows > 0) {
                     tipoId = tipo.getCodigoTipo();
                 }
+                db.setTransactionSuccessful();
             } catch (Exception e) {
                 Log.d(SalaHelper.class.getName(), e.getMessage());
             } finally {
@@ -77,4 +79,27 @@ public class TipoHelper extends BbddIncidencias {
         }
         return tipos;
     }
+    public EntTipo obtenerTipo(int idTipo) {
+        EntTipo tipo = null;
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor cursor = db.rawQuery("Select * from "+ TABLA_TIPO+ " where " + KEY_COL_CODIGO + "=" + idTipo, null);
+        if (cursor.moveToFirst()) {
+            do {
+                int codigo = cursor.getInt(0);
+                String nombre = cursor.getString(1);
+                String descripcion = cursor.getString(2);
+                tipo = new EntTipo(codigo, nombre, descripcion);
+            } while (cursor.moveToNext());
+        }
+        return tipo;
+    }
+
+    public Integer borrarTipo(int id) {
+        SQLiteDatabase db = getWritableDatabase();
+        int tipo = db.delete(TABLA_SALA, KEY_COL_CODIGO + "=" + id, null);
+        db.setTransactionSuccessful();
+        db.endTransaction();
+        return tipo;
+    }
+
 }

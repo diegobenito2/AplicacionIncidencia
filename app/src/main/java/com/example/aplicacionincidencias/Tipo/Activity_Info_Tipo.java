@@ -24,6 +24,7 @@ import gestionincidencias.entidades.EntTipo;
 public class Activity_Info_Tipo extends AppCompatActivity implements View.OnClickListener {
     private Button btnVolver, btnGuardar, btnBorrar;
     private EntTipo tipo;
+    private TipoHelper th = new TipoHelper(this, "bbddIncidencias", null, 1);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,7 +104,7 @@ public class Activity_Info_Tipo extends AppCompatActivity implements View.OnClic
                     tipo.setDescripcion(edDescripcion.getText().toString());
                     GestionIncidencias.getArTipos().add(GestionIncidencias.getArTipos().size(), tipo);
                     Toast.makeText(getApplicationContext(), "Tipo Añadido Correctamente", Toast.LENGTH_SHORT).show();
-                }else{
+                } else {
                     Toast.makeText(getApplicationContext(), "Tipo Guardado Correctamente", Toast.LENGTH_SHORT).show();
                 }
                 Intent intentVolverTipo = new Intent(view.getContext(), activityTipo.class);

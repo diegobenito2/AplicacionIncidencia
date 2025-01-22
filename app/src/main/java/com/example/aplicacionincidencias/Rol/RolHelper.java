@@ -5,9 +5,13 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+
 import androidx.annotation.Nullable;
+
 import com.example.aplicacionincidencias.Bbdd.BbddIncidencias;
+
 import java.util.ArrayList;
+
 import gestionincidencias.entidades.EntRol;
 
 public class RolHelper extends BbddIncidencias {
@@ -90,6 +94,26 @@ public class RolHelper extends BbddIncidencias {
             } while (cursor.moveToNext());
         }
         return roles;
+    }
+
+    public EntRol obtenerRol(int idRol) {
+
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLA_ROL + " where " + KEY_COL_CODIGO + "=" + idRol, null);
+        EntRol rol = null;
+        if (cursor.moveToFirst()) {
+            do {
+                int codigo = cursor.getInt(0);
+                String nombre = cursor.getString(1);
+                String descripcion = cursor.getString(2);
+                int nivelAcceso = cursor.getInt(3);
+
+                rol = new EntRol(codigo, nombre, descripcion, nivelAcceso);
+
+
+            } while (cursor.moveToNext());
+        }
+        return rol;
     }
 
     public int borrarRol(int codigo) {

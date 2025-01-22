@@ -85,7 +85,7 @@ public class SalaHelper extends BbddIncidencias {
     public EntSala obtenerSala(int idSala) {
         EntSala sala = null;
         SQLiteDatabase db = getWritableDatabase();
-        Cursor cursor = db.rawQuery("Select * from sala where " + KEY_COL_CODIGO + "=" + idSala, null);
+        Cursor cursor = db.rawQuery("Select * FROM " + TABLA_SALA + " where " + KEY_COL_CODIGO + "=" + idSala, null);
         if (cursor.moveToFirst()) {
             do {
                 int codigo = cursor.getInt(0);

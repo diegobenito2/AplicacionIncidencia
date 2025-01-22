@@ -39,6 +39,7 @@ public class Activity_Info_Ubicacion extends AppCompatActivity implements View.O
     private TextView tvFechaFin;
     private int SalaSelected;
     private int ElementoSelected;
+    private UbicacionHelper ubih = new UbicacionHelper(this, "bbddIncidencias", null, 1);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

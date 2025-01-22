@@ -28,6 +28,7 @@ public class Activity_Info_Elemento extends AppCompatActivity implements View.On
     private Button btnVolver, btnGuardar,btnBorrar;
     private EntElemento elemento;
     private int TipoSelected;
+    private ElementoHelper eh = new ElementoHelper(this, "bbddIncidencias", null, 1);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

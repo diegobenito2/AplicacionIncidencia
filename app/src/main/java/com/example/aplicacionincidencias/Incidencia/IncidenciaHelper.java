@@ -85,6 +85,38 @@ public class IncidenciaHelper extends BbddIncidencias {
         return incidenciaID;
     }
 
+    public EntIncidencia obtenerIncidencia(int idIncidencia) {
+
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM "+TABLA_INCIDENCIA+" where "+ KEY_COL_CODIGO + "=" + idIncidencia, null);
+
+        EntIncidencia incidencia = null;
+
+        if (cursor.moveToFirst()) {
+            do {
+
+                int codigo = cursor.getInt(0);
+                int idUsuarioCreacion = cursor.getInt(1);
+                int idElemento = cursor.getInt(2);
+                String fechaCreacionstr = cursor.getString(3);
+                String descripcion = cursor.getString(4);
+                Date fechaCreacion = null;
+
+                if (fechaCreacion != null && fechaCreacion.equals("")) {
+                    try {
+                        fechaCreacion = formatter.parse(fechaCreacionstr);
+                    } catch (ParseException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+
+                 incidencia = new EntIncidencia(codigo, descripcion, idElemento, fechaCreacion, idUsuarioCreacion);
+
+            } while (cursor.moveToNext());
+        }
+        return incidencia;
+    }
+
     public ArrayList<EntIncidencia> obtenerIncidencias() {
         ArrayList<EntIncidencia> incidencias = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
@@ -115,14 +147,14 @@ public class IncidenciaHelper extends BbddIncidencias {
         return incidencias;
     }
 
-    public int borrarUsuario(int codigo) {
+    public int borrarIncidencia(int codigo) {
         SQLiteDatabase db = getWritableDatabase();
         int borrados = 0;
 
         db.beginTransaction();
 
         try {
-            borrados = db.delete(TABLA_USUARIO, "codigo = ?", new String[]{String.valueOf(codigo)});
+            borrados = db.delete(TABLA_INCIDENCIA, "codigo = ?", new String[]{String.valueOf(codigo)});
             db.setTransactionSuccessful();
         } catch (Exception e) {
             Log.d(UsuarioHelper.class.getName(), e.getMessage());

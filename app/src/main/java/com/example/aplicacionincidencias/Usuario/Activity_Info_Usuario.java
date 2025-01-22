@@ -29,6 +29,7 @@ public class Activity_Info_Usuario extends AppCompatActivity implements View.OnC
     private Button btnVolver, btnGuardar, btnBorrar;
     private EntUsuario usuario;
     private int RolSelected;
+    private UsuarioHelper uh = new UsuarioHelper(this, "bbddIncidencias", null, 1);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
