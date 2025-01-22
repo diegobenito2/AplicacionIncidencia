@@ -16,7 +16,6 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.aplicacionincidencias.R;
 
-import gestionincidencias.GestionIncidencias;
 import gestionincidencias.entidades.EntRol;
 
 public class Activity_Info_Rol extends AppCompatActivity implements View.OnClickListener {
@@ -39,11 +38,7 @@ public class Activity_Info_Rol extends AppCompatActivity implements View.OnClick
         String nombreRol = getIntent().getExtras().getString("nombre");
 
         if (codigoRol > 0) {
-            for (EntRol r : GestionIncidencias.getArRoles()) {
-                if (r.getCodigo() == codigoRol) {
-                    rol = r;
-                }
-            }
+            rol = rh.obtenerRol(codigoRol);
         } else if (codigoRol == 0 && nombreRol.isEmpty()) {
             rol = new EntRol(0, "", "", 0);
         }
@@ -66,9 +61,9 @@ public class Activity_Info_Rol extends AppCompatActivity implements View.OnClick
         btnVolver = findViewById(R.id.btnVolverRol);
         btnGuardar = findViewById(R.id.btnGuardarRol);
         btnBorrar = findViewById(R.id.btnBorrarRol);
-        btnBorrar.setOnClickListener((View.OnClickListener) this);
-        btnVolver.setOnClickListener((View.OnClickListener) this);
-        btnGuardar.setOnClickListener((View.OnClickListener) this);
+        btnBorrar.setOnClickListener(this);
+        btnVolver.setOnClickListener(this);
+        btnGuardar.setOnClickListener(this);
     }
 
     @Override
@@ -78,8 +73,10 @@ public class Activity_Info_Rol extends AppCompatActivity implements View.OnClick
             startActivity(intent);
         });
         btnBorrar.setOnClickListener(v -> {
-            GestionIncidencias.getArRoles().remove(rol);
-            Toast.makeText(getApplicationContext(), "Rol Borrado Correctamente", Toast.LENGTH_SHORT).show();
+            int borrado = rh.borrarRol(rol.getCodigo());
+            if (borrado == 1) {
+                Toast.makeText(getApplicationContext(), "Rol Borrado Correctamente", Toast.LENGTH_SHORT).show();
+            }
             Intent intentVolverRol = new Intent(view.getContext(), Activity_Rol.class);
             startActivity(intentVolverRol);
         });
@@ -94,10 +91,10 @@ public class Activity_Info_Rol extends AppCompatActivity implements View.OnClick
                 rol.setNivel_acceso(Integer.parseInt(edNivelAcceso.getText().toString()));
 
                 if (rol.getCodigo() == 0) {
-                    rol.setCodigo(GestionIncidencias.getArRoles().size() + 1);
-                    GestionIncidencias.getArRoles().add(GestionIncidencias.getArRoles().size(), rol);
+                    rh.crearRol(rol);
                     Toast.makeText(getApplicationContext(), "Rol Añadido Correctamente", Toast.LENGTH_SHORT).show();
                 } else {
+                    rh.actualizarRol(rol);
                     Toast.makeText(getApplicationContext(), "Rol Guardado Correctamente", Toast.LENGTH_SHORT).show();
                 }
                 Intent intentVolverRol = new Intent(view.getContext(), Activity_Rol.class);
