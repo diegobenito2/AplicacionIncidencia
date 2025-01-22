@@ -55,6 +55,7 @@ public class SalaHelper extends BbddIncidencias {
                 if (rows > 0) {
                     salaId = sala.getCodigoSala();
                 }
+                db.setTransactionSuccessful();
             } catch (Exception e) {
                 Log.d(SalaHelper.class.getName(), e.getMessage());
             } finally {
@@ -98,10 +99,11 @@ public class SalaHelper extends BbddIncidencias {
 
     public Integer borrarSala(int idSala) {
         SQLiteDatabase db = getWritableDatabase();
-        int sala = db.delete(TABLA_SALA,  KEY_COL_CODIGO + "=" + idSala, null);
+        int sala = db.delete(TABLA_SALA, KEY_COL_CODIGO + "=" + idSala, null);
+        db.setTransactionSuccessful();
+        db.endTransaction();
         return sala;
     }
-
 
 
 }

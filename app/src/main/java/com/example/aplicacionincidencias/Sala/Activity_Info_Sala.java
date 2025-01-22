@@ -86,10 +86,10 @@ public class Activity_Info_Sala extends AppCompatActivity implements View.OnClic
                 EditText edNombreSala = findViewById(R.id.editNombreSala);
                 EditText edDescripcion = findViewById(R.id.editDescripcionSala);
 
-                sala.setNombre(edNombreSala.getText().toString());
-                sala.setDescripcion(edDescripcion.getText().toString());
+                sala.setNombre(edNombreSala.getText().toString().trim());
+                sala.setDescripcion(edDescripcion.getText().toString().trim());
 
-                if (sala.getCodigoSala() == 0 && sala.getNombre().isEmpty()) {
+                if (sala.getCodigoSala() == 0) {
                     sala.setNombre(edNombreSala.getText().toString());
                     sala.setDescripcion(edDescripcion.getText().toString());
                     sdh.crearSala(sala);
