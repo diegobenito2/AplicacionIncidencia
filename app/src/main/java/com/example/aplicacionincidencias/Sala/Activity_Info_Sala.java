@@ -7,22 +7,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-
 import com.example.aplicacionincidencias.R;
-
 //import gestionincidencias.GestionIncidencias;
 import gestionincidencias.entidades.EntSala;
 
 public class Activity_Info_Sala extends AppCompatActivity implements View.OnClickListener {
     private Button btnVolver, btnGuardar, btnBorrar;
     private EntSala sala;
-    private SalaHelper sdh;
+    private SalaHelper sdh = new SalaHelper(this, "bbddIncidencias", null, 1);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,9 +59,9 @@ public class Activity_Info_Sala extends AppCompatActivity implements View.OnClic
         btnVolver = findViewById(R.id.btnVolverSala);
         btnGuardar = findViewById(R.id.btnGuardarSala);
         btnBorrar = findViewById(R.id.btnBorrarSala);
-        btnBorrar.setOnClickListener((View.OnClickListener) this);
-        btnVolver.setOnClickListener((View.OnClickListener) this);
-        btnGuardar.setOnClickListener((View.OnClickListener) this);
+        btnBorrar.setOnClickListener( this);
+        btnVolver.setOnClickListener( this);
+        btnGuardar.setOnClickListener( this);
 
     }
 

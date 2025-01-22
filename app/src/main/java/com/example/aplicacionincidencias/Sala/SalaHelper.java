@@ -98,7 +98,7 @@ public class SalaHelper extends BbddIncidencias {
 
     public Integer borrarSala(int idSala) {
         SQLiteDatabase db = getWritableDatabase();
-        int sala = db.delete(TABLA_SALA, "where " + KEY_COL_CODIGO + "=" + idSala, null);
+        int sala = db.delete(TABLA_SALA,  KEY_COL_CODIGO + "=" + idSala, null);
         return sala;
     }
 
