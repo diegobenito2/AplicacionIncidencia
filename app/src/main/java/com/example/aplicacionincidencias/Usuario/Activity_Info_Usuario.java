@@ -17,12 +17,11 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.aplicacionincidencias.R;
+import com.example.aplicacionincidencias.Rol.RolHelper;
 
 import java.util.ArrayList;
 
-import gestionincidencias.GestionIncidencias;
 import gestionincidencias.entidades.EntRol;
-import gestionincidencias.entidades.EntTipo;
 import gestionincidencias.entidades.EntUsuario;
 
 public class Activity_Info_Usuario extends AppCompatActivity implements View.OnClickListener {
@@ -30,6 +29,8 @@ public class Activity_Info_Usuario extends AppCompatActivity implements View.OnC
     private EntUsuario usuario;
     private int RolSelected;
     private UsuarioHelper uh = new UsuarioHelper(this, "bbddIncidencias", null, 1);
+    private RolHelper rh = new RolHelper(this, "bbddIncidencias", null, 1);
+    private ArrayList<EntRol> arRoles = rh.obtenerRoles();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,11 +48,7 @@ public class Activity_Info_Usuario extends AppCompatActivity implements View.OnC
         String nombreUsuario = getIntent().getExtras().getString("nombre");
 
         if (codigoUsuario > 0) {
-            for (EntUsuario u : GestionIncidencias.getArUsuarios()) {
-                if (u.getCodigoUsuario() == codigoUsuario) {
-                    usuario = u;
-                }
-            }
+            uh.obtenerUsuario(codigoUsuario);
         } else if (codigoUsuario == 0 && nombreUsuario.isBlank()) {
             usuario = new EntUsuario(codigoUsuario, nombreUsuario, "", "", "", 0);
         }
@@ -68,7 +65,7 @@ public class Activity_Info_Usuario extends AppCompatActivity implements View.OnC
             // Configuración del Spinner de Usuarios
             ArrayList<String> listaRoles = new ArrayList<>();
             ArrayList<Integer> listaRolesIds = new ArrayList<>();
-            for (EntRol rol : GestionIncidencias.getArRoles()) {
+            for (EntRol rol : arRoles) {
                 listaRoles.add(rol.getNombre());
                 listaRolesIds.add(rol.getCodigo());
             }
@@ -113,7 +110,7 @@ public class Activity_Info_Usuario extends AppCompatActivity implements View.OnC
             startActivity(intent);
         });
         btnBorrar.setOnClickListener(v -> {
-            GestionIncidencias.getArUsuarios().remove(usuario);
+            uh.borrarUsuario(usuario.getCodigoUsuario());
             Toast.makeText(getApplicationContext(), "Usuario Borrado Correctamente", Toast.LENGTH_SHORT).show();
             Intent intentVolverUsuario = new Intent(view.getContext(), ActivityUsuario.class);
             startActivity(intentVolverUsuario);
@@ -127,7 +124,7 @@ public class Activity_Info_Usuario extends AppCompatActivity implements View.OnC
 
                 Spinner spinnerRol = findViewById(R.id.spinnerrolUsuario);
                 String RolSelected = spinnerRol.getSelectedItem().toString(); //Guardas el nombre del Tipo seleccionado
-                for (EntRol rol : GestionIncidencias.getArRoles()) { //Recorres la lista de Tipos.
+                for (EntRol rol : arRoles) { //Recorres la lista de Tipos.
                     if (rol.getNombre().equals(RolSelected)) { //Cuando el nombre es igual al nombre de Tipo seleccionado.
                         usuario.setRol(rol.getCodigo()); //Cambia el código de Tipo del Elemento al del Tipo seleccionado.
                         usuario.setEntRol(rol); //Cambia el objeto Tipo del Elemento por el nuevo Tipo.
@@ -141,11 +138,12 @@ public class Activity_Info_Usuario extends AppCompatActivity implements View.OnC
                 usuario.setPassword(edContraseñaUsuario.getText().toString());
 
                 if (usuario.getCodigoUsuario() == 0 && usuario.getNombre().isEmpty()) {
-                    usuario.setCodigoUsuario(GestionIncidencias.getArUsuarios().size() + 1);
 
-                    GestionIncidencias.getArUsuarios().add(GestionIncidencias.getArUsuarios().size(), usuario);
+
+                    uh.crearUsuario(usuario);
                     Toast.makeText(getApplicationContext(), "Usuario Añadido Correctamente", Toast.LENGTH_SHORT).show();
                 } else {
+                    uh.actualizarUsuario(usuario);
                     Toast.makeText(getApplicationContext(), "Usuario Guardado Correctamente", Toast.LENGTH_SHORT).show();
                 }
                 Intent intentVolverUsuario = new Intent(view.getContext(), ActivityUsuario.class);

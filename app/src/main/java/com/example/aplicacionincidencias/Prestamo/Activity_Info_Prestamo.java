@@ -16,14 +16,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.example.aplicacionincidencias.Elemento.ElementoHelper;
 import com.example.aplicacionincidencias.R;
+import com.example.aplicacionincidencias.Usuario.UsuarioHelper;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
-import gestionincidencias.GestionIncidencias;
+
 import gestionincidencias.entidades.EntElemento;
 import gestionincidencias.entidades.EntPrestamo;
 import gestionincidencias.entidades.EntUsuario;
@@ -36,6 +40,10 @@ public class Activity_Info_Prestamo extends AppCompatActivity implements View.On
     private int ElementoSelected;
     private int UsuarioSelected;
     private PrestamoHelper ph = new PrestamoHelper(this, "bbddIncidencias", null, 1);
+    private ElementoHelper eh = new ElementoHelper(this, "bbddIncidencias", null, 1);
+    private UsuarioHelper uh = new UsuarioHelper(this, "bbddIncidencias", null, 1);
+    private ArrayList<EntElemento> arElementos = eh.obtenerElementos();
+    private ArrayList<EntUsuario> arUsuarios = uh.obtenerUsuarios();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,11 +59,7 @@ public class Activity_Info_Prestamo extends AppCompatActivity implements View.On
 
         int idPrestamo = getIntent().getExtras().getInt("codigoPrestamo");
         if (idPrestamo > 0) {
-            for (EntPrestamo e : GestionIncidencias.getArPrestamos()) {
-                if (e.getCodigoPrestamo() == idPrestamo) {
-                    prestamo = e;
-                }
-            }
+            prestamo = ph.obtenerPrestamo(idPrestamo);
 
         } else if (idPrestamo == 0) {
             Date nuevafechainicio = null;
@@ -76,7 +80,6 @@ public class Activity_Info_Prestamo extends AppCompatActivity implements View.On
             // Al ser un nuevo tipo y el código ponerse automaticamente pues los campos se ocultan.
             if (prestamo.getCodigoPrestamo() == 0) {
                 TextView tvCodigoPrestamo = findViewById(R.id.tvCodigoPrestamo);
-                tvInfoCodigoPrestamo.setText(String.valueOf(GestionIncidencias.getArPrestamos().size() + 1));
                 tvCodigoPrestamo.setVisibility(View.INVISIBLE);
                 tvInfoCodigoPrestamo.setVisibility(View.INVISIBLE);
             }
@@ -92,7 +95,7 @@ public class Activity_Info_Prestamo extends AppCompatActivity implements View.On
             // Configuración del Spinner de Usuarios
             ArrayList<String> listaUsuarios = new ArrayList<>();
             ArrayList<Integer> listaUsuariosIds = new ArrayList<>();
-            for (EntUsuario user : GestionIncidencias.getArUsuarios()) {
+            for (EntUsuario user : arUsuarios) {
                 listaUsuarios.add(user.getNombre());
                 listaUsuariosIds.add(user.getCodigoUsuario());
             }
@@ -112,7 +115,7 @@ public class Activity_Info_Prestamo extends AppCompatActivity implements View.On
             // Configuración del Spinner de Elementos
             ArrayList<String> listaElementos = new ArrayList<>();
             ArrayList<Integer> listaElementosIds = new ArrayList<>();
-            for (EntElemento elemento : GestionIncidencias.getArElementos()) {
+            for (EntElemento elemento : arElementos) {
                 listaElementos.add(elemento.getNombre());
                 listaElementosIds.add(elemento.getCodigoElemento());
             }
@@ -158,7 +161,7 @@ public class Activity_Info_Prestamo extends AppCompatActivity implements View.On
         btnGuardar = findViewById(R.id.btnGuardarPrestamo);
         btnGuardar.setOnClickListener((View.OnClickListener) this);
         btnBorrar = findViewById(R.id.btnBorrarPrestamo);
-        btnBorrar.setOnClickListener((View.OnClickListener)this);
+        btnBorrar.setOnClickListener((View.OnClickListener) this);
         tvfechaInicio.setOnClickListener(this);
         tvfechaFin.setOnClickListener(this);
     }
@@ -171,7 +174,7 @@ public class Activity_Info_Prestamo extends AppCompatActivity implements View.On
             startActivity(intent);
         });
         btnBorrar.setOnClickListener(v -> {
-            GestionIncidencias.getArPrestamos().remove(prestamo);
+            ph.borrarPrestamo(prestamo.getCodigoPrestamo());
             Toast.makeText(getApplicationContext(), "Prestamo Borrado Correctamente", Toast.LENGTH_SHORT).show();
             Intent intentVolverPrestamos = new Intent(view.getContext(), ActivityPrestamo.class);
             startActivity(intentVolverPrestamos);
@@ -182,7 +185,7 @@ public class Activity_Info_Prestamo extends AppCompatActivity implements View.On
                 ////////////////////////////////////////////////////////Spinner Usuarios//////////////////////////////////////////////////////////////////////////////////
                 Spinner spinnerUsuarios = findViewById(R.id.spinnerUsuario);
                 String UsuarioSelected = spinnerUsuarios.getSelectedItem().toString(); //Guardas el nombre del usuario seleccionado
-                for (EntUsuario usuario : GestionIncidencias.getArUsuarios()) { //Recorres la lista de usuarios.
+                for (EntUsuario usuario : arUsuarios) { //Recorres la lista de usuarios.
                     if (usuario.getNombre().equals(UsuarioSelected)) { //Cuando el nombre es igual al nombre de usuario seleccionado.
                         prestamo.setIdUsuario(usuario.getCodigoUsuario()); //Cambia el código de usuario del prestamo al del usuario seleccionado.
                         prestamo.setUsuario(usuario); //Cambia el objeto Usuario del prestamo por el nuevo usuario.
@@ -191,7 +194,7 @@ public class Activity_Info_Prestamo extends AppCompatActivity implements View.On
                 ////////////////////////////////////////////////////////Spinner Elementos//////////////////////////////////////////////////////////////////////////////////
                 Spinner spinnerElementos = findViewById(R.id.spinnerElemento);
                 String ElementoSelected = spinnerElementos.getSelectedItem().toString();//Guardas el nombre del elemento seleccionado
-                for (EntElemento elemento : GestionIncidencias.getArElementos()) {//Recorres la lista de elementos.
+                for (EntElemento elemento : arElementos) {//Recorres la lista de elementos.
 
                     if (elemento.getNombre().equals(ElementoSelected)) {//Cuando el nombre es igual al nombre del elemento seleccionado.
                         prestamo.setIdElemento(elemento.getCodigoElemento());  //Cambia el código de elemento del prestamo al del elemento seleccionado.
@@ -223,10 +226,11 @@ public class Activity_Info_Prestamo extends AppCompatActivity implements View.On
                 }
                 //Si es un nuevo prestamo que le ponga el codigo automatico y que lo agrege al final de la lista.
                 if (prestamo.getCodigoPrestamo() == 0) {
-                    prestamo.setCodigoPrestamo(GestionIncidencias.getArPrestamos().size() + 1);
-                    GestionIncidencias.getArPrestamos().add(GestionIncidencias.getArPrestamos().size(), prestamo);
+
+                    ph.crearPrestamo(prestamo);
                     Toast.makeText(getApplicationContext(), "Prestamo Añadido Correctamente", Toast.LENGTH_SHORT).show();
-                }else{
+                } else {
+                    ph.actualizarPrestamo(prestamo);
                     Toast.makeText(getApplicationContext(), "Prestamo Guardado Correctamente", Toast.LENGTH_SHORT).show();
                 }
                 Intent intentVolverPrestamos = new Intent(view.getContext(), ActivityPrestamo.class);

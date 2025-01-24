@@ -18,7 +18,9 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.aplicacionincidencias.Elemento.ElementoHelper;
 import com.example.aplicacionincidencias.R;
+import com.example.aplicacionincidencias.Sala.SalaHelper;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -27,19 +29,22 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-import gestionincidencias.GestionIncidencias;
 import gestionincidencias.entidades.EntElemento;
 import gestionincidencias.entidades.EntSala;
 import gestionincidencias.entidades.EntUbicacion;
 
 public class Activity_Info_Ubicacion extends AppCompatActivity implements View.OnClickListener {
-    private Button btnVolver, btnGuardar,btnBorrar;
+    private Button btnVolver, btnGuardar, btnBorrar;
     private EntUbicacion ubicacion;
     private TextView tvFechaInicio;
     private TextView tvFechaFin;
     private int SalaSelected;
     private int ElementoSelected;
     private UbicacionHelper ubih = new UbicacionHelper(this, "bbddIncidencias", null, 1);
+    private ElementoHelper eh = new ElementoHelper(this, "bbddIncidencias", null, 1);
+    private SalaHelper sh = new SalaHelper(this, "bbddIncidencias", null, 1);
+    private ArrayList<EntElemento> arElementos = eh.obtenerElementos();
+    private ArrayList<EntSala> arSalas = sh.obtenerSalas();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,12 +61,7 @@ public class Activity_Info_Ubicacion extends AppCompatActivity implements View.O
         String salaUbicacion = getIntent().getExtras().getString("sala");
 
         if (codigoUbicacion > 0) {
-            for (EntUbicacion u : GestionIncidencias.getArUbicaciones()) {
-                if (u.getCodigoUbicacion() == codigoUbicacion) {
-                    ubicacion = u;
-                    break;
-                }
-            }
+            ubicacion = ubih.obtenerUbicacion(codigoUbicacion);
         } else if (codigoUbicacion == 0 && salaUbicacion.isBlank()) {
 
             String fecha = "2024-11-29 20:32:00";
@@ -81,7 +81,7 @@ public class Activity_Info_Ubicacion extends AppCompatActivity implements View.O
             EditText edDescripcionUbicacion = findViewById(R.id.edDescripcionUbicacion);
             edDescripcionUbicacion.setText(ubicacion.getDescripcion());
 
-            if (ubicacion.getCodigoUbicacion()==0&&salaUbicacion.isEmpty()) {
+            if (ubicacion.getCodigoUbicacion() == 0 && salaUbicacion.isEmpty()) {
                 TextView tvCodigoUbicacion = findViewById(R.id.tvcodigoUbicacion);
                 tvCodigoUbicacion.setVisibility(View.INVISIBLE);
                 tvInfoCodigoUbicacion.setVisibility(View.INVISIBLE);
@@ -91,7 +91,7 @@ public class Activity_Info_Ubicacion extends AppCompatActivity implements View.O
             Spinner spinnerSalas = findViewById(R.id.spinnerSala);
             ArrayList<String> listaSalas = new ArrayList<>();
             ArrayList<Integer> listaSalasIds = new ArrayList<>();
-            for (EntSala sala : GestionIncidencias.getArSalas()) {
+            for (EntSala sala : arSalas) {
                 listaSalas.add(sala.getNombre());
                 listaSalasIds.add(sala.getCodigoSala());
             }
@@ -110,7 +110,7 @@ public class Activity_Info_Ubicacion extends AppCompatActivity implements View.O
             Spinner spinnerElementos = findViewById(R.id.spinnerElemento);
             ArrayList<String> listaElementos = new ArrayList<>();
             ArrayList<Integer> listaElementosIds = new ArrayList<>();
-            for (EntElemento elemento : GestionIncidencias.getArElementos()) {
+            for (EntElemento elemento : arElementos) {
                 listaElementos.add(elemento.getNombre());
                 listaElementosIds.add(elemento.getCodigoElemento());
             }
@@ -154,7 +154,7 @@ public class Activity_Info_Ubicacion extends AppCompatActivity implements View.O
         btnVolver.setOnClickListener(this);
         btnGuardar.setOnClickListener(this);
         btnBorrar = findViewById(R.id.btnBorrarUbicacion);
-        btnBorrar.setOnClickListener((View.OnClickListener)this);
+        btnBorrar.setOnClickListener((View.OnClickListener) this);
         tvFechaInicio.setOnClickListener(this);
         tvFechaFin.setOnClickListener(this);
     }
@@ -166,7 +166,7 @@ public class Activity_Info_Ubicacion extends AppCompatActivity implements View.O
             startActivity(intent);
         });
         btnBorrar.setOnClickListener(v -> {
-            GestionIncidencias.getArUbicaciones().remove(ubicacion);
+            ubih.borrarUbicacion(ubicacion.getCodigoUbicacion());
             Toast.makeText(getApplicationContext(), "Ubicación Borrada Correctamente", Toast.LENGTH_SHORT).show();
             Intent intentVolverUbicacion = new Intent(view.getContext(), activityUbicacion.class);
             startActivity(intentVolverUbicacion);
@@ -177,7 +177,7 @@ public class Activity_Info_Ubicacion extends AppCompatActivity implements View.O
 ////////////////////////////////////////////////////////Spinner Salas//////////////////////////////////////////////////////////////////////////////////
                 Spinner spinnerSalas = findViewById(R.id.spinnerSala);
                 String SalaSelected = spinnerSalas.getSelectedItem().toString();
-                for (EntSala sala : GestionIncidencias.getArSalas()) {
+                for (EntSala sala : arSalas) {
                     if (sala.getNombre().equals(SalaSelected)) {
                         ubicacion.setIdSala(sala.getCodigoSala()); // Guarda el id del elemento puesto en el spinner.
                         ubicacion.setSala(sala);
@@ -188,7 +188,7 @@ public class Activity_Info_Ubicacion extends AppCompatActivity implements View.O
 ////////////////////////////////////////////////////////Spinner Elementos//////////////////////////////////////////////////////////////////////////////////
                 Spinner spinnerElementos = findViewById(R.id.spinnerElemento);
                 String ElementoSelected = spinnerElementos.getSelectedItem().toString();
-                for (EntElemento elemento : GestionIncidencias.getArElementos()) {
+                for (EntElemento elemento : arElementos) {
 
                     if (elemento.getNombre().equals(ElementoSelected)) {
                         ubicacion.setIdElemento(elemento.getCodigoElemento()); // Guarda el id del elemento puesto en el spinner.
@@ -218,12 +218,13 @@ public class Activity_Info_Ubicacion extends AppCompatActivity implements View.O
                 }
 
                 if (ubicacion.getCodigoUbicacion() == 0) {
-                    ubicacion.setCodigoUbicacion(GestionIncidencias.getArUbicaciones().size() + 1);
+
                     EditText edDescripcionUbicacion = findViewById(R.id.edDescripcionUbicacion);
                     ubicacion.setDescripcion(edDescripcionUbicacion.getText().toString());
-                    GestionIncidencias.getArUbicaciones().add(GestionIncidencias.getArUbicaciones().size(), ubicacion);
+                    ubih.crearUbicacion(ubicacion);
                     Toast.makeText(getApplicationContext(), "Ubicación Añadida Correctamente", Toast.LENGTH_SHORT).show();
-                }else{
+                } else {
+                    ubih.actualizarUbicacion(ubicacion);
                     Toast.makeText(getApplicationContext(), "Ubicación Guardada Correctamente", Toast.LENGTH_SHORT).show();
                 }
 

@@ -16,14 +16,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import com.example.aplicacionincidencias.Elemento.ElementoHelper;
 import com.example.aplicacionincidencias.R;
+import com.example.aplicacionincidencias.Usuario.UsuarioHelper;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
-import gestionincidencias.GestionIncidencias;
 import gestionincidencias.entidades.EntElemento;
 import gestionincidencias.entidades.EntIncidencia;
 import gestionincidencias.entidades.EntUsuario;
@@ -36,6 +37,10 @@ public class Activity_Info_Incidencia extends AppCompatActivity implements View.
     private int ElementoSelected;
     private int UsuarioSelected;
     private IncidenciaHelper ih = new IncidenciaHelper(this, "bbddIncidencias", null, 1);
+    private ElementoHelper eh = new ElementoHelper(this, "bbddIncidencias", null, 1);
+    private UsuarioHelper uh = new UsuarioHelper(this, "bbddIncidencias", null, 1);
+    private ArrayList<EntElemento> arElementos = eh.obtenerElementos();
+    private ArrayList<EntUsuario> arUsuarios = uh.obtenerUsuarios();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,11 +57,7 @@ public class Activity_Info_Incidencia extends AppCompatActivity implements View.
         int codigoIncidencia = getIntent().getExtras().getInt("codigoIncidencia");
         String descripcionIncidencia = getIntent().getExtras().getString("descripcionIncidencia");
         if (codigoIncidencia > 0) {
-            for (EntIncidencia i : GestionIncidencias.getArIncidencias()) {
-                if (i.getCodigoIncidencia() == codigoIncidencia) {
-                    incidencia = i;
-                }
-            }
+            incidencia = ih.obtenerIncidencia(codigoIncidencia);
         } else if (codigoIncidencia == 0 && descripcionIncidencia.isEmpty()) {
             Date nuevafechacreacion = null;
 
@@ -87,9 +88,10 @@ public class Activity_Info_Incidencia extends AppCompatActivity implements View.
             Spinner spinnerElementos = findViewById(R.id.spinnerElemento);
 
             // Configuración del Spinner de Usuarios
+
             ArrayList<String> listaUsuarios = new ArrayList<>();
             ArrayList<Integer> listaUsuariosIds = new ArrayList<>();
-            for (EntUsuario user : GestionIncidencias.getArUsuarios()) {
+            for (EntUsuario user : arUsuarios) {
                 listaUsuarios.add(user.getNombre());
                 listaUsuariosIds.add(user.getCodigoUsuario());
             }
@@ -107,9 +109,10 @@ public class Activity_Info_Incidencia extends AppCompatActivity implements View.
 ////////////////////////////////////////////////////////Fin Spinner Usuarios//////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////Inicio Spinner Elementos//////////////////////////////////////////////////////////////////////////////////
             // Configuración del Spinner de Elementos
+
             ArrayList<String> listaElementos = new ArrayList<>();
             ArrayList<Integer> listaElementosIds = new ArrayList<>();
-            for (EntElemento elemento : GestionIncidencias.getArElementos()) {
+            for (EntElemento elemento : arElementos) {
                 listaElementos.add(elemento.getNombre());
                 listaElementosIds.add(elemento.getCodigoElemento());
             }
@@ -154,7 +157,7 @@ public class Activity_Info_Incidencia extends AppCompatActivity implements View.
             startActivity(intent);
         });
         btnBorrar.setOnClickListener(v -> {
-            GestionIncidencias.getArIncidencias().remove(incidencia);
+            ih.borrarIncidencia(incidencia.getCodigoIncidencia());
             Toast.makeText(getApplicationContext(), "Incidencia Borrada Correctamente", Toast.LENGTH_SHORT).show();
             Intent intentVolverIncidencias = new Intent(view.getContext(), activityIncidencia.class);
             startActivity(intentVolverIncidencias);
@@ -168,7 +171,7 @@ public class Activity_Info_Incidencia extends AppCompatActivity implements View.
                 ////////////////////////////////////////////////////////Spinner Usuarios//////////////////////////////////////////////////////////////////////////////////
                 Spinner spinnerUsuarios = findViewById(R.id.spinnerUsuario);
                 String UsuarioSelected = spinnerUsuarios.getSelectedItem().toString(); //Guardas el nombre del usuario seleccionado
-                for (EntUsuario usuario : GestionIncidencias.getArUsuarios()) { //Recorres la lista de usuarios.
+                for (EntUsuario usuario : arUsuarios) { //Recorres la lista de usuarios.
                     if (usuario.getNombre().equals(UsuarioSelected)) { //Cuando el nombre es igual al nombre de usuario seleccionado.
                         incidencia.setIdUsuarioCreacion(usuario.getCodigoUsuario()); //Cambia el código de usuario de la incidencia al del usuario seleccionado.
                         incidencia.setUsuarioCreacion(usuario); //Cambia el objeto Usuario de la incidencia por el nuevo usuario.
@@ -177,7 +180,7 @@ public class Activity_Info_Incidencia extends AppCompatActivity implements View.
                 ////////////////////////////////////////////////////////Spinner Elementos//////////////////////////////////////////////////////////////////////////////////
                 Spinner spinnerElementos = findViewById(R.id.spinnerElemento);
                 String ElementoSelected = spinnerElementos.getSelectedItem().toString();//Guardas el nombre del elemento seleccionado
-                for (EntElemento elemento : GestionIncidencias.getArElementos()) {//Recorres la lista de elementos.
+                for (EntElemento elemento : arElementos) {//Recorres la lista de elementos.
 
                     if (elemento.getNombre().equals(ElementoSelected)) {//Cuando el nombre es igual al nombre del elemento seleccionado.
                         incidencia.setIdElemento(elemento.getCodigoElemento());  //Cambia el código de elemento de la incidencia al del elemento seleccionado.
@@ -200,8 +203,8 @@ public class Activity_Info_Incidencia extends AppCompatActivity implements View.
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
-                } else if (incidencia.getCodigoIncidencia() == 0 && incidencia.getDescripcion().isEmpty()) {
-                    incidencia.setCodigoIncidencia(GestionIncidencias.getArIncidencias().size() + 1);
+                } else if (incidencia.getCodigoIncidencia() == 0) {
+
                     incidencia.setDescripcion(edDescripcionIncidencia.getText().toString());
                     tvFechaCreacion = findViewById(R.id.tvInfoFechaCreacion);
                     String FechaCreacion = tvFechaCreacion.getText().toString();
@@ -212,9 +215,10 @@ public class Activity_Info_Incidencia extends AppCompatActivity implements View.
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
-                    GestionIncidencias.getArIncidencias().add(GestionIncidencias.getArIncidencias().size(), incidencia);
+                    ih.crearIncidencia(incidencia);
                     Toast.makeText(getApplicationContext(), "Incidencia Añadida Correctamente", Toast.LENGTH_SHORT).show();
-                }else{
+                } else {
+                    ih.actualizarIncidencia(incidencia);
                     Toast.makeText(getApplicationContext(), "Incidencia Guardada Correctamente", Toast.LENGTH_SHORT).show();
                 }
                 Intent intentVolverIncidencias = new Intent(view.getContext(), activityIncidencia.class);

@@ -60,10 +60,12 @@ public class Activity_Info_Elemento extends AppCompatActivity implements View.On
             Spinner spinnerTipos = findViewById(R.id.spinnerTipoElemento);
 
 
+            ArrayList<EntTipo> arTipos = th.obtenerTipos();
+
             // Configuración del Spinner de Usuarios
             ArrayList<String> listaTipos = new ArrayList<>();
             ArrayList<Integer> listaTiposIds = new ArrayList<>();
-            for (EntTipo type : GestionIncidencias.getArTipos()) {
+            for (EntTipo type : arTipos) {
                 listaTipos.add(type.getNombre());
                 listaTiposIds.add(type.getCodigoTipo());
             }

@@ -66,5 +66,6 @@ public class Activity_Rol extends menutrespuntos {
                 startActivity(intentInfoRol);
             }
         });
+
     }
 }
