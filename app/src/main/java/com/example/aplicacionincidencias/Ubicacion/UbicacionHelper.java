@@ -108,10 +108,10 @@ public class UbicacionHelper extends BbddIncidencias {
             do {
                 int codigoUbicacion = cursor.getInt(0);
                 int idSala = cursor.getInt(1);
-                int idElemento = cursor.getInt(2);
-                String descripcion = cursor.getString(3);
-                String fechaInicioString = cursor.getString(4);
-                String fechaFinString = cursor.getString(5);
+                int idElemento = cursor.getInt(5);
+                String descripcion = cursor.getString(2);
+                String fechaInicioString = cursor.getString(3);
+                String fechaFinString = cursor.getString(4);
                 Date fechaInicioFormat = null;
                 Date fechaFinFormat = null;
 
@@ -151,10 +151,10 @@ public class UbicacionHelper extends BbddIncidencias {
             do {
                 int codigoUbicacion = cursor.getInt(0);
                 int idSala = cursor.getInt(1);
-                int idElemento = cursor.getInt(2);
-                String descripcion = cursor.getString(3);
-                String fechaInicioString = cursor.getString(4);
-                String fechaFinString = cursor.getString(5);
+                int idElemento = cursor.getInt(5);
+                String descripcion = cursor.getString(2);
+                String fechaInicioString = cursor.getString(3);
+                String fechaFinString = cursor.getString(4);
                 Date fechaInicioFormat = null;
                 Date fechaFinFormat = null;
 

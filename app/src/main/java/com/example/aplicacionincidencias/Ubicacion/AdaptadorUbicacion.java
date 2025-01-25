@@ -31,7 +31,7 @@ public class AdaptadorUbicacion extends ArrayAdapter<EntUbicacion> {
         TextView txSalaUbicacion = Vubicacion.findViewById(R.id.SalaUbicacion);
 
 
-        txCodigoUbicacion.setText("Codigo Ubicación:" + String.valueOf(datos[position].getCodigoUbicacion()));
+        txCodigoUbicacion.setText("Codigo Ubicación:" + datos[position].getCodigoUbicacion());
         txSalaUbicacion.setText("Sala: " + datos[position].getSala().getNombre());
 
         return Vubicacion;

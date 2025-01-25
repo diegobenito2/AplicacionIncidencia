@@ -79,7 +79,7 @@ public class PrestamoHelper extends BbddIncidencias {
     public ArrayList<EntPrestamo> obtenerPrestamos() {
         ArrayList<EntPrestamo> prestamos = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+
 
 
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLA_PRESTAMO, null);
@@ -112,7 +112,6 @@ public class PrestamoHelper extends BbddIncidencias {
     public EntPrestamo obtenerPrestamo(int idPrestamo) {
 
         SQLiteDatabase db = getReadableDatabase();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
         EntPrestamo prestamo = null;
 
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLA_PRESTAMO + " where " + KEY_COL_CODIGO + "=" + idPrestamo, null);
