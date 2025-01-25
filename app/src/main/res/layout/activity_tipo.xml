@@ -6,12 +6,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Tipo.activityTipo">
-    <ListView
-        android:id="@+id/ListaTipo"
+
+    <SearchView
+        android:id="@+id/sVTipo"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></ListView>
+        app:layout_constraintTop_toTopOf="parent" />
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabAñadirTipo"
         android:layout_width="wrap_content"
@@ -24,4 +26,10 @@
         android:src="@drawable/plus"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+    <ListView
+        android:id="@+id/ListaTipo"
+        android:layout_width="410dp"
+        android:layout_height="683dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sVTipo" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,14 +7,12 @@
     android:layout_height="match_parent"
     tools:context=".Sala.activitySalas">
 
-    <ListView
-        android:id="@+id/ListaSalas"
+    <SearchView
+        android:id="@+id/sVSala"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-    </ListView>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabAñadirSala"
@@ -29,4 +27,13 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ListView
+        android:id="@+id/ListaSalas"
+        android:layout_width="410dp"
+        android:layout_height="683dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sVSala" />
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,12 +7,13 @@
     android:layout_height="match_parent"
     tools:context=".Prestamo.ActivityPrestamo">
 
-    <ListView
-        android:id="@+id/ListaPrestamo"
+    <SearchView
+        android:id="@+id/sVPrestamo"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="-36dp"
-        tools:layout_editor_absoluteY="-309dp"></ListView>
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabAñadirPrestamo"
         android:layout_width="wrap_content"
@@ -25,4 +26,11 @@
         android:src="@drawable/plus"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <ListView
+        android:id="@+id/ListaPrestamo"
+        android:layout_width="410dp"
+        android:layout_height="683dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sVPrestamo" />
 </androidx.constraintlayout.widget.ConstraintLayout>

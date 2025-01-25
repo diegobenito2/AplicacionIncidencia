@@ -7,23 +7,14 @@
     android:layout_height="match_parent"
     tools:context=".Usuario.ActivityUsuario">
 
-    <ListView
-        android:id="@+id/ListaUsuario"
+    <SearchView
+        android:id="@+id/sVUsuario"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></ListView>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabAñadirSala"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="end|bottom"
-        android:layout_margin="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="64dp"
-        android:contentDescription="@string/submit"
-        android:src="@drawable/plus"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabAñadirUsuario"
         android:layout_width="wrap_content"
@@ -36,4 +27,11 @@
         android:src="@drawable/plus"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <ListView
+        android:id="@+id/ListaUsuario"
+        android:layout_width="410dp"
+        android:layout_height="683dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sVUsuario"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
