@@ -45,7 +45,7 @@ public class Activity_Info_Elemento extends AppCompatActivity implements View.On
         String nombreElemento = getIntent().getExtras().getString("nombre");
 
         if (codigoElemento > 0) {
-            eh.obtenerElemento(codigoElemento);
+        elemento=eh.obtenerElemento(codigoElemento);
         } else if (codigoElemento == 0 && nombreElemento.isBlank()) {
             elemento = new EntElemento(0, "", "", 0);
         }
@@ -125,9 +125,8 @@ public class Activity_Info_Elemento extends AppCompatActivity implements View.On
                 Spinner spinnerTipos = findViewById(R.id.spinnerTipoElemento);
                 String TipoSelected = spinnerTipos.getSelectedItem().toString(); //Guardas el nombre del Tipo seleccionado
                 EntTipo tipo = th.obtenerNombreTipo(TipoSelected);
-
-                elemento.setNombre(String.valueOf(edNombreElemento.getText()));
-                elemento.setDescripcion(String.valueOf(edDescripcion.getText()));
+                elemento.setNombre(edNombreElemento.getText().toString());
+                elemento.setDescripcion(edDescripcion.getText().toString());
                 elemento.setTipoElemento(tipo);
                 elemento.setIdTipo(tipo.getCodigoTipo());
 

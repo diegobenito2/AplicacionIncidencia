@@ -1,0 +1,3 @@
+Funcionalidad SearchView
+Ver porque no funciona prestamo
+Ubicacion no se abre
