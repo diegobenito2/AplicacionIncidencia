@@ -24,8 +24,6 @@ import com.example.aplicacionincidencias.Sala.SalaHelper;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -45,7 +43,7 @@ public class Activity_Info_Ubicacion extends AppCompatActivity implements View.O
     private UbicacionHelper ubih = new UbicacionHelper(this, "bbddIncidencias", null, 1);
     private ElementoHelper eh = new ElementoHelper(this, "bbddIncidencias", null, 1);
     private SalaHelper sh = new SalaHelper(this, "bbddIncidencias", null, 1);
-    private SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,24 +129,22 @@ public class Activity_Info_Ubicacion extends AppCompatActivity implements View.O
             tvFechaInicio = findViewById(R.id.tvinfocodigoUbicacionFechaInicio);
             Date fechaInicio = ubicacion.getFechaInicio();
 
-
             if (fechaInicio != null) {
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
                 tvFechaInicio.setText(format.format(fechaInicio));
             } else {
-                fechaInicio = new Date("0000-00-00 00:00:00");
-                tvFechaInicio.setText(format.format(fechaInicio));
+                tvFechaInicio.setText("0000-00-00 00:00:00");
             }
 
 ////////////////////////////////////////////////////////DatePicker Fecha Fin//////////////////////////////////////////////////////////////////////////////////
             tvFechaFin = findViewById(R.id.tvinfocodigoUbicacionFechaFin);
             Date fechaFin = ubicacion.getFechaFin();
 
-
             if (fechaFin != null) {
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
                 tvFechaFin.setText(format.format(fechaFin));
             } else {
-                fechaFin = new Date("0000-00-00 00:00:00");
-                tvFechaFin.setText(format.format(fechaFin));
+                tvFechaFin.setText("0000-00-00 00:00:00");
             }
 
         }
@@ -193,8 +189,9 @@ public class Activity_Info_Ubicacion extends AppCompatActivity implements View.O
 ////////////////////////////////////////////////////////DatePicker Fecha Inicio//////////////////////////////////////////////////////////////////////////////////
                 TextView tvFechaInicio = findViewById(R.id.tvinfocodigoUbicacionFechaInicio);
                 String fechaInicio = tvFechaInicio.getText().toString();
+                SimpleDateFormat formatInicio = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
                 try {
-                    Date fechaInicioDate = format.parse(fechaInicio);
+                    Date fechaInicioDate = formatInicio.parse(fechaInicio);
                     ubicacion.setFechaInicio(fechaInicioDate);
                 } catch (ParseException e) {
                     e.printStackTrace();
@@ -202,8 +199,9 @@ public class Activity_Info_Ubicacion extends AppCompatActivity implements View.O
 ////////////////////////////////////////////////////////DatePicker Fecha Fin//////////////////////////////////////////////////////////////////////////////////
                 TextView tvFechaFin = findViewById(R.id.tvinfocodigoUbicacionFechaFin);
                 String fechaFin = tvFechaFin.getText().toString();
+                SimpleDateFormat formatFin = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
                 try {
-                    Date fechaFinDate = format.parse(fechaFin);
+                    Date fechaFinDate = formatFin.parse(fechaFin);
                     ubicacion.setFechaFin(fechaFinDate);
                 } catch (ParseException e) {
                     e.printStackTrace();

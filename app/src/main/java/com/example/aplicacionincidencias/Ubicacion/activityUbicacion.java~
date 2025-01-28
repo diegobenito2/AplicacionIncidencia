@@ -35,7 +35,7 @@ public class activityUbicacion extends menutrespuntos {
             return insets;
         });
 
-        ListView listaUbicaciones=findViewById(R.id.ListaUbicacion);
+        ListView listaUbicaciones= (ListView) findViewById(R.id.ListaUbicacion);
         UbicacionHelper ubih = new UbicacionHelper(this, "bbddIncidencias", null, 1);
         ArrayList<EntUbicacion> ubicaciones = ubih.obtenerUbicaciones();
         AdaptadorUbicacion adaptadorUbicacion = new AdaptadorUbicacion(this, ubicaciones.toArray(new EntUbicacion[0]));

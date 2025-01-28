@@ -86,7 +86,7 @@ public class UsuarioHelper extends BbddIncidencias {
     public ArrayList<EntUsuario> obtenerUsuarios() {
         ArrayList<EntUsuario> usuarios = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM usuario", null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLA_USUARIO, null);
 
         if (cursor.moveToFirst()) {
             do {
@@ -139,6 +139,27 @@ public class UsuarioHelper extends BbddIncidencias {
             db.endTransaction();
         }
         return borrados;
+    }
+
+    public EntUsuario obtenerNombreUsuario(String nombreUsuario) {
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLA_USUARIO + " where " + KEY_COL_NOMBRE + "='" + nombreUsuario + "'", null);
+        EntUsuario usuario = null;
+        if (cursor.moveToFirst()) {
+            do {
+                int codigo = cursor.getInt(0);
+                String nombre = cursor.getString(1);
+                String correo = cursor.getString(2);
+                String telefono = cursor.getString(3);
+                String password = cursor.getString(4);
+                int codigoRol = cursor.getInt(5);
+
+                usuario = new EntUsuario(codigo, nombre, correo, telefono, password, codigoRol);
+
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return usuario;
     }
 
 

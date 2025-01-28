@@ -79,7 +79,7 @@ public class RolHelper extends BbddIncidencias {
     public ArrayList<EntRol> obtenerRoles() {
         ArrayList<EntRol> roles = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLA_ROL, null);
+        Cursor cursor = db.rawQuery("SELECT * FROM rol", null);
 
         if (cursor.moveToFirst()) {
             do {

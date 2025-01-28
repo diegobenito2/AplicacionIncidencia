@@ -10,24 +10,20 @@ import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-
 import com.example.aplicacionincidencias.Elemento.ElementoHelper;
 import com.example.aplicacionincidencias.R;
 import com.example.aplicacionincidencias.Usuario.UsuarioHelper;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
-
 import gestionincidencias.entidades.EntElemento;
 import gestionincidencias.entidades.EntPrestamo;
 import gestionincidencias.entidades.EntUsuario;
@@ -42,8 +38,7 @@ public class Activity_Info_Prestamo extends AppCompatActivity implements View.On
     private PrestamoHelper ph = new PrestamoHelper(this, "bbddIncidencias", null, 1);
     private ElementoHelper eh = new ElementoHelper(this, "bbddIncidencias", null, 1);
     private UsuarioHelper uh = new UsuarioHelper(this, "bbddIncidencias", null, 1);
-    private ArrayList<EntElemento> arElementos = eh.obtenerElementos();
-    private ArrayList<EntUsuario> arUsuarios = uh.obtenerUsuarios();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,6 +88,7 @@ public class Activity_Info_Prestamo extends AppCompatActivity implements View.On
             Spinner spinnerElementos = findViewById(R.id.spinnerElemento);
 
             // Configuración del Spinner de Usuarios
+            ArrayList<EntUsuario> arUsuarios = uh.obtenerUsuarios();
             ArrayList<String> listaUsuarios = new ArrayList<>();
             ArrayList<Integer> listaUsuariosIds = new ArrayList<>();
             for (EntUsuario user : arUsuarios) {
@@ -113,6 +109,7 @@ public class Activity_Info_Prestamo extends AppCompatActivity implements View.On
 ////////////////////////////////////////////////////////Fin Spinner Usuarios//////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////Inicio Spinner Elementos//////////////////////////////////////////////////////////////////////////////////
             // Configuración del Spinner de Elementos
+            ArrayList<EntElemento> arElementos = eh.obtenerElementos();
             ArrayList<String> listaElementos = new ArrayList<>();
             ArrayList<Integer> listaElementosIds = new ArrayList<>();
             for (EntElemento elemento : arElementos) {
@@ -185,23 +182,16 @@ public class Activity_Info_Prestamo extends AppCompatActivity implements View.On
                 ////////////////////////////////////////////////////////Spinner Usuarios//////////////////////////////////////////////////////////////////////////////////
                 Spinner spinnerUsuarios = findViewById(R.id.spinnerUsuario);
                 String UsuarioSelected = spinnerUsuarios.getSelectedItem().toString(); //Guardas el nombre del usuario seleccionado
-                for (EntUsuario usuario : arUsuarios) { //Recorres la lista de usuarios.
-                    if (usuario.getNombre().equals(UsuarioSelected)) { //Cuando el nombre es igual al nombre de usuario seleccionado.
-                        prestamo.setIdUsuario(usuario.getCodigoUsuario()); //Cambia el código de usuario del prestamo al del usuario seleccionado.
-                        prestamo.setUsuario(usuario); //Cambia el objeto Usuario del prestamo por el nuevo usuario.
-                    }
-                }
+                EntUsuario usuarioSeleccionado = uh.obtenerNombreUsuario(UsuarioSelected);
+                prestamo.setUsuario(usuarioSeleccionado);
+                prestamo.setIdUsuario(usuarioSeleccionado.getCodigoUsuario());
+
                 ////////////////////////////////////////////////////////Spinner Elementos//////////////////////////////////////////////////////////////////////////////////
                 Spinner spinnerElementos = findViewById(R.id.spinnerElemento);
                 String ElementoSelected = spinnerElementos.getSelectedItem().toString();//Guardas el nombre del elemento seleccionado
-                for (EntElemento elemento : arElementos) {//Recorres la lista de elementos.
-
-                    if (elemento.getNombre().equals(ElementoSelected)) {//Cuando el nombre es igual al nombre del elemento seleccionado.
-                        prestamo.setIdElemento(elemento.getCodigoElemento());  //Cambia el código de elemento del prestamo al del elemento seleccionado.
-                        prestamo.setElemento(elemento);//Cambia el objeto Elemento del prestamo por el nuevo elemento.
-                        break;
-                    }
-                }
+                EntElemento elementoSeleccionado = eh.buscarNombreElemento(ElementoSelected);
+                prestamo.setElemento(elementoSeleccionado);
+                prestamo.setIdElemento(elementoSeleccionado.getCodigoElemento());
 
 
 ////////////////////////////////////////////////////////DatePicker Fecha Inicio//////////////////////////////////////////////////////////////////////////////////

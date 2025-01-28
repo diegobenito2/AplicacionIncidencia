@@ -104,6 +104,19 @@ public class SalaHelper extends BbddIncidencias {
         db.endTransaction();
         return sala;
     }
-
+    public EntSala buscarNombreSala(String nombreSala) {
+        EntSala sala = null;
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor cursor = db.rawQuery("Select * FROM " + TABLA_SALA + " where " + KEY_COL_NOMBRE + "='" + nombreSala + "'", null);
+        if (cursor.moveToFirst()) {
+            do {
+                int codigo = cursor.getInt(0);
+                String nombre = cursor.getString(1);
+                String descripcion = cursor.getString(2);
+                sala = new EntSala(codigo, nombre, descripcion);
+            } while (cursor.moveToNext());
+        }
+        return sala;
+    }
 
 }

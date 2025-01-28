@@ -30,7 +30,7 @@ public class Activity_Info_Usuario extends AppCompatActivity implements View.OnC
     private int RolSelected;
     private UsuarioHelper uh = new UsuarioHelper(this, "bbddIncidencias", null, 1);
     private RolHelper rh = new RolHelper(this, "bbddIncidencias", null, 1);
-    private ArrayList<EntRol> arRoles = rh.obtenerRoles();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +48,7 @@ public class Activity_Info_Usuario extends AppCompatActivity implements View.OnC
         String nombreUsuario = getIntent().getExtras().getString("nombre");
 
         if (codigoUsuario > 0) {
-            uh.obtenerUsuario(codigoUsuario);
+            usuario= uh.obtenerUsuario(codigoUsuario);
         } else if (codigoUsuario == 0 && nombreUsuario.isBlank()) {
             usuario = new EntUsuario(codigoUsuario, nombreUsuario, "", "", "", 0);
         }
@@ -63,6 +63,7 @@ public class Activity_Info_Usuario extends AppCompatActivity implements View.OnC
 
 
             // Configuración del Spinner de Usuarios
+            ArrayList<EntRol> arRoles = rh.obtenerRoles();
             ArrayList<String> listaRoles = new ArrayList<>();
             ArrayList<Integer> listaRolesIds = new ArrayList<>();
             for (EntRol rol : arRoles) {
@@ -97,9 +98,9 @@ public class Activity_Info_Usuario extends AppCompatActivity implements View.OnC
         btnVolver = findViewById(R.id.btnVolverUsuario);
         btnGuardar = findViewById(R.id.btnGuardarUsuario);
         btnBorrar = findViewById(R.id.btnBorrarUsuario);
-        btnBorrar.setOnClickListener((View.OnClickListener) this);
-        btnVolver.setOnClickListener((View.OnClickListener) this);
-        btnGuardar.setOnClickListener((View.OnClickListener) this);
+        btnBorrar.setOnClickListener(this);
+        btnVolver.setOnClickListener(this);
+        btnGuardar.setOnClickListener(this);
 
     }
 
@@ -124,13 +125,9 @@ public class Activity_Info_Usuario extends AppCompatActivity implements View.OnC
 
                 Spinner spinnerRol = findViewById(R.id.spinnerrolUsuario);
                 String RolSelected = spinnerRol.getSelectedItem().toString(); //Guardas el nombre del Tipo seleccionado
-                for (EntRol rol : arRoles) { //Recorres la lista de Tipos.
-                    if (rol.getNombre().equals(RolSelected)) { //Cuando el nombre es igual al nombre de Tipo seleccionado.
-                        usuario.setRol(rol.getCodigo()); //Cambia el código de Tipo del Elemento al del Tipo seleccionado.
-                        usuario.setEntRol(rol); //Cambia el objeto Tipo del Elemento por el nuevo Tipo.
-                        break;
-                    }
-                }
+                EntRol rolSelected = rh.obtenerNombreRol(RolSelected);
+                usuario.setEntRol(rolSelected);
+                usuario.setRol(rolSelected.getCodigo());
 
                 usuario.setNombre(edNombreUsuario.getText().toString());
                 usuario.setCorreo(edCorreoUsuario.getText().toString());

@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 import gestionincidencias.entidades.EntElemento;
 
+
 public class ElementoHelper extends BbddIncidencias {
 
     public ElementoHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
@@ -130,6 +131,24 @@ public class ElementoHelper extends BbddIncidencias {
             db.endTransaction();
         }
         return borrados;
+    }
+
+    public EntElemento buscarNombreElemento(String nombreElemento) {
+        EntElemento elemento = null;
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor cursor = db.rawQuery("Select * from " + TABLA_ELEMENTO + " where " + KEY_COL_NOMBRE + "='" + nombreElemento + "'", null);
+        if (cursor.moveToFirst()) {
+            do {
+                int codigo = cursor.getInt(0);
+                String nombre = cursor.getString(1);
+                String descripcion = cursor.getString(2);
+                int idTipo = cursor.getInt(3);
+                elemento = new EntElemento(codigo, nombre, descripcion, idTipo);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+
+        return elemento;
     }
 
 }
