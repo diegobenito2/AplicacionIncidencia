@@ -29,10 +29,13 @@ public class AdaptadorUbicacion extends ArrayAdapter<EntUbicacion> {
 
         TextView txCodigoUbicacion = Vubicacion.findViewById(R.id.codigoUbicacion);
         TextView txSalaUbicacion = Vubicacion.findViewById(R.id.SalaUbicacion);
-
+        String sala = "--";
+        if (datos[position].getSala() != null) {
+            sala = datos[position].getSala().getNombre();
+        }
 
         txCodigoUbicacion.setText("Codigo Ubicación:" + datos[position].getCodigoUbicacion());
-        txSalaUbicacion.setText("Descripción: " + datos[position].getDescripcion());
+        txSalaUbicacion.setText("Sala: " + sala);
 
         return Vubicacion;
     }

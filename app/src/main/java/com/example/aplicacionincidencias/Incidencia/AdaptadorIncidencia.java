@@ -35,7 +35,11 @@ public class AdaptadorIncidencia extends ArrayAdapter<EntIncidencia> {
 
         txCodigo.setText("Código: " + datos[position].getCodigoIncidencia());
         txDescripcion.setText("Descripción: " + datos[position].getDescripcion());
-        tvUsuarioCreacion.setText("Usuario Creación: " + datos[position].getUsuarioCreacion().getNombre());
+        String usuarioCreacion = "--";
+        if (datos[position].getUsuarioCreacion() != null) {
+            usuarioCreacion = datos[position].getUsuarioCreacion().getNombre();
+        }
+        tvUsuarioCreacion.setText("Usuario Creación: " + usuarioCreacion);
 
 
         return VIncidencia;

@@ -28,7 +28,7 @@ public class AdaptadorUsuario extends ArrayAdapter<EntUsuario> {
         TextView txCodigg = VUsuario.findViewById(R.id.IdCodigoUsuario);
         TextView txNombre = VUsuario.findViewById(R.id.NombreUsuario);
 
-        txCodigg.setText("Codigo: " + String.valueOf(datos[position].getCodigoUsuario()));
+        txCodigg.setText("Codigo: " + datos[position].getCodigoUsuario());
         txNombre.setText("Nombre: " + datos[position].getNombre());
 
 
