@@ -158,37 +158,5 @@ public class IncidenciaHelper extends BbddIncidencias {
         }
         return borrados;
     }
-    public EntIncidencia obtenerDescripcionIncidencia(String descripcionIncidencia) {
-
-        SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM "+TABLA_INCIDENCIA+" where "+ KEY_COL_DESCRIPCION + "='" + descripcionIncidencia+ "'", null);
-
-        EntIncidencia incidencia = null;
-
-        if (cursor.moveToFirst()) {
-            do {
-
-                int codigo = cursor.getInt(0);
-                int idUsuarioCreacion = cursor.getInt(1);
-                int idElemento = cursor.getInt(2);
-                String fechaCreacionstr = cursor.getString(3);
-                String descripcion = cursor.getString(4);
-                Date fechaCreacion = null;
-
-                if (fechaCreacion != null && fechaCreacion.equals("")) {
-                    try {
-                        fechaCreacion = formatter.parse(fechaCreacionstr);
-                    } catch (ParseException e) {
-                        throw new RuntimeException(e);
-                    }
-                }
-
-                incidencia = new EntIncidencia(codigo, descripcion, idElemento, fechaCreacion, idUsuarioCreacion);
-
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        return incidencia;
-    }
 }
 

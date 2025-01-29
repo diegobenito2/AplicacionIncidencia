@@ -78,7 +78,4 @@ public class activityIncidencia extends menutrespuntos {
             }
         });
     }
-    public void filtrado(){
-
-    }
 }

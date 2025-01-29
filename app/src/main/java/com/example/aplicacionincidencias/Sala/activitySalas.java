@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.SearchView;
+
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -17,32 +19,36 @@ import com.example.aplicacionincidencias.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import gestionincidencias.GestionIncidencias;
 import gestionincidencias.entidades.EntSala;
 
-public class activitySalas extends menutrespuntos{
+public class activitySalas extends menutrespuntos {
+    private SearchView svSala = null;
+    private AdaptadorSalas adaptadorSalas = null;
+    private SalaHelper sh = new SalaHelper(this, "bbddIncidencias", null, 1);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_salas);
-        guardaActividad(getSharedPreferences("datos",MODE_PRIVATE),activitySalas.class.toString());
+        guardaActividad(getSharedPreferences("datos", MODE_PRIVATE), activitySalas.class.toString());
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
+        svSala = findViewById(R.id.sVSala);
         // Obtener la referencia al ListView con el ID 'ListaSalas' en el layout de la actividad
-        ListView listaSalas = (ListView) findViewById(R.id.ListaSalas);
+        ListView listaSalas = findViewById(R.id.ListaSalas);
         //Para que coja los datos de la base de datos.
-        SalaHelper sh = new SalaHelper(this, "bbddIncidencias", null, 1);
+
         ArrayList<EntSala> salas = sh.obtenerSalas();
 
         // Crear un adaptador personalizado 'AdaptadorSalas' pasando el contexto actual y el array de salas (convertido a un arreglo de EntSala)
-        AdaptadorSalas adaptadorSalas = new AdaptadorSalas(this, salas.toArray(new EntSala[0]));
+        adaptadorSalas = new AdaptadorSalas(this, salas.toArray(new EntSala[0]));
 
         // Establecer el adaptador al ListView para que cargue los datos de las salas en la interfaz
         listaSalas.setAdapter(adaptadorSalas);
@@ -80,9 +86,24 @@ public class activitySalas extends menutrespuntos{
                 // Pasar datos a la nueva actividad mediante el uso de 'putExtra'. Estos datos corresponden a la sala seleccionada.
 
                 intentInfoSala.putExtra("codigo", 0);
-                intentInfoSala.putExtra("nombre","");
+                intentInfoSala.putExtra("nombre", "");
                 startActivity(intentInfoSala);
             }
+        });
+        svSala.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                List<EntSala> salasFiltradas = sh.filtradoSalas(newText);
+                adaptadorSalas.addAll(salasFiltradas);
+                adaptadorSalas.notifyDataSetChanged();
+                return false;
+            }
+
         });
     }
 

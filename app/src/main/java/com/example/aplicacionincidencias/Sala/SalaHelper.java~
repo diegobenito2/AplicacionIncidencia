@@ -126,7 +126,7 @@ public class SalaHelper extends BbddIncidencias {
         SQLiteDatabase db = getWritableDatabase();
         String query = "SELECT * FROM " + TABLA_SALA + " WHERE " + KEY_COL_NOMBRE + " LIKE ?";
         Cursor cursor = db.rawQuery(query, new String[]{"%" + texto + "%"});
-
+        
         if (cursor.moveToFirst()) {
             do {
                 int codigo = cursor.getInt(0);
