@@ -25,7 +25,7 @@ import gestionincidencias.GestionIncidencias;
 import gestionincidencias.entidades.EntSala;
 
 public class activitySalas extends menutrespuntos {
-    private SearchView svSala = null;
+
     private AdaptadorSalas adaptadorSalas = null;
     private SalaHelper sh = new SalaHelper(this, "bbddIncidencias", null, 1);
 
@@ -40,7 +40,7 @@ public class activitySalas extends menutrespuntos {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        svSala = findViewById(R.id.sVSala);
+
         // Obtener la referencia al ListView con el ID 'ListaSalas' en el layout de la actividad
         ListView listaSalas = findViewById(R.id.ListaSalas);
         //Para que coja los datos de la base de datos.
@@ -90,21 +90,7 @@ public class activitySalas extends menutrespuntos {
                 startActivity(intentInfoSala);
             }
         });
-        svSala.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
 
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                List<EntSala> salasFiltradas = sh.filtradoSalas(newText);
-                adaptadorSalas.addAll(salasFiltradas);
-                adaptadorSalas.notifyDataSetChanged();
-                return false;
-            }
-
-        });
     }
 
 }

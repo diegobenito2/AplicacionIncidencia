@@ -10,20 +10,24 @@ import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
 import com.example.aplicacionincidencias.Elemento.ElementoHelper;
 import com.example.aplicacionincidencias.R;
 import com.example.aplicacionincidencias.Usuario.UsuarioHelper;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
+
 import gestionincidencias.entidades.EntElemento;
 import gestionincidencias.entidades.EntPrestamo;
 import gestionincidencias.entidades.EntUsuario;
@@ -138,7 +142,7 @@ public class Activity_Info_Prestamo extends AppCompatActivity implements View.On
                 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
                 tvfechaInicio.setText(format.format(fechaInicio));
             } else {
-                tvfechaInicio.setText("Fecha no disponible.");
+                tvfechaInicio.setText(new Date(System.currentTimeMillis()).toString());
             }
 ////////////////////////////////////////////////////////DatePicker Fecha Fin//////////////////////////////////////////////////////////////////////////////////
             tvfechaFin = findViewById(R.id.infotvfechaFin);
@@ -148,7 +152,7 @@ public class Activity_Info_Prestamo extends AppCompatActivity implements View.On
                 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
                 tvfechaFin.setText(format.format(fechaFin));
             } else {
-                tvfechaFin.setText("Fecha no disponible.");
+                tvfechaFin.setText(new Date(System.currentTimeMillis()).toString());
             }
 
         }
@@ -197,22 +201,30 @@ public class Activity_Info_Prestamo extends AppCompatActivity implements View.On
 ////////////////////////////////////////////////////////DatePicker Fecha Inicio//////////////////////////////////////////////////////////////////////////////////
                 TextView tvFechaInicio = findViewById(R.id.infotvfechaInicio);
                 String FechaInicio = tvFechaInicio.getText().toString();
-                SimpleDateFormat formatInicio = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
-                try {
-                    Date fechaInicio = formatInicio.parse(FechaInicio);
-                    prestamo.setFechaInicio(fechaInicio);
-                } catch (ParseException e) {
-                    e.printStackTrace();
+                if (FechaInicio != null) {
+                    SimpleDateFormat formatInicio = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+                    try {
+                        Date fechaInicio = formatInicio.parse(FechaInicio);
+                        prestamo.setFechaInicio(fechaInicio);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    prestamo.setFechaInicio(new Date(System.currentTimeMillis()));
                 }
 ////////////////////////////////////////////////////////DatePicker Fecha Fin//////////////////////////////////////////////////////////////////////////////////
                 TextView tvFechaFin = findViewById(R.id.infotvfechaFin);
                 String fechaFin = tvFechaFin.getText().toString();
-                SimpleDateFormat formatFin = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
-                try {
-                    Date fechaFinal = formatFin.parse(fechaFin);
-                    prestamo.setFechaFin(fechaFinal);
-                } catch (ParseException e) {
-                    e.printStackTrace();
+                if (fechaFin != null) {
+                    SimpleDateFormat formatFin = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+                    try {
+                        Date fechaFinal = formatFin.parse(fechaFin);
+                        prestamo.setFechaFin(fechaFinal);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    prestamo.setFechaFin(new Date(System.currentTimeMillis()));
                 }
                 //Si es un nuevo prestamo que le ponga el codigo automatico y que lo agrege al final de la lista.
                 if (prestamo.getCodigoPrestamo() == 0) {

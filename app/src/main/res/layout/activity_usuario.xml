@@ -7,13 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".Usuario.ActivityUsuario">
 
-    <SearchView
-        android:id="@+id/sVUsuario"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabAñadirUsuario"
@@ -31,7 +24,7 @@
     <ListView
         android:id="@+id/ListaUsuario"
         android:layout_width="410dp"
-        android:layout_height="683dp"
+        android:layout_height="734dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/sVUsuario"/>
+        tools:layout_editor_absoluteY="-3dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

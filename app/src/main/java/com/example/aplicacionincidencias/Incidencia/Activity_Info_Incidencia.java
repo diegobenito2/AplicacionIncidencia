@@ -62,23 +62,21 @@ public class Activity_Info_Incidencia extends AppCompatActivity implements View.
         int codigoIncidencia = getIntent().getExtras().getInt("codigoIncidencia");
         String descripcionIncidencia = getIntent().getExtras().getString("descripcionIncidencia");
 
-        ArrayList<EntUsuario> usuarios = uh.obtenerUsuarios();
 
         if (codigoIncidencia > 0) {
             incidencia = ih.obtenerIncidencia(codigoIncidencia);
         } else if (codigoIncidencia == 0 && descripcionIncidencia.isEmpty()) {
             Date nuevafechacreacion = null;
 
-            String fecha = "2024-01-01 10:30:00";
+
             SimpleDateFormat formatInicio = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
             try {
-                nuevafechacreacion = formatInicio.parse(fecha);
+                nuevafechacreacion = formatInicio.parse(String.valueOf(new Date(System.currentTimeMillis())));
             } catch (ParseException e) {
                 e.printStackTrace();
             }
             incidencia = new EntIncidencia(0, "", 0, nuevafechacreacion, 0);
         }
-
 
 
         if (incidencia != null) {
@@ -145,7 +143,7 @@ public class Activity_Info_Incidencia extends AppCompatActivity implements View.
             if (fechaCreacion != null) {
                 tvFechaCreacion.setText(format.format(fechaCreacion));
             } else {
-
+                tvFechaCreacion.setText(format.format(new Date(System.currentTimeMillis())));
             }
         }
         btnVolver = findViewById(R.id.btnVolverIncidencia);
@@ -191,13 +189,17 @@ public class Activity_Info_Incidencia extends AppCompatActivity implements View.
                 incidencia.setDescripcion(edDescripcionIncidencia.getText().toString());
 
                 tvFechaCreacion = findViewById(R.id.tvInfoFechaCreacion);
-                String FechaCreacion = tvFechaCreacion.getText().toString();
-                SimpleDateFormat formatCreacion = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
-                try {
-                    Date fechaCreacion = formatCreacion.parse(FechaCreacion);
-                    incidencia.setFechaCreacion(fechaCreacion);
-                } catch (ParseException e) {
-                    e.printStackTrace();
+                String FechaCreacion = incidencia.getFechaCreacion().toString();
+                if (FechaCreacion != null) {
+                    SimpleDateFormat formatCreacion = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+                    try {
+                        Date fechaCreacion = formatCreacion.parse(FechaCreacion);
+                        incidencia.setFechaCreacion(fechaCreacion);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    incidencia.setFechaCreacion(new Date(System.currentTimeMillis()));
                 }
 
                 if (incidencia.getCodigoIncidencia() != 0) {
@@ -219,7 +221,11 @@ public class Activity_Info_Incidencia extends AppCompatActivity implements View.
             @Override
             public void onClick(View view) {
                 Calendar c = Calendar.getInstance();
-                c.setTime(incidencia.getFechaCreacion());
+                if (incidencia.getFechaCreacion() != null) {
+                    c.setTime(incidencia.getFechaCreacion());
+                } else {
+                    c.setTime(new Date(System.currentTimeMillis()));
+                }
                 DatePickerDialog dialogo = new DatePickerDialog(Activity_Info_Incidencia.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int y, int m, int d) {

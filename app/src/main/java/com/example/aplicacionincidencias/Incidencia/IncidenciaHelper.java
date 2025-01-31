@@ -103,7 +103,7 @@ public class IncidenciaHelper extends BbddIncidencias {
                 String descripcion = cursor.getString(4);
                 Date fechaCreacion = null;
 
-                if (fechaCreacion != null && fechaCreacion.equals("")) {
+                if (fechaCreacionstr != null && !fechaCreacionstr.equals("")) {
                     try {
                         fechaCreacion = formatter.parse(fechaCreacionstr);
                     } catch (ParseException e) {
