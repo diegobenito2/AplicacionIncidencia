@@ -155,10 +155,11 @@ public class UsuarioHelper extends BbddIncidencias {
                 int codigoRol = cursor.getInt(5);
 
                 usuario = new EntUsuario(codigo, nombre, correo, telefono, password, codigoRol);
+                System.out.println("kia");
 
             } while (cursor.moveToNext());
         }
-        cursor.close();
+
         return usuario;
     }
 

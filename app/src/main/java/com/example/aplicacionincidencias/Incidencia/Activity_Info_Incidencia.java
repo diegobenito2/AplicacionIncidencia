@@ -61,6 +61,9 @@ public class Activity_Info_Incidencia extends AppCompatActivity implements View.
 
         int codigoIncidencia = getIntent().getExtras().getInt("codigoIncidencia");
         String descripcionIncidencia = getIntent().getExtras().getString("descripcionIncidencia");
+
+        ArrayList<EntUsuario> usuarios = uh.obtenerUsuarios();
+
         if (codigoIncidencia > 0) {
             incidencia = ih.obtenerIncidencia(codigoIncidencia);
         } else if (codigoIncidencia == 0 && descripcionIncidencia.isEmpty()) {
@@ -75,6 +78,9 @@ public class Activity_Info_Incidencia extends AppCompatActivity implements View.
             }
             incidencia = new EntIncidencia(0, "", 0, nuevafechacreacion, 0);
         }
+
+
+
         if (incidencia != null) {
             TextView tvInfoCodigoIncidencia = findViewById(R.id.tvinfoCodigoIncidencia);
             EditText edDescripcionIncidencia = findViewById(R.id.edDescripcionIncidencia);

@@ -10,6 +10,8 @@ import com.example.aplicacionincidencias.Bbdd.BbddIncidencias;
 import com.example.aplicacionincidencias.Usuario.UsuarioHelper;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import gestionincidencias.entidades.EntIncidencia;
@@ -61,7 +63,11 @@ public class IncidenciaHelper extends BbddIncidencias {
             values.put(KEY_COL_DESCRIPCION, incidencia.getDescripcion());
             values.put("idElemento", incidencia.getIdElemento());
             values.put("idUsuarioCreacion", incidencia.getIdUsuarioCreacion());
-            values.put("fechaCreacion", formatter.format(incidencia.getFechaCreacion()));
+            if (incidencia.getFechaCreacion() != null) {
+                values.put("fechaCreacion", formatter.format(incidencia.getFechaCreacion()));
+            }else{
+                values.put("fechaCreacion", formatter.format(new Date(System.currentTimeMillis())));
+            }
 
 
             int rows = db.update(TABLA_INCIDENCIA, values, "codigo = ?",
