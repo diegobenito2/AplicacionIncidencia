@@ -164,5 +164,6 @@ public class IncidenciaHelper extends BbddIncidencias {
         }
         return borrados;
     }
+     
 }
 
