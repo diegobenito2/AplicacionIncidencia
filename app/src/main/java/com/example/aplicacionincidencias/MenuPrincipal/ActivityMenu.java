@@ -14,6 +14,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.aplicacionincidencias.Bbdd.BbddIncidencias;
 import com.example.aplicacionincidencias.Elemento.ElementoHelper;
 import com.example.aplicacionincidencias.Elemento.activityElemento;
+import com.example.aplicacionincidencias.Incidencia.Filtrado;
 import com.example.aplicacionincidencias.Incidencia.IncidenciaHelper;
 import com.example.aplicacionincidencias.Incidencia.activityIncidencia;
 import com.example.aplicacionincidencias.Prestamo.ActivityPrestamo;
@@ -51,6 +52,7 @@ public class ActivityMenu extends menutrespuntos implements View.OnClickListener
     private Button ButtonMenuElemento;
     private Button ButtonMenuIncidencia;
     private Button ButtonMenuRol;
+    Button filtrarIncidencia;
     private boolean revisionInicial;
 
     @Override
@@ -116,6 +118,7 @@ public class ActivityMenu extends menutrespuntos implements View.OnClickListener
         ButtonMenuElemento = findViewById(R.id.ButtonMenuElemento);
         ButtonMenuIncidencia = findViewById(R.id.ButtonMenuIncidencia);
         ButtonMenuRol = findViewById(R.id.ButtonMenuRol);
+        filtrarIncidencia = findViewById(R.id.filtrarIncidencia);
 
     }
 
@@ -128,6 +131,7 @@ public class ActivityMenu extends menutrespuntos implements View.OnClickListener
         ButtonMenuElemento.setOnClickListener((View.OnClickListener) this);
         ButtonMenuIncidencia.setOnClickListener((View.OnClickListener) this);
         ButtonMenuRol.setOnClickListener((View.OnClickListener) this);
+        filtrarIncidencia.setOnClickListener((View.OnClickListener) this);
     }
 
     @Override
@@ -162,6 +166,11 @@ public class ActivityMenu extends menutrespuntos implements View.OnClickListener
         });
         ButtonMenuRol.setOnClickListener(v -> {
             Intent intent = new Intent(this, Activity_Rol.class);
+            startActivity(intent);
+        });
+
+        filtrarIncidencia.setOnClickListener(v -> {
+            Intent intent = new Intent(this, Filtrado.class);
             startActivity(intent);
         });
 
@@ -210,7 +219,7 @@ public class ActivityMenu extends menutrespuntos implements View.OnClickListener
         }
 
         IncidenciaHelper ih = new IncidenciaHelper(this, "bbddIncidencias", null, 1);
-        ArrayList<EntIncidencia> incidencias = ih.obtenerIncidencias();
+        ArrayList<EntIncidencia> incidencias = ih.obtenerIncidencias(null);
         if (incidencias == null || incidencias.isEmpty()) {
             for (EntIncidencia i : GestionIncidencias.getArIncidencias()) {
                 ih.crearIncidencia(i);

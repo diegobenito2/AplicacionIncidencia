@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 
 import androidx.activity.EdgeToEdge;
@@ -18,7 +19,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
-import gestionincidencias.GestionIncidencias;
 import gestionincidencias.entidades.EntIncidencia;
 import gestionincidencias.entidades.EntUsuario;
 
@@ -36,19 +36,31 @@ public class activityIncidencia extends menutrespuntos {
         });
         ListView listaIncidencia = findViewById(R.id.ListaIncidencia);
         IncidenciaHelper ih = new IncidenciaHelper(this, "bbddIncidencias", null, 1);
-        ArrayList<EntIncidencia> incidencias = ih.obtenerIncidencias();
-        AdaptadorIncidencia adaptadorIncidencia = new AdaptadorIncidencia(this, incidencias.toArray(new EntIncidencia[0]));
+        Bundle extras = getIntent().getExtras();
+        String filtro = null;
+        if (extras != null) {
+            filtro = extras.getString("filtro");
+        }
+        ArrayList<EntIncidencia> incidencias = null;
+        if (filtro != null) {
+            incidencias = ih.obtenerIncidencias(filtro);
+            AdaptadorIncidencia adaptadorIncidencia = new AdaptadorIncidencia(this, incidencias.toArray(new EntIncidencia[0]));
+            listaIncidencia.setAdapter(adaptadorIncidencia);
+        } else {
+            incidencias = ih.obtenerIncidencias(null);
+            AdaptadorIncidencia adaptadorIncidencia = new AdaptadorIncidencia(this, incidencias.toArray(new EntIncidencia[0]));
+            listaIncidencia.setAdapter(adaptadorIncidencia);
+        }
         UsuarioHelper uh = new UsuarioHelper(this, "bbddIncidencias", null, 1);
         ArrayList<EntUsuario> usuarios = uh.obtenerUsuarios();
-        for (EntIncidencia i : incidencias){
-            for (EntUsuario u: usuarios){
-                if (i.getIdUsuarioCreacion() == u.getCodigoUsuario()){
+        for (EntIncidencia i : incidencias) {
+            for (EntUsuario u : usuarios) {
+                if (i.getIdUsuarioCreacion() == u.getCodigoUsuario()) {
                     i.setUsuarioCreacion(u);
                     break;
                 }
             }
         }
-        listaIncidencia.setAdapter(adaptadorIncidencia);
 
         listaIncidencia.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -77,5 +89,6 @@ public class activityIncidencia extends menutrespuntos {
                 startActivity(intentInfoIncidencia);
             }
         });
+
     }
 }

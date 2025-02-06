@@ -5,15 +5,20 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+
 import androidx.annotation.Nullable;
+
+import com.android.car.ui.IFocusArea;
 import com.example.aplicacionincidencias.Bbdd.BbddIncidencias;
 import com.example.aplicacionincidencias.Usuario.UsuarioHelper;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
+
 import gestionincidencias.entidades.EntIncidencia;
 
 
@@ -65,7 +70,7 @@ public class IncidenciaHelper extends BbddIncidencias {
             values.put("idUsuarioCreacion", incidencia.getIdUsuarioCreacion());
             if (incidencia.getFechaCreacion() != null) {
                 values.put("fechaCreacion", formatter.format(incidencia.getFechaCreacion()));
-            }else{
+            } else {
                 values.put("fechaCreacion", formatter.format(new Date(System.currentTimeMillis())));
             }
 
@@ -89,7 +94,7 @@ public class IncidenciaHelper extends BbddIncidencias {
     public EntIncidencia obtenerIncidencia(int idIncidencia) {
 
         SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM "+TABLA_INCIDENCIA+" where "+ KEY_COL_CODIGO + "=" + idIncidencia, null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLA_INCIDENCIA + " where " + KEY_COL_CODIGO + "=" + idIncidencia, null);
 
         EntIncidencia incidencia = null;
 
@@ -111,42 +116,52 @@ public class IncidenciaHelper extends BbddIncidencias {
                     }
                 }
 
-                 incidencia = new EntIncidencia(codigo, descripcion, idElemento, fechaCreacion, idUsuarioCreacion);
+                incidencia = new EntIncidencia(codigo, descripcion, idElemento, fechaCreacion, idUsuarioCreacion);
 
             } while (cursor.moveToNext());
         }
         return incidencia;
     }
 
-    public ArrayList<EntIncidencia> obtenerIncidencias() {
+    public ArrayList<EntIncidencia> obtenerIncidencias(String texto) {
         ArrayList<EntIncidencia> incidencias = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM incidencia", null);
+        Cursor cursor = null;
 
-        if (cursor.moveToFirst()) {
-            do {
-
-                int codigo = cursor.getInt(0);
-                int idUsuarioCreacion = cursor.getInt(1);
-                int idElemento = cursor.getInt(2);
-                String fechaCreacionstr = cursor.getString(3);
-                String descripcion = cursor.getString(4);
-                Date fechaCreacion = null;
-
-                if (fechaCreacion != null && fechaCreacion.equals("")) {
-                    try {
-                        fechaCreacion = formatter.parse(fechaCreacionstr);
-                    } catch (ParseException e) {
-                        throw new RuntimeException(e);
-                    }
-                }
-
-                EntIncidencia incidencia = new EntIncidencia(codigo, descripcion, idElemento, fechaCreacion, idUsuarioCreacion);
-                incidencias.add(incidencia);
-            } while (cursor.moveToNext());
+        if (texto != null && !texto.isEmpty()) {
+            cursor = db.rawQuery("SELECT * FROM incidencia WHERE descripcion LIKE ?", new String[]{"%" + texto + "%"});
+        } else {
+            cursor = db.rawQuery("SELECT * FROM incidencia", null);
         }
+
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                do {
+                    int codigo = cursor.getInt(0);
+                    int idUsuarioCreacion = cursor.getInt(1);
+                    int idElemento = cursor.getInt(2);
+                    String fechaCreacionstr = cursor.getString(3);
+                    String descripcion = cursor.getString(4);
+                    Date fechaCreacion = null;
+
+                    if (fechaCreacionstr != null && !fechaCreacionstr.equals("")) {
+                        try {
+                            fechaCreacion = formatter.parse(fechaCreacionstr);
+                        } catch (ParseException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+
+                    EntIncidencia incidencia = new EntIncidencia(codigo, descripcion, idElemento, fechaCreacion, idUsuarioCreacion);
+                    incidencias.add(incidencia);
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+        }
+        db.close();
         return incidencias;
     }
+
 
     public int borrarIncidencia(int codigo) {
         SQLiteDatabase db = getWritableDatabase();
@@ -164,6 +179,7 @@ public class IncidenciaHelper extends BbddIncidencias {
         }
         return borrados;
     }
-     
+
+
 }
 
