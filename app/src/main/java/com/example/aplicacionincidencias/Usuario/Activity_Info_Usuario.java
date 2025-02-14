@@ -48,7 +48,7 @@ public class Activity_Info_Usuario extends AppCompatActivity implements View.OnC
         String nombreUsuario = getIntent().getExtras().getString("nombre");
 
         if (codigoUsuario > 0) {
-            usuario= uh.obtenerUsuario(codigoUsuario);
+            usuario = uh.obtenerUsuario(codigoUsuario);
         } else if (codigoUsuario == 0 && nombreUsuario.isBlank()) {
             usuario = new EntUsuario(codigoUsuario, nombreUsuario, "", "", "", 0);
         }
@@ -106,17 +106,15 @@ public class Activity_Info_Usuario extends AppCompatActivity implements View.OnC
 
     @Override
     public void onClick(View view) {
-        btnVolver.setOnClickListener(v -> {
+        if (view.getId() == R.id.btnVolverUsuario) {
             Intent intent = new Intent(this, ActivityUsuario.class);
             startActivity(intent);
-        });
-        btnBorrar.setOnClickListener(v -> {
+        } else if (view.getId() == R.id.btnBorrarUsuario) {
             uh.borrarUsuario(usuario.getCodigoUsuario());
             Toast.makeText(getApplicationContext(), "Usuario Borrado Correctamente", Toast.LENGTH_SHORT).show();
             Intent intentVolverUsuario = new Intent(view.getContext(), ActivityUsuario.class);
             startActivity(intentVolverUsuario);
-        });
-        btnGuardar.setOnClickListener(v -> {
+        } else if (view.getId() == R.id.btnGuardarUsuario) {
             if (usuario != null) {
                 EditText edNombreUsuario = findViewById(R.id.edNombreUsuario);
                 EditText edCorreoUsuario = findViewById(R.id.edcorreoUsuario);
@@ -146,7 +144,7 @@ public class Activity_Info_Usuario extends AppCompatActivity implements View.OnC
                 Intent intentVolverUsuario = new Intent(view.getContext(), ActivityUsuario.class);
                 startActivity(intentVolverUsuario);
             }
-        });
+        }
     }
 }
 

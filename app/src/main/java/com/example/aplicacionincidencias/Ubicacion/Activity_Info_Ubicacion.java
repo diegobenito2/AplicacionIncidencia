@@ -165,17 +165,15 @@ public class Activity_Info_Ubicacion extends AppCompatActivity implements View.O
 
     @Override
     public void onClick(View view) {
-        btnVolver.setOnClickListener(v -> {
+        if (view.getId() == R.id.btnVolverUbicacion) {
             Intent intent = new Intent(this, activityUbicacion.class);
             startActivity(intent);
-        });
-        btnBorrar.setOnClickListener(v -> {
+        } else if (view.getId() == R.id.btnBorrarUbicacion) {
             ubih.borrarUbicacion(ubicacion.getCodigoUbicacion());
             Toast.makeText(getApplicationContext(), "Ubicación Borrada Correctamente", Toast.LENGTH_SHORT).show();
             Intent intentVolverUbicacion = new Intent(view.getContext(), activityUbicacion.class);
             startActivity(intentVolverUbicacion);
-        });
-        btnGuardar.setOnClickListener(v -> {
+        } else if (view.getId() == R.id.btnGuardarUbicacion) {
             if (ubicacion != null) {
 
 ////////////////////////////////////////////////////////Spinner Salas//////////////////////////////////////////////////////////////////////////////////
@@ -223,7 +221,7 @@ public class Activity_Info_Ubicacion extends AppCompatActivity implements View.O
                 Intent intentVolverUbicacion = new Intent(view.getContext(), activityUbicacion.class);
                 startActivity(intentVolverUbicacion);
             }
-        });
+        }
 
         // Listener para seleccionar fecha de inicio.
         tvFechaInicio.setOnClickListener(new View.OnClickListener() {

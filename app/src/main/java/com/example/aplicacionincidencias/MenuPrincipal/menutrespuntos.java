@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.aplicacionincidencias.Elemento.activityElemento;
+import com.example.aplicacionincidencias.Incidencia.Filtrado;
 import com.example.aplicacionincidencias.Incidencia.activityIncidencia;
 import com.example.aplicacionincidencias.Prestamo.ActivityPrestamo;
 import com.example.aplicacionincidencias.R;
@@ -34,8 +35,11 @@ public class menutrespuntos extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-
-        if (item.getItemId() == R.id.itemMenuSalas) {
+        if (item.getItemId() == R.id.itemMenuPrincipal) {
+            Intent intentMenuPrincipal = new Intent(this, ActivityMenu.class);
+            startActivity(intentMenuPrincipal);
+            return true;
+        } else if (item.getItemId() == R.id.itemMenuSalas) {
             Intent intentSalas = new Intent(this, activitySalas.class);
             startActivity(intentSalas);
             return true;
@@ -67,10 +71,13 @@ public class menutrespuntos extends AppCompatActivity {
             Intent intentRol = new Intent(this, Activity_Rol.class);
             startActivity(intentRol);
             return true;
-        }else {
+        } else if (item.getItemId() == R.id.itemMenufiltrado) {
+            Intent intentfiltrado = new Intent(this, Filtrado.class);
+            startActivity(intentfiltrado);
+            return true;
+        } else {
             return super.onOptionsItemSelected(item);
         }
-
     }
 
     public void guardaActividad(SharedPreferences prefs, String valor) {

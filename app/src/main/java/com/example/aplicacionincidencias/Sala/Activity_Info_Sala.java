@@ -68,11 +68,10 @@ public class Activity_Info_Sala extends AppCompatActivity implements View.OnClic
 
     @Override
     public void onClick(View view) {
-        btnVolver.setOnClickListener(v -> {
+        if (view.getId() == R.id.btnVolverSala){
             Intent intent = new Intent(this, activitySalas.class);
             startActivity(intent);
-        });
-        btnBorrar.setOnClickListener(v -> {
+        } else if (view.getId() == R.id.btnBorrarSala) {
 
             int borrado = sdh.borrarSala(sala.getCodigoSala());
             if (borrado == 1) {
@@ -80,8 +79,9 @@ public class Activity_Info_Sala extends AppCompatActivity implements View.OnClic
             }
             Intent intentVolverSalas = new Intent(view.getContext(), activitySalas.class);
             startActivity(intentVolverSalas);
-        });
-        btnGuardar.setOnClickListener(v -> {
+
+        } else if (view.getId() == R.id.btnGuardarSala) {
+
             if (sala != null) {
                 EditText edNombreSala = findViewById(R.id.editNombreSala);
                 EditText edDescripcion = findViewById(R.id.editDescripcionSala);
@@ -101,7 +101,11 @@ public class Activity_Info_Sala extends AppCompatActivity implements View.OnClic
                 Intent intentVolverSalas = new Intent(view.getContext(), activitySalas.class);
                 startActivity(intentVolverSalas);
             }
-        });
+        }
+
+
+
+
     }
 }
 

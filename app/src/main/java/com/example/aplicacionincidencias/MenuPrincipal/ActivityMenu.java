@@ -53,7 +53,7 @@ public class ActivityMenu extends menutrespuntos implements View.OnClickListener
     private Button ButtonMenuIncidencia;
     private Button ButtonMenuRol;
     Button filtrarIncidencia;
-    private boolean revisionInicial;
+    private static boolean revisionInicial;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,42 +69,42 @@ public class ActivityMenu extends menutrespuntos implements View.OnClickListener
         initComponents();
         initListeners();
         //******************************Parte para guardar la actividad en la que se ha cerrado la aplicación***************//
-//        String ultima = getUltimaActividad(getSharedPreferences("datos", MODE_PRIVATE));
-//
-//        if (!revisionInicial && ultima != null && !ultima.isEmpty()) {
-//            if (ultima.equals(activitySalas.class.toString())) {
-//                Intent intentSala = new Intent(this, activitySalas.class);
-//                startActivity(intentSala);
-//            } else if (ultima.equals(activityElemento.class.toString())) {
-//                Intent intentElemento = new Intent(this, activityElemento.class);
-//                startActivity(intentElemento);
-//            } else if (ultima.equals(activityIncidencia.class.toString())) {
-//                Intent intentIncidencias = new Intent(this, activityIncidencia.class);
-//                startActivity(intentIncidencias);
-//            } else if (ultima.equals(activityTipo.class.toString())) {
-//                Intent intentTipo = new Intent(this, activityTipo.class);
-//                startActivity(intentTipo);
-//            } else if (ultima.equals(activityUbicacion.class.toString())) {
-//                Intent intentUbicacion = new Intent(this, activityUbicacion.class);
-//                startActivity(intentUbicacion);
-//            } else if (ultima.equals(Activity_Rol.class.toString())) {
-//                Intent intentRol = new Intent(this, Activity_Rol.class);
-//                startActivity(intentRol);
-//            } else if (ultima.equals(ActivityPrestamo.class.toString())) {
-//                Intent intentPrestamo = new Intent(this, ActivityPrestamo.class);
-//                startActivity(intentPrestamo);
-//            } else if (ultima.equals(ActivityUsuario.class.toString())) {
-//                Intent intentUsuario = new Intent(this, ActivityUsuario.class);
-//                startActivity(intentUsuario);
-//            }
-//
-//            revisionInicial = true;
-//        }
-//        guardaActividad(getSharedPreferences("datos", MODE_PRIVATE), "");
+        String ultima = getUltimaActividad(getSharedPreferences("datos", MODE_PRIVATE));
+
+        if (!revisionInicial && ultima != null && !ultima.isEmpty()) {
+            if (ultima.equals(activitySalas.class.toString())) {
+                Intent intentSala = new Intent(this, activitySalas.class);
+                startActivity(intentSala);
+            } else if (ultima.equals(activityElemento.class.toString())) {
+                Intent intentElemento = new Intent(this, activityElemento.class);
+                startActivity(intentElemento);
+            } else if (ultima.equals(activityIncidencia.class.toString())) {
+                Intent intentIncidencias = new Intent(this, activityIncidencia.class);
+                startActivity(intentIncidencias);
+            } else if (ultima.equals(activityTipo.class.toString())) {
+                Intent intentTipo = new Intent(this, activityTipo.class);
+                startActivity(intentTipo);
+            } else if (ultima.equals(activityUbicacion.class.toString())) {
+                Intent intentUbicacion = new Intent(this, activityUbicacion.class);
+                startActivity(intentUbicacion);
+            } else if (ultima.equals(Activity_Rol.class.toString())) {
+                Intent intentRol = new Intent(this, Activity_Rol.class);
+                startActivity(intentRol);
+            } else if (ultima.equals(ActivityPrestamo.class.toString())) {
+                Intent intentPrestamo = new Intent(this, ActivityPrestamo.class);
+                startActivity(intentPrestamo);
+            } else if (ultima.equals(ActivityUsuario.class.toString())) {
+                Intent intentUsuario = new Intent(this, ActivityUsuario.class);
+                startActivity(intentUsuario);
+            }
+
+            revisionInicial = true;
+        }
+        guardaActividad(getSharedPreferences("datos", MODE_PRIVATE), "");
         //Parte de la base de datos
         BbddIncidencias bbdd = new BbddIncidencias(this, "bbddIncidencias", null, 1);
         SQLiteDatabase db = bbdd.getWritableDatabase();
-//        bbdd.onUpgrade(db, 0, 0); // Para borrar las tablas
+        bbdd.onUpgrade(db, 0, 0); // Para borrar las tablas
         cargarDatosBBDD();
 
     }
@@ -136,45 +136,34 @@ public class ActivityMenu extends menutrespuntos implements View.OnClickListener
 
     @Override
     public void onClick(View view) {
-        ButtonMenuSala.setOnClickListener(v -> {
+        if (view.getId() == R.id.ButtonMenuSala) {
             Intent intent = new Intent(this, activitySalas.class);
             startActivity(intent);
-        });
-        ButtonMenuTipo.setOnClickListener(v -> {
+        } else if (view.getId() == R.id.ButtonMenuTipo) {
             Intent intent = new Intent(this, activityTipo.class);
             startActivity(intent);
-        });
-        ButtonMenuPrestamo.setOnClickListener(v -> {
+        } else if (view.getId() == R.id.ButtonMenuPrestamo) {
             Intent intent = new Intent(this, ActivityPrestamo.class);
             startActivity(intent);
-        });
-        ButtonMenuUbicacion.setOnClickListener(v -> {
+        } else if (view.getId() == R.id.ButtonMenuUbicacion) {
             Intent intent = new Intent(this, activityUbicacion.class);
             startActivity(intent);
-        });
-        ButtonMenuUsuario.setOnClickListener(v -> {
+        } else if (view.getId() == R.id.ButtonMenuUsuario) {
             Intent intent = new Intent(this, ActivityUsuario.class);
             startActivity(intent);
-        });
-        ButtonMenuElemento.setOnClickListener(v -> {
+        }else if (view.getId() == R.id.ButtonMenuElemento){
             Intent intent = new Intent(this, activityElemento.class);
             startActivity(intent);
-        });
-        ButtonMenuIncidencia.setOnClickListener(v -> {
+        } else if (view.getId() == R.id.ButtonMenuIncidencia) {
             Intent intent = new Intent(this, activityIncidencia.class);
             startActivity(intent);
-        });
-        ButtonMenuRol.setOnClickListener(v -> {
+        } else if (view.getId() == R.id.ButtonMenuRol) {
             Intent intent = new Intent(this, Activity_Rol.class);
             startActivity(intent);
-        });
-
-        filtrarIncidencia.setOnClickListener(v -> {
+        } else if (view.getId() == R.id.filtrarIncidencia) {
             Intent intent = new Intent(this, Filtrado.class);
             startActivity(intent);
-        });
-
-
+        }
     }
 
     public void cargarDatosBBDD() {

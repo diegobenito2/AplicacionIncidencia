@@ -68,19 +68,19 @@ public class Activity_Info_Rol extends AppCompatActivity implements View.OnClick
 
     @Override
     public void onClick(View view) {
-        btnVolver.setOnClickListener(v -> {
+        if (view.getId() ==R.id.btnVolverRol){
             Intent intent = new Intent(this, Activity_Rol.class);
             startActivity(intent);
-        });
-        btnBorrar.setOnClickListener(v -> {
+        } else if (view.getId()==R.id.btnBorrarRol) {
+
             int borrado = rh.borrarRol(rol.getCodigo());
             if (borrado == 1) {
                 Toast.makeText(getApplicationContext(), "Rol Borrado Correctamente", Toast.LENGTH_SHORT).show();
             }
             Intent intentVolverRol = new Intent(view.getContext(), Activity_Rol.class);
             startActivity(intentVolverRol);
-        });
-        btnGuardar.setOnClickListener(v -> {
+        } else if (view.getId() == R.id.btnGuardarRol) {
+
             if (rol != null) {
                 EditText edNombreRol = findViewById(R.id.edNombreRol);
                 EditText edDescripcion = findViewById(R.id.edDescripcionRol);
@@ -100,6 +100,7 @@ public class Activity_Info_Rol extends AppCompatActivity implements View.OnClick
                 Intent intentVolverRol = new Intent(view.getContext(), Activity_Rol.class);
                 startActivity(intentVolverRol);
             }
-        });
+        }
+
     }
 }

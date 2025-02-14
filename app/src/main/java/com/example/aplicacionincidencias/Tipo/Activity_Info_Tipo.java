@@ -71,19 +71,17 @@ public class Activity_Info_Tipo extends AppCompatActivity implements View.OnClic
 
     @Override
     public void onClick(View view) {
-        btnVolver.setOnClickListener(v -> {
+        if (view.getId() == R.id.btnVolverTipo) {
             Intent intent = new Intent(this, activityTipo.class);
             startActivity(intent);
-        });
-        btnBorrar.setOnClickListener(v -> {
+        } else if (view.getId() == R.id.btnBorrarTipo) {
             int borrado = th.borrarTipo(tipo.getCodigoTipo());
             if (borrado == 1) {
                 Toast.makeText(getApplicationContext(), "Tipo Borrado Correctamente", Toast.LENGTH_SHORT).show();
             }
             Intent intentVolverTipo = new Intent(view.getContext(), activityTipo.class);
             startActivity(intentVolverTipo);
-        });
-        btnGuardar.setOnClickListener(v -> {
+        } else if (view.getId() == R.id.btnGuardarTipo) {
             if (tipo != null) {
                 EditText edNombreTipo = findViewById(R.id.editNombreTipo);
                 EditText edDescripcion = findViewById(R.id.editDescripcionTipo);
@@ -104,6 +102,6 @@ public class Activity_Info_Tipo extends AppCompatActivity implements View.OnClic
                 Intent intentVolverTipo = new Intent(view.getContext(), activityTipo.class);
                 startActivity(intentVolverTipo);
             }
-        });
+        }
     }
 }

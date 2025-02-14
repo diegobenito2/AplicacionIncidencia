@@ -170,17 +170,17 @@ public class Activity_Info_Prestamo extends AppCompatActivity implements View.On
 
     @Override
     public void onClick(View view) {
-        btnVolver.setOnClickListener(v -> {
+        if (view.getId() == R.id.btnVolverPrestamo) {
             Intent intent = new Intent(this, ActivityPrestamo.class);
             startActivity(intent);
-        });
-        btnBorrar.setOnClickListener(v -> {
+        } else if (view.getId() == R.id.btnBorrarPrestamo) {
+
             ph.borrarPrestamo(prestamo.getCodigoPrestamo());
             Toast.makeText(getApplicationContext(), "Prestamo Borrado Correctamente", Toast.LENGTH_SHORT).show();
             Intent intentVolverPrestamos = new Intent(view.getContext(), ActivityPrestamo.class);
             startActivity(intentVolverPrestamos);
-        });
-        btnGuardar.setOnClickListener(v -> {
+        } else if (view.getId() == R.id.btnGuardarPrestamo) {
+
             if (prestamo != null) {
 
                 ////////////////////////////////////////////////////////Spinner Usuarios//////////////////////////////////////////////////////////////////////////////////
@@ -238,7 +238,9 @@ public class Activity_Info_Prestamo extends AppCompatActivity implements View.On
                 Intent intentVolverPrestamos = new Intent(view.getContext(), ActivityPrestamo.class);
                 startActivity(intentVolverPrestamos);
             }
-        });
+        }
+
+
 ////////////////////////////////////////////////////////DatePicker Fecha Inicio//////////////////////////////////////////////////////////////////////////////////
         tvfechaInicio.setOnClickListener(new View.OnClickListener() {
             @Override

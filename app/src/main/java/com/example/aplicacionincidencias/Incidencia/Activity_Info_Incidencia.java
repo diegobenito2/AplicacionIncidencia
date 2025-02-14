@@ -158,17 +158,15 @@ public class Activity_Info_Incidencia extends AppCompatActivity implements View.
 
     @Override
     public void onClick(View view) {
-        btnVolver.setOnClickListener(v -> {
+        if (view.getId() == R.id.btnVolverIncidencia) {
             Intent intent = new Intent(this, activityIncidencia.class);
             startActivity(intent);
-        });
-        btnBorrar.setOnClickListener(v -> {
+        } else if (view.getId() == R.id.btnBorrarIncidencia) {
             ih.borrarIncidencia(incidencia.getCodigoIncidencia());
             Toast.makeText(getApplicationContext(), "Incidencia Borrada Correctamente", Toast.LENGTH_SHORT).show();
             Intent intentVolverIncidencias = new Intent(view.getContext(), activityIncidencia.class);
             startActivity(intentVolverIncidencias);
-        });
-        btnGuardar.setOnClickListener(v -> {
+        } else if (view.getId() == R.id.btnGuardarIncidencia) {
             if (incidencia != null) {
                 EditText edDescripcionIncidencia = findViewById(R.id.edDescripcionIncidencia);
                 tvFechaCreacion = findViewById(R.id.tvInfoFechaCreacion);
@@ -216,7 +214,7 @@ public class Activity_Info_Incidencia extends AppCompatActivity implements View.
                 Intent intentVolverIncidencias = new Intent(view.getContext(), activityIncidencia.class);
                 startActivity(intentVolverIncidencias);
             }
-        });
+        }
         tvFechaCreacion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

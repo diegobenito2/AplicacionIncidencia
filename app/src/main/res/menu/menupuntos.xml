@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
+        android:id="@+id/itemMenuPrincipal"
+        android:title="Menu Principal">
+    </item>
+    <item
         android:id="@+id/itemMenuSalas"
         android:title="Salas">
 
@@ -38,11 +42,15 @@
     <item
         android:id="@+id/itemMenuRol"
         android:title="Rol">
-
+    </item>
+    <item
+        android:id="@+id/itemMenufiltrado"
+        android:title="Rol">
     </item>
     <item
         android:id="@+id/itemMenuGuardar"
         android:title="Guardar Actividad">
     </item>
+
 
 </menu>

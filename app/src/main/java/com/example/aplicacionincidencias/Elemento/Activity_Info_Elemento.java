@@ -45,7 +45,7 @@ public class Activity_Info_Elemento extends AppCompatActivity implements View.On
         String nombreElemento = getIntent().getExtras().getString("nombre");
 
         if (codigoElemento > 0) {
-        elemento=eh.obtenerElemento(codigoElemento);
+            elemento = eh.obtenerElemento(codigoElemento);
         } else if (codigoElemento == 0 && nombreElemento.isBlank()) {
             elemento = new EntElemento(0, "", "", 0);
         }
@@ -106,19 +106,19 @@ public class Activity_Info_Elemento extends AppCompatActivity implements View.On
 
     @Override
     public void onClick(View view) {
-        btnVolver.setOnClickListener(v -> {
+        if (view.getId() == R.id.btnVolverElemento) {
+
             Intent intent = new Intent(this, activityElemento.class);
             startActivity(intent);
-        });
-        btnBorrar.setOnClickListener(v -> {
+        } else if (view.getId() == R.id.btnVolverElemento) {
             int borrado = eh.borrarElemento(elemento.getCodigoElemento());
             if (borrado == 1) {
                 Toast.makeText(getApplicationContext(), "Elemento Borrado Correctamente", Toast.LENGTH_SHORT).show();
             }
             Intent intentVolverElemento = new Intent(view.getContext(), activityElemento.class);
             startActivity(intentVolverElemento);
-        });
-        btnGuardar.setOnClickListener(v -> {
+        } else if (view.getId() == R.id.btnGuardarElemento) {
+
             if (elemento != null) {
                 EditText edNombreElemento = findViewById(R.id.edNombreElemento);
                 EditText edDescripcion = findViewById(R.id.edDescripcionElemento);
@@ -140,6 +140,8 @@ public class Activity_Info_Elemento extends AppCompatActivity implements View.On
                 Intent intentVolverSalas = new Intent(view.getContext(), activityElemento.class);
                 startActivity(intentVolverSalas);
             }
-        });
+        }
+
+
     }
 }
